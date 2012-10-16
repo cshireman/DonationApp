@@ -23,6 +23,16 @@
 		83195DA8162D175600B63831 /* VPNSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83195DA7162D175600B63831 /* VPNSecondViewController.m */; };
 		83195DAA162D175600B63831 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DA9162D175600B63831 /* second.png */; };
 		83195DAC162D175600B63831 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DAB162D175600B63831 /* second@2x.png */; };
+		83195DB4162D188F00B63831 /* VPNSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83195DB3162D188F00B63831 /* VPNSplashViewController.m */; };
+		83195DB6162D234300B63831 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195DB5162D234300B63831 /* QuartzCore.framework */; };
+		83195DC2162D25AC00B63831 /* CDSplash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBA162D25AC00B63831 /* CDSplash.jpg */; };
+		83195DC3162D25AC00B63831 /* CDSplash@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBB162D25AC00B63831 /* CDSplash@2x.jpg */; };
+		83195DC4162D25AC00B63831 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBC162D25AC00B63831 /* Default.png */; };
+		83195DC5162D25AC00B63831 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBD162D25AC00B63831 /* Default@2x.png */; };
+		83195DC6162D25AC00B63831 /* VP.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBE162D25AC00B63831 /* VP.png */; };
+		83195DC7162D25AC00B63831 /* VP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBF162D25AC00B63831 /* VP@2x.png */; };
+		83195DC9162D25C600B63831 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DC8162D25C600B63831 /* appicon.png */; };
+		83195DCB162D25D100B63831 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DCA162D25D100B63831 /* appicon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +58,17 @@
 		83195DA7162D175600B63831 /* VPNSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNSecondViewController.m; sourceTree = "<group>"; };
 		83195DA9162D175600B63831 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		83195DAB162D175600B63831 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		83195DB2162D188F00B63831 /* VPNSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSplashViewController.h; sourceTree = "<group>"; };
+		83195DB3162D188F00B63831 /* VPNSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSplashViewController.m; sourceTree = "<group>"; };
+		83195DB5162D234300B63831 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		83195DBA162D25AC00B63831 /* CDSplash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CDSplash.jpg; sourceTree = "<group>"; };
+		83195DBB162D25AC00B63831 /* CDSplash@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CDSplash@2x.jpg"; sourceTree = "<group>"; };
+		83195DBC162D25AC00B63831 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		83195DBD162D25AC00B63831 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		83195DBE162D25AC00B63831 /* VP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VP.png; sourceTree = "<group>"; };
+		83195DBF162D25AC00B63831 /* VP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VP@2x.png"; sourceTree = "<group>"; };
+		83195DC8162D25C600B63831 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
+		83195DCA162D25D100B63831 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83195DB6162D234300B63831 /* QuartzCore.framework in Frameworks */,
 				83195D85162D175600B63831 /* UIKit.framework in Frameworks */,
 				83195D87162D175600B63831 /* Foundation.framework in Frameworks */,
 				83195D89162D175600B63831 /* CoreGraphics.framework in Frameworks */,
@@ -67,6 +89,9 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				83195DCA162D25D100B63831 /* appicon@2x.png */,
+				83195DC8162D25C600B63831 /* appicon.png */,
+				83195DB5162D234300B63831 /* QuartzCore.framework */,
 				83195D8A162D175600B63831 /* DonationApp */,
 				83195D83162D175600B63831 /* Frameworks */,
 				83195D81162D175600B63831 /* Products */,
@@ -94,6 +119,7 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				83195DB7162D25AC00B63831 /* images */,
 				83195D93162D175600B63831 /* VPNAppDelegate.h */,
 				83195D94162D175600B63831 /* VPNAppDelegate.m */,
 				83195D9C162D175600B63831 /* MainStoryboard.storyboard */,
@@ -106,6 +132,8 @@
 				83195DA9162D175600B63831 /* second.png */,
 				83195DAB162D175600B63831 /* second@2x.png */,
 				83195D8B162D175600B63831 /* Supporting Files */,
+				83195DB2162D188F00B63831 /* VPNSplashViewController.h */,
+				83195DB3162D188F00B63831 /* VPNSplashViewController.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -122,6 +150,19 @@
 				83195D9A162D175600B63831 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83195DB7162D25AC00B63831 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				83195DBA162D25AC00B63831 /* CDSplash.jpg */,
+				83195DBB162D25AC00B63831 /* CDSplash@2x.jpg */,
+				83195DBC162D25AC00B63831 /* Default.png */,
+				83195DBD162D25AC00B63831 /* Default@2x.png */,
+				83195DBE162D25AC00B63831 /* VP.png */,
+				83195DBF162D25AC00B63831 /* VP@2x.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +226,14 @@
 				83195DA5162D175600B63831 /* first@2x.png in Resources */,
 				83195DAA162D175600B63831 /* second.png in Resources */,
 				83195DAC162D175600B63831 /* second@2x.png in Resources */,
+				83195DC2162D25AC00B63831 /* CDSplash.jpg in Resources */,
+				83195DC3162D25AC00B63831 /* CDSplash@2x.jpg in Resources */,
+				83195DC4162D25AC00B63831 /* Default.png in Resources */,
+				83195DC5162D25AC00B63831 /* Default@2x.png in Resources */,
+				83195DC6162D25AC00B63831 /* VP.png in Resources */,
+				83195DC7162D25AC00B63831 /* VP@2x.png in Resources */,
+				83195DC9162D25C600B63831 /* appicon.png in Resources */,
+				83195DCB162D25D100B63831 /* appicon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +248,7 @@
 				83195D95162D175600B63831 /* VPNAppDelegate.m in Sources */,
 				83195DA1162D175600B63831 /* VPNFirstViewController.m in Sources */,
 				83195DA8162D175600B63831 /* VPNSecondViewController.m in Sources */,
+				83195DB4162D188F00B63831 /* VPNSplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +330,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -291,6 +342,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
