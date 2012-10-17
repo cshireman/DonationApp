@@ -17,10 +17,8 @@
 		83195D99162D175600B63831 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195D98162D175600B63831 /* Default@2x.png */; };
 		83195D9B162D175600B63831 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195D9A162D175600B63831 /* Default-568h@2x.png */; };
 		83195D9E162D175600B63831 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83195D9C162D175600B63831 /* MainStoryboard.storyboard */; };
-		83195DA1162D175600B63831 /* VPNFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83195DA0162D175600B63831 /* VPNFirstViewController.m */; };
 		83195DA3162D175600B63831 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DA2162D175600B63831 /* first.png */; };
 		83195DA5162D175600B63831 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DA4162D175600B63831 /* first@2x.png */; };
-		83195DA8162D175600B63831 /* VPNSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83195DA7162D175600B63831 /* VPNSecondViewController.m */; };
 		83195DAA162D175600B63831 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DA9162D175600B63831 /* second.png */; };
 		83195DAC162D175600B63831 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DAB162D175600B63831 /* second@2x.png */; };
 		83195DB4162D188F00B63831 /* VPNSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83195DB3162D188F00B63831 /* VPNSplashViewController.m */; };
@@ -33,6 +31,16 @@
 		83195DC7162D25AC00B63831 /* VP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBF162D25AC00B63831 /* VP@2x.png */; };
 		83195DC9162D25C600B63831 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DC8162D25C600B63831 /* appicon.png */; };
 		83195DCB162D25D100B63831 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DCA162D25D100B63831 /* appicon@2x.png */; };
+		8397DF72162E6C04000D8633 /* VPNUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF71162E6C04000D8633 /* VPNUser.m */; };
+		8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF79162E7581000D8633 /* VPNHomeViewController.m */; };
+		8397DF7F162E76C0000D8633 /* 17-bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7B162E76C0000D8633 /* 17-bar-chart.png */; };
+		8397DF80162E76C0000D8633 /* 53-house.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7C162E76C0000D8633 /* 53-house.png */; };
+		8397DF81162E76C0000D8633 /* 172-pricetag.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7D162E76C0000D8633 /* 172-pricetag.png */; };
+		8397DF82162E76C0000D8633 /* 177-building.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7E162E76C0000D8633 /* 177-building.png */; };
+		8397DF84162E78E5000D8633 /* arrow_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF83162E78E5000D8633 /* arrow_icon.jpg */; };
+		8397DF88162E81DA000D8633 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8397DF87162E81DA000D8633 /* iAd.framework */; };
+		8397DF8B162E82F2000D8633 /* logo_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF89162E82F2000D8633 /* logo_large.png */; };
+		8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF8A162E82F2000D8633 /* logo_orgs.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,12 +58,8 @@
 		83195D98162D175600B63831 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		83195D9A162D175600B63831 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		83195D9D162D175600B63831 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		83195D9F162D175600B63831 /* VPNFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNFirstViewController.h; sourceTree = "<group>"; };
-		83195DA0162D175600B63831 /* VPNFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNFirstViewController.m; sourceTree = "<group>"; };
 		83195DA2162D175600B63831 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		83195DA4162D175600B63831 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		83195DA6162D175600B63831 /* VPNSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNSecondViewController.h; sourceTree = "<group>"; };
-		83195DA7162D175600B63831 /* VPNSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNSecondViewController.m; sourceTree = "<group>"; };
 		83195DA9162D175600B63831 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		83195DAB162D175600B63831 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		83195DB2162D188F00B63831 /* VPNSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSplashViewController.h; sourceTree = "<group>"; };
@@ -69,6 +73,19 @@
 		83195DBF162D25AC00B63831 /* VP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VP@2x.png"; sourceTree = "<group>"; };
 		83195DC8162D25C600B63831 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
 		83195DCA162D25D100B63831 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
+		8397DF70162E6C04000D8633 /* VPNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNUser.h; path = models/VPNUser.h; sourceTree = "<group>"; };
+		8397DF71162E6C04000D8633 /* VPNUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNUser.m; path = models/VPNUser.m; sourceTree = "<group>"; };
+		8397DF78162E7581000D8633 /* VPNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNHomeViewController.h; sourceTree = "<group>"; };
+		8397DF79162E7581000D8633 /* VPNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNHomeViewController.m; sourceTree = "<group>"; };
+		8397DF7B162E76C0000D8633 /* 17-bar-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "17-bar-chart.png"; sourceTree = "<group>"; };
+		8397DF7C162E76C0000D8633 /* 53-house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "53-house.png"; sourceTree = "<group>"; };
+		8397DF7D162E76C0000D8633 /* 172-pricetag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "172-pricetag.png"; sourceTree = "<group>"; };
+		8397DF7E162E76C0000D8633 /* 177-building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "177-building.png"; sourceTree = "<group>"; };
+		8397DF83162E78E5000D8633 /* arrow_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = arrow_icon.jpg; sourceTree = "<group>"; };
+		8397DF85162E8127000D8633 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		8397DF87162E81DA000D8633 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		8397DF89162E82F2000D8633 /* logo_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_large.png; sourceTree = "<group>"; };
+		8397DF8A162E82F2000D8633 /* logo_orgs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_orgs.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8397DF88162E81DA000D8633 /* iAd.framework in Frameworks */,
 				83195DB6162D234300B63831 /* QuartzCore.framework in Frameworks */,
 				83195D85162D175600B63831 /* UIKit.framework in Frameworks */,
 				83195D87162D175600B63831 /* Foundation.framework in Frameworks */,
@@ -89,6 +107,8 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				8397DF87162E81DA000D8633 /* iAd.framework */,
+				8397DF85162E8127000D8633 /* AdSupport.framework */,
 				83195DCA162D25D100B63831 /* appicon@2x.png */,
 				83195DC8162D25C600B63831 /* appicon.png */,
 				83195DB5162D234300B63831 /* QuartzCore.framework */,
@@ -119,21 +139,20 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				8397DF77162E6CA2000D8633 /* models */,
 				83195DB7162D25AC00B63831 /* images */,
 				83195D93162D175600B63831 /* VPNAppDelegate.h */,
 				83195D94162D175600B63831 /* VPNAppDelegate.m */,
 				83195D9C162D175600B63831 /* MainStoryboard.storyboard */,
-				83195D9F162D175600B63831 /* VPNFirstViewController.h */,
-				83195DA0162D175600B63831 /* VPNFirstViewController.m */,
 				83195DA2162D175600B63831 /* first.png */,
 				83195DA4162D175600B63831 /* first@2x.png */,
-				83195DA6162D175600B63831 /* VPNSecondViewController.h */,
-				83195DA7162D175600B63831 /* VPNSecondViewController.m */,
 				83195DA9162D175600B63831 /* second.png */,
 				83195DAB162D175600B63831 /* second@2x.png */,
 				83195D8B162D175600B63831 /* Supporting Files */,
 				83195DB2162D188F00B63831 /* VPNSplashViewController.h */,
 				83195DB3162D188F00B63831 /* VPNSplashViewController.m */,
+				8397DF78162E7581000D8633 /* VPNHomeViewController.h */,
+				8397DF79162E7581000D8633 /* VPNHomeViewController.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -155,6 +174,13 @@
 		83195DB7162D25AC00B63831 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8397DF89162E82F2000D8633 /* logo_large.png */,
+				8397DF8A162E82F2000D8633 /* logo_orgs.png */,
+				8397DF83162E78E5000D8633 /* arrow_icon.jpg */,
+				8397DF7B162E76C0000D8633 /* 17-bar-chart.png */,
+				8397DF7C162E76C0000D8633 /* 53-house.png */,
+				8397DF7D162E76C0000D8633 /* 172-pricetag.png */,
+				8397DF7E162E76C0000D8633 /* 177-building.png */,
 				83195DBA162D25AC00B63831 /* CDSplash.jpg */,
 				83195DBB162D25AC00B63831 /* CDSplash@2x.jpg */,
 				83195DBC162D25AC00B63831 /* Default.png */,
@@ -163,6 +189,15 @@
 				83195DBF162D25AC00B63831 /* VP@2x.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		8397DF77162E6CA2000D8633 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				8397DF70162E6C04000D8633 /* VPNUser.h */,
+				8397DF71162E6C04000D8633 /* VPNUser.m */,
+			);
+			name = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +269,13 @@
 				83195DC7162D25AC00B63831 /* VP@2x.png in Resources */,
 				83195DC9162D25C600B63831 /* appicon.png in Resources */,
 				83195DCB162D25D100B63831 /* appicon@2x.png in Resources */,
+				8397DF7F162E76C0000D8633 /* 17-bar-chart.png in Resources */,
+				8397DF80162E76C0000D8633 /* 53-house.png in Resources */,
+				8397DF81162E76C0000D8633 /* 172-pricetag.png in Resources */,
+				8397DF82162E76C0000D8633 /* 177-building.png in Resources */,
+				8397DF84162E78E5000D8633 /* arrow_icon.jpg in Resources */,
+				8397DF8B162E82F2000D8633 /* logo_large.png in Resources */,
+				8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,9 +288,9 @@
 			files = (
 				83195D91162D175600B63831 /* main.m in Sources */,
 				83195D95162D175600B63831 /* VPNAppDelegate.m in Sources */,
-				83195DA1162D175600B63831 /* VPNFirstViewController.m in Sources */,
-				83195DA8162D175600B63831 /* VPNSecondViewController.m in Sources */,
 				83195DB4162D188F00B63831 /* VPNSplashViewController.m in Sources */,
+				8397DF72162E6C04000D8633 /* VPNUser.m in Sources */,
+				8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +409,7 @@
 				83195DB1162D175600B63831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
