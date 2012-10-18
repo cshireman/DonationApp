@@ -31,6 +31,8 @@
 		83195DC7162D25AC00B63831 /* VP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DBF162D25AC00B63831 /* VP@2x.png */; };
 		83195DC9162D25C600B63831 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DC8162D25C600B63831 /* appicon.png */; };
 		83195DCB162D25D100B63831 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DCA162D25D100B63831 /* appicon@2x.png */; };
+		831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */; };
+		831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */ = {isa = PBXBuildFile; fileRef = 831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */; };
 		8397DF72162E6C04000D8633 /* VPNUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF71162E6C04000D8633 /* VPNUser.m */; };
 		8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF79162E7581000D8633 /* VPNHomeViewController.m */; };
 		8397DF7F162E76C0000D8633 /* 17-bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7B162E76C0000D8633 /* 17-bar-chart.png */; };
@@ -73,6 +75,9 @@
 		83195DBF162D25AC00B63831 /* VP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VP@2x.png"; sourceTree = "<group>"; };
 		83195DC8162D25C600B63831 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
 		83195DCA162D25D100B63831 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
+		831D8845162FB44500274662 /* VPNMainTabGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNMainTabGroupViewController.h; sourceTree = "<group>"; };
+		831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNMainTabGroupViewController.m; sourceTree = "<group>"; };
+		831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CD_App_SU_Screen_r3.png; sourceTree = "<group>"; };
 		8397DF70162E6C04000D8633 /* VPNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNUser.h; path = models/VPNUser.h; sourceTree = "<group>"; };
 		8397DF71162E6C04000D8633 /* VPNUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNUser.m; path = models/VPNUser.m; sourceTree = "<group>"; };
 		8397DF78162E7581000D8633 /* VPNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNHomeViewController.h; sourceTree = "<group>"; };
@@ -153,6 +158,8 @@
 				83195DB3162D188F00B63831 /* VPNSplashViewController.m */,
 				8397DF78162E7581000D8633 /* VPNHomeViewController.h */,
 				8397DF79162E7581000D8633 /* VPNHomeViewController.m */,
+				831D8845162FB44500274662 /* VPNMainTabGroupViewController.h */,
+				831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 		83195DB7162D25AC00B63831 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */,
 				8397DF89162E82F2000D8633 /* logo_large.png */,
 				8397DF8A162E82F2000D8633 /* logo_orgs.png */,
 				8397DF83162E78E5000D8633 /* arrow_icon.jpg */,
@@ -276,6 +284,7 @@
 				8397DF84162E78E5000D8633 /* arrow_icon.jpg in Resources */,
 				8397DF8B162E82F2000D8633 /* logo_large.png in Resources */,
 				8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */,
+				831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +300,7 @@
 				83195DB4162D188F00B63831 /* VPNSplashViewController.m in Sources */,
 				8397DF72162E6C04000D8633 /* VPNUser.m in Sources */,
 				8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */,
+				831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

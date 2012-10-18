@@ -7,6 +7,7 @@
 //
 
 #import "VPNHomeViewController.h"
+#import "VPNMainTabGroupViewController.h"
 
 #define kTaxSettingsSection     0
 #define kPasswordSection        1
@@ -198,7 +199,8 @@
 
 -(IBAction) logoutPushed:(id)sender
 {
-    
+    VPNMainTabGroupViewController* tabBarController = (VPNMainTabGroupViewController*)self.navigationController.tabBarController;
+    [tabBarController displayLoginScene];
 }
 
 -(IBAction) updatePushed:(id)sender
