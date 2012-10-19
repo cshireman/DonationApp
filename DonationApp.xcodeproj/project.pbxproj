@@ -43,6 +43,8 @@
 		8397DF88162E81DA000D8633 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8397DF87162E81DA000D8633 /* iAd.framework */; };
 		8397DF8B162E82F2000D8633 /* logo_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF89162E82F2000D8633 /* logo_large.png */; };
 		8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF8A162E82F2000D8633 /* logo_orgs.png */; };
+		83A1D3F316311295002CD13C /* VPNUserSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */; };
+		83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,10 @@
 		8397DF87162E81DA000D8633 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		8397DF89162E82F2000D8633 /* logo_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_large.png; sourceTree = "<group>"; };
 		8397DF8A162E82F2000D8633 /* logo_orgs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_orgs.png; sourceTree = "<group>"; };
+		83A1D3F116311295002CD13C /* VPNUserSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserSignupViewController.h; sourceTree = "<group>"; };
+		83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserSignupViewController.m; sourceTree = "<group>"; };
+		83A1D3F5163117DE002CD13C /* VPNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNLoginViewController.h; sourceTree = "<group>"; };
+		83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +166,10 @@
 				8397DF79162E7581000D8633 /* VPNHomeViewController.m */,
 				831D8845162FB44500274662 /* VPNMainTabGroupViewController.h */,
 				831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */,
+				83A1D3F116311295002CD13C /* VPNUserSignupViewController.h */,
+				83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */,
+				83A1D3F5163117DE002CD13C /* VPNLoginViewController.h */,
+				83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -301,6 +311,8 @@
 				8397DF72162E6C04000D8633 /* VPNUser.m in Sources */,
 				8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */,
 				831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */,
+				83A1D3F316311295002CD13C /* VPNUserSignupViewController.m in Sources */,
+				83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qgS-SM-Wcr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qgS-SM-Wcr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="1508" y="-1486"/>
         </scene>
-        <!--View Controller-->
+        <!--User Signup View Controller-->
         <scene sceneID="r9O-Am-cbh">
             <objects>
-                <viewController id="enf-C1-b0j" sceneMemberID="viewController">
+                <viewController id="enf-C1-b0j" customClass="VPNUserSignupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ClD-9q-vuM">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,33 +114,48 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="enf-C1-b0j" id="vsa-Qp-DcK"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" id="oq0-fa-Fq7">
                                 <rect key="frame" x="20" y="58" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="enf-C1-b0j" id="a2r-1f-BGZ"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" id="cEA-bk-23b">
                                 <rect key="frame" x="20" y="96" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="enf-C1-b0j" id="SVe-4v-gXA"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="5eG-TN-coy">
                                 <rect key="frame" x="20" y="134" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="enf-C1-b0j" id="M9N-K9-5WY"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" id="Qvh-qr-Ozg">
                                 <rect key="frame" x="20" y="172" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="enf-C1-b0j" id="EgD-OA-HMW"/>
+                                </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RBY-Hh-GS4">
-                                <rect key="frame" x="20" y="210" width="280" height="60"/>
+                                <rect key="frame" x="20" y="210" width="280" height="88"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -179,6 +194,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelPushed:" destination="enf-C1-b0j" eventType="touchUpInside" id="sa2-z1-BEY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pAo-mz-YvR">
                                 <rect key="frame" x="170" y="366" width="130" height="44"/>
@@ -191,12 +209,23 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitPushed:" destination="enf-C1-b0j" eventType="touchUpInside" id="8EP-qe-kle"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="0SR-Jo-SgF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="confirmPasswordField" destination="Qvh-qr-Ozg" id="Ywq-FB-Fiq"/>
+                        <outlet property="emailField" destination="cEA-bk-23b" id="A6I-yB-Z8p"/>
+                        <outlet property="firstNameField" destination="aUr-t3-mHZ" id="wBS-wW-pT9"/>
+                        <outlet property="lastNameField" destination="oq0-fa-Fq7" id="x4j-7n-v59"/>
+                        <outlet property="passwordField" destination="5eG-TN-coy" id="AFV-OK-ps3"/>
+                        <outlet property="taxYearTable" destination="RBY-Hh-GS4" id="8E0-MR-gWr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GqZ-cf-su8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -594,7 +623,6 @@
         <!--Table View Controller - Select Tax Year-->
         <scene sceneID="K69-E2-rWw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="egj-e4-Suo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="SfT-fF-eJd" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GJt-cE-CyS">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -642,6 +670,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Tax Year" id="ZX6-I1-3x5"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="egj-e4-Suo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1508" y="2025"/>
         </scene>
@@ -712,6 +741,19 @@
             <relationships>
                 <relationship kind="outlet" name="firstImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="secondImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="VPNUserSignupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNUserSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="submitPushed:"/>
+                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="taxYearTable" candidateClass="UITableView"/>
             </relationships>
         </class>
     </classes>
