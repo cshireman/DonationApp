@@ -177,13 +177,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if(indexPath.section == kTaxSettingsSection)
+    {
+        VPNMainTabGroupViewController* tabBarController = (VPNMainTabGroupViewController*)self.tabBarController;
+
+        if(indexPath.row == 0)
+            [tabBarController displaySelectTaxYearScene];
+        else
+            [self performSegueWithIdentifier:@"SelectTaxRateSegue" sender:self];
+        
+    }
 }
 
 #pragma mark -

@@ -52,10 +52,86 @@ static VPNUser* currentUser = nil;
     return self;
 }
 
+-(id)copyWithZone:(NSZone*)zone
+{
+    VPNUser* copy = [[[self class] allocWithZone:zone] init];
+    
+    copy.username = self.username;
+    copy.password = self.password;
+    copy.first_name = self.first_name;
+    copy.last_name = self.last_name;
+    copy.is_email_opted_in = self.is_email_opted_in;
+    
+    copy.tax_years = [self.tax_years copyWithZone:zone];
+    
+    return copy;
+}
+
+/**
+ * Get the current user from memory
+ */
 +(VPNUser*) currentUser
 {
     return currentUser;
 }
+
+/**
+ * Load the user from the user defaults.  Set the user as the current user and returns a reference
+ * to that user
+ * @return VPNUser* Pointer to the VPNUser object that was loaded from the defaults
+ */
++(VPNUser*) loadUserFromDisc
+{
+    NSData* data = [[NSMutableData alloc] initWithContentsOfFile:[VPNUser userFilePath]];
+    if(nil == data)
+        return nil;
+    
+    NSKeyedUnarchiver* unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    currentUser = (VPNUser*)[unarchiver decodeObjectForKey:@"User"];
+    [unarchiver finishDecoding];
+    
+    return [VPNUser currentUser];
+}
+
++(NSString*) userFilePath
+{
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:kUserFilename];
+}
+
+/**
+ * Save this user to the user defaults
+ */
+-(void) saveAsDefaultUser
+{
+    NSMutableData* data = [[NSMutableData alloc] init];
+    NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    
+    [archiver encodeObject:self forKey:@"User"];
+    [archiver finishEncoding];
+    
+    [data writeToFile:[VPNUser userFilePath] atomically:YES];
+    currentUser = self;
+}
+
+/**
+ * Authenticate this user against the API.
+ * @return BOOL YES on success, NO on failure
+ */
+-(BOOL) authenticate
+{
+    currentUser = [VPNUser loadUserFromDisc];
+    if(currentUser == nil)
+        return NO;
+    
+    if([currentUser.username isEqualToString:self.username] &&
+       [currentUser.password isEqualToString:self.password])
+        return YES;
+    
+    return NO;
+}
+
 
 
 @end

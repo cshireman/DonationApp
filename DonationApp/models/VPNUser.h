@@ -16,7 +16,9 @@
 #define kIsEmailOptedInKey @"is_email_opted_in"
 #define kTaxYearsKey       @"tax_years"
 
-@interface VPNUser : NSObject <NSCoding>
+#define kUserFilename       @"user_file"
+
+@interface VPNUser : NSObject <NSCoding, NSCopying>
 
 @property (copy, nonatomic) NSString* username;
 @property (copy, nonatomic) NSString* password;
@@ -28,5 +30,11 @@
 @property (strong, nonatomic) NSMutableArray* tax_years;
 
 +(VPNUser*) currentUser;
++(VPNUser*) loadUserFromDisc;
++(NSString*) userFilePath;
+
+-(void) saveAsDefaultUser;
+-(BOOL) authenticate;
+
 
 @end

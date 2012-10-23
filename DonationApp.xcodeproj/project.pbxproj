@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83175E7B16364E3E000C98B4 /* VPNUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E7A16364E3E000C98B4 /* VPNUserTest.m */; };
+		83175E7E163650BB000C98B4 /* VPNUserSignupViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E7D163650BB000C98B4 /* VPNUserSignupViewControllerTest.m */; };
+		83175E8116365367000C98B4 /* VPNLoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E8016365367000C98B4 /* VPNLoginViewControllerTest.m */; };
+		83175E8416365711000C98B4 /* VPNMainTabGroupControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E8316365711000C98B4 /* VPNMainTabGroupControllerTest.m */; };
+		83175E871636575E000C98B4 /* VPNHomeViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E861636575E000C98B4 /* VPNHomeViewControllerTest.m */; };
+		83175E8A16365A8E000C98B4 /* VPNSelectTaxRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E8916365A8D000C98B4 /* VPNSelectTaxRateViewController.m */; };
+		83175E8D16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E8C16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m */; };
 		83195D85162D175600B63831 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D84162D175600B63831 /* UIKit.framework */; };
 		83195D87162D175600B63831 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
 		83195D89162D175600B63831 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D88162D175600B63831 /* CoreGraphics.framework */; };
@@ -33,6 +40,11 @@
 		83195DCB162D25D100B63831 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DCA162D25D100B63831 /* appicon@2x.png */; };
 		831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */; };
 		831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */ = {isa = PBXBuildFile; fileRef = 831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */; };
+		8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8368526A1633BC7D00E51EEB /* SenTestingKit.framework */; };
+		8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D84162D175600B63831 /* UIKit.framework */; };
+		8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
+		836852731633BC7D00E51EEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 836852711633BC7D00E51EEB /* InfoPlist.strings */; };
+		836852761633BC7D00E51EEB /* DonationAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 836852751633BC7D00E51EEB /* DonationAppTests.m */; };
 		8397DF72162E6C04000D8633 /* VPNUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF71162E6C04000D8633 /* VPNUser.m */; };
 		8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF79162E7581000D8633 /* VPNHomeViewController.m */; };
 		8397DF7F162E76C0000D8633 /* 17-bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7B162E76C0000D8633 /* 17-bar-chart.png */; };
@@ -47,7 +59,31 @@
 		83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		83175E7216364912000C98B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83195D77162D175600B63831 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83195D7F162D175600B63831;
+			remoteInfo = DonationApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		83175E7916364E3E000C98B4 /* VPNUserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserTest.h; sourceTree = "<group>"; };
+		83175E7A16364E3E000C98B4 /* VPNUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserTest.m; sourceTree = "<group>"; };
+		83175E7C163650BB000C98B4 /* VPNUserSignupViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserSignupViewControllerTest.h; sourceTree = "<group>"; };
+		83175E7D163650BB000C98B4 /* VPNUserSignupViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserSignupViewControllerTest.m; sourceTree = "<group>"; };
+		83175E7F16365367000C98B4 /* VPNLoginViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNLoginViewControllerTest.h; sourceTree = "<group>"; };
+		83175E8016365367000C98B4 /* VPNLoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNLoginViewControllerTest.m; sourceTree = "<group>"; };
+		83175E8216365711000C98B4 /* VPNMainTabGroupControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNMainTabGroupControllerTest.h; sourceTree = "<group>"; };
+		83175E8316365711000C98B4 /* VPNMainTabGroupControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNMainTabGroupControllerTest.m; sourceTree = "<group>"; };
+		83175E851636575E000C98B4 /* VPNHomeViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNHomeViewControllerTest.h; sourceTree = "<group>"; };
+		83175E861636575E000C98B4 /* VPNHomeViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNHomeViewControllerTest.m; sourceTree = "<group>"; };
+		83175E8816365A8D000C98B4 /* VPNSelectTaxRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSelectTaxRateViewController.h; sourceTree = "<group>"; };
+		83175E8916365A8D000C98B4 /* VPNSelectTaxRateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSelectTaxRateViewController.m; sourceTree = "<group>"; };
+		83175E8B16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSelectTaxRateViewControllerTest.h; sourceTree = "<group>"; };
+		83175E8C16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSelectTaxRateViewControllerTest.m; sourceTree = "<group>"; };
 		83195D80162D175600B63831 /* DonationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83195D84162D175600B63831 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83195D86162D175600B63831 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -80,6 +116,13 @@
 		831D8845162FB44500274662 /* VPNMainTabGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNMainTabGroupViewController.h; sourceTree = "<group>"; };
 		831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNMainTabGroupViewController.m; sourceTree = "<group>"; };
 		831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CD_App_SU_Screen_r3.png; sourceTree = "<group>"; };
+		836852691633BC7D00E51EEB /* DonationAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonationAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8368526A1633BC7D00E51EEB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		836852701633BC7D00E51EEB /* DonationAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DonationAppTests-Info.plist"; sourceTree = "<group>"; };
+		836852721633BC7D00E51EEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		836852741633BC7D00E51EEB /* DonationAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonationAppTests.h; sourceTree = "<group>"; };
+		836852751633BC7D00E51EEB /* DonationAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonationAppTests.m; sourceTree = "<group>"; };
+		836852771633BC7D00E51EEB /* DonationAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DonationAppTests-Prefix.pch"; sourceTree = "<group>"; };
 		8397DF70162E6C04000D8633 /* VPNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNUser.h; path = models/VPNUser.h; sourceTree = "<group>"; };
 		8397DF71162E6C04000D8633 /* VPNUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNUser.m; path = models/VPNUser.m; sourceTree = "<group>"; };
 		8397DF78162E7581000D8633 /* VPNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNHomeViewController.h; sourceTree = "<group>"; };
@@ -112,6 +155,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		836852651633BC7D00E51EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */,
+				8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */,
+				8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -124,6 +177,7 @@
 				83195DC8162D25C600B63831 /* appicon.png */,
 				83195DB5162D234300B63831 /* QuartzCore.framework */,
 				83195D8A162D175600B63831 /* DonationApp */,
+				8368526E1633BC7D00E51EEB /* DonationAppTests */,
 				83195D83162D175600B63831 /* Frameworks */,
 				83195D81162D175600B63831 /* Products */,
 			);
@@ -133,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				83195D80162D175600B63831 /* DonationApp.app */,
+				836852691633BC7D00E51EEB /* DonationAppTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,6 +198,7 @@
 				83195D84162D175600B63831 /* UIKit.framework */,
 				83195D86162D175600B63831 /* Foundation.framework */,
 				83195D88162D175600B63831 /* CoreGraphics.framework */,
+				8368526A1633BC7D00E51EEB /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -170,6 +226,8 @@
 				83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */,
 				83A1D3F5163117DE002CD13C /* VPNLoginViewController.h */,
 				83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */,
+				83175E8816365A8D000C98B4 /* VPNSelectTaxRateViewController.h */,
+				83175E8916365A8D000C98B4 /* VPNSelectTaxRateViewController.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -209,6 +267,38 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		8368526E1633BC7D00E51EEB /* DonationAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				836852741633BC7D00E51EEB /* DonationAppTests.h */,
+				836852751633BC7D00E51EEB /* DonationAppTests.m */,
+				8368526F1633BC7D00E51EEB /* Supporting Files */,
+				83175E7916364E3E000C98B4 /* VPNUserTest.h */,
+				83175E7A16364E3E000C98B4 /* VPNUserTest.m */,
+				83175E7C163650BB000C98B4 /* VPNUserSignupViewControllerTest.h */,
+				83175E7D163650BB000C98B4 /* VPNUserSignupViewControllerTest.m */,
+				83175E7F16365367000C98B4 /* VPNLoginViewControllerTest.h */,
+				83175E8016365367000C98B4 /* VPNLoginViewControllerTest.m */,
+				83175E8216365711000C98B4 /* VPNMainTabGroupControllerTest.h */,
+				83175E8316365711000C98B4 /* VPNMainTabGroupControllerTest.m */,
+				83175E851636575E000C98B4 /* VPNHomeViewControllerTest.h */,
+				83175E861636575E000C98B4 /* VPNHomeViewControllerTest.m */,
+				83175E8B16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.h */,
+				83175E8C16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m */,
+			);
+			path = DonationAppTests;
+			sourceTree = "<group>";
+		};
+		8368526F1633BC7D00E51EEB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				836852701633BC7D00E51EEB /* DonationAppTests-Info.plist */,
+				836852711633BC7D00E51EEB /* InfoPlist.strings */,
+				836852771633BC7D00E51EEB /* DonationAppTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8397DF77162E6CA2000D8633 /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +328,25 @@
 			productReference = 83195D80162D175600B63831 /* DonationApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		836852681633BC7D00E51EEB /* DonationAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8368527A1633BC7D00E51EEB /* Build configuration list for PBXNativeTarget "DonationAppTests" */;
+			buildPhases = (
+				836852641633BC7D00E51EEB /* Sources */,
+				836852651633BC7D00E51EEB /* Frameworks */,
+				836852661633BC7D00E51EEB /* Resources */,
+				836852671633BC7D00E51EEB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83175E7316364912000C98B4 /* PBXTargetDependency */,
+			);
+			name = DonationAppTests;
+			productName = DonationAppTests;
+			productReference = 836852691633BC7D00E51EEB /* DonationAppTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -261,6 +370,7 @@
 			projectRoot = "";
 			targets = (
 				83195D7F162D175600B63831 /* DonationApp */,
+				836852681633BC7D00E51EEB /* DonationAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -298,7 +408,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		836852661633BC7D00E51EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				836852731633BC7D00E51EEB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		836852671633BC7D00E51EEB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		83195D7C162D175600B63831 /* Sources */ = {
@@ -313,10 +447,33 @@
 				831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */,
 				83A1D3F316311295002CD13C /* VPNUserSignupViewController.m in Sources */,
 				83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */,
+				83175E8A16365A8E000C98B4 /* VPNSelectTaxRateViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		836852641633BC7D00E51EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				836852761633BC7D00E51EEB /* DonationAppTests.m in Sources */,
+				83175E7B16364E3E000C98B4 /* VPNUserTest.m in Sources */,
+				83175E7E163650BB000C98B4 /* VPNUserSignupViewControllerTest.m in Sources */,
+				83175E8116365367000C98B4 /* VPNLoginViewControllerTest.m in Sources */,
+				83175E8416365711000C98B4 /* VPNMainTabGroupControllerTest.m in Sources */,
+				83175E871636575E000C98B4 /* VPNHomeViewControllerTest.m in Sources */,
+				83175E8D16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83175E7316364912000C98B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83195D7F162D175600B63831 /* DonationApp */;
+			targetProxy = 83175E7216364912000C98B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		83195D8D162D175600B63831 /* InfoPlist.strings */ = {
@@ -333,6 +490,14 @@
 				83195D9D162D175600B63831 /* en */,
 			);
 			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		836852711633BC7D00E51EEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				836852721633BC7D00E51EEB /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -412,6 +577,40 @@
 			};
 			name = Release;
 		};
+		836852781633BC7D00E51EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DonationApp.app/DonationApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DonationAppTests/DonationAppTests-Prefix.pch";
+				INFOPLIST_FILE = "DonationAppTests/DonationAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		836852791633BC7D00E51EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DonationApp.app/DonationApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DonationAppTests/DonationAppTests-Prefix.pch";
+				INFOPLIST_FILE = "DonationAppTests/DonationAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -429,6 +628,15 @@
 			buildConfigurations = (
 				83195DB0162D175600B63831 /* Debug */,
 				83195DB1162D175600B63831 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8368527A1633BC7D00E51EEB /* Build configuration list for PBXNativeTarget "DonationAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				836852781633BC7D00E51EEB /* Debug */,
+				836852791633BC7D00E51EEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

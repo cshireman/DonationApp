@@ -7,6 +7,7 @@
 //
 
 #import "VPNUserSignupViewController.h"
+#import "VPNUser.h"
 
 @interface VPNUserSignupViewController ()
 
@@ -111,6 +112,18 @@
 
 -(IBAction)submitPushed:(id)sender
 {
+    VPNUser* user = [[VPNUser alloc] init];
+    
+    user.first_name = self.firstNameField.text;
+    user.last_name = self.lastNameField.text;
+    user.username = self.emailField.text;
+    user.password = self.passwordField.text;
+    user.is_email_opted_in = YES;
+    
+    user.tax_years = [[NSMutableArray alloc] initWithCapacity:1];
+    [user.tax_years addObject:@"2012"];
+    
+    [user saveAsDefaultUser];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

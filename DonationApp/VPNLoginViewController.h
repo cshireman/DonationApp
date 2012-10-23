@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VPNLoginViewController : UIViewController
+@class VPNLoginViewController;
+@protocol VPNLoginViewControllerDelegate <NSObject>
+
+-(void) loginController:(VPNLoginViewController*)login didFinish:(BOOL)status;
+
+@end
+
+@interface VPNLoginViewController : UIViewController <UITextFieldDelegate>
+
+@property (strong, nonatomic) id<VPNLoginViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
+@property (strong, nonatomic) IBOutlet UITextField* usernameField;
+@property (strong, nonatomic) IBOutlet UITextField* passwordField;
 
 -(IBAction) loginPushed:(id) sender;
+-(IBAction) dismissKeyboard;
 
 @end

@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>DonationAppTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>83195D7F162D175600B63831</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>836852681633BC7D00E51EEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
