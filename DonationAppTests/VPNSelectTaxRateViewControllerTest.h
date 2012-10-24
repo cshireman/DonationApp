@@ -14,6 +14,8 @@
 @property (strong, nonatomic) VPNSelectTaxRateViewController* selectTaxRateController;
 @property BOOL cancelPushed;
 @property BOOL savePushed;
+@property (strong,nonatomic) NSMutableArray* taxRates;
+@property (copy, nonatomic) NSString* defaultTaxRate;
 
 -(void) selectTaxRateCanceled;
 -(void) selectTaxRateSaved;

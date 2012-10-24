@@ -12,26 +12,97 @@
 @synthesize selectTaxRateController;
 @synthesize cancelPushed;
 @synthesize savePushed;
+@synthesize taxRates;
+@synthesize defaultTaxRate;
 
 -(void) setUp
 {
+    self.defaultTaxRate = @"25%";
+    
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.defaultTaxRate forKey:kSelectedTaxRateKey];
+    
     self.selectTaxRateController = [[VPNSelectTaxRateViewController alloc] init];
     self.selectTaxRateController.delegate = self;
     
     self.cancelPushed = NO;
     self.savePushed = NO;
+    self.taxRates = [[NSMutableArray alloc] initWithObjects:@"10%",@"15%",@"25%",@"28%",@"33%",@"35%", nil];
+
+    self.selectTaxRateController.taxRates = self.taxRates;
 }
 
--(void) testSelectTaxRateControllerCanCancel
+-(void) testSelectTaxRateControllerCanPushCancel
 {
     [self.selectTaxRateController cancelPushed:self];
     STAssertTrue(self.cancelPushed,@"Cancel should have been pushed");
 }
 
--(void) testSelectTaxRateControllerCanSave
+-(void) testSelectTaxRateControllerCanPushSave
 {
     [self.selectTaxRateController savePushed:self];
     STAssertTrue(self.savePushed,@"Save should have been pushed");
+}
+
+-(void) testThatTaxRateCellsArePopulated
+{
+    for(int i = 0; i < [taxRates count]; i++)
+    {
+        NSIndexPath* taxRateIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        
+        UITableViewCell* testCell = [self.selectTaxRateController tableView:nil cellForRowAtIndexPath:taxRateIndexPath];
+        STAssertEqualObjects(testCell.textLabel.text, [self.taxRates objectAtIndex:taxRateIndexPath.row], @"Tax Rate label doesn't match");
+    }
+}
+
+-(void) testThatThereIsOnlyOneSection
+{
+    NSInteger testSectionCount = [self.selectTaxRateController numberOfSectionsInTableView:nil];
+    STAssertEquals(testSectionCount, 1, @"There can be only one - section that is");
+}
+
+-(void) testThatThereAreTheCorrectNumberOfRowsInTheTable
+{
+    NSUInteger testRowCount = [self.selectTaxRateController tableView:nil numberOfRowsInSection:0];
+    STAssertEquals(testRowCount, [self.taxRates count], @"There should be the same number of rows as there are tax rates");
+}
+
+-(void) testThatTaxRateCanBeSelected
+{
+    self.selectTaxRateController.selectedTaxRate = @"25%";
+    [self.selectTaxRateController tableView:nil didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    
+    STAssertEquals(@"28%", self.selectTaxRateController.selectedTaxRate, @"Tax Rate should have changed to 28%");
+}
+
+-(void) testThatTaxRateCanBeSelectedAndSaved
+{
+    self.selectTaxRateController.selectedTaxRate = @"25%";
+    [self.selectTaxRateController tableView:nil didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    [self.selectTaxRateController savePushed:self];
+    
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* savedTaxRate = [userDefaults objectForKey:kSelectedTaxRateKey];
+    STAssertEqualObjects(@"28%", savedTaxRate, @"Tax rate was not saved when save pushed");
+}
+
+-(void) testThatSelectedTaxRateWasLoadedFromUserDefaults
+{
+    STAssertEqualObjects(self.defaultTaxRate, self.selectTaxRateController.selectedTaxRate, @"Tax rate should load as default tax rate");
+}
+
+-(void) testCheckmarkIsDisplayedOnSelectedTaxRateRow
+{
+    for(int i = 0; i < [self.taxRates count]; i++)
+    {
+        if([[self.taxRates objectAtIndex:i] isEqualToString:self.selectTaxRateController.selectedTaxRate])
+        {
+            NSIndexPath* taxRateIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        
+            UITableViewCell* testCell = [self.selectTaxRateController tableView:nil cellForRowAtIndexPath:taxRateIndexPath];
+            STAssertEquals(testCell.accessoryType, UITableViewCellAccessoryCheckmark, @"Selected tax rate should have a check mark");
+        }
+    }
 }
 
 
