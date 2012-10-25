@@ -511,15 +511,71 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Select Tax Rate" id="OXo-Dg-TAk">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ah4-yh-dPA"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="gp6-Bc-8yg"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ah4-yh-dPA">
+                                            <connections>
+                                                <action selector="cancelPushed:" destination="IjO-qQ-KSj" id="Xsm-PU-MM0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="gp6-Bc-8yg">
+                                            <connections>
+                                                <action selector="savePushed:" destination="IjO-qQ-KSj" id="AOh-yY-Vum"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" id="W8m-pX-vfv">
+                                <rect key="frame" x="0.0" y="44" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uj3-aR-ZOx">
+                                        <rect key="frame" x="10" y="10" width="300" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">Disclaimer: My Tax Savings is only an estimate of your tax savings and assumes you itemize using Schedule A on your IRS return instead of the standard deduction.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="YJw-Ej-nZT">
+                                <rect key="frame" x="0.0" y="124" width="320" height="341"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="0Aa-DE-F0a" style="IBUITableViewCellStyleDefault" id="H9L-uY-s9Y">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Aa-DE-F0a">
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="IjO-qQ-KSj" id="Wld-yR-bYy"/>
+                                    <outlet property="delegate" destination="IjO-qQ-KSj" id="p3B-6t-uE9"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="taxRateTable" destination="YJw-Ej-nZT" id="Ah1-kT-gIg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTN-3b-M2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -885,6 +941,11 @@
         </class>
         <class className="VPNSelectTaxRateViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxRateViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="savePushed:"/>
+                <relationship kind="outlet" name="taxRateTable" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="VPNSplashViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSplashViewController.h"/>

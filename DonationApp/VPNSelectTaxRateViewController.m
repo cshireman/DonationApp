@@ -16,16 +16,25 @@
 @synthesize delegate;
 @synthesize taxRates;
 @synthesize selectedTaxRate;
+@synthesize taxRateTable;
+
+-(id) init
+{
+    self = [super init];
+    if(self)
+    {
+        [self config];
+    }
+    
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-        self.selectedTaxRate = [userDefaults objectForKey:kSelectedTaxRateKey];
-        
-        self.taxRates = [[NSMutableArray alloc] initWithObjects:@"10%",@"15%",@"25%",@"28%",@"33%",@"35%", nil];
+        [self config];
     }
     return self;
 }
@@ -33,13 +42,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self config];
 	// Do any additional setup after loading the view.
+    [self.taxRateTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) config
+{
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    self.selectedTaxRate = [userDefaults objectForKey:kSelectedTaxRateKey];
+    if(self.selectedTaxRate == nil)
+        self.selectedTaxRate = @"25%";
+    
+    self.taxRates = [[NSMutableArray alloc] initWithObjects:@"10%",@"15%",@"25%",@"28%",@"33%",@"35%", nil];    
 }
 
 #pragma mark -

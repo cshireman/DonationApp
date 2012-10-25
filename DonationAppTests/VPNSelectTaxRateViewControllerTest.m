@@ -19,13 +19,15 @@
 
 -(void) setUp
 {
-    self.defaultTaxRate = @"25%";
+    self.defaultTaxRate = @"28%";
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:self.defaultTaxRate forKey:kSelectedTaxRateKey];
+    [userDefaults synchronize];
     
     self.selectTaxRateController = [[VPNSelectTaxRateViewController alloc] init];
     self.selectTaxRateController.delegate = self;
+    [self.selectTaxRateController config];
     
     self.cancelPushed = NO;
     self.savePushed = NO;

@@ -24,8 +24,12 @@
 @property (strong, nonatomic) NSMutableArray* taxRates;
 @property (copy, nonatomic) NSString* selectedTaxRate;
 
+@property (strong, nonatomic) IBOutlet UITableView* taxRateTable;
+
 -(IBAction)savePushed:(id)sender;
 -(IBAction)cancelPushed:(id)sender;
+
+-(void) config;
 
 //UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;

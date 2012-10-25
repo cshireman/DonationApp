@@ -190,6 +190,16 @@
 }
 
 #pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController* destination = (UIViewController*)segue.destinationViewController;
+    if([destination respondsToSelector:@selector(setDelegate:)])
+        [destination setValue:self forKey:@"delegate"];
+}
+
+#pragma mark -
 #pragma mark AdBannerViewDelegate Methods
 
 -(void) bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
@@ -210,5 +220,30 @@
 {
     
 }
+
+/**
+ * Calculate the tax savings amount based on donation amounts and tax rate
+ */
+-(double) calculateTaxSavingsWithItemAmount:(double)itemAmount moneyAmount:(double)moneyAmount mileageAmount:(double)mileageAmount taxRate:(double)taxRate;
+{
+    return taxRate*(itemAmount+moneyAmount+(0.14*mileageAmount));
+}
+
+#pragma mark -
+#pragma mark VPNSelectTaxRateViewControllerDelegate Methods
+-(void) selectTaxRateCanceled
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) selectTaxRateSaved
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setDouble:25.00 forKey:kTaxSavingsKey];
+    [userDefaults synchronize];
+}
+
 
 @end

@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
+#import "VPNSelectTaxRateViewController.h"
 
-@interface VPNHomeViewController : UITableViewController <ADBannerViewDelegate>
+#define kTaxSavingsKey      @"tax_savings"
+#define kItemSubtotalKey    @"items_subtotal"
+#define kMoneySubtotalKey   @"money_subtotal"
+#define kMileageSubtotalKey @"mileage_subtotal"
+
+@interface VPNHomeViewController : UITableViewController <ADBannerViewDelegate, VPNSelectTaxRateViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* updateButton;
 @property (strong, nonatomic) IBOutlet UIView* optOutView;
@@ -18,5 +24,13 @@
 
 -(IBAction)logoutPushed:(id)sender;
 -(IBAction)updatePushed:(id)sender;
+
+//VPNSelectTaxRateViewControllerDelegate Methods
+-(void) selectTaxRateCanceled;
+-(void) selectTaxRateSaved;
+
+//Custom Methods
+-(double) calculateTaxSavingsWithItemAmount:(double)itemAmount moneyAmount:(double)moneyAmount mileageAmount:(double)mileageAmount taxRate:(double)taxRate;
+
 
 @end

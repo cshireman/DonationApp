@@ -14,11 +14,5 @@
 
 @property (strong, nonatomic) VPNHomeViewController* homeController;
 
-@end
-
-@interface FakeTabGroupController : VPNMainTabGroupViewController
-
-@property BOOL selectTaxYearSceneCalled;
-@property BOOL loginSceneCalled;
 
 @end
