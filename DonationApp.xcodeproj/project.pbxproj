@@ -55,6 +55,7 @@
 		8397DF88162E81DA000D8633 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8397DF87162E81DA000D8633 /* iAd.framework */; };
 		8397DF8B162E82F2000D8633 /* logo_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF89162E82F2000D8633 /* logo_large.png */; };
 		8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF8A162E82F2000D8633 /* logo_orgs.png */; };
+		8398662016383591009D8518 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8398661816383591009D8518 /* libOCMock.a */; };
 		83A1D3F316311295002CD13C /* VPNUserSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */; };
 		83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */; };
 /* End PBXBuildFile section */
@@ -136,6 +137,13 @@
 		8397DF87162E81DA000D8633 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		8397DF89162E82F2000D8633 /* logo_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_large.png; sourceTree = "<group>"; };
 		8397DF8A162E82F2000D8633 /* logo_orgs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_orgs.png; sourceTree = "<group>"; };
+		8398661816383591009D8518 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		8398661A16383591009D8518 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		8398661B16383591009D8518 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		8398661C16383591009D8518 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		8398661D16383591009D8518 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		8398661E16383591009D8518 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		8398661F16383591009D8518 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
 		83A1D3F116311295002CD13C /* VPNUserSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserSignupViewController.h; sourceTree = "<group>"; };
 		83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserSignupViewController.m; sourceTree = "<group>"; };
 		83A1D3F5163117DE002CD13C /* VPNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNLoginViewController.h; sourceTree = "<group>"; };
@@ -162,6 +170,7 @@
 				8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */,
 				8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */,
 				8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */,
+				8398662016383591009D8518 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +279,7 @@
 		8368526E1633BC7D00E51EEB /* DonationAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				8383DD98163834AE009467F1 /* libraries */,
 				836852741633BC7D00E51EEB /* DonationAppTests.h */,
 				836852751633BC7D00E51EEB /* DonationAppTests.m */,
 				8368526F1633BC7D00E51EEB /* Supporting Files */,
@@ -299,6 +309,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8383DD98163834AE009467F1 /* libraries */ = {
+			isa = PBXGroup;
+			children = (
+				8398661816383591009D8518 /* libOCMock.a */,
+				8398661916383591009D8518 /* OCMock */,
+			);
+			path = libraries;
+			sourceTree = "<group>";
+		};
 		8397DF77162E6CA2000D8633 /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +325,19 @@
 				8397DF71162E6C04000D8633 /* VPNUser.m */,
 			);
 			name = models;
+			sourceTree = "<group>";
+		};
+		8398661916383591009D8518 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				8398661A16383591009D8518 /* NSNotificationCenter+OCMAdditions.h */,
+				8398661B16383591009D8518 /* OCMArg.h */,
+				8398661C16383591009D8518 /* OCMConstraint.h */,
+				8398661D16383591009D8518 /* OCMock.h */,
+				8398661E16383591009D8518 /* OCMockObject.h */,
+				8398661F16383591009D8518 /* OCMockRecorder.h */,
+			);
+			path = OCMock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,6 +592,10 @@
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -572,6 +608,10 @@
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -587,7 +627,19 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationAppTests/DonationAppTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/DonationAppTests/libraries";
 				INFOPLIST_FILE = "DonationAppTests/DonationAppTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+					"\"$(SRCROOT)/DonationAppTests/libraries\"",
+				);
+				OTHER_CODE_SIGN_FLAGS = "";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/DonationAppTests/libraries/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -604,7 +656,19 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationAppTests/DonationAppTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/DonationAppTests/libraries";
 				INFOPLIST_FILE = "DonationAppTests/DonationAppTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+					"\"$(SRCROOT)/DonationAppTests/libraries\"",
+				);
+				OTHER_CODE_SIGN_FLAGS = "";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/DonationAppTests/libraries/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

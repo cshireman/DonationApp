@@ -7,6 +7,8 @@
 //
 
 #import "VPNSelectTaxRateViewControllerTest.h"
+#import "OCMock.h"
+#import "OCMockObject.h"
 
 @implementation VPNSelectTaxRateViewControllerTest
 @synthesize selectTaxRateController;
@@ -49,9 +51,12 @@
     for(int i = 0; i < [taxRates count]; i++)
     {
         NSIndexPath* taxRateIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        id testTableView = [OCMockObject mockForClass: [UITableView class]];
+        [[testTableView expect] dequeueReusableCellWithIdentifier:@"Cell"];
         
-        UITableViewCell* testCell = [self.selectTaxRateController tableView:nil cellForRowAtIndexPath:taxRateIndexPath];
+        UITableViewCell* testCell = [self.selectTaxRateController tableView:testTableView cellForRowAtIndexPath:taxRateIndexPath];
         STAssertEqualObjects(testCell.textLabel.text, [self.taxRates objectAtIndex:taxRateIndexPath.row], @"Tax Rate label doesn't match");
+        [testTableView verify];
     }
 }
 
@@ -69,10 +74,17 @@
 
 -(void) testThatTaxRateCanBeSelected
 {
+    NSIndexPath* rowIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    
+    id testTableView = [OCMockObject mockForClass: [UITableView class]];
+    [[testTableView expect] deselectRowAtIndexPath:rowIndexPath animated:YES];
+    [[testTableView expect] reloadData];
+    
     self.selectTaxRateController.selectedTaxRate = @"25%";
-    [self.selectTaxRateController tableView:nil didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    [self.selectTaxRateController tableView:testTableView didSelectRowAtIndexPath:rowIndexPath];
     
     STAssertEquals(@"28%", self.selectTaxRateController.selectedTaxRate, @"Tax Rate should have changed to 28%");
+    [testTableView verify];
 }
 
 -(void) testThatTaxRateCanBeSelectedAndSaved
@@ -93,13 +105,16 @@
 
 -(void) testCheckmarkIsDisplayedOnSelectedTaxRateRow
 {
+    id testTableView = [OCMockObject mockForClass: [UITableView class]];
     for(int i = 0; i < [self.taxRates count]; i++)
     {
         if([[self.taxRates objectAtIndex:i] isEqualToString:self.selectTaxRateController.selectedTaxRate])
         {
             NSIndexPath* taxRateIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [[testTableView expect] dequeueReusableCellWithIdentifier:@"Cell"];
         
-            UITableViewCell* testCell = [self.selectTaxRateController tableView:nil cellForRowAtIndexPath:taxRateIndexPath];
+            UITableViewCell* testCell = [self.selectTaxRateController tableView:testTableView cellForRowAtIndexPath:taxRateIndexPath];
+            [testTableView verify];
             STAssertEquals(testCell.accessoryType, UITableViewCellAccessoryCheckmark, @"Selected tax rate should have a check mark");
         }
     }
