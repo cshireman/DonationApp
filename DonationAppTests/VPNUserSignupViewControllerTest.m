@@ -13,6 +13,7 @@
 @synthesize signupController;
 
 -(void)setUp{
+    [super setUp];
     self.signupController = [[VPNUserSignupViewController alloc] init];
 }
 

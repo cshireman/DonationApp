@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#define kSelectedTaxRateKey     @"selected_tax_rate"
+#import "VPNTaxSavings.h"
 
 @class VPNSelectTaxRateViewController;
 @protocol VPNSelectTaxRateViewControllerDelegate <NSObject>

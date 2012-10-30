@@ -101,6 +101,19 @@ static VPNUser* currentUser = nil;
 }
 
 /**
+ * Delete the user file from the disc
+ */
++(void) deleteUserFromDisc
+{
+    NSError* error;
+    NSString* filePath = [VPNUser userFilePath];
+    
+    NSFileManager* fileMgr = [NSFileManager defaultManager];
+    if([fileMgr fileExistsAtPath:filePath])
+        [fileMgr removeItemAtPath:filePath error:&error];
+}
+
+/**
  * Save this user to the user defaults
  */
 -(void) saveAsDefaultUser

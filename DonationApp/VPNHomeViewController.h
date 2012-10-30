@@ -30,7 +30,6 @@
 -(void) selectTaxRateSaved;
 
 //Custom Methods
--(double) calculateTaxSavingsWithItemAmount:(double)itemAmount moneyAmount:(double)moneyAmount mileageAmount:(double)mileageAmount taxRate:(double)taxRate;
 
 
 @end

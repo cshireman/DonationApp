@@ -221,13 +221,6 @@
     
 }
 
-/**
- * Calculate the tax savings amount based on donation amounts and tax rate
- */
--(double) calculateTaxSavingsWithItemAmount:(double)itemAmount moneyAmount:(double)moneyAmount mileageAmount:(double)mileageAmount taxRate:(double)taxRate;
-{
-    return taxRate*(itemAmount+moneyAmount+(0.14*mileageAmount));
-}
 
 #pragma mark -
 #pragma mark VPNSelectTaxRateViewControllerDelegate Methods
@@ -241,6 +234,10 @@
     [self dismissModalViewControllerAnimated:YES];
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* selectedTaxRate=  [userDefaults objectForKey:kSelectedTaxRateKey];
+    
+    double taxRate = [VPNTaxSavings doubleForTaxRate:selectedTaxRate];
+    
     [userDefaults setDouble:25.00 forKey:kTaxSavingsKey];
     [userDefaults synchronize];
 }

@@ -10,32 +10,44 @@
 
 @implementation VPNUserTest
 
--(void) testUserCanBeSavedToDisc
+-(void) setUp
 {
-    VPNUser* testUser = [[VPNUser alloc] init];
+    testUser = [[VPNUser alloc] init];
     testUser.username = @"chris@shireman.net";
     testUser.password = @"password";
     testUser.first_name = @"Christopher";
     testUser.last_name = @"Shireman";
-    
+}
+
+-(void) tearDown
+{
+    [VPNUser deleteUserFromDisc];
+    testUser = nil;
+}
+
+-(void) testCanCreateUser
+{
+    STAssertNotNil(testUser, @"Should be able to create user");
+}
+
+-(void) testUserCanBeSavedToDisc
+{
     [testUser saveAsDefaultUser];
     
-    NSString* filename = [VPNUser userFilePath];
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filename];
-    STAssertTrue(fileExists, @"User file doesn't exist!");
-    
     VPNUser* loadedUser = [VPNUser loadUserFromDisc];
+    STAssertNotNil(loadedUser, @"User should not be nill after being loaded from disc");
     STAssertEqualObjects(loadedUser.username, testUser.username, @"Users are not the same after save");
+}
+
+-(void) testUserCanBeDeletedFromDisc
+{
+    [VPNUser deleteUserFromDisc];
+    VPNUser* loadedUser = [VPNUser loadUserFromDisc];
+    STAssertNil(loadedUser, @"User should be nill after being loaded from disc");
 }
 
 -(void) testUserCanBeAuthenticatedAgainstCurrentUser
 {
-    VPNUser* testUser = [[VPNUser alloc] init];
-    testUser.username = @"chris@shireman.net";
-    testUser.password = @"password";
-    testUser.first_name = @"Christopher";
-    testUser.last_name = @"Shireman";
-    
     [testUser saveAsDefaultUser];
     
     VPNUser* anotherUser = [testUser copy];

@@ -19,6 +19,7 @@
 
 -(void) setUp
 {
+    [super setUp];
     self.defaultTaxRate = @"28%";
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];

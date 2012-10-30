@@ -13,6 +13,7 @@
 @synthesize loginStatus;
 
 -(void) setUp{
+    [super setUp];
     self.loginController = [[VPNLoginViewController alloc] init];
     self.loginController.delegate = self;
 }

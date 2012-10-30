@@ -10,5 +10,7 @@
 #import "VPNUser.h"
 
 @interface VPNUserTest : SenTestCase
-
+{
+    VPNUser* testUser;
+}
 @end
