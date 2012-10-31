@@ -14,7 +14,9 @@
 
 @property (strong) NSError* fetchError;
 @property (strong) VPNUser* receivedUser;
+@property (strong) VPNSession* receivedSession;
 
 -(void) startingSessionFailedWithError:(NSError*)error;
--(void) didStartSessionWithUser:(VPNUser*)user;
+-(void) didStartSession:(VPNSession*)session;
+-(void) didGetUser:(VPNUser*)user;
 @end

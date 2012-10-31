@@ -11,13 +11,13 @@
 #import "VPNMockCDManagerDelegate.h"
 #import "VPNMockCDCommunicator.h"
 #import "VPNUser.h"
-#import "VPNFakeUserBuilder.h"
+#import "VPNFakeSessionBuilder.h"
 
-@interface VPNUserCreationWorkflowTests : SenTestCase
+@interface VPNSessionCreationWorkflowTests : SenTestCase
 {
     VPNCDManager* manager;
     VPNMockCDManagerDelegate* delegate;
-    VPNFakeUserBuilder* builder;
+    VPNFakeSessionBuilder* builder;
     NSError* underlyingError;
     VPNUser* user;
 }

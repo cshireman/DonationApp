@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
-#import "VPNUserCreationWorkflowTests.h"
+#import "VPNSessionCreationWorkflowTests.h"
 
-@implementation VPNUserCreationWorkflowTests
+@implementation VPNSessionCreationWorkflowTests
 
 -(void) setUp
 {
@@ -16,8 +16,8 @@
     delegate = [[VPNMockCDManagerDelegate alloc] init];
     manager.delegate = delegate;
     
-    builder = [[VPNFakeUserBuilder alloc] init];
-    manager.userBuilder = builder;
+    builder = [[VPNFakeSessionBuilder alloc] init];
+    manager.sessionBuilder = builder;
 
     underlyingError = [NSError errorWithDomain:@"Test Domain" code:0 userInfo:nil];
     user = [[VPNUser alloc] init];
@@ -77,32 +77,32 @@
 
 -(void)testUserJSONIsPassedToUserBuilder
 {
-    [manager receivedUserJSON: @"Fake JSON"];
+    [manager receivedSessionJSON: @"Fake JSON"];
     STAssertEqualObjects(builder.JSON, @"Fake JSON", @"Downloaded JSON is sent to builder");
 }
 
 -(void)testDelegateNotifiedOfErrorWhenUserBuilderFails
 {
-    builder.userToReturn = nil;
+    builder.sessionToReturn = nil;
     builder.errorToSet = underlyingError;
     
-    [manager receivedUserJSON:@"Fake JSON"];
+    [manager receivedSessionJSON:@"Fake JSON"];
     STAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],
                    @"The delegate should have found out about the error");    
 }
 
 -(void) testDelegateNotToldAboutErrorWhenUserReceived
 {
-    builder.userToReturn = user;
-    [manager receivedUserJSON:@"Fake JSON"];
+    builder.sessionToReturn = [[VPNSession alloc] init];
+    [manager receivedSessionJSON:@"Fake JSON"];
     STAssertNil([delegate fetchError], @"No error should be received on success");
 }
 
 -(void) testDelegateReceivesUserDiscoveredByManager
 {
-    builder.userToReturn = user;
-    [manager receivedUserJSON:@"Fake JSON"];
-    STAssertEqualObjects([delegate receivedUser], user,@"The manager should have sent its user to the delegate");
+    builder.sessionToReturn = [[VPNSession alloc] init];
+    [manager receivedSessionJSON:@"Fake JSON"];
+    STAssertEqualObjects([delegate receivedSession], builder.sessionToReturn,@"The manager should have sent its session to the delegate");
 }
 
 @end

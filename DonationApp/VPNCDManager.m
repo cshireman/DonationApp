@@ -13,6 +13,7 @@
 @synthesize delegate;
 @synthesize communicator;
 @synthesize userBuilder;
+@synthesize sessionBuilder;
 
 -(void) setDelegate:(id<VPNCDManagerDelegate>)newDelegate
 {
@@ -47,9 +48,25 @@
     }
     else
     {
-        [delegate didStartSessionWithUser:user];
+        [delegate didGetUser:user];
     }
 }
+
+-(void)receivedSessionJSON:(NSString*)objectNotation
+{
+    NSError* error = nil;
+    VPNSession* session = [sessionBuilder sessionFromJSON:objectNotation error:&error];
+    
+    if(!session)
+    {
+        [self tellDelegateAboutError:error];
+    }
+    else
+    {
+        [delegate didStartSession:session];
+    }
+}
+
 
 -(void) tellDelegateAboutError:(NSError*) error
 {

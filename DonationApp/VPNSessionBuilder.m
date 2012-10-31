@@ -1,16 +1,16 @@
 //
-//  VPNUserBuilder.m
+//  VPNSessionBuilder.m
 //  DonationApp
 //
-//  Created by Chris Shireman on 10/29/12.
+//  Created by Chris Shireman on 10/30/12.
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
-#import "VPNUserBuilder.h"
+#import "VPNSessionBuilder.h"
 
-@implementation VPNUserBuilder
+@implementation VPNSessionBuilder
 
--(VPNUser*)userFromJSON:(NSString*)objectNotation error:(NSError**)error
+-(VPNSession*)sessionFromJSON:(NSString*)objectNotation error:(NSError**)error
 {
     NSParameterAssert(objectNotation != nil);
     NSData* unicodeNotation = [objectNotation dataUsingEncoding:NSUTF8StringEncoding];
@@ -22,16 +22,16 @@
     {
         if(error != NULL)
         {
-            *error = [NSError errorWithDomain:VPNUserBuilderError code:VPNUserBuilderInvalidJSONError userInfo:nil];
+            *error = [NSError errorWithDomain:VPNSessionBuilderError code:VPNSessionBuilderInvalidJSONError userInfo:nil];
         }
     }
     
-    VPNUser* user = [[VPNUser alloc] init];
-    
+    VPNSession* session = [[VPNSession alloc] init];
     
     return nil;
+    
 }
 
 @end
 
-NSString* VPNUserBuilderError = @"UserBuilderError";
+NSString* VPNSessionBuilderError = @"SessionBuilderError";

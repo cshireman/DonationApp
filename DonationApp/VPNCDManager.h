@@ -10,6 +10,8 @@
 #import "VPNCDManagerDelegate.h"
 #import "VPNCDCommunicator.h"
 #import "VPNUserBuilder.h"
+#import "VPNSessionBuilder.h"
+#import "VPNSession.h"
 
 extern NSString* VPNCDManagerError;
 
@@ -22,9 +24,11 @@ enum {
 @property (nonatomic, weak) id<VPNCDManagerDelegate> delegate;
 @property (strong, nonatomic) VPNCDCommunicator* communicator;
 @property (strong, nonatomic) VPNUserBuilder* userBuilder;
+@property (strong, nonatomic) VPNSessionBuilder* sessionBuilder;
 
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
+-(void)receivedSessionJSON:(NSString*)objectNotation;
 -(void)receivedUserJSON:(NSString*)objectNotation;
 
 

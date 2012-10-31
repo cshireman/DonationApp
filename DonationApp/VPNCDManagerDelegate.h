@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "VPNUser.h"
+#import "VPNSession.h"
 
 @protocol VPNCDManagerDelegate <NSObject>
 
 -(void) startingSessionFailedWithError:(NSError*)error;
--(void) didStartSessionWithUser:(VPNUser*)user;
+-(void) didStartSession:(VPNSession*)session;
+-(void) didGetUser:(VPNUser*)user;
 
 @end

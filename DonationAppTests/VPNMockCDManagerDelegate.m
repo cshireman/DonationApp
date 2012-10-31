@@ -17,7 +17,12 @@
     self.fetchError = error;
 }
 
--(void) didStartSessionWithUser:(VPNUser*)user
+-(void) didStartSession:(VPNSession *)session
+{
+    self.receivedSession = session;
+}
+
+-(void) didGetUser:(VPNUser*)user
 {
     self.receivedUser = user;
 }
