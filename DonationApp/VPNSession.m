@@ -15,6 +15,8 @@
 @synthesize last_name;
 @synthesize annual_limit;
 
+static VPNSession* currentSession = nil;
+
 -(id) initWithDictionary:(NSDictionary*)info
 {
     self = [super init];
@@ -22,12 +24,29 @@
     if(self)
     {
         session = [info objectForKey:@"session"];
-        first_name = [info objectForKey:@"first_name"];
-        last_name = [info objectForKey:@"last_name"];
-        annual_limit = [[info objectForKey:@"annual_limit"] intValue];
+        first_name = [info objectForKey:@"firstName"];
+        last_name = [info objectForKey:@"lastName"];
+        annual_limit = [[info objectForKey:@"annualLimit"] intValue];
     }
     
     return self;
 }
+
+-(void) setAsCurrentSession
+{
+    currentSession = self;
+}
+
++(id) currentSession
+{
+    return currentSession;
+}
+
++(void) clearCurrentSession
+{
+    currentSession = nil;
+}
+
+
 
 @end

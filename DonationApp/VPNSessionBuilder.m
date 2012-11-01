@@ -24,11 +24,38 @@
         {
             *error = [NSError errorWithDomain:VPNSessionBuilderError code:VPNSessionBuilderInvalidJSONError userInfo:nil];
         }
+        
+        return nil;
     }
     
-    VPNSession* session = [[VPNSession alloc] init];
+    NSDictionary* sessionInfo = [parsedObject objectForKey:@"d"];
     
-    return nil;
+    //Make sure there is a session attribute in the JSON
+    NSArray* keys = [sessionInfo allKeys];
+    BOOL sessionKeyFound = NO;
+    for(NSString* key in keys)
+    {
+        if([key isEqualToString:@"session"])
+        {
+            sessionKeyFound = YES;
+            break;
+        }
+    }
+    
+    //If there was no session found, return with error
+    if(!sessionKeyFound)
+    {
+        if(error != NULL)
+        {
+            *error = [NSError errorWithDomain:VPNSessionBuilderError code:VPNSessionBuilderMissingDataError userInfo:nil];
+        }
+        
+        return nil;
+    }
+    
+    VPNSession* session = [[VPNSession alloc] initWithDictionary:sessionInfo];
+    
+    return session;
     
 }
 

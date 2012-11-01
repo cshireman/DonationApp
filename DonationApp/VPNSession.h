@@ -16,5 +16,9 @@
 @property (assign) NSInteger annual_limit;
 
 -(id) initWithDictionary:(NSDictionary*)info;
+-(void) setAsCurrentSession;
+
++(id) currentSession;
++(void) clearCurrentSession;
 
 @end

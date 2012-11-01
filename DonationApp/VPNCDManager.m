@@ -57,7 +57,7 @@
     NSError* error = nil;
     VPNSession* session = [sessionBuilder sessionFromJSON:objectNotation error:&error];
     
-    if(!session)
+    if(session == nil)
     {
         [self tellDelegateAboutError:error];
     }

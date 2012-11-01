@@ -18,6 +18,7 @@
 -(void) tearDown
 {
     session = nil;
+    [VPNSession clearCurrentSession];
 }
 
 -(void) testSessionCanBeCreated
@@ -29,15 +30,21 @@
 {
     NSDictionary* testSessionInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                      @"1234",@"session",
-                                     @"Joe",@"first_name",
-                                     @"Tester",@"last_name",
-                                     [NSNumber numberWithInt:15000],@"annual_limit", nil];
+                                     @"Joe",@"firstName",
+                                     @"Tester",@"lastName",
+                                     [NSNumber numberWithInt:15000],@"annualLimit", nil];
     
     session = [[VPNSession alloc] initWithDictionary:testSessionInfo];
     STAssertEqualObjects(session.session, @"1234", @"Session should be able to loaded from dictionary");
     STAssertEqualObjects(session.first_name, @"Joe", @"Session should be able to loaded from dictionary");
     STAssertEqualObjects(session.last_name, @"Tester", @"Session should be able to loaded from dictionary");
     STAssertEquals(session.annual_limit, 15000, @"Session should be able to loaded from dictionary");
+}
+
+-(void) testCurrentSessionCanBeSet
+{
+    [session setAsCurrentSession];
+    STAssertNotNil([VPNSession currentSession], @"Current session should have be set");
 }
 
 @end
