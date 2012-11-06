@@ -83,6 +83,11 @@
     [delegate startingSessionFailedWithError:reportableError];    
 }
 
+-(NSArray*) getOrganizations
+{
+    return nil;
+}
+
 @end
 
 NSString* VPNCDManagerError = @"VPNCDManagerError";

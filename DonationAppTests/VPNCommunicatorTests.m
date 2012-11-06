@@ -65,15 +65,15 @@
     [delegate verify];
 }
 
--(void) testStartingSessionCallCreatesConnection
-{
-    VPNUser* user = [[VPNUser alloc] init];
-    user.username = @"media";
-    user.password = @"test";
-
-    [communicator startSessionForUser:user];
-    STAssertNotNil(communicator.currentConnection, @"Connection should have been created");
-}
+//-(void) testStartingSessionCallCreatesConnection
+//{
+//    VPNUser* user = [[VPNUser alloc] init];
+//    user.username = @"media";
+//    user.password = @"test";
+//
+//    [communicator startSessionForUser:user];
+//    STAssertNotNil(communicator.currentConnection, @"Connection should have been created");
+//}
 
 
 @end

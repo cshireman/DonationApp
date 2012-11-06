@@ -31,5 +31,7 @@ enum {
 -(void)receivedSessionJSON:(NSString*)objectNotation;
 -(void)receivedUserJSON:(NSString*)objectNotation;
 
+-(NSArray*) getOrganizations;
+
 
 @end
