@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VPNCDManagerDelegate.h"
 #import "VPNCDCommunicator.h"
+#import "VPNCommunicatorDelegate.h"
 #import "VPNUserBuilder.h"
 #import "VPNSessionBuilder.h"
 #import "VPNSession.h"
@@ -16,10 +17,12 @@
 extern NSString* VPNCDManagerError;
 
 enum {
-    VPNCDManagerErrorStartSessionCode
+    VPNCDManagerErrorStartSessionCode,
+    VPNCDManagerInvalidUserError,
+    VPNCDManagerInvalidJSONError,
 };
 
-@interface VPNCDManager : NSObject
+@interface VPNCDManager : NSObject <VPNCommunicatorDelegate>
 
 @property (nonatomic, weak) id<VPNCDManagerDelegate> delegate;
 @property (strong, nonatomic) VPNCDCommunicator* communicator;
@@ -28,10 +31,11 @@ enum {
 
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
--(void)receivedSessionJSON:(NSString*)objectNotation;
--(void)receivedUserJSON:(NSString*)objectNotation;
 
 -(NSArray*) getOrganizations;
 
+//Communicator delegate
+-(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;
+-(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall;
 
 @end

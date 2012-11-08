@@ -46,6 +46,7 @@
 		83195DCB162D25D100B63831 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83195DCA162D25D100B63831 /* appicon@2x.png */; };
 		831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */; };
 		831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */ = {isa = PBXBuildFile; fileRef = 831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */; };
+		8335A62E164B752D00806A98 /* VPNManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8335A62D164B752D00806A98 /* VPNManagerTests.m */; };
 		8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8368526A1633BC7D00E51EEB /* SenTestingKit.framework */; };
 		8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D84162D175600B63831 /* UIKit.framework */; };
 		8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
@@ -153,6 +154,8 @@
 		831D8845162FB44500274662 /* VPNMainTabGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNMainTabGroupViewController.h; sourceTree = "<group>"; };
 		831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNMainTabGroupViewController.m; sourceTree = "<group>"; };
 		831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CD_App_SU_Screen_r3.png; sourceTree = "<group>"; };
+		8335A62C164B752D00806A98 /* VPNManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNManagerTests.h; sourceTree = "<group>"; };
+		8335A62D164B752D00806A98 /* VPNManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNManagerTests.m; sourceTree = "<group>"; };
 		836852691633BC7D00E51EEB /* DonationAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonationAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8368526A1633BC7D00E51EEB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		836852701633BC7D00E51EEB /* DonationAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DonationAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				8390ECBB1648BCA1000D03AE /* VPNOrganizationTests.m */,
 				8390ECCB1648C145000D03AE /* VPNOrganizationsListViewControllerTests.h */,
 				8390ECCC1648C145000D03AE /* VPNOrganizationsListViewControllerTests.m */,
+				8335A62C164B752D00806A98 /* VPNManagerTests.h */,
+				8335A62D164B752D00806A98 /* VPNManagerTests.m */,
 			);
 			path = DonationAppTests;
 			sourceTree = "<group>";
@@ -650,6 +655,7 @@
 				8390ECCA1648C12A000D03AE /* VPNOrganizationListViewController.m in Sources */,
 				8390ECCD1648C145000D03AE /* VPNOrganizationsListViewControllerTests.m in Sources */,
 				8390ECD21648CA08000D03AE /* VPNOrganizationCell.m in Sources */,
+				8335A62E164B752D00806A98 /* VPNManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +791,7 @@
 				GCC_PREFIX_HEADER = "DonationAppTests/DonationAppTests-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/DonationAppTests/libraries";
 				INFOPLIST_FILE = "DonationAppTests/DonationAppTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
@@ -814,6 +821,7 @@
 				GCC_PREFIX_HEADER = "DonationAppTests/DonationAppTests-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/DonationAppTests/libraries";
 				INFOPLIST_FILE = "DonationAppTests/DonationAppTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",

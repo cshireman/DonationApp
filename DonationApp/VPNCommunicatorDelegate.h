@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NSString APICallType;
+
 @protocol VPNCommunicatorDelegate <NSObject>
 
 @optional
--(void) receivedUserJSON:(NSString*)objectNotation;
--(void) receivedSessionJSON:(NSString*)objectNotation;
-
--(void) receivedError:(NSError*)error;
+-(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;
+-(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall;
 
 @end

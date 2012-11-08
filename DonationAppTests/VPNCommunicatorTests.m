@@ -32,8 +32,7 @@
 
 -(void) testConformingObjectCanBeDelegate
 {
-    STAssertNoThrow(communicator.delegate = delegate, @"Object conforming to the delegate protocol should be",
-                    @"as the delegate");
+    STAssertNoThrow(communicator.delegate = delegate, @"Object conforming to the delegate protocol should be",@"as the delegate");
 }
 
 -(void) testCommunicatorAcceptsNilAsADelegate
@@ -41,39 +40,48 @@
     STAssertNoThrow(communicator.delegate = nil,@"It should be possible to use nil as the objects delegate");
 }
 
--(void) testCurrentCallTypeSetToLoginWhenStartingSession
+-(void) testMakingAPICallWithInvalidAPICallTypeSendsErrorToDelegate
 {
-    VPNUser* user = [[VPNUser alloc] init];
-    user.username = @"media";
-    user.password = @"test";
-
-    [communicator startSessionForUser:user];
-    STAssertEqualObjects(LoginUser, communicator.currentCallType, @"Call type should have been set to LoginUser");
-}
-
--(void) testNilUserShouldThrowExceptionWhenStartingSession
-{
-    STAssertThrows([communicator startSessionForUser:nil], @"User is required to start a session");
-}
-
--(void) testBlankUsernameWillSendErrorToDelegate
-{
-    [[delegate expect] receivedError:[OCMArg any]];
-    VPNUser* user = [[VPNUser alloc] init];
+    APICallType* badCallType = (APICallType*)@"BadAPICallType";
+    [[delegate expect] receivedError:[OCMArg any] forAPICall:@"BadAPICallType"];
     
-    [communicator startSessionForUser:user];
+    [communicator makeAPICall:badCallType withContent:@"Bad Content"];
+    
     [delegate verify];
 }
 
-//-(void) testStartingSessionCallCreatesConnection
-//{
-//    VPNUser* user = [[VPNUser alloc] init];
-//    user.username = @"media";
-//    user.password = @"test";
-//
-//    [communicator startSessionForUser:user];
-//    STAssertNotNil(communicator.currentConnection, @"Connection should have been created");
-//}
+-(void) testMakingAPICallWithNilAPICallTypeSendsErrorToDelegate
+{
+    APICallType* badCallType = nil;
+    [[delegate expect] receivedError:[OCMArg any] forAPICall:nil];
+    
+    [communicator makeAPICall:badCallType withContent:@"Bad Content"];
+    
+    [delegate verify];
+}
+
+-(void) testMakingValidAPICallWillStartConnection
+{
+    [communicator makeAPICall:LoginUser withContent:@"Some Content"];
+    STAssertEqualObjects(communicator.currentCallType, LoginUser, @"Call Type should have been set");
+    STAssertNotNil(communicator.currentConnection, @"Connection should have been created");
+}
+
+-(void) testFinishingConnectionWillSendResponseToDelegate
+{
+    communicator.currentCallType = LoginUser;
+    NSString* testString = @"TestString";
+    NSMutableData* testData = [NSMutableData dataWithBytes:[testString UTF8String] length:[testString length]];
+    
+    communicator.receivedData = testData;
+    
+    [[delegate expect] receivedResponse:testString forAPICall:LoginUser];
+    [communicator connectionDidFinishLoading:nil];
+    
+    [delegate verify];
+}
+
+
 
 
 @end

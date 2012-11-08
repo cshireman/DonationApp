@@ -15,6 +15,17 @@
 @synthesize userBuilder;
 @synthesize sessionBuilder;
 
+-(id) init
+{
+    self = [super init];
+    if(self){
+        communicator = [[VPNCDCommunicator alloc] init];
+        communicator.delegate = self;
+    }
+    
+    return self;
+}
+
 -(void) setDelegate:(id<VPNCDManagerDelegate>)newDelegate
 {
     if(newDelegate && ![newDelegate conformsToProtocol:@protocol(VPNCDManagerDelegate)])
@@ -29,7 +40,36 @@
 
 -(void)startSessionForUser:(VPNUser*)user
 {
-    [communicator startSessionForUser:user];
+    if(user == nil || user.username == nil || user.password == nil)
+    {
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidUserError userInfo:nil];
+        
+        [delegate startingSessionFailedWithError:error];
+        return;
+    }
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    [request setObject:@"12C7DCE347154B5A8FD49B72F169A975" forKey:@"apiKey"];
+    [request setObject:user.username forKey:@"username"];
+    [request setObject:user.password forKey:@"password"];
+    [request setObject:@"" forKey:@"userAgent"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate startingSessionFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:LoginUser withContent:jsonString];
 }
 
 -(void)startSessionForUserFailedWithError:(NSError*)error
@@ -87,6 +127,20 @@
 {
     return nil;
 }
+
+#pragma mark -
+#pragma mark Communicator Delegate Methods
+
+-(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall
+{
+    
+}
+
+-(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall
+{
+    
+}
+
 
 @end
 

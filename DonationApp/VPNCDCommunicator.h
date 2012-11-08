@@ -10,7 +10,29 @@
 #import "VPNCommunicatorDelegate.h"
 #import "VPNUser.h"
 
-typedef NSString APICallType;
+#define kNumAPICalls    27
+
+@interface VPNCDCommunicator : NSObject <NSURLConnectionDataDelegate>
+{
+    NSMutableArray* validAPICalls;
+}
+
+@property (strong) NSMutableData* receivedData;
+@property (copy) APICallType* currentCallType;
+
+@property (weak, nonatomic) id<VPNCommunicatorDelegate> delegate;
+@property (strong) NSURLConnection* currentConnection;
+
+-(void)makeAPICall:(APICallType*)apiCall withContent:(NSString*)content;
+-(void)cancelCurrentAPICall;
+
+//NSURLConnectionDataDelegate Methods
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection;
+
+@end
 
 extern APICallType* LoginUser;
 extern APICallType* LogoutUser;
@@ -49,24 +71,6 @@ extern APICallType* SendTaxPrepSummaryReport;
 extern NSString* CommunicatorDomain;
 
 enum {
-    CommunicatorInvalidUserError
+    CommunicatorInvalidUserError,
+    CommunicatorInvalidAPICallError
 };
-
-@interface VPNCDCommunicator : NSObject <NSURLConnectionDataDelegate>
-
-@property (strong) NSMutableData* receivedData;
-@property (copy) APICallType* currentCallType;
-
-@property (weak, nonatomic) id<VPNCommunicatorDelegate> delegate;
-@property (strong) NSURLConnection* currentConnection;
-
--(void)startSessionForUser:(VPNUser*)user;
--(void)cancelCurrentConnection;
-
-//NSURLConnectionDataDelegate Methods
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
--(void)connectionDidFinishLoading:(NSURLConnection *)connection;
-
-@end

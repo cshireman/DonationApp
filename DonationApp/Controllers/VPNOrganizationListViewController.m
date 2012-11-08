@@ -41,6 +41,7 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    //Load organizations from manager
     organizations = (NSMutableArray*)[manager getOrganizations];
 }
 

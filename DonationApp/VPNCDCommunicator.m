@@ -11,7 +11,47 @@
 @implementation VPNCDCommunicator
 @synthesize receivedData;
 @synthesize currentCallType;
+@synthesize currentConnection;
 @synthesize delegate;
+
+-(id) init
+{
+    self = [super init];
+    if(self)
+    {
+        validAPICalls = [[NSMutableArray alloc] initWithObjects:LoginUser,
+                         LogoutUser,
+                         RegisterTrialUser,
+                         GetUserInfo,
+                         UpdateUserInfo,
+                         ChangePassword,
+                         GetYears,
+                         GetPurchaseOptions,
+                         ValidatePromoCode,
+                         AddPurchasedYear,
+                         GetOrganizations,
+                         AddOrganization,
+                         UpdateOrganization,
+                         DeleteOrganization,
+                         GetItemLists,
+                         GetCashLists,
+                         GetMileageLists,
+                         AddList,
+                         UpdateList,
+                         DeleteList,
+                         AddListItem,
+                         UpdateListItem,
+                         DeleteListItem,
+                         GetCategoryList,
+                         SendDonationListReportWithValues,
+                         SendItemizedSummaryReport,
+                         SendTaxPrepSummaryReport,
+                         nil];
+        
+    }
+    
+    return self;
+}
 
 -(void) setDelegate:(id<VPNCommunicatorDelegate>)newDelegate
 {
@@ -25,19 +65,33 @@
     }
 }
 
--(void)startSessionForUser:(VPNUser*)user
+-(void) makeAPICall:(NSString *)apiCall withContent:(NSString *)content
 {
-    NSParameterAssert(user != nil);
-    
-    if(user.username == nil || [user.username isEqualToString:@""])
+    if(apiCall == nil || ![validAPICalls containsObject:apiCall])
     {
-        NSError* error = [NSError errorWithDomain:CommunicatorDomain code:CommunicatorInvalidUserError userInfo:nil];
-        [delegate receivedError:error];
+        NSError* error = [NSError errorWithDomain:CommunicatorDomain code:CommunicatorInvalidAPICallError userInfo:nil];
+        [delegate receivedError:error forAPICall:apiCall];
     }
     
-    currentCallType = LoginUser;
+    NSString* apiURL = [NSString stringWithFormat:@"http://review.prointegrations.com/charitydeductions/www/api/json/%@",apiCall];
+    
+    NSData* requestData = [NSData dataWithBytes:[content UTF8String] length:[content length]];
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:apiURL]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:requestData];
+    
+    currentCallType = [apiCall copy];
+    currentConnection = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
+-(void) cancelCurrentAPICall
+{
+    
+}
 
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods
@@ -63,7 +117,9 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     //read response into dictionary
-    NSString *jsonString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];	
+    NSString *jsonString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
+    
+    [delegate receivedResponse:jsonString forAPICall:currentCallType];
 }
 
 @end
