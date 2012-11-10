@@ -8,11 +8,18 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "VPNLoginViewController.h"
+#import "VPNCDManagerDelegate.h"
+#import "VPNCDManager.h"
 #import "VPNUser.h"
+#import "OCMock.h"
 
 @interface VPNLoginViewControllerTest : SenTestCase <VPNLoginViewControllerDelegate>
-
-@property BOOL loginStatus;
-@property (strong, nonatomic) VPNLoginViewController* loginController;
+{
+    VPNLoginViewController* loginController;
+    id delegate;
+    id usernameField;
+    id passwordField;
+    id observer;
+}
 
 @end

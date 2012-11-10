@@ -31,6 +31,8 @@
     [super viewDidLoad];
     if(manager == nil)
         manager = [[VPNCDManager alloc] init];
+    
+    manager.delegate = self;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,7 +44,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     //Load organizations from manager
-    organizations = (NSMutableArray*)[manager getOrganizations];
+    [manager getOrganizations:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,5 +158,8 @@
         }
     }
 }
+
+#pragma mark -
+#pragma mark ManagerDelegate methods
 
 @end

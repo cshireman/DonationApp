@@ -72,60 +72,14 @@
     [communicator makeAPICall:LoginUser withContent:jsonString];
 }
 
--(void)startSessionForUserFailedWithError:(NSError*)error
+-(void) getUserInfo:(BOOL)forceDownload
 {
-    [self tellDelegateAboutError:error];
+    
 }
 
--(void)receivedUserJSON:(NSString*)objectNotation
+-(void) getOrganizations:(BOOL)forceDownload
 {
-    NSError* error = nil;
-    VPNUser* user = [userBuilder userFromJSON:objectNotation error:&error];
     
-    if(!user)
-    {
-        [self tellDelegateAboutError:error];
-    }
-    else
-    {
-        [delegate didGetUser:user];
-    }
-}
-
--(void)receivedSessionJSON:(NSString*)objectNotation
-{
-    NSError* error = nil;
-    VPNSession* session = [sessionBuilder sessionFromJSON:objectNotation error:&error];
-    
-    if(session == nil)
-    {
-        [self tellDelegateAboutError:error];
-    }
-    else
-    {
-        [delegate didStartSession:session];
-    }
-}
-
-
--(void) tellDelegateAboutError:(NSError*) error
-{
-    NSDictionary* errorInfo = nil;
-    if(error)
-    {
-        errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
-    }
-    
-    NSError* reportableError = [NSError errorWithDomain:VPNCDManagerError
-                                                   code:VPNCDManagerErrorStartSessionCode
-                                               userInfo:errorInfo];
-    
-    [delegate startingSessionFailedWithError:reportableError];    
-}
-
--(NSArray*) getOrganizations
-{
-    return nil;
 }
 
 #pragma mark -
@@ -133,15 +87,60 @@
 
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall
 {
+    if(response == nil)
+    {
+        NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerErrorStartSessionCode userInfo:nil];
+        
+        [delegate startingSessionFailedWithError:jsonError];
+        return;
+    }
     
+    NSError* error = nil;
+    NSData* responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary* responseInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+    
+    if(error == nil)
+    {
+        NSDictionary* d = [responseInfo objectForKey:@"d"];
+        
+        if([@"SUCCESS" isEqualToString:[d objectForKey:@"status"]])
+        {
+            //Take action based on api call
+            if([LoginUser isEqual:apiCall])
+            {
+                [[VPNSession currentSession] populateWithDictionary:d];
+                [delegate didStartSession];
+            }
+        }
+        else
+        {
+            //create error and send to appropriate delegate method
+            NSInteger apiErrorCode = [[d objectForKey:@"errorCode"] integerValue];
+            NSDictionary* errorInfo = [NSDictionary dictionaryWithObject:[d objectForKey:@"errorMessage"] forKey:@"errorMessage"];
+            
+            NSError* apiError = [NSError errorWithDomain:APIErrorDomain code:apiErrorCode userInfo:errorInfo];
+            
+            [delegate startingSessionFailedWithError:apiError];
+        }
+    }
+    else
+    {
+        NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:nil];
+        
+        [delegate startingSessionFailedWithError:jsonError];
+    }
 }
 
 -(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall
 {
-    
+    if([LoginUser isEqual:apiCall])
+    {
+        [delegate startingSessionFailedWithError:error];
+    }
 }
 
 
 @end
 
 NSString* VPNCDManagerError = @"VPNCDManagerError";
+NSString* APIErrorDomain = @"APIErrorDomain";

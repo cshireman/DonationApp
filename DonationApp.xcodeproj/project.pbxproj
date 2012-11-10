@@ -12,7 +12,6 @@
 		830DF56C1640E4EA00A31818 /* VPNSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56A1640E4EA00A31818 /* VPNSession.m */; };
 		830DF56F1640E5F200A31818 /* VPNSessionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56E1640E5F200A31818 /* VPNSessionBuilder.m */; };
 		830DF5701640E5F200A31818 /* VPNSessionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56E1640E5F200A31818 /* VPNSessionBuilder.m */; };
-		830DF5731640E95500A31818 /* VPNFakeSessionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF5721640E95500A31818 /* VPNFakeSessionBuilder.m */; };
 		83175E7B16364E3E000C98B4 /* VPNUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E7A16364E3E000C98B4 /* VPNUserTest.m */; };
 		83175E7E163650BB000C98B4 /* VPNUserSignupViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E7D163650BB000C98B4 /* VPNUserSignupViewControllerTest.m */; };
 		83175E8116365367000C98B4 /* VPNLoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83175E8016365367000C98B4 /* VPNLoginViewControllerTest.m */; };
@@ -47,12 +46,13 @@
 		831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */; };
 		831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */ = {isa = PBXBuildFile; fileRef = 831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */; };
 		8335A62E164B752D00806A98 /* VPNManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8335A62D164B752D00806A98 /* VPNManagerTests.m */; };
+		834DBDDF164CCAA1006B0ED8 /* VPNNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */; };
+		834DBDE0164CCAA1006B0ED8 /* VPNNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */; };
 		8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8368526A1633BC7D00E51EEB /* SenTestingKit.framework */; };
 		8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D84162D175600B63831 /* UIKit.framework */; };
 		8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
 		836852731633BC7D00E51EEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 836852711633BC7D00E51EEB /* InfoPlist.strings */; };
 		8372B08E16423A4800C6E762 /* VPNCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8372B08D16423A4800C6E762 /* VPNCommunicatorTests.m */; };
-		8374CCFC16422B870013C678 /* VPNSessionBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8374CCFB16422B870013C678 /* VPNSessionBuilderTests.m */; };
 		8390ECBC1648BCA1000D03AE /* VPNOrganizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECBB1648BCA1000D03AE /* VPNOrganizationTests.m */; };
 		8390ECC01648BCC0000D03AE /* VPNOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECBF1648BCC0000D03AE /* VPNOrganization.m */; };
 		8390ECC11648BCC0000D03AE /* VPNOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECBF1648BCC0000D03AE /* VPNOrganization.m */; };
@@ -76,17 +76,12 @@
 		839866831639819A009D8518 /* VPNTaxSavingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 839866821639819A009D8518 /* VPNTaxSavingsTests.m */; };
 		83A1D3F316311295002CD13C /* VPNUserSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */; };
 		83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */; };
-		83BFD918163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD917163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.m */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
-		83BFD920163F863300BC64B7 /* VPNMockCDManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91F163F863300BC64B7 /* VPNMockCDManagerDelegate.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
 		83BFD928163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
-		83BFD92F163F895600BC64B7 /* VPNMockCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD92E163F895600BC64B7 /* VPNMockCDCommunicator.m */; };
 		83BFD93C163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
 		83BFD93D163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
-		83BFD940163F9A6500BC64B7 /* VPNFakeUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93F163F9A6500BC64B7 /* VPNFakeUserBuilder.m */; };
-		83BFD943163FA84300BC64B7 /* VPNUserBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD942163FA84300BC64B7 /* VPNUserBuilderTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,8 +101,6 @@
 		830DF56A1640E4EA00A31818 /* VPNSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSession.m; sourceTree = "<group>"; };
 		830DF56D1640E5F100A31818 /* VPNSessionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionBuilder.h; sourceTree = "<group>"; };
 		830DF56E1640E5F200A31818 /* VPNSessionBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionBuilder.m; sourceTree = "<group>"; };
-		830DF5711640E95500A31818 /* VPNFakeSessionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNFakeSessionBuilder.h; sourceTree = "<group>"; };
-		830DF5721640E95500A31818 /* VPNFakeSessionBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNFakeSessionBuilder.m; sourceTree = "<group>"; };
 		83175E7916364E3E000C98B4 /* VPNUserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserTest.h; sourceTree = "<group>"; };
 		83175E7A16364E3E000C98B4 /* VPNUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserTest.m; sourceTree = "<group>"; };
 		83175E7C163650BB000C98B4 /* VPNUserSignupViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserSignupViewControllerTest.h; sourceTree = "<group>"; };
@@ -156,6 +149,8 @@
 		831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CD_App_SU_Screen_r3.png; sourceTree = "<group>"; };
 		8335A62C164B752D00806A98 /* VPNManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNManagerTests.h; sourceTree = "<group>"; };
 		8335A62D164B752D00806A98 /* VPNManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNManagerTests.m; sourceTree = "<group>"; };
+		834DBDDD164CCAA1006B0ED8 /* VPNNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNNotifier.h; sourceTree = "<group>"; };
+		834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNNotifier.m; sourceTree = "<group>"; };
 		836852691633BC7D00E51EEB /* DonationAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonationAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8368526A1633BC7D00E51EEB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		836852701633BC7D00E51EEB /* DonationAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DonationAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -163,8 +158,6 @@
 		836852771633BC7D00E51EEB /* DonationAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DonationAppTests-Prefix.pch"; sourceTree = "<group>"; };
 		8372B08C16423A4800C6E762 /* VPNCommunicatorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCommunicatorTests.h; sourceTree = "<group>"; };
 		8372B08D16423A4800C6E762 /* VPNCommunicatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCommunicatorTests.m; sourceTree = "<group>"; };
-		8374CCFA16422B870013C678 /* VPNSessionBuilderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionBuilderTests.h; sourceTree = "<group>"; };
-		8374CCFB16422B870013C678 /* VPNSessionBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionBuilderTests.m; sourceTree = "<group>"; };
 		8374CCFE1642302B0013C678 /* VPNCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCommunicatorDelegate.h; sourceTree = "<group>"; };
 		8390ECBA1648BCA1000D03AE /* VPNOrganizationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNOrganizationTests.h; sourceTree = "<group>"; };
 		8390ECBB1648BCA1000D03AE /* VPNOrganizationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNOrganizationTests.m; sourceTree = "<group>"; };
@@ -204,23 +197,13 @@
 		83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserSignupViewController.m; sourceTree = "<group>"; };
 		83A1D3F5163117DE002CD13C /* VPNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNLoginViewController.h; sourceTree = "<group>"; };
 		83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNLoginViewController.m; sourceTree = "<group>"; };
-		83BFD916163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionCreationWorkflowTests.h; sourceTree = "<group>"; };
-		83BFD917163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionCreationWorkflowTests.m; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
-		83BFD91E163F863300BC64B7 /* VPNMockCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNMockCDManagerDelegate.h; sourceTree = "<group>"; };
-		83BFD91F163F863300BC64B7 /* VPNMockCDManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNMockCDManagerDelegate.m; sourceTree = "<group>"; };
 		83BFD925163F892900BC64B7 /* VPNCDCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDCommunicator.h; sourceTree = "<group>"; };
 		83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDCommunicator.m; sourceTree = "<group>"; };
-		83BFD92D163F895600BC64B7 /* VPNMockCDCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNMockCDCommunicator.h; sourceTree = "<group>"; };
-		83BFD92E163F895600BC64B7 /* VPNMockCDCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNMockCDCommunicator.m; sourceTree = "<group>"; };
 		83BFD93A163F9A4F00BC64B7 /* VPNUserBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserBuilder.h; sourceTree = "<group>"; };
 		83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserBuilder.m; sourceTree = "<group>"; };
-		83BFD93E163F9A6400BC64B7 /* VPNFakeUserBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNFakeUserBuilder.h; sourceTree = "<group>"; };
-		83BFD93F163F9A6500BC64B7 /* VPNFakeUserBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNFakeUserBuilder.m; sourceTree = "<group>"; };
-		83BFD941163FA84300BC64B7 /* VPNUserBuilderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserBuilderTests.h; sourceTree = "<group>"; };
-		83BFD942163FA84300BC64B7 /* VPNUserBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserBuilderTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +293,8 @@
 				830DF56D1640E5F100A31818 /* VPNSessionBuilder.h */,
 				830DF56E1640E5F200A31818 /* VPNSessionBuilder.m */,
 				8374CCFE1642302B0013C678 /* VPNCommunicatorDelegate.h */,
+				834DBDDD164CCAA1006B0ED8 /* VPNNotifier.h */,
+				834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -368,22 +353,8 @@
 				83175E8C16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m */,
 				839866811639819A009D8518 /* VPNTaxSavingsTests.h */,
 				839866821639819A009D8518 /* VPNTaxSavingsTests.m */,
-				83BFD916163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.h */,
-				83BFD917163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.m */,
-				83BFD91E163F863300BC64B7 /* VPNMockCDManagerDelegate.h */,
-				83BFD91F163F863300BC64B7 /* VPNMockCDManagerDelegate.m */,
-				83BFD92D163F895600BC64B7 /* VPNMockCDCommunicator.h */,
-				83BFD92E163F895600BC64B7 /* VPNMockCDCommunicator.m */,
-				83BFD93E163F9A6400BC64B7 /* VPNFakeUserBuilder.h */,
-				83BFD93F163F9A6500BC64B7 /* VPNFakeUserBuilder.m */,
-				83BFD941163FA84300BC64B7 /* VPNUserBuilderTests.h */,
-				83BFD942163FA84300BC64B7 /* VPNUserBuilderTests.m */,
-				8374CCFA16422B870013C678 /* VPNSessionBuilderTests.h */,
-				8374CCFB16422B870013C678 /* VPNSessionBuilderTests.m */,
 				830DF5651640E42100A31818 /* VPNSessionTests.h */,
 				830DF5661640E42100A31818 /* VPNSessionTests.m */,
-				830DF5711640E95500A31818 /* VPNFakeSessionBuilder.h */,
-				830DF5721640E95500A31818 /* VPNFakeSessionBuilder.m */,
 				8372B08C16423A4800C6E762 /* VPNCommunicatorTests.h */,
 				8372B08D16423A4800C6E762 /* VPNCommunicatorTests.m */,
 				8390ECBA1648BCA1000D03AE /* VPNOrganizationTests.h */,
@@ -622,6 +593,7 @@
 				8390ECC01648BCC0000D03AE /* VPNOrganization.m in Sources */,
 				8390ECC91648C12A000D03AE /* VPNOrganizationListViewController.m in Sources */,
 				8390ECD11648CA08000D03AE /* VPNOrganizationCell.m in Sources */,
+				834DBDDF164CCAA1006B0ED8 /* VPNNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,19 +608,12 @@
 				83175E871636575E000C98B4 /* VPNHomeViewControllerTest.m in Sources */,
 				83175E8D16365A9F000C98B4 /* VPNSelectTaxRateViewControllerTest.m in Sources */,
 				839866831639819A009D8518 /* VPNTaxSavingsTests.m in Sources */,
-				83BFD918163F83D600BC64B7 /* VPNSessionCreationWorkflowTests.m in Sources */,
 				83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */,
-				83BFD920163F863300BC64B7 /* VPNMockCDManagerDelegate.m in Sources */,
 				83BFD928163F892900BC64B7 /* VPNCDCommunicator.m in Sources */,
-				83BFD92F163F895600BC64B7 /* VPNMockCDCommunicator.m in Sources */,
 				83BFD93D163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */,
-				83BFD940163F9A6500BC64B7 /* VPNFakeUserBuilder.m in Sources */,
-				83BFD943163FA84300BC64B7 /* VPNUserBuilderTests.m in Sources */,
 				830DF5671640E42100A31818 /* VPNSessionTests.m in Sources */,
 				830DF56C1640E4EA00A31818 /* VPNSession.m in Sources */,
 				830DF5701640E5F200A31818 /* VPNSessionBuilder.m in Sources */,
-				830DF5731640E95500A31818 /* VPNFakeSessionBuilder.m in Sources */,
-				8374CCFC16422B870013C678 /* VPNSessionBuilderTests.m in Sources */,
 				8372B08E16423A4800C6E762 /* VPNCommunicatorTests.m in Sources */,
 				8390ECBC1648BCA1000D03AE /* VPNOrganizationTests.m in Sources */,
 				8390ECC11648BCC0000D03AE /* VPNOrganization.m in Sources */,
@@ -656,6 +621,7 @@
 				8390ECCD1648C145000D03AE /* VPNOrganizationsListViewControllerTests.m in Sources */,
 				8390ECD21648CA08000D03AE /* VPNOrganizationCell.m in Sources */,
 				8335A62E164B752D00806A98 /* VPNManagerTests.m in Sources */,
+				834DBDE0164CCAA1006B0ED8 /* VPNNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

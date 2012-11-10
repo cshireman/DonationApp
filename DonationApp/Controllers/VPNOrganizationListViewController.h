@@ -10,7 +10,7 @@
 #import "VPNOrganization.h"
 #import "VPNCDManager.h"
 
-@interface VPNOrganizationListViewController : UITableViewController
+@interface VPNOrganizationListViewController : UITableViewController <VPNCDManagerDelegate>
 
 @property (nonatomic, strong) NSMutableArray* organizations;
 @property (nonatomic, strong) VPNCDManager* manager;

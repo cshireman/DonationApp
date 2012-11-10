@@ -943,7 +943,6 @@
         <class className="VPNLoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNLoginViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelPushed:"/>
                 <relationship kind="action" name="dismissKeyboard"/>
                 <relationship kind="action" name="loginPushed:"/>
                 <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>

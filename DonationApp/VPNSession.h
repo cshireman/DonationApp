@@ -17,6 +17,7 @@
 
 -(id) initWithDictionary:(NSDictionary*)info;
 -(void) setAsCurrentSession;
+-(void) populateWithDictionary:(NSDictionary*)info;
 
 +(id) currentSession;
 +(void) clearCurrentSession;

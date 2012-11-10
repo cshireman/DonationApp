@@ -9,62 +9,129 @@
 #import "VPNLoginViewControllerTest.h"
 
 @implementation VPNLoginViewControllerTest
-@synthesize loginController;
-@synthesize loginStatus;
 
 -(void) setUp{
-    [super setUp];
-    self.loginController = [[VPNLoginViewController alloc] init];
-    self.loginController.delegate = self;
+    loginController = [[VPNLoginViewController alloc] init];
+    delegate = [OCMockObject mockForProtocol:@protocol(VPNLoginViewControllerDelegate)];
+    
+    loginController.delegate = delegate;
+    
+    usernameField = [OCMockObject mockForClass:[UITextField class]];
+    passwordField = [OCMockObject mockForClass:[UITextField class]];
+    observer = [OCMockObject observerMock];
+
 }
 
--(void)testLoginButtonCanAuthenticateUser
+-(void) tearDown
 {
+    loginController = nil;
+    delegate = nil;
+    
+    usernameField = nil;
+    passwordField = nil;
+    observer = nil;
+}
+
+-(void) testLoginControllerConformsToManagerProtocol
+{
+    STAssertTrue([loginController conformsToProtocol:@protocol(VPNCDManagerDelegate)],@"login controller should conform to manager protocol");
+}
+
+-(void) testLoginControllerIsManagersDelegate
+{
+    STAssertEquals(loginController.manager.delegate, loginController, @"Login controller should be the managers delegate");
+}
+
+-(void) testPushingLoginWithValuesCallsStartSessionOnManager
+{
+    id manager = [OCMockObject mockForClass:[VPNCDManager class]];
     VPNUser* testUser = [[VPNUser alloc] init];
-    testUser.username = @"chris@shireman.net";
-    testUser.password = @"password";
-    testUser.first_name = @"Christopher";
-    testUser.last_name = @"Shireman";
+    testUser.username = @"media";
+    testUser.username = @"test";
     
-    [testUser saveAsDefaultUser];
+    loginController.user = testUser;
     
-    self.loginController.usernameField = [[UITextField alloc] init];
-    self.loginController.passwordField = [[UITextField alloc] init];
+    [[[usernameField stub] andReturn:@"media"] text];
+    [[[passwordField stub] andReturn:@"test"] text];
     
-    self.loginController.usernameField.text = @"chris@shireman.net";
-    self.loginController.passwordField.text = @"password";
+    loginController.usernameField = usernameField;
+    loginController.passwordField = passwordField;
     
-    [self.loginController loginPushed:self];
-    STAssertTrue(self.loginStatus, @"Login of default user should have worked");
+    [[manager expect] startSessionForUser:testUser];
+    loginController.manager = manager;
+    
+    [loginController loginPushed:nil];
+    
+    [manager verify];
 }
 
--(void)testLoginButtonCanRejectInvalidUser
-{
-    VPNUser* testUser = [[VPNUser alloc] init];
-    testUser.username = @"chris@shireman.net";
-    testUser.password = @"password";
-    testUser.first_name = @"Christopher";
-    testUser.last_name = @"Shireman";
+-(void) testBlankUsernameFieldTriggerzError
+{    
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"BlankUsernameError" object:nil];
     
-    [testUser saveAsDefaultUser];
+    [[observer expect] notificationWithName:@"BlankUsernameError" object:[OCMArg any]];
     
-    self.loginController.usernameField = [[UITextField alloc] init];
-    self.loginController.passwordField = [[UITextField alloc] init];
+    [[[usernameField stub] andReturn:@""] text];
+    [[[passwordField stub] andReturn:@"password"] text];
     
-    self.loginController.usernameField.text = @"chris@shireman.net";
-    self.loginController.passwordField.text = @"notmypassword";
+    loginController.usernameField = usernameField;
+    loginController.passwordField = passwordField;
     
-    [self.loginController loginPushed:self];
-    STAssertFalse(self.loginStatus, @"Login of default user should have worked");
+    [loginController loginPushed:nil];
+    
+    [observer verify];
+    
 }
 
-
-#pragma mark -
-#pragma mark VPNLoginViewControllerDelegate Methods
-
--(void) loginController:(VPNLoginViewController*)login didFinish:(BOOL)status
+-(void) testBlankPasswordFieldTriggerzError
 {
-    self.loginStatus = status;
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"BlankPasswordError" object:nil];
+    
+    [[observer expect] notificationWithName:@"BlankPasswordError" object:[OCMArg any]];
+    
+    [[[usernameField stub] andReturn:@"username"] text];
+    [[[passwordField stub] andReturn:@""] text];
+    
+    loginController.usernameField = usernameField;
+    loginController.passwordField = passwordField;
+    
+    [loginController loginPushed:nil];
+    
+    [observer verify];
+}
+
+-(void) testDidStartSessionCallsGetUserInfoOnManager
+{
+    id manager = [OCMockObject mockForClass:[VPNCDManager class]];
+    [[manager expect] getUserInfo:YES];
+    loginController.manager = manager;
+    
+    [loginController didStartSession];
+    
+    [manager verify];
+}
+
+-(void) testSessionErrorDisplaysError
+{
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"InvalidLoginError" object:nil];
+    
+    [[observer expect] notificationWithName:@"InvalidLoginError" object:[OCMArg any]];
+
+    [loginController startingSessionFailedWithError:nil];
+    
+    [observer verify];
+}
+
+-(void) testGetUserInfoErrorDisplaysError
+{
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"GetUserInfoError" object:nil];
+    
+    [[observer expect] notificationWithName:@"GetUserInfoError" object:[OCMArg any]];
+    
+    [loginController getUserInfoFailedWithError:nil];
+    
+    [observer verify];
+    
 }
 
 @end

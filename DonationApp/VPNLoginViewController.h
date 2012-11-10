@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VPNCDManagerDelegate.h"
+#import "VPNCDManager.h"
+#import "VPNUser.h"
+#import "VPNNotifier.h"
 
 @class VPNLoginViewController;
 @protocol VPNLoginViewControllerDelegate <NSObject>
@@ -15,9 +19,11 @@
 
 @end
 
-@interface VPNLoginViewController : UIViewController <UITextFieldDelegate>
+@interface VPNLoginViewController : UIViewController <UITextFieldDelegate,VPNCDManagerDelegate>
 
 @property (strong, nonatomic) id<VPNLoginViewControllerDelegate> delegate;
+@property (strong, nonatomic) VPNCDManager* manager;
+@property (strong, nonatomic) VPNUser* user;
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet UITextField* usernameField;
@@ -25,5 +31,10 @@
 
 -(IBAction) loginPushed:(id) sender;
 -(IBAction) dismissKeyboard;
+
+//VPNCDManagerDelegate methods
+-(void) startingSessionFailedWithError:(NSError*)error;
+-(void) didStartSession;
+
 
 @end

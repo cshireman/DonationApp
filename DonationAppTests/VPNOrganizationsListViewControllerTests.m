@@ -106,7 +106,7 @@
 {
     id mockManager = [OCMockObject mockForClass:[VPNCDManager class]];
     
-    [[mockManager expect] getOrganizations];
+    [[mockManager expect] getOrganizations:NO];
     
     orgListController.manager = mockManager;
     [orgListController viewWillAppear:YES];

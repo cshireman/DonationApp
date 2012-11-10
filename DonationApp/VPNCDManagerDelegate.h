@@ -12,8 +12,12 @@
 
 @protocol VPNCDManagerDelegate <NSObject>
 
+@optional
+//LoginUser
 -(void) startingSessionFailedWithError:(NSError*)error;
--(void) didStartSession:(VPNSession*)session;
--(void) didGetUser:(VPNUser*)user;
+-(void) didStartSession;
 
+//GetUser
+-(void) didGetUser:(VPNUser*)user;
+-(void) getUserInfoFailedWithError:(NSError*)error;
 @end

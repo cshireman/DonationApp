@@ -18,25 +18,58 @@
 @synthesize passwordField;
 @synthesize scrollView;
 @synthesize delegate;
+@synthesize manager;
+@synthesize user;
+
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {
+        [self configure];
+    }
+    
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self configure];
     }
     return self;
 }
 
+/**
+ Configure the manager and other default structures
+ */
+-(void) configure
+{
+    if(manager == nil)
+        manager = [[VPNCDManager alloc] init];
+    
+    if(manager.delegate == nil)
+        manager.delegate = self;
+    
+    if(user == nil)
+    {
+        user = [VPNUser loadUserFromDisc];
+        if(user == nil)
+            user = [[VPNUser alloc] init];        
+    }
+}
+
 - (void)viewDidLoad
 {    
-    NSLog(@"Delegate: %@",self.delegate);
     [super viewDidLoad];
-    VPNUser* user = [VPNUser loadUserFromDisc];
+    [self configure];
+    
     if(user != nil)
     {
-        self.usernameField.text = user.username;
-        self.passwordField.text = user.password;
+        usernameField.text = user.username;
+        passwordField.text = user.password;
     }
     
     scrollView.contentSize = CGSizeMake(320, 700);
@@ -54,30 +87,31 @@
 
 -(IBAction) loginPushed:(id)sender
 {
+    user.username = usernameField.text;
+    user.password = passwordField.text;
     
-    VPNUser* user = [[VPNUser alloc] init];
-    user.username = self.usernameField.text;
-    user.password = self.passwordField.text;
-
-    if([user authenticate])
+    user.username = [user.username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    user.password = [user.password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if([user.username isEqualToString:@""])
     {
-        if(self.delegate != nil)
-        {
-            [self.delegate loginController:self didFinish:YES];
-        }
+        [VPNNotifier postNotification:@"BlankUsernameError"];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Username is a required field" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+        
+        return;
     }
-    else
+    
+    if([user.password isEqualToString:@""])
     {
-        NSLog(@"User is not valid");
-        if(self.delegate != nil)
-        {
-            [self.delegate loginController:self didFinish:NO];
-        }
-        else
-        {
-            NSLog(@"Delegate is Nil!");
-        }
+        [VPNNotifier postNotification:@"BlankPasswordError"];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Password is a required field" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+        
+        return;
     }
+    
+    [manager startSessionForUser:user];
 }
 
 -(IBAction)cancelPushed:(id)sender
@@ -114,5 +148,33 @@
     [self.scrollView scrollRectToVisible:top animated:YES];
     return YES;
 }
+
+#pragma mark -
+#pragma mark VPNCDManagerDelegate methods
+
+-(void) startingSessionFailedWithError:(NSError*)error
+{
+    [VPNNotifier postNotification:@"InvalidLoginError"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Invalid Username or Password" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+-(void) didStartSession
+{
+    [manager getUserInfo:YES];
+}
+
+-(void) getUserInfoFailedWithError:(NSError*)error
+{
+    [VPNNotifier postNotification:@"GetUserInfoError"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your user information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+-(void) didGetUser:(VPNUser *)user
+{
+    
+}
+
 
 @end
