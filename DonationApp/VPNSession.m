@@ -60,6 +60,11 @@ static VPNSession* currentSession = nil;
     currentSession = nil;
 }
 
++(void) setCurrentSessionWithSession:(VPNSession*) newSession
+{
+    currentSession = newSession;
+}
+
 
 
 @end

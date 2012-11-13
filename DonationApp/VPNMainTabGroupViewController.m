@@ -61,20 +61,9 @@
 #pragma mark -
 #pragma mark VPNLoginViewControllerDelegate Methods
 
--(void) loginController:(VPNLoginViewController *)login didFinish:(BOOL)status
+-(void) loginControllerFinished
 {
-    if(status)
-    {
-        VPNSession* session = [VPNSession currentSession];
-        NSLog(@"Session: %@",session.session);
-        [self dismissModalViewControllerAnimated:YES];
-    }
-    else
-    {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Please try again" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-        
-        [alert show];
-    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -

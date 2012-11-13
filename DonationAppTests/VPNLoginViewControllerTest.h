@@ -13,7 +13,7 @@
 #import "VPNUser.h"
 #import "OCMock.h"
 
-@interface VPNLoginViewControllerTest : SenTestCase <VPNLoginViewControllerDelegate>
+@interface VPNLoginViewControllerTest : SenTestCase
 {
     VPNLoginViewController* loginController;
     id delegate;

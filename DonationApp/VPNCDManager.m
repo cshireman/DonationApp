@@ -74,10 +74,46 @@
 
 -(void) getUserInfo:(BOOL)forceDownload
 {
+    VPNUser* user = nil;
     
+    if(!forceDownload)
+    {
+        user = [VPNUser loadUserFromDisc];
+    }
+    
+    if(user == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:@"12C7DCE347154B5A8FD49B72F169A975" forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getUserInfoFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetUserInfo withContent:jsonString];
+    }
 }
 
 -(void) getOrganizations:(BOOL)forceDownload
+{
+    
+}
+
+-(void)getTaxYears:(BOOL)forceDownload
 {
     
 }

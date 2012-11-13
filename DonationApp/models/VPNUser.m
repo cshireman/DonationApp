@@ -67,6 +67,18 @@ static VPNUser* currentUser = nil;
     return copy;
 }
 
+-(id) initWithDictionary:(NSDictionary*)info
+{
+    self = [super init];
+    if(self)
+    {
+
+    }
+    
+    return self;
+}
+
+
 /**
  * Get the current user from memory
  */

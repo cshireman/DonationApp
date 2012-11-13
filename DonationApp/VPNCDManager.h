@@ -48,6 +48,7 @@ enum {
 
 -(void)getUserInfo:(BOOL)forceDownload;
 -(void)getOrganizations:(BOOL)forceDownload;
+-(void)getTaxYears:(BOOL)forceDownload;
 
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;

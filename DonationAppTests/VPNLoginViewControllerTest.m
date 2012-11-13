@@ -134,4 +134,92 @@
     
 }
 
+-(void) testGettingNilUserThrowsException
+{
+    STAssertThrows([loginController didGetUser:nil],@"Nil User returned should throw exception");
+}
+
+-(void) testGettingUserCallsForTaxYearDownload
+{
+    id mockManager = [OCMockObject mockForClass:[VPNCDManager class]];
+    [[mockManager expect] getTaxYears:YES];
+    
+    loginController.manager = mockManager;
+    
+    [loginController didGetUser:[[VPNUser alloc] init]];
+    
+    [mockManager verify];
+}
+
+-(void) testGetTaxYearsErrorDisplaysError
+{
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"GetTaxYearsError" object:nil];
+    
+    [[observer expect] notificationWithName:@"GetTaxYearsError" object:[OCMArg any]];
+    
+    [loginController getTaxYearsFailedWithError:nil];
+    
+    [observer verify];
+}
+
+-(void) testGetTaxYearsIsPassedNilThrowsError
+{
+    STAssertThrows([loginController didGetTaxYears:nil], @"Should throw error when nil tax years is returned");
+}
+
+-(void) testGetTaxYearsIsPassedEmptyArrayDisplaysError
+{
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"GetTaxYearsEmptyError" object:nil];
+    
+    [[observer expect] notificationWithName:@"GetTaxYearsEmptyError" object:[OCMArg any]];
+    
+    [loginController didGetTaxYears:[NSArray array]];
+    
+    [observer verify];
+    
+}
+
+-(void) testGetTaxYearsWithValidYearsCallsForOrganizationDownload
+{
+    NSMutableArray* taxYears = [NSMutableArray arrayWithObjects:@"2011",@"2012", nil];
+    id mockManager = [OCMockObject mockForClass:[VPNCDManager class]];
+    [[mockManager expect] getOrganizations:YES];
+    
+    loginController.manager = mockManager;
+    
+    [loginController didGetTaxYears:taxYears];
+    
+    [mockManager verify];
+}
+
+-(void) testGetOrganizationsErrorDisplaysError
+{
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"GetOrganizationsError" object:nil];
+    
+    [[observer expect] notificationWithName:@"GetOrganizationsError" object:[OCMArg any]];
+    
+    [loginController getOrganizationsFailedWithError:nil];
+    
+    [observer verify];
+}
+
+-(void) testGetOrganizationsIsPassedNilThrowsError
+{
+    STAssertThrows([loginController didGetOrganizations:nil], @"Should throw error when nil organizations is returned");
+}
+
+-(void) testGetOrganizationsSendsLoginDismissalRequest
+{
+    NSArray* testOrgs = [NSArray arrayWithObjects:@"org1",@"org2", nil];
+    [[delegate expect] loginControllerFinished];
+
+    loginController.delegate = delegate;
+    
+    [loginController didGetOrganizations:testOrgs];
+    
+    [delegate verify];
+}
+
+
+
 @end

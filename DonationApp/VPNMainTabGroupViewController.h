@@ -14,4 +14,6 @@
 -(void) displayLoginScene;
 -(void) displaySelectTaxYearScene;
 
+-(void) loginControllerFinished;
+
 @end

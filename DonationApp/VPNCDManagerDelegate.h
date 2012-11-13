@@ -20,4 +20,13 @@
 //GetUser
 -(void) didGetUser:(VPNUser*)user;
 -(void) getUserInfoFailedWithError:(NSError*)error;
+
+//GetYears
+-(void) didGetTaxYears:(NSArray*)taxYears;
+-(void) getTaxYearsFailedWithError:(NSError*)error;
+
+//GetOrganizations
+-(void) didGetOrganizations:(NSArray*)organizations;
+-(void) getOrganizationsFailedWithError:(NSError*)error;
+
 @end

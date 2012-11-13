@@ -147,6 +147,38 @@
     [delegate verify];
 }
 
+-(void) testGetUserInfoStartsAPIRequestWhenForcedDownloadIsTrue
+{
+    NSString* fakeContent = @"{\"apiKey\":\"12C7DCE347154B5A8FD49B72F169A975\",\"session\":\"2DC23AC770C539DCCCA0175765\"}";
+    
+    id mockCommunicator = [OCMockObject mockForClass:[VPNCDCommunicator class]];
+    [[mockCommunicator expect] makeAPICall:GetUserInfo withContent:fakeContent];
+    manager.communicator = mockCommunicator;
+    
+    VPNSession* currentSession = [VPNSession currentSession];
+    currentSession.session = @"2DC23AC770C539DCCCA0175765";
+
+    manager.communicator = mockCommunicator;
+    [manager getUserInfo:YES];
+    
+    [mockCommunicator verify];
+}
+
+-(void) testGetUserInfoChecksForLocalUserWhenForcedDownloadIsFalse
+{
+    
+}
+
+-(void) testGetUserInfoMakesAPICallWhenNoLocalUserIsAvailableAndForcedDownloadIsFalse
+{
+    
+}
+
+-(void) testGetUserInfoCallsDelegateWhenLocalUserIsAvailableAndForcedDownloadIsFalse
+{
+    
+}
+
 
 
 @end

@@ -15,7 +15,7 @@
 @class VPNLoginViewController;
 @protocol VPNLoginViewControllerDelegate <NSObject>
 
--(void) loginController:(VPNLoginViewController*)login didFinish:(BOOL)status;
+-(void) loginControllerFinished;
 
 @end
 
@@ -35,6 +35,16 @@
 //VPNCDManagerDelegate methods
 -(void) startingSessionFailedWithError:(NSError*)error;
 -(void) didStartSession;
+
+-(void) getUserInfoFailedWithError:(NSError *)error;
+-(void) didGetUser:(VPNUser *)user;
+
+-(void) getTaxYearsFailedWithError:(NSError *)error;
+-(void) didGetTaxYears:(NSArray *)taxYears;
+
+-(void) didGetOrganizations:(NSArray*)organizations;
+-(void) getOrganizationsFailedWithError:(NSError*)error;
+
 
 
 @end

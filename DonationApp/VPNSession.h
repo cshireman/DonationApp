@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VPNUser.h"
 
 @interface VPNSession : NSObject
 
@@ -15,11 +16,13 @@
 @property (copy) NSString* last_name;
 @property (assign) NSInteger annual_limit;
 
+
 -(id) initWithDictionary:(NSDictionary*)info;
 -(void) setAsCurrentSession;
 -(void) populateWithDictionary:(NSDictionary*)info;
 
 +(id) currentSession;
 +(void) clearCurrentSession;
++(void) setCurrentSessionWithSession:(VPNSession*) newSession;
 
 @end

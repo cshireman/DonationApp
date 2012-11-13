@@ -34,8 +34,10 @@
 +(void) deleteUserFromDisc;
 +(NSString*) userFilePath;
 
+
 -(void) saveAsDefaultUser;
 -(BOOL) authenticate;
+-(id) initWithDictionary:(NSDictionary*)info;
 
 
 @end

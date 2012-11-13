@@ -171,8 +171,46 @@
     [alert show];
 }
 
--(void) didGetUser:(VPNUser *)user
+-(void) didGetUser:(VPNUser *)theUser
 {
+    NSParameterAssert(theUser != nil);
+    
+    [manager getTaxYears:YES];
+}
+
+-(void) getTaxYearsFailedWithError:(NSError *)error
+{
+    [VPNNotifier postNotification:@"GetTaxYearsError"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your tax year information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+    
+}
+
+-(void) didGetTaxYears:(NSArray *)taxYears
+{
+    NSParameterAssert(taxYears != nil);
+    if([taxYears count] == 0)
+    {
+        [VPNNotifier postNotification:@"GetTaxYearsEmptyError"];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your tax year information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    [manager getOrganizations:YES];
+}
+
+-(void) didGetOrganizations:(NSArray*)organizations
+{
+    NSParameterAssert(organizations != nil);
+    
+    [delegate loginControllerFinished];
+}
+
+-(void) getOrganizationsFailedWithError:(NSError*)error
+{
+    [VPNNotifier postNotification:@"GetOrganizationsError"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your organization information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
     
 }
 
