@@ -8,6 +8,7 @@
 
 #import "VPNCDManager.h"
 
+NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 @implementation VPNCDManager
 @synthesize delegate;
@@ -49,7 +50,7 @@
     }
     
     NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
-    [request setObject:@"12C7DCE347154B5A8FD49B72F169A975" forKey:@"apiKey"];
+    [request setObject:APIKey forKey:@"apiKey"];
     [request setObject:user.username forKey:@"username"];
     [request setObject:user.password forKey:@"password"];
     [request setObject:@"" forKey:@"userAgent"];
@@ -86,7 +87,7 @@
         NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
         VPNSession* session = [VPNSession currentSession];
         
-        [request setObject:@"12C7DCE347154B5A8FD49B72F169A975" forKey:@"apiKey"];
+        [request setObject:APIKey forKey:@"apiKey"];
         [request setObject:session.session forKey:@"session"];
         
         NSError* error = nil;
@@ -106,16 +107,92 @@
         
         [communicator makeAPICall:GetUserInfo withContent:jsonString];
     }
+    else
+    {
+        [delegate didGetUser:user];
+    }
 }
 
 -(void) getOrganizations:(BOOL)forceDownload
 {
+    NSMutableArray* organizations = nil;
+    
+    if(!forceDownload)
+    {
+        organizations = [VPNOrganization loadOrganizationsFromDisc];
+    }
+    
+    if(organizations == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:APIKey forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        [request setObject:[NSNumber numberWithBool:YES] forKey:@"includeInactive"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getOrganizationsFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetOrganizations withContent:jsonString];
+    }
+    else
+    {
+        [delegate didGetOrganizations:organizations];
+    }
     
 }
 
 -(void)getTaxYears:(BOOL)forceDownload
 {
+    NSMutableArray* taxYears = nil;
     
+    if(!forceDownload)
+    {
+        taxYears = [VPNUser currentUser].tax_years;
+    }
+    
+    if(taxYears == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:APIKey forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getTaxYearsFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetYears withContent:jsonString];
+    }
+    else
+    {
+        [delegate didGetTaxYears:taxYears];
+    }    
 }
 
 #pragma mark -
@@ -147,6 +224,47 @@
                 [[VPNSession currentSession] populateWithDictionary:d];
                 [delegate didStartSession];
             }
+            else if([GetUserInfo isEqual:apiCall])
+            {
+                VPNUser* newUser = [[VPNUser alloc] initWithDictionary:[d objectForKey:@"user"]];
+                [newUser saveAsDefaultUser];
+                
+                [delegate didGetUser:newUser];
+            }
+            else if([GetOrganizations isEqual:apiCall])
+            {
+                NSArray* resultOrgs = [d objectForKey:@"organizations"];
+                if(nil != resultOrgs && [resultOrgs count] > 0)
+                {
+                    NSMutableArray* organizations = [[NSMutableArray alloc] initWithCapacity:[resultOrgs count]];
+                    for(NSDictionary* orgInfo in resultOrgs)
+                    {
+                        [organizations addObject:[[VPNOrganization alloc] initWithDictionary:orgInfo]];
+                    }
+                    
+                    [VPNOrganization saveOrganizationsToDisc:organizations];
+                    [delegate didGetOrganizations:organizations];
+                }
+                else
+                {
+                    [delegate didGetOrganizations:[NSArray array]];
+                }
+            }
+            else if([GetYears isEqualToString:apiCall])
+            {
+                NSArray* resultYears = [d objectForKey:@"years"];
+                if(nil != resultYears && [resultYears count] > 0)
+                {
+                    [VPNUser currentUser].tax_years = resultYears;
+                    [[VPNUser currentUser] saveAsDefaultUser];
+                    
+                    [delegate didGetTaxYears:resultYears];
+                }
+                else
+                {
+                    [delegate didGetTaxYears:[NSArray array]];
+                }                
+            }
         }
         else
         {
@@ -172,6 +290,18 @@
     if([LoginUser isEqual:apiCall])
     {
         [delegate startingSessionFailedWithError:error];
+    }
+    else if([GetUserInfo isEqual:apiCall])
+    {
+        [delegate getUserInfoFailedWithError:error];
+    }
+    else if([GetOrganizations isEqual:apiCall])
+    {
+        [delegate getOrganizationsFailedWithError:error];
+    }
+    else if([GetYears isEqual:apiCall])
+    {
+        [delegate getTaxYearsFailedWithError:error];
     }
 }
 

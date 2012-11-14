@@ -13,6 +13,7 @@
 #import "VPNUserBuilder.h"
 #import "VPNSessionBuilder.h"
 #import "VPNSession.h"
+#import "VPNOrganization.h"
 
 extern NSString* VPNCDManagerError;
 extern NSString* APIErrorDomain;

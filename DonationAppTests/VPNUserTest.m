@@ -55,4 +55,28 @@
     STAssertTrue(authenticated, @"User copy could not be authenticated");
 }
 
+-(void) testUserCanBeInitializedWithDictionary
+{
+    NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+    
+    [userInfo setObject:@"chris@shireman.net" forKey:@"Email"];
+    [userInfo setObject:@"Christopher" forKey:@"FirstName"];
+    [userInfo setObject:@"Shireman" forKey:@"LastName"];
+    [userInfo setObject:@"FALSE" forKey:@"EmailOptOut"];
+
+    VPNUser* user = [[VPNUser alloc] initWithDictionary:userInfo];
+    
+    STAssertEqualObjects(@"chris@shireman.net", user.username, @"Username should have been initialized from dictionary");
+    STAssertEqualObjects(@"chris@shireman.net", user.email, @"Email should have been initialized from dictionary");
+    STAssertEqualObjects(@"Christopher", user.first_name, @"FirstName should have been initialized from dictionary");
+    STAssertEqualObjects(@"Shireman", user.last_name, @"LastName should have been initialized from dictionary");
+    STAssertEquals(YES, user.is_email_opted_in, @"Email Opt In should have been initialized from dictionary");
+}
+
+-(void) testInitUserWithNilDictionaryThrowsError
+{
+    STAssertThrows([[VPNUser alloc] initWithDictionary:nil],@"Should throw error if dictionary is nil");
+}
+
+
 @end

@@ -118,7 +118,7 @@
 {
     //read response into dictionary
     NSString *jsonString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
-    
+    NSLog(@"Received:%@",jsonString);
     [delegate receivedResponse:jsonString forAPICall:currentCallType];
 }
 

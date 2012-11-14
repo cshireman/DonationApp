@@ -7,6 +7,7 @@
 //
 
 #import "VPNUser.h"
+#import "VPNNotifier.h"
 
 @implementation VPNUser
 
@@ -69,10 +70,17 @@ static VPNUser* currentUser = nil;
 
 -(id) initWithDictionary:(NSDictionary*)info
 {
+    NSParameterAssert(info != nil);
+    
     self = [super init];
     if(self)
     {
+        self.username = [info objectForKey:@"Email"];
+        self.first_name = [info objectForKey:@"FirstName"];
+        self.last_name = [info objectForKey:@"LastName"];
+        self.email = [info objectForKey:@"Email"];
 
+        self.is_email_opted_in = ![[info objectForKey:@"EmailOptOut"] boolValue];
     }
     
     return self;
@@ -94,6 +102,7 @@ static VPNUser* currentUser = nil;
  */
 +(VPNUser*) loadUserFromDisc
 {
+    [VPNNotifier postNotification:@"LoadingUserFromDisc"];
     NSData* data = [[NSMutableData alloc] initWithContentsOfFile:[VPNUser userFilePath]];
     if(nil == data)
         return nil;

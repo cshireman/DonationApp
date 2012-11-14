@@ -16,12 +16,19 @@
     delegate = [OCMockObject mockForProtocol:@protocol(VPNCDManagerDelegate)];
     
     manager.delegate = delegate;
+    
+    observer = [OCMockObject observerMock];
+    user = [[VPNUser alloc] init];
 }
 
 -(void) tearDown
 {
     manager = nil;
     delegate = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    observer = nil;
+    user = nil;
 }
 
 -(void) testManagerCreatedCommunicatorOnInit
@@ -52,7 +59,6 @@
 {
     [[delegate expect] startingSessionFailedWithError:[OCMArg any]];
     
-    VPNUser* user = [[VPNUser alloc] init];
     user.username = nil;
     user.password = nil;
     
@@ -63,7 +69,6 @@
 
 -(void) testStartingSessionWithCompleteUserCallsCommunicator
 {
-    VPNUser* user = [[VPNUser alloc] init];
     user.username = @"media";
     user.password = @"test";
     
@@ -166,17 +171,60 @@
 
 -(void) testGetUserInfoChecksForLocalUserWhenForcedDownloadIsFalse
 {
+    VPNUser* testUser = [[VPNUser alloc] init];
     
+    testUser.username = @"username";
+    testUser.password = @"password";
+    
+    [testUser saveAsDefaultUser];
+    
+    [[delegate expect] didGetUser:[OCMArg any]];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"LoadingUserFromDisc" object:nil];
+    
+    [[observer expect] notificationWithName:@"LoadingUserFromDisc" object:[OCMArg any]];
+    
+    [manager getUserInfo:NO];
+    
+    [observer verify];
+    
+    [VPNUser deleteUserFromDisc];
 }
 
 -(void) testGetUserInfoMakesAPICallWhenNoLocalUserIsAvailableAndForcedDownloadIsFalse
 {
+    [VPNUser deleteUserFromDisc];
     
+    NSString* fakeContent = @"{\"apiKey\":\"12C7DCE347154B5A8FD49B72F169A975\",\"session\":\"2DC23AC770C539DCCCA0175765\"}";
+    
+    id mockCommunicator = [OCMockObject mockForClass:[VPNCDCommunicator class]];
+    [[mockCommunicator expect] makeAPICall:GetUserInfo withContent:fakeContent];
+    manager.communicator = mockCommunicator;
+    
+    VPNSession* currentSession = [VPNSession currentSession];
+    currentSession.session = @"2DC23AC770C539DCCCA0175765";
+    
+    manager.communicator = mockCommunicator;
+    [manager getUserInfo:NO];
+    
+    [mockCommunicator verify];
 }
 
 -(void) testGetUserInfoCallsDelegateWhenLocalUserIsAvailableAndForcedDownloadIsFalse
 {
+    VPNUser* testUser = [[VPNUser alloc] init];
     
+    testUser.username = @"username";
+    testUser.password = @"password";
+    
+    [testUser saveAsDefaultUser];
+    
+    [[delegate expect] didGetUser:[OCMArg any]];
+    
+    [manager getUserInfo:NO];
+    
+    [delegate verify];
+    
+    [VPNUser deleteUserFromDisc];
 }
 
 

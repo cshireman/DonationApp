@@ -162,4 +162,10 @@
 #pragma mark -
 #pragma mark ManagerDelegate methods
 
+-(void) didGetOrganizations:(NSArray *)newOrganizations
+{
+    self.organizations = newOrganizations;
+    [self.tableView reloadData];
+}
+
 @end

@@ -7,8 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VPNNotifier.h"
 
-@interface VPNOrganization : NSObject
+#define kOrganizationsFilePath  @"organizations"
+
+#define kOrganizationIDKey          @"ID"
+#define kOrganizationIsActiveKey    @"IsActive"
+#define kOrganizationNameKey        @"Name"
+#define kOrganizationAddressKey     @"Address"
+#define kOrganizationCityKey        @"City"
+#define kOrganizationStateKey       @"State"
+#define kOrganizationZipCodeKey     @"Zip"
+#define kOrganizationListCountKey   @"ListCount"
+
+@interface VPNOrganization : NSObject <NSCoding>
 
 @property (assign) int ID;
 @property (assign) BOOL is_active;
@@ -20,5 +32,11 @@
 @property (nonatomic, copy) NSString* zip_code;
 
 @property (assign) int list_count;
+
++(NSMutableArray*) loadOrganizationsFromDisc;
++(void) saveOrganizationsToDisc:(NSArray*)organizations;
++(NSString*) organizationFilePath;
+
+-(id) initWithDictionary:(NSDictionary*)info;
 
 @end

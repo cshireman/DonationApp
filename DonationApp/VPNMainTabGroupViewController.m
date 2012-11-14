@@ -64,6 +64,7 @@
 -(void) loginControllerFinished
 {
     [self dismissModalViewControllerAnimated:YES];
+    [VPNNotifier postNotification:@"LoginFinished"];
 }
 
 #pragma mark -

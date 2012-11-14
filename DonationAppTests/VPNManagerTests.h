@@ -15,6 +15,8 @@
 {
     VPNCDManager* manager;
     id delegate;
+    id observer;
+    VPNUser* user;
 }
 
 @end
