@@ -46,6 +46,29 @@
 }
  */
 
+-(void) testLogoutPushedClearsCurrentSessionID
+{
+    VPNSession* session = [VPNSession currentSession];
+    session.session = @"Some Session ID";
+    [homeController logoutPushed:nil];
+    
+    session = [VPNSession currentSession];
+    STAssertNil(session.session,@"Session should have been cleared");
+}
+
+-(void) testLogoutPushedClearsCurrentlySelectedTaxYear
+{
+    VPNUser* user = [VPNUser currentUser];
+    user.selected_tax_year = 2012;
+    
+    [homeController logoutPushed:nil];
+    
+    STAssertEquals(0, user.selected_tax_year, @"Selected tax year should have been reset");
+}
+
+-(void) testLogoutDisplaysCallsForLoginToBeDisplayed
+{
+}
 
 
 @end

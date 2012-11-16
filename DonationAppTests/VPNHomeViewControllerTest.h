@@ -9,6 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "VPNMainTabGroupViewController.h"
 #import "VPNHomeViewController.h"
+#import "OCMock.h"
 
 @interface VPNHomeViewControllerTest : SenTestCase
 

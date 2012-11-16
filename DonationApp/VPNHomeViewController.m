@@ -219,6 +219,13 @@
 
 -(IBAction) logoutPushed:(id)sender
 {
+    VPNSession* currentSession = [VPNSession currentSession];
+    VPNUser* currentUser = [VPNUser currentUser];
+    
+    currentSession.session = nil;
+    currentUser.selected_tax_year = 0;
+    [currentUser saveAsDefaultUser];
+    
     VPNMainTabGroupViewController* tabBarController = (VPNMainTabGroupViewController*)self.navigationController.tabBarController;
     [tabBarController displayLoginScene];
 }

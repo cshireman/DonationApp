@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#define kUsernameKey       @"username"
-#define kPasswordKey       @"password"
-#define kFirstNameKey      @"first_name"
-#define kLastNameKey       @"last_name"
-#define kEmailKey          @"email"
-#define kIsEmailOptedInKey @"is_email_opted_in"
-#define kTaxYearsKey       @"tax_years"
+#define kUsernameKey        @"username"
+#define kPasswordKey        @"password"
+#define kFirstNameKey       @"first_name"
+#define kLastNameKey        @"last_name"
+#define kEmailKey           @"email"
+#define kIsEmailOptedInKey  @"is_email_opted_in"
+#define kTaxYearsKey        @"tax_years"
+#define kSelectedTaxYearKey @"selected_tax_year"
 
 #define kUserFilename       @"user_file"
 
@@ -28,6 +29,7 @@
 @property (assign) BOOL is_email_opted_in;
 
 @property (strong, nonatomic) NSMutableArray* tax_years;
+@property (assign)            int selected_tax_year;
 
 +(VPNUser*) currentUser;
 +(VPNUser*) loadUserFromDisc;

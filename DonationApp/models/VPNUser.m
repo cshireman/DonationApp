@@ -18,6 +18,7 @@
 @synthesize email;
 @synthesize tax_years;
 @synthesize is_email_opted_in;
+@synthesize selected_tax_year;
 
 static VPNUser* currentUser = nil;
 
@@ -34,6 +35,7 @@ static VPNUser* currentUser = nil;
     
     [coder encodeBool:self.is_email_opted_in forKey:kIsEmailOptedInKey];
     [coder encodeObject:self.tax_years forKey:kTaxYearsKey];
+    [coder encodeInt:self.selected_tax_year forKey:kSelectedTaxYearKey];
 }
 
 -(id)initWithCoder:(NSCoder *)coder
@@ -48,6 +50,7 @@ static VPNUser* currentUser = nil;
         
         is_email_opted_in = [coder decodeBoolForKey:kIsEmailOptedInKey];
         tax_years = [coder decodeObjectForKey:kTaxYearsKey];
+        selected_tax_year = [coder decodeIntForKey:kSelectedTaxYearKey];
     }
     
     return self;
@@ -64,6 +67,7 @@ static VPNUser* currentUser = nil;
     copy.is_email_opted_in = self.is_email_opted_in;
     
     copy.tax_years = [self.tax_years copyWithZone:zone];
+    copy.selected_tax_year = self.selected_tax_year;
     
     return copy;
 }
