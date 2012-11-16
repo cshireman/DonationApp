@@ -55,9 +55,7 @@
     
     if(user == nil)
     {
-        user = [VPNUser loadUserFromDisc];
-        if(user == nil)
-            user = [[VPNUser alloc] init];        
+        user = [VPNUser currentUser];
     }
 }
 

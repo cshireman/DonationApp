@@ -234,11 +234,11 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             }
             else if([GetUserInfo isEqual:apiCall])
             {
-                VPNUser* newUser = [[VPNUser alloc] initWithDictionary:[d objectForKey:@"user"]];
-                [newUser saveAsDefaultUser];
-                [VPNUser saveUserToDisc:newUser];
+                VPNUser* currentUser = [VPNUser currentUser];
+                [currentUser populateWithDictionary:[d objectForKey:@"user"]];
+                [VPNUser saveUserToDisc:currentUser];
                 
-                [delegate didGetUser:newUser];
+                [delegate didGetUser:currentUser];
             }
             else if([GetOrganizations isEqual:apiCall])
             {

@@ -80,7 +80,7 @@
     self = [super init];
     if(self)
     {
-        self.username = [info objectForKey:@"Email"];
+//        self.username = [info objectForKey:@"Email"];
         self.first_name = [info objectForKey:@"FirstName"];
         self.last_name = [info objectForKey:@"LastName"];
         self.email = [info objectForKey:@"Email"];
@@ -89,6 +89,15 @@
     }
     
     return self;
+}
+
+-(void) populateWithDictionary:(NSDictionary*)info
+{
+    self.first_name = [info objectForKey:@"FirstName"];
+    self.last_name = [info objectForKey:@"LastName"];
+    self.email = [info objectForKey:@"Email"];
+    
+    self.is_email_opted_in = ![[info objectForKey:@"EmailOptOut"] boolValue];    
 }
 
 /**

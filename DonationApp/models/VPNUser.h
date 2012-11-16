@@ -40,6 +40,7 @@
 -(void) saveAsDefaultUser;
 -(BOOL) authenticate;
 -(id) initWithDictionary:(NSDictionary*)info;
+-(void) populateWithDictionary:(NSDictionary*)info;
 
 
 @end
