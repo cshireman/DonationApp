@@ -16,19 +16,38 @@
 
 @implementation VPNMainTabGroupViewController
 
+-(id) init
+{
+    self = [super init];
+    if(self)
+    {
+   //     [self configure];
+    }
+    
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self configure];
     }
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self configure];
 	// Do any additional setup after loading the view.
+}
+
+-(void) configure
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayLoginScene) name:@"Logout" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +85,11 @@
     [self dismissModalViewControllerAnimated:YES];
     [VPNNotifier postNotification:@"LoginFinished"];
     
-    
+    VPNUser* user = [VPNUser currentUser];
+    if(user.selected_tax_year == 0)
+    {
+      //  [self performSegueWithIdentifier:@"SelectTaxYearSegue" sender:self];
+    }
 }
 
 #pragma mark -

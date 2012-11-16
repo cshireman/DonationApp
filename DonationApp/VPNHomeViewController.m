@@ -23,6 +23,20 @@
 @synthesize optOutView;
 @synthesize optOutSwitch;
 @synthesize bannerView;
+@synthesize session;
+@synthesize user;
+
+-(id) init
+{
+    self = [super init];
+    if(self)
+    {
+        session = [VPNSession currentSession];
+        user = [VPNUser currentUser];
+    }
+    
+    return self;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,9 +50,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    session = [VPNSession currentSession];
+    user = [VPNUser currentUser];
+    
+    NSLog(@"%@ %@",user.first_name, user.last_name);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished) name:@"LoginFinished" object:nil];
 
+    [self.tableView reloadData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -48,7 +67,11 @@
 
 -(void) loginFinished
 {
+    user = [VPNUser currentUser];
+    session = [VPNSession currentSession];
+    
     [self.tableView reloadData];
+    [optOutSwitch setOn:user.is_email_opted_in];
 }
 
 -(void) viewDidUnload
@@ -137,6 +160,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    if([CellIdentifier isEqualToString:@"ContactInfoCell"])
+    {
+        UILabel* nameLabel = (UILabel*)[cell viewWithTag:1];
+        UILabel* emailLabel = (UILabel*)[cell viewWithTag:2];
+        
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@",user.first_name,user.last_name];
+        emailLabel.text = user.email;
+    }
     
     return cell;
 }
@@ -219,15 +250,14 @@
 
 -(IBAction) logoutPushed:(id)sender
 {
-    VPNSession* currentSession = [VPNSession currentSession];
-    VPNUser* currentUser = [VPNUser currentUser];
+    [VPNSession clearCurrentSession];
+    session = [VPNSession currentSession];
     
-    currentSession.session = nil;
-    currentUser.selected_tax_year = 0;
-    [currentUser saveAsDefaultUser];
+    user = [VPNUser currentUser];
+    user.selected_tax_year = 0;
+    [user saveAsDefaultUser];
     
-    VPNMainTabGroupViewController* tabBarController = (VPNMainTabGroupViewController*)self.navigationController.tabBarController;
-    [tabBarController displayLoginScene];
+    [VPNNotifier postNotification:@"Logout"];
 }
 
 -(IBAction) updatePushed:(id)sender

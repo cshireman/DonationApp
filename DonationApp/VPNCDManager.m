@@ -86,6 +86,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     {
         NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
         VPNSession* session = [VPNSession currentSession];
+        NSLog(@"Session:%@",session.session);
         
         [request setObject:APIKey forKey:@"apiKey"];
         [request setObject:session.session forKey:@"session"];
@@ -221,13 +222,21 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             //Take action based on api call
             if([LoginUser isEqual:apiCall])
             {
-                [[VPNSession currentSession] populateWithDictionary:d];
+                VPNSession* session = [VPNSession currentSession];
+                if(session == nil)
+                    session = [[VPNSession alloc] init];
+                
+                [session populateWithDictionary:d];
+                
+                [VPNSession setCurrentSessionWithSession:session];
+                
                 [delegate didStartSession];
             }
             else if([GetUserInfo isEqual:apiCall])
             {
                 VPNUser* newUser = [[VPNUser alloc] initWithDictionary:[d objectForKey:@"user"]];
                 [newUser saveAsDefaultUser];
+                [VPNUser saveUserToDisc:newUser];
                 
                 [delegate didGetUser:newUser];
             }

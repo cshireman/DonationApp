@@ -9,67 +9,53 @@
 #import "VPNHomeViewControllerTest.h"
 
 @implementation VPNHomeViewControllerTest
-@synthesize homeController;
 
 -(void) setUp
 {
-    [super setUp];
-    self.homeController = [[VPNHomeViewController alloc] init];
+    homeController = [[VPNHomeViewController alloc] init];
+    session = [[VPNSession alloc] init];
+    user = [[VPNUser alloc] init];
 }
 
-/*
--(void) testTaxSavingsIsUpdatedAfterNewTaxRateIsSelected
+-(void) tearDown
 {
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    [userDefaults setDouble:10.00 forKey:kTaxSavingsKey];
-    [userDefaults setDouble:100.00 forKey:kItemSubtotalKey];
-    [userDefaults setDouble:0.00 forKey:kMoneySubtotalKey];
-    [userDefaults setDouble:0.00 forKey:kMileageSubtotalKey];
-    
-    [userDefaults setValue:@"25%" forKey:kSelectedTaxRateKey];
-    [userDefaults synchronize];
-    
-    [self.homeController selectTaxRateSaved];
-    
-    [userDefaults synchronize];
-    STAssertEquals(25.00, [userDefaults doubleForKey:kTaxSavingsKey], @"Tax savings should have been updated to 25.00");
-    
-    [userDefaults setValue:@"15%" forKey:kSelectedTaxRateKey];
-    [userDefaults synchronize];
-    
-    [self.homeController selectTaxRateSaved];
-    
-    [userDefaults synchronize];
-    STAssertEquals(15.00, [userDefaults doubleForKey:kTaxSavingsKey], @"Tax savings should have been updated to 15.00");
-
+    homeController = nil;
+    session = nil;
+    user = nil;
 }
- */
 
 -(void) testLogoutPushedClearsCurrentSessionID
 {
-    VPNSession* session = [VPNSession currentSession];
-    session.session = @"Some Session ID";
+    session.session = @"Test Session";
+    homeController.session = session;
+    
     [homeController logoutPushed:nil];
     
-    session = [VPNSession currentSession];
-    STAssertNil(session.session,@"Session should have been cleared");
+    VPNSession* sessionResult = homeController.session;
+    STAssertTrue(sessionResult != session,@"Session should have been cleared");
 }
 
 -(void) testLogoutPushedClearsCurrentlySelectedTaxYear
 {
-    VPNUser* user = [VPNUser currentUser];
     user.selected_tax_year = 2012;
+    homeController.user = user;
     
     [homeController logoutPushed:nil];
     
-    STAssertEquals(0, user.selected_tax_year, @"Selected tax year should have been reset");
+    STAssertEquals(0, homeController.user.selected_tax_year, @"Selected tax year should have been reset");
 }
 
--(void) testLogoutDisplaysCallsForLoginToBeDisplayed
+-(void) testLogoutPushedSendsLogoutNotification
 {
+    id observer = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"Logout" object:nil];
+    
+    [[observer expect] notificationWithName:@"Logout" object:[OCMArg any]];
+    
+    [homeController logoutPushed:nil];
+    
+    [observer verify];
 }
-
 
 @end
 

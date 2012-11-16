@@ -194,6 +194,8 @@
         [VPNNotifier postNotification:@"GetTaxYearsEmptyError"];
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your tax year information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
         [alert show];
+        
+        return;
     }
     
     [manager getOrganizations:YES];

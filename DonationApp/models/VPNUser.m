@@ -8,6 +8,8 @@
 
 #import "VPNUser.h"
 #import "VPNNotifier.h"
+#import "VPNAppDelegate.h"
+
 
 @implementation VPNUser
 
@@ -20,7 +22,6 @@
 @synthesize is_email_opted_in;
 @synthesize selected_tax_year;
 
-static VPNUser* currentUser = nil;
 
 #pragma mark -
 #pragma mark NSCoding
@@ -90,13 +91,13 @@ static VPNUser* currentUser = nil;
     return self;
 }
 
-
 /**
  * Get the current user from memory
  */
 +(VPNUser*) currentUser
 {
-    return currentUser;
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    return appDelegate.user;
 }
 
 /**
@@ -109,13 +110,27 @@ static VPNUser* currentUser = nil;
     [VPNNotifier postNotification:@"LoadingUserFromDisc"];
     NSData* data = [[NSMutableData alloc] initWithContentsOfFile:[VPNUser userFilePath]];
     if(nil == data)
+    {
         return nil;
+    }
     
+    VPNUser* user = nil;
     NSKeyedUnarchiver* unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    currentUser = (VPNUser*)[unarchiver decodeObjectForKey:@"User"];
+    user = (VPNUser*)[unarchiver decodeObjectForKey:@"User"];
     [unarchiver finishDecoding];
     
-    return [VPNUser currentUser];
+    return user;
+}
+
++(void) saveUserToDisc:(VPNUser*)user
+{
+    NSMutableData* data = [[NSMutableData alloc] init];
+    NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    
+    [archiver encodeObject:user forKey:@"User"];
+    [archiver finishEncoding];
+    
+    [data writeToFile:[VPNUser userFilePath] atomically:YES];    
 }
 
 +(NSString*) userFilePath
@@ -130,12 +145,16 @@ static VPNUser* currentUser = nil;
  */
 +(void) deleteUserFromDisc
 {
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+
     NSError* error;
     NSString* filePath = [VPNUser userFilePath];
     
     NSFileManager* fileMgr = [NSFileManager defaultManager];
     if([fileMgr fileExistsAtPath:filePath])
         [fileMgr removeItemAtPath:filePath error:&error];
+    
+    appDelegate.user = nil;
 }
 
 /**
@@ -143,14 +162,8 @@ static VPNUser* currentUser = nil;
  */
 -(void) saveAsDefaultUser
 {
-    NSMutableData* data = [[NSMutableData alloc] init];
-    NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    
-    [archiver encodeObject:self forKey:@"User"];
-    [archiver finishEncoding];
-    
-    [data writeToFile:[VPNUser userFilePath] atomically:YES];
-    currentUser = self;
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.user = self;
 }
 
 /**
@@ -159,7 +172,7 @@ static VPNUser* currentUser = nil;
  */
 -(BOOL) authenticate
 {
-    currentUser = [VPNUser loadUserFromDisc];
+    VPNUser* currentUser = [VPNUser loadUserFromDisc];
     if(currentUser == nil)
         return NO;
     

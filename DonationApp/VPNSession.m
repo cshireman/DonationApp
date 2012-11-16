@@ -7,6 +7,8 @@
 //
 
 #import "VPNSession.h"
+#import "VPNAppDelegate.h"
+
 
 @implementation VPNSession
 
@@ -15,7 +17,6 @@
 @synthesize last_name;
 @synthesize annual_limit;
 
-static VPNSession* currentSession = nil;
 
 -(id) initWithDictionary:(NSDictionary*)info
 {
@@ -40,29 +41,23 @@ static VPNSession* currentSession = nil;
     annual_limit = [[info objectForKey:@"annualLimit"] intValue];    
 }
 
--(void) setAsCurrentSession
-{
-    currentSession = self;
-}
 
-+(void) initialize
++(VPNSession*) currentSession
 {
-    currentSession = [[VPNSession alloc] init];
-}
-
-+(id) currentSession
-{
-    return currentSession;
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    return appDelegate.userSession;
 }
 
 +(void) clearCurrentSession
 {
-    currentSession = nil;
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.userSession = nil;
 }
 
 +(void) setCurrentSessionWithSession:(VPNSession*) newSession
 {
-    currentSession = newSession;
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.userSession = newSession;
 }
 
 

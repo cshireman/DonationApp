@@ -33,6 +33,7 @@
 
 +(VPNUser*) currentUser;
 +(VPNUser*) loadUserFromDisc;
++(void) saveUserToDisc:(VPNUser*)user;
 +(void) deleteUserFromDisc;
 +(NSString*) userFilePath;
 

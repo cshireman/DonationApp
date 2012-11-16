@@ -9,11 +9,15 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "VPNMainTabGroupViewController.h"
 #import "VPNHomeViewController.h"
+#import "VPNSession.h"
+#import "VPNUser.h"
 #import "OCMock.h"
 
 @interface VPNHomeViewControllerTest : SenTestCase
-
-@property (strong, nonatomic) VPNHomeViewController* homeController;
-
+{
+    VPNHomeViewController* homeController;
+    VPNSession* session;
+    VPNUser* user;
+};
 
 @end

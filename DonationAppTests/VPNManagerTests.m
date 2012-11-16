@@ -160,8 +160,9 @@
     [[mockCommunicator expect] makeAPICall:GetUserInfo withContent:fakeContent];
     manager.communicator = mockCommunicator;
     
-    VPNSession* currentSession = [VPNSession currentSession];
+    VPNSession* currentSession = [[VPNSession alloc] init];
     currentSession.session = @"2DC23AC770C539DCCCA0175765";
+    [VPNSession setCurrentSessionWithSession:currentSession];
 
     manager.communicator = mockCommunicator;
     [manager getUserInfo:YES];
@@ -200,8 +201,11 @@
     [[mockCommunicator expect] makeAPICall:GetUserInfo withContent:fakeContent];
     manager.communicator = mockCommunicator;
     
-    VPNSession* currentSession = [VPNSession currentSession];
+    VPNSession* currentSession = [[VPNSession alloc] init];
+    
     currentSession.session = @"2DC23AC770C539DCCCA0175765";
+    
+    [VPNSession setCurrentSessionWithSession:currentSession];
     
     manager.communicator = mockCommunicator;
     [manager getUserInfo:NO];

@@ -43,7 +43,7 @@
 
 -(void) testCurrentSessionCanBeSet
 {
-    [session setAsCurrentSession];
+    [VPNSession setCurrentSessionWithSession:session];
     STAssertNotNil([VPNSession currentSession], @"Current session should have be set");
 }
 

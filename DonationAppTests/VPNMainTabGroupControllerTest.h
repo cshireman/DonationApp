@@ -7,7 +7,14 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "VPNMainTabGroupViewController.h"
+#import "VPNUser.h"
+#import "VPNNotifier.h"
+#import "OCMock.h"
 
 @interface VPNMainTabGroupControllerTest : SenTestCase
+{
+    VPNMainTabGroupViewController* tabGroupController;
+};
 
 @end

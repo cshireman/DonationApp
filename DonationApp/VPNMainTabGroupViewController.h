@@ -16,4 +16,6 @@
 
 -(void) loginControllerFinished;
 
+-(void) configure;
+
 @end

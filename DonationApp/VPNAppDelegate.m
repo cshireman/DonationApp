@@ -9,6 +9,8 @@
 #import "VPNAppDelegate.h"
 
 @implementation VPNAppDelegate
+@synthesize userSession;
+@synthesize user;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -41,6 +43,25 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(VPNSession*) userSession
+{
+    if(userSession == nil)
+        userSession = [[VPNSession alloc] init];
+    
+    return userSession;
+}
+
+-(VPNUser*) user
+{
+    if(user == nil)
+        user = [VPNUser loadUserFromDisc];
+    
+    if(user == nil)
+        user = [[VPNUser alloc] init];
+    
+    return user;
 }
 
 @end

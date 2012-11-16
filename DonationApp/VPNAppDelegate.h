@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNTaxSavings.h"
+#import "VPNSession.h"
+#import "VPNUser.h"
 
 @interface VPNAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) VPNTaxSavings* taxSavings;
+@property (strong, nonatomic) VPNSession* userSession;
+@property (strong, nonatomic) VPNUser* user;
 
 @end
