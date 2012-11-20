@@ -8,6 +8,9 @@
 
 #import "VPNHomeViewController.h"
 #import "VPNMainTabGroupViewController.h"
+#import "VPNContactInfoCell.h"
+#import "VPNPasswordCell.h"
+#import "VPNTaxRateCell.h"
 
 #define kTaxSettingsSection     0
 #define kPasswordSection        1
@@ -25,14 +28,19 @@
 @synthesize bannerView;
 @synthesize session;
 @synthesize user;
+@synthesize nameField;
+@synthesize emailField;
+@synthesize passwordField;
+@synthesize confirmPasswordField;
+@synthesize taxSavingsLabel;
+@synthesize manager;
 
 -(id) init
 {
     self = [super init];
     if(self)
     {
-        session = [VPNSession currentSession];
-        user = [VPNUser currentUser];
+        [self configure];
     }
     
     return self;
@@ -42,21 +50,40 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        [self configure];
     }
     return self;
+}
+
+-(void) configure
+{
+    session = [VPNSession currentSession];
+    user = [VPNUser currentUser];
+    manager = [[VPNCDManager alloc] init];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    session = [VPNSession currentSession];
-    user = [VPNUser currentUser];
+    [self configure];
+    
+    [self.tableView registerClass:[VPNContactInfoCell class] forCellReuseIdentifier:@"ContactInfoCell"];
+    [self.tableView registerClass:[VPNPasswordCell class] forCellReuseIdentifier:@"ChangePasswordCell"];
+    [self.tableView registerClass:[VPNTaxRateCell class] forCellReuseIdentifier:@"MyTaxSavingsCell"];
     
     NSLog(@"%@ %@",user.first_name, user.last_name);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished) name:@"LoginFinished" object:nil];
 
+    //Load up cells to get field and label references
+    NSIndexPath* contactInfoIndexPath = [NSIndexPath indexPathForRow:0 inSection:kContactInfoSection];
+    NSIndexPath* changePasswordIndexPath = [NSIndexPath indexPathForRow:0 inSection:kPasswordSection];
+    NSIndexPath* taxSavingsIndexPath = [NSIndexPath indexPathForRow:1 inSection:kTaxSettingsSection];
+    
+    [self tableView:self.tableView cellForRowAtIndexPath:contactInfoIndexPath];
+    [self tableView:self.tableView cellForRowAtIndexPath:changePasswordIndexPath];
+    [self tableView:self.tableView cellForRowAtIndexPath:taxSavingsIndexPath];
+    
     [self.tableView reloadData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -162,11 +189,32 @@
     // Configure the cell...
     if([CellIdentifier isEqualToString:@"ContactInfoCell"])
     {
-        UILabel* nameLabel = (UILabel*)[cell viewWithTag:1];
-        UILabel* emailLabel = (UILabel*)[cell viewWithTag:2];
+        VPNContactInfoCell* contactCell = (VPNContactInfoCell*)cell;
+        if(nameField == nil)
+            nameField = contactCell.nameField;
         
-        nameLabel.text = [NSString stringWithFormat:@"%@ %@",user.first_name,user.last_name];
-        emailLabel.text = user.email;
+        if(emailField == nil)
+            emailField = contactCell.emailField;
+        
+        nameField.text = [NSString stringWithFormat:@"%@ %@",user.first_name,user.last_name];
+        emailField.text = user.email;
+    }
+    else if([CellIdentifier isEqualToString:@"ChangePasswordCell"])
+    {
+        VPNPasswordCell* passwordCell = (VPNPasswordCell*)cell;
+        
+        if(passwordField == nil)
+            passwordField = passwordCell.passwordField;
+        
+        if(confirmPasswordField == nil)
+            confirmPasswordField = passwordCell.confirmPasswordField;
+    }
+    else if([CellIdentifier isEqualToString:@"MyTaxSavingsCell"])
+    {
+        VPNTaxRateCell* taxSavingsCell = (VPNTaxRateCell*)cell;
+        taxSavingsLabel = taxSavingsCell.taxSavings;
+        
+        taxSavingsLabel.text = [NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]];
     }
     
     return cell;
@@ -262,7 +310,26 @@
 
 -(IBAction) updatePushed:(id)sender
 {
+    NSString* password = passwordField.text;
+    NSString* confirmPassword = confirmPasswordField.text;
     
+    if([password length] > 0 || [confirmPassword length] > 0)
+    {
+        if([password isEqualToString:confirmPassword])
+        {
+            [VPNNotifier postNotification:@"PasswordsMatch"];
+            [manager changePassword:password];
+        }
+        else
+        {
+            [VPNNotifier postNotification:@"PasswordMismatchError"];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"The passwords you entered do not match, please try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    [manager getUserInfo:YES];
 }
 
 
@@ -282,8 +349,65 @@
     
     double taxRate = [VPNTaxSavings doubleForTaxRate:selectedTaxRate];
     
-    [userDefaults setDouble:25.00 forKey:kTaxSavingsKey];
+    [userDefaults setDouble:taxRate forKey:kTaxSavingsKey];
     [userDefaults synchronize];
+}
+
+#pragma mark -
+#pragma mark VPNCDManagerDelegateMethods
+
+-(void) didChangePassword
+{
+    [VPNNotifier postNotification:@"UserInfoUpdated"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your password has been saved!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];    
+}
+
+-(void) changePasswordFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Password Update Error" message:@"We could not save your password at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+-(void) didUpdateUserInfo
+{
+    [VPNNotifier postNotification:@"UserInfoUpdated"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your information has been saved!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+-(void) updateUserInfoFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update Error" message:@"We could not save your information at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+-(void) didGetUser:(VPNUser*)theUser
+{
+    NSString* name = nameField.text;
+    NSString* email = emailField.text;
+    
+    NSArray* nameParts = [name componentsSeparatedByString:@" "];
+    if(nil != nameParts && [nameParts count] > 0)
+    {
+        NSInteger lastIndex = [nameParts count] - 1;
+        theUser.first_name = [nameParts objectAtIndex:0];
+        theUser.last_name = [nameParts objectAtIndex:lastIndex];
+    }
+    else
+    {
+        theUser.first_name = name;
+    }
+    
+    theUser.email = email;
+    
+    [manager updateUserInfo:user];
+}
+
+-(void) getUserInfoFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update Error" message:@"We could not save your information at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];    
 }
 
 

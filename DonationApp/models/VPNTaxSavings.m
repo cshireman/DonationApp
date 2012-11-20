@@ -7,12 +7,14 @@
 //
 
 #import "VPNTaxSavings.h"
+#import "VPNAppDelegate.h"
 
 @implementation VPNTaxSavings
 @synthesize itemSubtotal;
 @synthesize moneySubtotal;
 @synthesize mileageSubtotal;
 @synthesize taxSavings;
+@synthesize taxRate;
 
 /**
  * Calculate the tax savings amount based on donation amounts and tax rate
@@ -40,6 +42,12 @@
         return 0.35;
     
     return 0.0;
+}
+
++(double) currentTaxSavings
+{
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    return appDelegate.currentTaxSavings;
 }
 
 @end

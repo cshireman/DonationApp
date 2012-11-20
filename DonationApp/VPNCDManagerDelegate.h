@@ -29,4 +29,13 @@
 -(void) didGetOrganizations:(NSArray*)organizations;
 -(void) getOrganizationsFailedWithError:(NSError*)error;
 
+//ChangePassword
+-(void) didChangePassword;
+-(void) changePasswordFailedWithError:(NSError*)error;
+
+//UpdateUserInfo
+-(void) didUpdateUserInfo;
+-(void) updateUserInfoFailedWithError:(NSError*)error;
+
+
 @end

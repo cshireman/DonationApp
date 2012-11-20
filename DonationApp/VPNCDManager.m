@@ -196,6 +196,17 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }    
 }
 
+-(void)changePassword:(NSString*)newPassword
+{
+    
+}
+
+-(void)updateUserInfo:(VPNUser*)user
+{
+    
+}
+
+
 #pragma mark -
 #pragma mark Communicator Delegate Methods
 

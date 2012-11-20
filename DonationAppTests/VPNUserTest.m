@@ -32,11 +32,13 @@
 
 -(void) testUserCanBeSavedToDisc
 {
-    [testUser saveAsDefaultUser];
+    [VPNUser saveUserToDisc:testUser];
     
     VPNUser* loadedUser = [VPNUser loadUserFromDisc];
     STAssertNotNil(loadedUser, @"User should not be nill after being loaded from disc");
     STAssertEqualObjects(loadedUser.username, testUser.username, @"Users are not the same after save");
+    
+    [VPNUser deleteUserFromDisc];
 }
 
 -(void) testUserCanBeDeletedFromDisc
@@ -44,15 +46,6 @@
     [VPNUser deleteUserFromDisc];
     VPNUser* loadedUser = [VPNUser loadUserFromDisc];
     STAssertNil(loadedUser, @"User should be nill after being loaded from disc");
-}
-
--(void) testUserCanBeAuthenticatedAgainstCurrentUser
-{
-    [testUser saveAsDefaultUser];
-    
-    VPNUser* anotherUser = [testUser copy];
-    BOOL authenticated = [anotherUser authenticate];
-    STAssertTrue(authenticated, @"User copy could not be authenticated");
 }
 
 -(void) testUserCanBeInitializedWithDictionary
@@ -66,7 +59,6 @@
 
     VPNUser* user = [[VPNUser alloc] initWithDictionary:userInfo];
     
-    STAssertEqualObjects(@"chris@shireman.net", user.username, @"Username should have been initialized from dictionary");
     STAssertEqualObjects(@"chris@shireman.net", user.email, @"Email should have been initialized from dictionary");
     STAssertEqualObjects(@"Christopher", user.first_name, @"FirstName should have been initialized from dictionary");
     STAssertEqualObjects(@"Shireman", user.last_name, @"LastName should have been initialized from dictionary");

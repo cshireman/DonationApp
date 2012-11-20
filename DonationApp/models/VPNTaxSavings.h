@@ -17,9 +17,10 @@
 @property (assign) double moneySubtotal;
 @property (assign) double mileageSubtotal;
 @property (assign) double taxSavings;
+@property (assign) double taxRate;
 
 +(double) calculateTaxSavingsWithItemAmount:(double)itemAmount moneyAmount:(double)moneyAmount mileageAmount:(double)mileageAmount taxRate:(double)taxRate;
-
 +(double) doubleForTaxRate:(NSString*)taxRate;
++(double) currentTaxSavings;
 
 @end

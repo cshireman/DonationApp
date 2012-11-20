@@ -124,6 +124,7 @@
     [user.tax_years addObject:@"2012"];
     
     [user saveAsDefaultUser];
+    [VPNUser saveUserToDisc:user];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

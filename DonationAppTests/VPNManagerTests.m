@@ -178,6 +178,7 @@
     testUser.password = @"password";
     
     [testUser saveAsDefaultUser];
+    [VPNUser saveUserToDisc:testUser];
     
     [[delegate expect] didGetUser:[OCMArg any]];
     [[NSNotificationCenter defaultCenter] addMockObserver:observer name:@"LoadingUserFromDisc" object:nil];
@@ -221,6 +222,7 @@
     testUser.password = @"password";
     
     [testUser saveAsDefaultUser];
+    [VPNUser saveUserToDisc:testUser];
     
     [[delegate expect] didGetUser:[OCMArg any]];
     

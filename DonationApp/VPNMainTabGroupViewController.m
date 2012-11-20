@@ -88,7 +88,7 @@
     VPNUser* user = [VPNUser currentUser];
     if(user.selected_tax_year == 0)
     {
-      //  [self performSegueWithIdentifier:@"SelectTaxYearSegue" sender:self];
+        [self performSegueWithIdentifier:@"SelectTaxYearSegue" sender:self];
     }
 }
 

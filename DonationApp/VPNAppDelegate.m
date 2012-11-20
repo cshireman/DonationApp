@@ -11,6 +11,7 @@
 @implementation VPNAppDelegate
 @synthesize userSession;
 @synthesize user;
+@synthesize currentTaxSavings;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

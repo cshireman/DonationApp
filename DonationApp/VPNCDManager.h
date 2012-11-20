@@ -50,6 +50,8 @@ enum {
 -(void)getUserInfo:(BOOL)forceDownload;
 -(void)getOrganizations:(BOOL)forceDownload;
 -(void)getTaxYears:(BOOL)forceDownload;
+-(void)changePassword:(NSString*)newPassword;
+-(void)updateUserInfo:(VPNUser*)user;
 
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;

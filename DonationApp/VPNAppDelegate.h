@@ -17,5 +17,6 @@
 @property (strong, nonatomic) VPNTaxSavings* taxSavings;
 @property (strong, nonatomic) VPNSession* userSession;
 @property (strong, nonatomic) VPNUser* user;
+@property (assign)            double currentTaxSavings;
 
 @end
