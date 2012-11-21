@@ -198,7 +198,32 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 -(void)changePassword:(NSString*)newPassword
 {
+    NSParameterAssert(newPassword != nil);
+    NSParameterAssert(![newPassword isEqualToString:@""]);
     
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:newPassword forKey:@"newPassword"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate changePasswordFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:ChangePassword withContent:jsonString];
 }
 
 -(void)updateUserInfo:(VPNUser*)user
@@ -275,7 +300,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 NSArray* resultYears = [d objectForKey:@"years"];
                 if(nil != resultYears && [resultYears count] > 0)
                 {
-                    [VPNUser currentUser].tax_years = resultYears;
+                    [VPNUser currentUser].tax_years = [NSMutableArray arrayWithArray:resultYears];
                     [[VPNUser currentUser] saveAsDefaultUser];
                     
                     [delegate didGetTaxYears:resultYears];
@@ -284,6 +309,10 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 {
                     [delegate didGetTaxYears:[NSArray array]];
                 }                
+            }
+            else if([ChangePassword isEqualToString:apiCall])
+            {
+                [delegate didChangePassword];
             }
         }
         else
@@ -294,14 +323,28 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             
             NSError* apiError = [NSError errorWithDomain:APIErrorDomain code:apiErrorCode userInfo:errorInfo];
             
-            [delegate startingSessionFailedWithError:apiError];
+            if([LoginUser isEqual:apiCall])
+                [delegate startingSessionFailedWithError:apiError];
+            else if([GetUserInfo isEqual:apiCall])
+                [delegate getUserInfoFailedWithError:apiError];
+            else if([GetOrganizations isEqual:apiCall])
+                [delegate getOrganizationsFailedWithError:apiError];
+            else if([ChangePassword isEqualToString:apiCall])
+                [delegate changePasswordFailedWithError:apiError];
         }
     }
     else
     {
         NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:nil];
         
-        [delegate startingSessionFailedWithError:jsonError];
+        if([LoginUser isEqual:apiCall])
+            [delegate startingSessionFailedWithError:jsonError];
+        else if([GetUserInfo isEqual:apiCall])
+            [delegate getUserInfoFailedWithError:jsonError];
+        else if([GetOrganizations isEqual:apiCall])
+            [delegate getOrganizationsFailedWithError:jsonError];
+        else if([ChangePassword isEqualToString:apiCall])
+            [delegate changePasswordFailedWithError:jsonError];
     }
 }
 
@@ -322,6 +365,10 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     else if([GetYears isEqual:apiCall])
     {
         [delegate getTaxYearsFailedWithError:error];
+    }
+    else if([ChangePassword isEqual:apiCall])
+    {
+        [delegate changePasswordFailedWithError:error];
     }
 }
 

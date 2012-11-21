@@ -19,6 +19,9 @@
     
     observer = [OCMockObject observerMock];
     user = [[VPNUser alloc] init];
+    
+    receivedJSON = @"";
+    receivedAPICall = nil;
 }
 
 -(void) tearDown
@@ -29,6 +32,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:observer];
     observer = nil;
     user = nil;
+    
+    receivedJSON = nil;
+    receivedAPICall = nil;
 }
 
 -(void) testManagerCreatedCommunicatorOnInit
@@ -233,6 +239,133 @@
     [VPNUser deleteUserFromDisc];
 }
 
+-(void) fakeAPICall:(APICallType*)apiCallType withContent:(NSString*)content
+{
+    receivedAPICall = apiCallType;
+    receivedJSON = [content copy];
+}
 
+#pragma mark -
+#pragma mark ChangePassword API Call
 
+-(void) testChangePasswordAPICallCreatesCorrectJSONAndAPICall
+{
+    VPNSession* session = [VPNSession currentSession];
+    session.session = @"CF0CFFF4B5B8685C3F33175794";
+    [VPNSession setCurrentSessionWithSession:session];
+    
+    id mockCommunicator = [OCMockObject mockForClass:[VPNCDCommunicator class]];
+    
+    [[[mockCommunicator stub] andCall:@selector(fakeAPICall:withContent:) onObject:self] makeAPICall:[OCMArg any] withContent:[OCMArg any]] ;
+    manager.communicator = mockCommunicator;
+    
+    [manager changePassword:@"NewPassword"];
+    
+    NSString* expectedJSON = @"{\"apiKey\":\"12C7DCE347154B5A8FD49B72F169A975\",\"session\":\"CF0CFFF4B5B8685C3F33175794\",\"newPassword\":\"NewPassword\"}";
+    
+    NSError* error = nil;
+    NSDictionary* expectedResponse = [NSJSONSerialization JSONObjectWithData:[expectedJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    NSDictionary* receivedResponse = [NSJSONSerialization JSONObjectWithData:[receivedJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    
+    STAssertEqualObjects(expectedResponse, receivedResponse, @"Received JSON should match expected JSON");
+    STAssertEqualObjects(ChangePassword, receivedAPICall, @"Received API Call should be ChangePassword");
+}
+
+-(void) testChangePasswordThrowsErrorWithBlankPassword
+{
+    STAssertThrows([manager changePassword:@""], @"Should throw exception for blank password");
+}
+
+-(void) testChangePasswordThrowsErrorWithNilPassword
+{
+    STAssertThrows([manager changePassword:nil], @"Should throw exception for nil password");
+}
+
+-(void) testDidChangePasswordCalledWhenChangePasswordSucceeds
+{
+    [[delegate expect] didChangePassword];
+    NSString* validChangePasswordResponse = @"{\"d\":{\"status\":\"SUCCESS\",\"reasonCode\":\"0\"}}";
+    [manager receivedResponse:validChangePasswordResponse forAPICall:ChangePassword];
+    
+    [delegate verify];
+}
+
+-(void) testChangePasswordFailedWithErrorCalledWhenFailureSent
+{
+    [[delegate expect] changePasswordFailedWithError:[OCMArg any]];
+    NSString* failureChangePasswordResponse = @"{\"d\":{\"status\":\"FAILURE\",\"errorCode\":\"2\",\"errorMessage\":\"Invalid Session\"}}";
+    [manager receivedResponse:failureChangePasswordResponse forAPICall:ChangePassword];
+    
+    [delegate verify];
+}
+
+-(void) testChangePasswordFailedWhenManagerReceivedCommunicatorError
+{
+    [[delegate expect] changePasswordFailedWithError:[OCMArg any]];
+    NSError* error = nil;
+    [manager receivedError:error forAPICall:ChangePassword];
+    
+    [delegate verify];
+}
+
+#pragma mark -
+#pragma mark UpdateUser API Call
+
+/*
+-(void) testUpdateUserInfoAPICallCreatesCorrectJSONAndAPICall
+{
+    VPNSession* session = [VPNSession currentSession];
+    session.session = @"CF0CFFF4B5B8685C3F33175794";
+    [VPNSession setCurrentSessionWithSession:session];
+    
+    id mockCommunicator = [OCMockObject mockForClass:[VPNCDCommunicator class]];
+    
+    [[[mockCommunicator stub] andCall:@selector(fakeAPICall:withContent:) onObject:self] makeAPICall:[OCMArg any] withContent:[OCMArg any]] ;
+    manager.communicator = mockCommunicator;
+    
+    [manager updateUserInfo:nil];
+    
+    NSString* expectedJSON = @"{\"apiKey\":\"12C7DCE347154B5A8FD49B72F169A975\",\"session\":\"CF0CFFF4B5B8685C3F33175794\",\"newPassword\":\"NewPassword\"}";
+    
+    NSError* error = nil;
+    NSDictionary* expectedResponse = [NSJSONSerialization JSONObjectWithData:[expectedJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    NSDictionary* receivedResponse = [NSJSONSerialization JSONObjectWithData:[receivedJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    
+    STAssertEqualObjects(expectedResponse, receivedResponse, @"Received JSON should match expected JSON");
+    STAssertEqualObjects(ChangePassword, receivedAPICall, @"Received API Call should be ChangePassword");
+}
+
+-(void) testUpdateUserInfoThrowsErrorWithNilUser
+{
+    STAssertThrows([manager updateUserInfo:nil], @"Should throw exception for nil user");
+}
+
+-(void) testDidChangePasswordCalledWhenChangePasswordSucceeds
+{
+    [[delegate expect] didChangePassword];
+    NSString* validChangePasswordResponse = @"{\"d\":{\"status\":\"SUCCESS\",\"reasonCode\":\"0\"}}";
+    [manager receivedResponse:validChangePasswordResponse forAPICall:ChangePassword];
+    
+    [delegate verify];
+}
+
+-(void) testChangePasswordFailedWithErrorCalledWhenFailureSent
+{
+    [[delegate expect] changePasswordFailedWithError:[OCMArg any]];
+    NSString* failureChangePasswordResponse = @"{\"d\":{\"status\":\"FAILURE\",\"errorCode\":\"2\",\"errorMessage\":\"Invalid Session\"}}";
+    [manager receivedResponse:failureChangePasswordResponse forAPICall:ChangePassword];
+    
+    [delegate verify];
+}
+
+-(void) testChangePasswordFailedWhenManagerReceivedCommunicatorError
+{
+    [[delegate expect] changePasswordFailedWithError:[OCMArg any]];
+    NSError* error = nil;
+    [manager receivedError:error forAPICall:ChangePassword];
+    
+    [delegate verify];
+}
+
+*/
 @end

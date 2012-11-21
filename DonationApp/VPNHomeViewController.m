@@ -358,6 +358,11 @@
 
 -(void) didChangePassword
 {
+    //Update the user record with new password so we don't have to keep logging in
+    VPNUser* currentUser = [VPNUser currentUser];
+    currentUser.password = passwordField.text;
+    [currentUser saveAsDefaultUser];
+    
     [VPNNotifier postNotification:@"UserInfoUpdated"];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your password has been saved!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];    

@@ -17,6 +17,9 @@
     id delegate;
     id observer;
     VPNUser* user;
+    
+    NSString* receivedJSON;
+    APICallType* receivedAPICall;
 }
 
 @end
