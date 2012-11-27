@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
-#import "VPNTaxRateCell.h"
+#import "VPNTaxSavingsCell.h"
 
-@implementation VPNTaxRateCell
+@implementation VPNTaxSavingsCell
 @synthesize taxSavings;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

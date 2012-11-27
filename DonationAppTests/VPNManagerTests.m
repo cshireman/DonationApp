@@ -311,7 +311,7 @@
 #pragma mark -
 #pragma mark UpdateUser API Call
 
-/*
+
 -(void) testUpdateUserInfoAPICallCreatesCorrectJSONAndAPICall
 {
     VPNSession* session = [VPNSession currentSession];
@@ -323,16 +323,35 @@
     [[[mockCommunicator stub] andCall:@selector(fakeAPICall:withContent:) onObject:self] makeAPICall:[OCMArg any] withContent:[OCMArg any]] ;
     manager.communicator = mockCommunicator;
     
-    [manager updateUserInfo:nil];
+    VPNUser* testUser = [[VPNUser alloc] init];
     
-    NSString* expectedJSON = @"{\"apiKey\":\"12C7DCE347154B5A8FD49B72F169A975\",\"session\":\"CF0CFFF4B5B8685C3F33175794\",\"newPassword\":\"NewPassword\"}";
+    testUser.first_name = @"FirstName";
+    testUser.last_name = @"LastName";
+    testUser.email = @"email@email.com";
+    testUser.company = @"Company";
+    testUser.phone = @"1234567890";
+    
+    testUser.address1 = @"123 Happy St.";
+    testUser.address2 = @"Suite #123";
+    testUser.city = @"City";
+    testUser.state = @"State";
+    testUser.zip = @"ZipCode";
+    
+    testUser.is_email_opted_in = NO;
+    
+    [manager updateUserInfo:testUser];
+    
+    NSString* expectedJSON = @"{\"apiKey\":\"12C7DCE347154B5A8FD49B72F169A975\",\"session\":\"CF0CFFF4B5B8685C3F33175794\",\"firstName\":\"FirstName\",\"lastName\":\"LastName\",\"company\":\"Company\",\"email\":\"email@email.com\",\"phone\":\"1234567890\",\"address1\":\"123 Happy St.\",\"address2\":\"Suite #123\",\"city\":\"City\",\"state\":\"State\",\"zip\":\"ZipCode\",\"emailOptOut\":1}";
     
     NSError* error = nil;
     NSDictionary* expectedResponse = [NSJSONSerialization JSONObjectWithData:[expectedJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
     NSDictionary* receivedResponse = [NSJSONSerialization JSONObjectWithData:[receivedJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
     
+    NSLog(@"%@",expectedJSON);
+    NSLog(@"%@",receivedJSON);
+    
     STAssertEqualObjects(expectedResponse, receivedResponse, @"Received JSON should match expected JSON");
-    STAssertEqualObjects(ChangePassword, receivedAPICall, @"Received API Call should be ChangePassword");
+    STAssertEqualObjects(UpdateUserInfo, receivedAPICall, @"Received API Call should be UpdateUserInfo");
 }
 
 -(void) testUpdateUserInfoThrowsErrorWithNilUser
@@ -340,32 +359,48 @@
     STAssertThrows([manager updateUserInfo:nil], @"Should throw exception for nil user");
 }
 
--(void) testDidChangePasswordCalledWhenChangePasswordSucceeds
+-(void) testDidUpdateUserInfoCalledWhenUpdateUserInfoSucceeds
 {
-    [[delegate expect] didChangePassword];
-    NSString* validChangePasswordResponse = @"{\"d\":{\"status\":\"SUCCESS\",\"reasonCode\":\"0\"}}";
-    [manager receivedResponse:validChangePasswordResponse forAPICall:ChangePassword];
+    [[delegate expect] didUpdateUserInfo];
+    NSString* validUpdateUserInfoResponse = @"{\"d\":{\"status\":\"SUCCESS\",\"reasonCode\":\"0\"}}";
+    [manager receivedResponse:validUpdateUserInfoResponse forAPICall:UpdateUserInfo];
     
     [delegate verify];
 }
 
--(void) testChangePasswordFailedWithErrorCalledWhenFailureSent
+-(void) testUpdateUserInfoFailedWithErrorCalledWhenFailureSent
 {
-    [[delegate expect] changePasswordFailedWithError:[OCMArg any]];
-    NSString* failureChangePasswordResponse = @"{\"d\":{\"status\":\"FAILURE\",\"errorCode\":\"2\",\"errorMessage\":\"Invalid Session\"}}";
-    [manager receivedResponse:failureChangePasswordResponse forAPICall:ChangePassword];
+    [[delegate expect] updateUserInfoFailedWithError:[OCMArg any]];
+    NSString* failureUpdateUserInfoResponse = @"{\"d\":{\"status\":\"FAILURE\",\"errorCode\":\"2\",\"errorMessage\":\"Invalid Session\"}}";
+    [manager receivedResponse:failureUpdateUserInfoResponse forAPICall:UpdateUserInfo];
     
     [delegate verify];
 }
 
--(void) testChangePasswordFailedWhenManagerReceivedCommunicatorError
+-(void) testUpdateUserInfoFailedWhenManagerReceivedCommunicatorError
 {
-    [[delegate expect] changePasswordFailedWithError:[OCMArg any]];
+    [[delegate expect] updateUserInfoFailedWithError:[OCMArg any]];
     NSError* error = nil;
-    [manager receivedError:error forAPICall:ChangePassword];
+    [manager receivedError:error forAPICall:UpdateUserInfo];
     
     [delegate verify];
 }
 
-*/
+-(void) testNonConformingObjectCannotBeDelegate
+{
+    STAssertThrows(manager.delegate =
+                   (id <VPNCDManagerDelegate>)[NSNull null], @"NSNull should not be used as the delegate",
+                   @"as it doesn't conform to the delegate protocol");
+}
+
+-(void) testConformingObjectCanBeDelegate
+{
+    STAssertNoThrow(manager.delegate = delegate, @"Object conforming to the delegate protocol should be",@"as the delegate");
+}
+
+-(void) testAcceptsNilAsADelegate
+{
+    STAssertNoThrow(manager.delegate = nil,@"It should be possible to use nil as the objects delegate");
+}
+
 @end

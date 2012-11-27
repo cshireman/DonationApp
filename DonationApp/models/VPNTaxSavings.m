@@ -50,4 +50,10 @@
     return appDelegate.currentTaxSavings;
 }
 
+-(void) setCurrentTaxSavings:(double)newTaxSavings
+{
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.currentTaxSavings = newTaxSavings;
+}
+
 @end

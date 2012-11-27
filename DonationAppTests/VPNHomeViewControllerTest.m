@@ -230,6 +230,10 @@
     id nameFieldMock = [OCMockObject mockForClass:[UITextField class]];
     id emailFieldMock = [OCMockObject mockForClass:[UITextField class]];
     
+    id managerMock = [OCMockObject mockForClass:[VPNCDManager class]];
+    [[managerMock stub] updateUserInfo:[OCMArg any]];
+    homeController.manager = managerMock;
+    
     [[nameFieldMock expect] text];
     [[emailFieldMock expect] text];
     
@@ -253,6 +257,10 @@
     homeController.nameField = nameField;
     homeController.emailField = emailField;
     
+    id managerMock = [OCMockObject mockForClass:[VPNCDManager class]];
+    [[managerMock stub] updateUserInfo:[OCMArg any]];
+    homeController.manager = managerMock;
+        
     id userMock = [OCMockObject mockForClass:[VPNUser class]];
     
     [[userMock expect] setFirst_name:@"User"];
@@ -277,6 +285,51 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:observer];
     
+}
+
+-(void) testSelectTaxRateSegueCalledWhenTaxSavingsRowSelected
+{
+    id mockController = [OCMockObject partialMockForObject:homeController];
+    [[mockController expect] performSegueWithIdentifier:@"SelectTaxRateSegue" sender:[OCMArg any]];
+    [[mockController stub] performSegueWithIdentifier:[OCMArg any] sender:[OCMArg any]];
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    
+    [homeController tableView:nil didSelectRowAtIndexPath:indexPath];
+    
+    [mockController verify];
+}
+
+-(void) testSelectTaxYearCallsTabGroupDisplayMethod
+{
+    id mockTabGroup = [OCMockObject niceMockForClass:[VPNMainTabGroupViewController class]];
+    id mockController = [OCMockObject partialMockForObject:homeController];
+    
+    [[mockTabGroup expect] displaySelectTaxYearScene];
+    [[[mockController stub] andReturn:mockTabGroup] tabBarController];
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    [homeController tableView:nil didSelectRowAtIndexPath:indexPath];
+    
+    [mockController verify];
+    [mockTabGroup verify];
+}
+
+-(void) testControllerConformsToManagerProtocol
+{
+    BOOL conforms = [homeController conformsToProtocol:@protocol(VPNCDManagerDelegate)];
+    STAssertTrue(conforms,@"Controller should conform to manager delegate protocol");
+}
+
+-(void) testConformsToSelectTaxRateDelegateProtocol
+{
+    STAssertTrue([homeController conformsToProtocol:@protocol(VPNSelectTaxRateViewControllerDelegate)], @"Should conform to protocol");
+}
+
+-(void) testConformsToAdBannerViewDelegateProtocol
+{
+    STAssertTrue([homeController conformsToProtocol:@protocol(ADBannerViewDelegate)], @"Should conform to protocol");
 }
 
 @end

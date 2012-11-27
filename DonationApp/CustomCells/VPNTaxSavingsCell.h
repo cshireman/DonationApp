@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VPNTaxRateCell : UITableViewCell
+@interface VPNTaxSavingsCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel* taxSavings;
 

@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNLoginViewController.m"
-         timestampString = "374741723.577472"
+         timestampString = "375467782.882995"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "174"
-         endingLineNumber = "174"
+         startingLineNumber = "186"
+         endingLineNumber = "186"
          landmarkName = "-didGetUser:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNLoginViewController.m"
-         timestampString = "374741723.577472"
+         timestampString = "375467782.882995"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "88"
-         endingLineNumber = "88"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "-loginPushed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNCDManager.m"
-         timestampString = "375167251.175093"
+         timestampString = "375222109.932255"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "304"
+         endingLineNumber = "304"
          landmarkName = "-receivedResponse:forAPICall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,12 +99,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNLoginViewController.m"
-         timestampString = "374741842.317292"
+         timestampString = "375467782.882995"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationAppTests/VPNManagerTests.m"
+         timestampString = "375221683.154352"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "330"
+         endingLineNumber = "330"
+         landmarkName = "-testUpdateUserInfoAPICallCreatesCorrectJSONAndAPICall"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationAppTests/VPNManagerTests.m"
+         timestampString = "375222169.072978"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "349"
+         endingLineNumber = "349"
+         landmarkName = "-testUpdateUserInfoAPICallCreatesCorrectJSONAndAPICall"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

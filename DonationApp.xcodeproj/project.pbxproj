@@ -68,8 +68,8 @@
 		8393FED4165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */; };
 		8393FED8165B3CBA00BD52A2 /* VPNPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */; };
 		8393FED9165B3CBA00BD52A2 /* VPNPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */; };
-		8393FEDC165B3CCF00BD52A2 /* VPNTaxRateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FEDB165B3CCF00BD52A2 /* VPNTaxRateCell.m */; };
-		8393FEDD165B3CCF00BD52A2 /* VPNTaxRateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FEDB165B3CCF00BD52A2 /* VPNTaxRateCell.m */; };
+		8393FEDC165B3CCF00BD52A2 /* VPNTaxSavingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FEDB165B3CCF00BD52A2 /* VPNTaxSavingsCell.m */; };
+		8393FEDD165B3CCF00BD52A2 /* VPNTaxSavingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FEDB165B3CCF00BD52A2 /* VPNTaxSavingsCell.m */; };
 		8397DF72162E6C04000D8633 /* VPNUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF71162E6C04000D8633 /* VPNUser.m */; };
 		8397DF7A162E7581000D8633 /* VPNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8397DF79162E7581000D8633 /* VPNHomeViewController.m */; };
 		8397DF7F162E76C0000D8633 /* 17-bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8397DF7B162E76C0000D8633 /* 17-bar-chart.png */; };
@@ -85,6 +85,10 @@
 		839866831639819A009D8518 /* VPNTaxSavingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 839866821639819A009D8518 /* VPNTaxSavingsTests.m */; };
 		83A1D3F316311295002CD13C /* VPNUserSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */; };
 		83A1D3F7163117DE002CD13C /* VPNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */; };
+		83AD5A3F165E881600347FB3 /* VPNOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AD5A3E165E881600347FB3 /* VPNOverlayViewController.m */; };
+		83AD5A40165E881600347FB3 /* VPNOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AD5A3E165E881600347FB3 /* VPNOverlayViewController.m */; };
+		83AD5A42165E893000347FB3 /* VPNOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AD5A41165E893000347FB3 /* VPNOverlayViewController.xib */; };
+		83AD5A43165E893000347FB3 /* VPNOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AD5A41165E893000347FB3 /* VPNOverlayViewController.xib */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
@@ -186,8 +190,8 @@
 		8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNContactInfoCell.m; sourceTree = "<group>"; };
 		8393FED6165B3CBA00BD52A2 /* VPNPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNPasswordCell.h; sourceTree = "<group>"; };
 		8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNPasswordCell.m; sourceTree = "<group>"; };
-		8393FEDA165B3CCF00BD52A2 /* VPNTaxRateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNTaxRateCell.h; path = CustomCells/VPNTaxRateCell.h; sourceTree = "<group>"; };
-		8393FEDB165B3CCF00BD52A2 /* VPNTaxRateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNTaxRateCell.m; path = CustomCells/VPNTaxRateCell.m; sourceTree = "<group>"; };
+		8393FEDA165B3CCF00BD52A2 /* VPNTaxSavingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNTaxSavingsCell.h; path = CustomCells/VPNTaxSavingsCell.h; sourceTree = "<group>"; };
+		8393FEDB165B3CCF00BD52A2 /* VPNTaxSavingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNTaxSavingsCell.m; path = CustomCells/VPNTaxSavingsCell.m; sourceTree = "<group>"; };
 		8397DF70162E6C04000D8633 /* VPNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNUser.h; path = models/VPNUser.h; sourceTree = "<group>"; };
 		8397DF71162E6C04000D8633 /* VPNUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNUser.m; path = models/VPNUser.m; sourceTree = "<group>"; };
 		8397DF78162E7581000D8633 /* VPNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNHomeViewController.h; sourceTree = "<group>"; };
@@ -216,6 +220,9 @@
 		83A1D3F216311295002CD13C /* VPNUserSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserSignupViewController.m; sourceTree = "<group>"; };
 		83A1D3F5163117DE002CD13C /* VPNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNLoginViewController.h; sourceTree = "<group>"; };
 		83A1D3F6163117DE002CD13C /* VPNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNLoginViewController.m; sourceTree = "<group>"; };
+		83AD5A3D165E881600347FB3 /* VPNOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNOverlayViewController.h; path = Controllers/VPNOverlayViewController.h; sourceTree = "<group>"; };
+		83AD5A3E165E881600347FB3 /* VPNOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNOverlayViewController.m; path = Controllers/VPNOverlayViewController.m; sourceTree = "<group>"; };
+		83AD5A41165E893000347FB3 /* VPNOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNOverlayViewController.xib; path = Controllers/VPNOverlayViewController.xib; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -410,6 +417,9 @@
 		8390ECC21648C0D5000D03AE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				83AD5A3D165E881600347FB3 /* VPNOverlayViewController.h */,
+				83AD5A3E165E881600347FB3 /* VPNOverlayViewController.m */,
+				83AD5A41165E893000347FB3 /* VPNOverlayViewController.xib */,
 				8387D48A165615B800FE7C0E /* VPNSelectTaxYearViewController.h */,
 				8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */,
 				83195DB2162D188F00B63831 /* VPNSplashViewController.h */,
@@ -439,8 +449,8 @@
 				8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */,
 				8393FED6165B3CBA00BD52A2 /* VPNPasswordCell.h */,
 				8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */,
-				8393FEDA165B3CCF00BD52A2 /* VPNTaxRateCell.h */,
-				8393FEDB165B3CCF00BD52A2 /* VPNTaxRateCell.m */,
+				8393FEDA165B3CCF00BD52A2 /* VPNTaxSavingsCell.h */,
+				8393FEDB165B3CCF00BD52A2 /* VPNTaxSavingsCell.m */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -570,6 +580,7 @@
 				8397DF8B162E82F2000D8633 /* logo_large.png in Resources */,
 				8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */,
 				831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */,
+				83AD5A42165E893000347FB3 /* VPNOverlayViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				836852731633BC7D00E51EEB /* InfoPlist.strings in Resources */,
+				83AD5A43165E893000347FB3 /* VPNOverlayViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +638,8 @@
 				8387D48C165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */,
 				8393FED3165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */,
 				8393FED8165B3CBA00BD52A2 /* VPNPasswordCell.m in Sources */,
-				8393FEDC165B3CCF00BD52A2 /* VPNTaxRateCell.m in Sources */,
+				8393FEDC165B3CCF00BD52A2 /* VPNTaxSavingsCell.m in Sources */,
+				83AD5A3F165E881600347FB3 /* VPNOverlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,7 +672,8 @@
 				8387D491165615DB00FE7C0E /* VPNSelectTaxYearViewControllerTests.m in Sources */,
 				8393FED4165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */,
 				8393FED9165B3CBA00BD52A2 /* VPNPasswordCell.m in Sources */,
-				8393FEDD165B3CCF00BD52A2 /* VPNTaxRateCell.m in Sources */,
+				8393FEDD165B3CCF00BD52A2 /* VPNTaxSavingsCell.m in Sources */,
+				83AD5A40165E881600347FB3 /* VPNOverlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

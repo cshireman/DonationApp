@@ -10,7 +10,7 @@
 #import "VPNMainTabGroupViewController.h"
 #import "VPNContactInfoCell.h"
 #import "VPNPasswordCell.h"
-#import "VPNTaxRateCell.h"
+#import "VPNTaxSavingsCell.h"
 
 #define kTaxSettingsSection     0
 #define kPasswordSection        1
@@ -67,9 +67,9 @@
     [super viewDidLoad];
     [self configure];
     
-    [self.tableView registerClass:[VPNContactInfoCell class] forCellReuseIdentifier:@"ContactInfoCell"];
-    [self.tableView registerClass:[VPNPasswordCell class] forCellReuseIdentifier:@"ChangePasswordCell"];
-    [self.tableView registerClass:[VPNTaxRateCell class] forCellReuseIdentifier:@"MyTaxSavingsCell"];
+//    [self.tableView registerClass:[VPNContactInfoCell class] forCellReuseIdentifier:@"ContactInfoCell"];
+//    [self.tableView registerClass:[VPNPasswordCell class] forCellReuseIdentifier:@"ChangePasswordCell"];
+//    [self.tableView registerClass:[VPNTaxSavingsCell class] forCellReuseIdentifier:@"MyTaxSavingsCell"];
     
     NSLog(@"%@ %@",user.first_name, user.last_name);
     
@@ -90,6 +90,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
 }
 
 -(void) loginFinished
@@ -189,6 +194,9 @@
     // Configure the cell...
     if([CellIdentifier isEqualToString:@"ContactInfoCell"])
     {
+        if(cell == nil)
+            cell = [[VPNContactInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
         VPNContactInfoCell* contactCell = (VPNContactInfoCell*)cell;
         if(nameField == nil)
             nameField = contactCell.nameField;
@@ -201,6 +209,9 @@
     }
     else if([CellIdentifier isEqualToString:@"ChangePasswordCell"])
     {
+        if(cell == nil)
+            cell = [[VPNPasswordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
         VPNPasswordCell* passwordCell = (VPNPasswordCell*)cell;
         
         if(passwordField == nil)
@@ -211,7 +222,10 @@
     }
     else if([CellIdentifier isEqualToString:@"MyTaxSavingsCell"])
     {
-        VPNTaxRateCell* taxSavingsCell = (VPNTaxRateCell*)cell;
+        if(cell == nil)
+            cell = [[VPNTaxSavingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+ 
+        VPNTaxSavingsCell* taxSavingsCell = (VPNTaxSavingsCell*)cell;
         taxSavingsLabel = taxSavingsCell.taxSavings;
         
         taxSavingsLabel.text = [NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]];
@@ -406,7 +420,7 @@
     
     theUser.email = email;
     
-    [manager updateUserInfo:user];
+    [manager updateUserInfo:theUser];
 }
 
 -(void) getUserInfoFailedWithError:(NSError*)error

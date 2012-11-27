@@ -17,7 +17,14 @@
 @synthesize password;
 @synthesize first_name;
 @synthesize last_name;
+@synthesize phone;
 @synthesize email;
+@synthesize company;
+@synthesize address1;
+@synthesize address2;
+@synthesize city;
+@synthesize state;
+@synthesize zip;
 @synthesize tax_years;
 @synthesize is_email_opted_in;
 @synthesize selected_tax_year;
@@ -32,7 +39,14 @@
     [coder encodeObject:self.password forKey:kPasswordKey];
     [coder encodeObject:self.first_name forKey:kFirstNameKey];
     [coder encodeObject:self.last_name forKey:kLastNameKey];
+    [coder encodeObject:self.phone forKey:kPhoneKey];
+    [coder encodeObject:self.company forKey:kCompanyKey];
     [coder encodeObject:self.email forKey:kEmailKey];
+    [coder encodeObject:self.address1 forKey:kAddress1Key];
+    [coder encodeObject:self.address2 forKey:kAddress2Key];
+    [coder encodeObject:self.city forKey:kCityKey];
+    [coder encodeObject:self.state forKey:kStateKey];
+    [coder encodeObject:self.zip forKey:kZipKey];
     
     [coder encodeBool:self.is_email_opted_in forKey:kIsEmailOptedInKey];
     [coder encodeObject:self.tax_years forKey:kTaxYearsKey];
@@ -47,7 +61,16 @@
         password = [coder decodeObjectForKey:kPasswordKey];
         first_name = [coder decodeObjectForKey:kFirstNameKey];
         last_name = [coder decodeObjectForKey:kLastNameKey];
+        phone = [coder decodeObjectForKey:kPhoneKey];
+        
+        company = [coder decodeObjectForKey:kCompanyKey];
         email = [coder decodeObjectForKey:kEmailKey];
+        address1 = [coder decodeObjectForKey:kAddress1Key];
+        address2 = [coder decodeObjectForKey:kAddress2Key];
+        city = [coder decodeObjectForKey:kCityKey];
+        
+        state = [coder decodeObjectForKey:kStateKey];
+        zip = [coder decodeObjectForKey:kZipKey];
         
         is_email_opted_in = [coder decodeBoolForKey:kIsEmailOptedInKey];
         tax_years = [coder decodeObjectForKey:kTaxYearsKey];
@@ -65,6 +88,15 @@
     copy.password = self.password;
     copy.first_name = self.first_name;
     copy.last_name = self.last_name;
+    copy.phone = self.phone;
+    
+    copy.company = self.company;
+    copy.address1 = self.address1;
+    copy.address2 = self.address2;
+    copy.city = self.city;
+    copy.state = self.state;
+    
+    copy.zip = self.zip;
     copy.is_email_opted_in = self.is_email_opted_in;
     
     copy.tax_years = [self.tax_years copyWithZone:zone];
@@ -80,12 +112,7 @@
     self = [super init];
     if(self)
     {
-//        self.username = [info objectForKey:@"Email"];
-        self.first_name = [info objectForKey:@"FirstName"];
-        self.last_name = [info objectForKey:@"LastName"];
-        self.email = [info objectForKey:@"Email"];
-
-        self.is_email_opted_in = ![[info objectForKey:@"EmailOptOut"] boolValue];
+        [self populateWithDictionary:info];
     }
     
     return self;
@@ -95,9 +122,53 @@
 {
     self.first_name = [info objectForKey:@"FirstName"];
     self.last_name = [info objectForKey:@"LastName"];
+    self.phone = [info objectForKey:@"Phone"];
+    self.company = [info objectForKey:@"Company"];
     self.email = [info objectForKey:@"Email"];
     
-    self.is_email_opted_in = ![[info objectForKey:@"EmailOptOut"] boolValue];    
+    self.address1 = [info objectForKey:@"Address1"];
+    self.address2 = [info objectForKey:@"Address2"];
+    self.city = [info objectForKey:@"City"];
+    self.state = [info objectForKey:@"State"];
+    self.zip = [info objectForKey:@"Zip"];
+    
+    self.is_email_opted_in = ![[info objectForKey:@"EmailOptOut"] boolValue];
+}
+
+/**
+ Fill any nill attributes with blank strings if they are set to nil
+ */
+-(void) fillWithBlanks
+{
+    if(first_name == nil)
+        first_name = @"";
+    
+    if(last_name == nil)
+        last_name = @"";
+
+    if(phone == nil)
+        phone = @"";
+
+    if(company == nil)
+        company = @"";
+
+    if(email == nil)
+        email = @"";
+
+    if(address1 == nil)
+        address1 = @"";
+
+    if(address2 == nil)
+        address2 = @"";
+
+    if(city == nil)
+        city = @"";
+
+    if(state == nil)
+        state = @"";
+
+    if(zip == nil)
+        zip = @"";
 }
 
 /**
