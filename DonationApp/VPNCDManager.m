@@ -7,6 +7,10 @@
 //
 
 #import "VPNCDManager.h"
+#import "VPNItemList.h"
+#import "VPNCashList.h"
+#import "VPNMileageList.h"
+#import "VPNCategoryList.h"
 
 NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
@@ -273,6 +277,173 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     [communicator makeAPICall:UpdateUserInfo withContent:jsonString];
     
 }
+
+-(void)getItemListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
+{
+    NSMutableArray* itemLists = nil;
+    
+    if(!forceDownload)
+    {
+        itemLists = [VPNItemList loadItemListsFromDisc:taxYear];
+    }
+    
+    if(itemLists == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:APIKey forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getItemListsFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetItemLists withContent:jsonString];
+    }
+    else
+    {
+        [delegate didGetItemLists:itemLists];
+    }
+    
+}
+
+-(void)getCashListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
+{
+    NSMutableArray* cashLists = nil;
+    
+    if(!forceDownload)
+    {
+        cashLists = [VPNCashList loadCashListsFromDisc:taxYear];
+    }
+    
+    if(cashLists == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:APIKey forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getItemListsFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetCashLists withContent:jsonString];
+    }
+    else
+    {
+        [delegate didGetCashLists:cashLists];
+    }
+    
+}
+
+-(void)getMileageListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
+{
+    NSMutableArray* mileageLists = nil;
+    
+    if(!forceDownload)
+    {
+        mileageLists = [VPNMileageList loadMileageListsFromDisc:taxYear];
+    }
+    
+    if(mileageLists == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:APIKey forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getMileageListsFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetMileageLists withContent:jsonString];
+    }
+    else
+    {
+        [delegate didGetMileageLists:mileageLists];
+    }    
+}
+
+-(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
+{
+    NSMutableArray* categoryList = nil;
+    
+    if(!forceDownload)
+    {
+        categoryList = [VPNCategoryList loadCategoryListsFromDisc:taxYear];
+    }
+    
+    if(categoryList == nil)
+    {
+        NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+        VPNSession* session = [VPNSession currentSession];
+        
+        [request setObject:APIKey forKey:@"apiKey"];
+        [request setObject:session.session forKey:@"session"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        
+        NSError* error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+        
+        if(error != nil)
+        {
+            NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+            NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+            
+            [delegate getCategoryListFailedWithError:error];
+            return;
+        }
+        
+        NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [communicator makeAPICall:GetCategoryList withContent:jsonString];
+    }
+    else
+    {
+        [delegate didGetCategoryList:categoryList];
+    }
+}
+
 
 
 #pragma mark -

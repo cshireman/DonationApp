@@ -53,6 +53,11 @@ enum {
 -(void)changePassword:(NSString*)newPassword;
 -(void)updateUserInfo:(VPNUser*)user;
 
+-(void)getItemListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
+-(void)getCashListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
+-(void)getMileageListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
+-(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
+
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;
 -(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall;

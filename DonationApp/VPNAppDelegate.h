@@ -19,4 +19,10 @@
 @property (strong, nonatomic) VPNUser* user;
 @property (assign)            double currentTaxSavings;
 
+//Lists
+@property (strong, nonatomic) NSMutableArray* itemLists;
+@property (strong, nonatomic) NSMutableArray* cashLists;
+@property (strong, nonatomic) NSMutableArray* mileageLists;
+@property (strong, nonatomic) NSMutableDictionary* categoryList;
+
 @end

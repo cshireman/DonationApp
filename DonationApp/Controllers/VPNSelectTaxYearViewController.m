@@ -7,8 +7,14 @@
 //
 
 #import "VPNSelectTaxYearViewController.h"
+#import "VPNUser.h"
+#import "VPNAppDelegate.h"
 
 @interface VPNSelectTaxYearViewController ()
+{
+    VPNUser* currentUser;
+    VPNCDManager* manager;
+}
 
 @end
 
@@ -26,7 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    currentUser = [VPNUser currentUser];
+    manager = [[VPNCDManager alloc] init];
+    manager.delegate = self;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -44,24 +54,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    if(currentUser.tax_years != nil)
+        return 0;
+    
+    return [currentUser.tax_years count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"TaxYearCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSNumber* taxYear = [currentUser.tax_years objectAtIndex:indexPath.row];
+    
+    if(currentUser.selected_tax_year != 0 && [taxYear intValue] == currentUser.selected_tax_year)
+    {
+        cell.imageView.image = [UIImage imageNamed:@"checked"];
+    }
+    else
+    {
+        cell.imageView.image = [UIImage imageNamed:@"unchecked"];
+    }
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%d",[taxYear intValue]];
     
     return cell;
 }
@@ -109,13 +131,65 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSNumber* selectedYear = [currentUser.tax_years objectAtIndex:indexPath.row];
+    currentUser.selected_tax_year = [selectedYear intValue];
+    
+    [currentUser saveAsDefaultUser];
+    [self.tableView reloadData];
+
+    [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
+
+#pragma mark -
+#pragma mark Manager Delegate methods
+
+//GetItemLists
+-(void) didGetItemLists:(NSArray*)itemLists
+{
+    [manager getCashListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
+}
+
+-(void) getItemListsFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem downloading your item lists, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+//GetCashLists
+-(void) didGetCashLists:(NSArray*)cashLists
+{
+    [manager getMileageListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
+}
+
+-(void) getCashListsFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem downloading your cash lists, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];    
+}
+
+//GetMileageLists
+-(void) didGetMileageLists:(NSArray*)mileageLists
+{
+    [manager getCategoryListForTaxYear:currentUser.selected_tax_year forceDownload:YES];
+}
+
+-(void) getMileageListsFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem downloading your mileage lists, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+//GetCategoryList
+-(void) didGetCategoryList:(NSDictionary*)categoryList
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) getCategoryListFailedWithError:(NSError*)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem our database, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
 
 @end
