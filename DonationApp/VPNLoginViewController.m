@@ -7,13 +7,10 @@
 //
 
 #import "VPNLoginViewController.h"
-#import "VPNOverlayViewController.h"
 #import "VPNUser.h"
+#import "DejalActivityView.h"
 
 @interface VPNLoginViewController ()
-{
-    VPNOverlayViewController* loading;
-}
 
 @end
 
@@ -61,8 +58,6 @@
     {
         user = [VPNUser currentUser];
     }
-
-    loading = [[VPNOverlayViewController alloc] init];
 }
 
 - (void)viewDidLoad
@@ -115,8 +110,7 @@
         return;
     }
     
-    [loading setDescriptionText:@"Logging in"];
-    [loading show];
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Logging in" width:155];
     [manager startSessionForUser:user];
 }
 
@@ -160,7 +154,7 @@
 
 -(void) startingSessionFailedWithError:(NSError*)error
 {
-    [loading hide];
+    [DejalBezelActivityView removeViewAnimated:YES];
     [VPNNotifier postNotification:@"InvalidLoginError"];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Invalid Username or Password" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
@@ -168,14 +162,13 @@
 
 -(void) didStartSession
 {
-    [loading setDescriptionText:@"Loading user info"];
-    [loading setProgressPercent:25.0];
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading user info";
     [manager getUserInfo:YES];
 }
 
 -(void) getUserInfoFailedWithError:(NSError*)error
 {
-    [loading hide];
+    [DejalBezelActivityView removeViewAnimated:YES];
     [VPNNotifier postNotification:@"GetUserInfoError"];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your user information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
@@ -185,14 +178,13 @@
 {
     NSParameterAssert(theUser != nil);
     
-    [loading setDescriptionText:@"Loading tax years"];
-    [loading setProgressPercent:50.0];
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading tax years";
     [manager getTaxYears:YES];
 }
 
 -(void) getTaxYearsFailedWithError:(NSError *)error
 {
-    [loading hide];
+    [DejalBezelActivityView removeViewAnimated:YES];
     [VPNNotifier postNotification:@"GetTaxYearsError"];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your tax year information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
@@ -211,14 +203,14 @@
         return;
     }
     
-    [loading setDescriptionText:@"Loading organizations"];
-    [loading setProgressPercent:75.0];
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading organizaations";
+    
     [manager getOrganizations:YES];
 }
 
 -(void) didGetOrganizations:(NSArray*)organizations
 {
-    [loading hide];
+    [DejalBezelActivityView removeViewAnimated:YES];
     NSParameterAssert(organizations != nil);
     
     [delegate loginControllerFinished];
@@ -226,7 +218,7 @@
 
 -(void) getOrganizationsFailedWithError:(NSError*)error
 {
-    [loading hide];
+    [DejalBezelActivityView removeViewAnimated:YES];
     [VPNNotifier postNotification:@"GetOrganizationsError"];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your organization information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];

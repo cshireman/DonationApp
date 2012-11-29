@@ -23,7 +23,7 @@
 #define kItemListsNotesKey              @"Notes"
 #define kItemListsItemsKey              @"Items"
 
-@interface VPNItemList : NSObject
+@interface VPNItemList : NSObject <NSCoding>
 
 @property (assign) int ID;
 @property (assign) int listType;

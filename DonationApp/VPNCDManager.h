@@ -44,6 +44,8 @@ enum {
 @property (strong, nonatomic) VPNUserBuilder* userBuilder;
 @property (strong, nonatomic) VPNSessionBuilder* sessionBuilder;
 
+@property (assign) int currentTaxYear;
+
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
 

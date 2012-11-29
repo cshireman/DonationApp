@@ -20,6 +20,16 @@
 @synthesize loadingLabel;
 @synthesize descriptionLabel;
 
+-(id) init
+{
+    self = [super initWithNibName:@"VPNOverlayViewController" bundle:nil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+    
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -58,13 +68,8 @@
 
 -(void) show
 {
-    NSObject* appDelegate = (NSObject*)[[UIApplication sharedApplication] delegate];
-    if([appDelegate respondsToSelector:@selector(window)])
-    {
-        UIWindow* window = [appDelegate performSelector:@selector(window)];
-        [window addSubview:loadingView];
-        [window bringSubviewToFront:loadingView];
-    }
+    UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+    [mainWindow insertSubview:loadingView aboveSubview:mainWindow];
 }
 
 -(void) hide

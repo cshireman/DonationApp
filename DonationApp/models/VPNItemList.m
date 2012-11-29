@@ -91,8 +91,7 @@
         self.notes = [info objectForKey:@"Notes"];
         
         NSArray* rawItems = [info objectForKey:@"Items"];
-        NSMutableArray* items = [[NSMutableArray alloc] initWithCapacity:[rawItems count]];
-        
+        items = [[NSMutableArray alloc] initWithCapacity:[rawItems count]];
 
         for(NSDictionary* itemInfo in rawItems)
         {

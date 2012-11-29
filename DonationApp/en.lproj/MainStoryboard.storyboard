@@ -836,23 +836,30 @@
             </objects>
             <point key="canvasLocation" x="990" y="1334"/>
         </scene>
-        <!--Table View Controller - Select Tax Year-->
+        <!--Select Tax Year View Controller - Select Tax Year-->
         <scene sceneID="K69-E2-rWw">
             <objects>
-                <tableViewController id="SfT-fF-eJd" sceneMemberID="viewController">
+                <tableViewController id="SfT-fF-eJd" customClass="VPNSelectTaxYearViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GJt-cE-CyS">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select a tax year to work on:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X9g-Rp-seg">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view key="tableFooterView" contentMode="scaleToFill" id="WMA-OI-7er">
-                            <rect key="frame" x="0.0" y="102" width="320" height="50"/>
+                            <rect key="frame" x="0.0" y="136" width="320" height="282"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d2O-Dp-U67">
-                                    <rect key="frame" x="68" y="3" width="185" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="116" y="219" width="89" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Need More Tax Years?">
+                                    <state key="normal" title="Buy Now">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -860,21 +867,28 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Need More Tax Years?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N5f-AJ-YaL">
+                                    <rect key="frame" x="20" y="190" width="280" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="d7G-65-nUM" style="IBUITableViewCellStyleDefault" id="cy5-ke-P0j">
-                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaxYearCell" textLabel="NcC-Vt-K4a" style="IBUITableViewCellStyleDefault" id="cy5-ke-P0j">
+                                <rect key="frame" x="0.0" y="80" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d7G-65-nUM">
-                                            <rect key="frame" x="10" y="0.0" width="260" height="43"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NcC-Vt-K4a">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
@@ -886,6 +900,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Tax Year" id="ZX6-I1-3x5"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egj-e4-Suo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -920,6 +935,97 @@
         <image name="arrow_icon.jpg" width="40" height="40"/>
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
+    <classes>
+        <class className="VPNContactInfoCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNContactInfoCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNHomeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNHomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logoutPushed:"/>
+                <relationship kind="action" name="updatePushed:"/>
+                <relationship kind="outlet" name="bannerView" candidateClass="ADBannerView"/>
+                <relationship kind="outlet" name="optOutSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="optOutView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="updateButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="VPNLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissKeyboard"/>
+                <relationship kind="action" name="loginPushed:"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNMainTabGroupViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNMainTabGroupViewController.h"/>
+        </class>
+        <class className="VPNOrganizationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="localityLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNOrganizationListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editPushed"/>
+            </relationships>
+        </class>
+        <class className="VPNPasswordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNPasswordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNSelectTaxRateViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxRateViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="savePushed:"/>
+                <relationship kind="outlet" name="taxRateTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNSelectTaxYearViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxYearViewController.h"/>
+        </class>
+        <class className="VPNSplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSplashViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="secondImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="VPNTaxSavingsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNTaxSavingsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="taxSavings" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNUserSignupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNUserSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="submitPushed:"/>
+                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="taxYearTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

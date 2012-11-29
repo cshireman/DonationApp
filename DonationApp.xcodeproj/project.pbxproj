@@ -58,6 +58,18 @@
 		834576831665E13100705992 /* VPNItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576811665E13100705992 /* VPNItem.m */; };
 		834DBDDF164CCAA1006B0ED8 /* VPNNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */; };
 		834DBDE0164CCAA1006B0ED8 /* VPNNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */; };
+		836426E316672C9300A70606 /* VPNCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 836426E216672C9300A70606 /* VPNCategory.m */; };
+		836426E416672C9300A70606 /* VPNCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 836426E216672C9300A70606 /* VPNCategory.m */; };
+		836426E71667305100A70606 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836426E61667305100A70606 /* CoreData.framework */; };
+		836426E81667305900A70606 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836426E61667305100A70606 /* CoreData.framework */; };
+		836426EB166730F300A70606 /* DonationApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 836426E9166730F300A70606 /* DonationApp.xcdatamodeld */; };
+		836426EC166730F300A70606 /* DonationApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 836426E9166730F300A70606 /* DonationApp.xcdatamodeld */; };
+		836426F31667406C00A70606 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 836426F21667406C00A70606 /* DejalActivityView.m */; };
+		836426F41667406C00A70606 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 836426F21667406C00A70606 /* DejalActivityView.m */; };
+		836426F7166748C900A70606 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F5166748C900A70606 /* checkbox_checked.png */; };
+		836426F8166748C900A70606 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F5166748C900A70606 /* checkbox_checked.png */; };
+		836426F9166748C900A70606 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F6166748C900A70606 /* checkbox_unchecked.png */; };
+		836426FA166748C900A70606 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F6166748C900A70606 /* checkbox_unchecked.png */; };
 		8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8368526A1633BC7D00E51EEB /* SenTestingKit.framework */; };
 		8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D84162D175600B63831 /* UIKit.framework */; };
 		8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
@@ -184,6 +196,14 @@
 		834576811665E13100705992 /* VPNItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItem.m; path = models/VPNItem.m; sourceTree = "<group>"; };
 		834DBDDD164CCAA1006B0ED8 /* VPNNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNNotifier.h; sourceTree = "<group>"; };
 		834DBDDE164CCAA1006B0ED8 /* VPNNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNNotifier.m; sourceTree = "<group>"; };
+		836426E116672C9300A70606 /* VPNCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCategory.h; path = models/VPNCategory.h; sourceTree = "<group>"; };
+		836426E216672C9300A70606 /* VPNCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNCategory.m; path = models/VPNCategory.m; sourceTree = "<group>"; };
+		836426E61667305100A70606 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		836426EA166730F300A70606 /* DonationApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DonationApp.xcdatamodel; sourceTree = "<group>"; };
+		836426F11667406C00A70606 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		836426F21667406C00A70606 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
+		836426F5166748C900A70606 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		836426F6166748C900A70606 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
 		836852691633BC7D00E51EEB /* DonationAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonationAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8368526A1633BC7D00E51EEB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		836852701633BC7D00E51EEB /* DonationAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DonationAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -257,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836426E71667305100A70606 /* CoreData.framework in Frameworks */,
 				8397DF88162E81DA000D8633 /* iAd.framework in Frameworks */,
 				83195DB6162D234300B63831 /* QuartzCore.framework in Frameworks */,
 				83195D85162D175600B63831 /* UIKit.framework in Frameworks */,
@@ -269,6 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836426E81667305900A70606 /* CoreData.framework in Frameworks */,
 				8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */,
 				8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */,
 				8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */,
@@ -282,6 +304,8 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				836426E9166730F300A70606 /* DonationApp.xcdatamodeld */,
+				836426E61667305100A70606 /* CoreData.framework */,
 				8397DF87162E81DA000D8633 /* iAd.framework */,
 				8397DF85162E8127000D8633 /* AdSupport.framework */,
 				83195DCA162D25D100B63831 /* appicon@2x.png */,
@@ -317,6 +341,8 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				836426F11667406C00A70606 /* DejalActivityView.h */,
+				836426F21667406C00A70606 /* DejalActivityView.m */,
 				8390ECCE1648C9E3000D03AE /* CustomCells */,
 				8390ECC21648C0D5000D03AE /* Controllers */,
 				8397DF77162E6CA2000D8633 /* models */,
@@ -362,6 +388,8 @@
 		83195DB7162D25AC00B63831 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				836426F5166748C900A70606 /* checkbox_checked.png */,
+				836426F6166748C900A70606 /* checkbox_unchecked.png */,
 				831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */,
 				8397DF89162E82F2000D8633 /* logo_large.png */,
 				8397DF8A162E82F2000D8633 /* logo_orgs.png */,
@@ -478,6 +506,8 @@
 		8397DF77162E6CA2000D8633 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				836426E116672C9300A70606 /* VPNCategory.h */,
+				836426E216672C9300A70606 /* VPNCategory.m */,
 				8345766F1665D88100705992 /* VPNItemList.h */,
 				834576801665E13100705992 /* VPNItem.h */,
 				834576811665E13100705992 /* VPNItem.m */,
@@ -611,6 +641,8 @@
 				8397DF8C162E82F2000D8633 /* logo_orgs.png in Resources */,
 				831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */,
 				83AD5A42165E893000347FB3 /* VPNOverlayViewController.xib in Resources */,
+				836426F7166748C900A70606 /* checkbox_checked.png in Resources */,
+				836426F9166748C900A70606 /* checkbox_unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +652,8 @@
 			files = (
 				836852731633BC7D00E51EEB /* InfoPlist.strings in Resources */,
 				83AD5A43165E893000347FB3 /* VPNOverlayViewController.xib in Resources */,
+				836426F8166748C900A70606 /* checkbox_checked.png in Resources */,
+				836426FA166748C900A70606 /* checkbox_unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +709,9 @@
 				8345767A1665D8A500705992 /* VPNMileageList.m in Sources */,
 				8345767E1665D8B400705992 /* VPNCategoryList.m in Sources */,
 				834576821665E13100705992 /* VPNItem.m in Sources */,
+				836426E316672C9300A70606 /* VPNCategory.m in Sources */,
+				836426EB166730F300A70606 /* DonationApp.xcdatamodeld in Sources */,
+				836426F31667406C00A70606 /* DejalActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +751,9 @@
 				8345767B1665D8A500705992 /* VPNMileageList.m in Sources */,
 				8345767F1665D8B400705992 /* VPNCategoryList.m in Sources */,
 				834576831665E13100705992 /* VPNItem.m in Sources */,
+				836426E416672C9300A70606 /* VPNCategory.m in Sources */,
+				836426EC166730F300A70606 /* DonationApp.xcdatamodeld in Sources */,
+				836426F41667406C00A70606 /* DejalActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +968,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		836426E9166730F300A70606 /* DonationApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				836426EA166730F300A70606 /* DonationApp.xcdatamodel */,
+			);
+			currentVersion = 836426EA166730F300A70606 /* DonationApp.xcdatamodel */;
+			name = DonationApp.xcdatamodeld;
+			path = DonationApp/DonationApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 83195D77162D175600B63831 /* Project object */;
 }

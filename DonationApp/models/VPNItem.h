@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VPNItem : NSObject
+@interface VPNItem : NSObject <NSCoding>
 
 -(id) initWithDictionary:(NSDictionary*)info;
 

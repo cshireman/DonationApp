@@ -10,6 +10,8 @@
 #import "VPNUser.h"
 #import "VPNAppDelegate.h"
 
+#import "DejalActivityView.h"
+
 @interface VPNSelectTaxYearViewController ()
 {
     VPNUser* currentUser;
@@ -37,11 +39,12 @@
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSLog(@"Tax Years: %@",currentUser.tax_years);
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +64,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if(currentUser.tax_years != nil)
+    if(currentUser.tax_years == nil)
         return 0;
     
     return [currentUser.tax_years count];
@@ -76,11 +79,11 @@
     
     if(currentUser.selected_tax_year != 0 && [taxYear intValue] == currentUser.selected_tax_year)
     {
-        cell.imageView.image = [UIImage imageNamed:@"checked"];
+        cell.imageView.image = [UIImage imageNamed:@"checkbox_checked"];
     }
     else
     {
-        cell.imageView.image = [UIImage imageNamed:@"unchecked"];
+        cell.imageView.image = [UIImage imageNamed:@"checkbox_unchecked"];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%d",[taxYear intValue]];
@@ -137,6 +140,7 @@
     [currentUser saveAsDefaultUser];
     [self.tableView reloadData];
 
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading Item Lists" width:155];
     [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
@@ -146,11 +150,14 @@
 //GetItemLists
 -(void) didGetItemLists:(NSArray*)itemLists
 {
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Cash Lists";
+    
     [manager getCashListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
 -(void) getItemListsFailedWithError:(NSError*)error
 {
+    [DejalBezelActivityView removeViewAnimated:YES];    
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem downloading your item lists, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
 }
@@ -158,11 +165,14 @@
 //GetCashLists
 -(void) didGetCashLists:(NSArray*)cashLists
 {
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Mileage Lists";
+    
     [manager getMileageListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
 -(void) getCashListsFailedWithError:(NSError*)error
 {
+    [DejalBezelActivityView removeViewAnimated:YES]; 
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem downloading your cash lists, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];    
 }
@@ -170,11 +180,14 @@
 //GetMileageLists
 -(void) didGetMileageLists:(NSArray*)mileageLists
 {
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Database";
+    
     [manager getCategoryListForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
 -(void) getMileageListsFailedWithError:(NSError*)error
 {
+    [DejalBezelActivityView removeViewAnimated:YES];    
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem downloading your mileage lists, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
 }
@@ -182,6 +195,8 @@
 //GetCategoryList
 -(void) didGetCategoryList:(NSDictionary*)categoryList
 {
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -15,10 +15,12 @@
 NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 @implementation VPNCDManager
+
 @synthesize delegate;
 @synthesize communicator;
 @synthesize userBuilder;
 @synthesize sessionBuilder;
+@synthesize currentTaxYear;
 
 -(id) init
 {
@@ -281,6 +283,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 -(void)getItemListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
 {
     NSMutableArray* itemLists = nil;
+    currentTaxYear = taxYear;
     
     if(!forceDownload)
     {
@@ -294,7 +297,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         
         [request setObject:APIKey forKey:@"apiKey"];
         [request setObject:session.session forKey:@"session"];
-        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
         
         NSError* error = nil;
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
@@ -323,6 +326,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 -(void)getCashListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
 {
     NSMutableArray* cashLists = nil;
+    currentTaxYear = taxYear;
     
     if(!forceDownload)
     {
@@ -336,7 +340,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         
         [request setObject:APIKey forKey:@"apiKey"];
         [request setObject:session.session forKey:@"session"];
-        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
         
         NSError* error = nil;
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
@@ -365,6 +369,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 -(void)getMileageListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
 {
     NSMutableArray* mileageLists = nil;
+    currentTaxYear = taxYear;
     
     if(!forceDownload)
     {
@@ -378,7 +383,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         
         [request setObject:APIKey forKey:@"apiKey"];
         [request setObject:session.session forKey:@"session"];
-        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
         
         NSError* error = nil;
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
@@ -405,11 +410,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
 {
-    NSMutableArray* categoryList = nil;
+    NSDictionary* categoryList = nil;
+    currentTaxYear = taxYear;
     
     if(!forceDownload)
     {
-        categoryList = [VPNCategoryList loadCategoryListsFromDisc:taxYear];
+        categoryList = nil;//[VPNCategoryList loadCategoryListsFromDisc:taxYear];
     }
     
     if(categoryList == nil)
@@ -419,7 +425,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         
         [request setObject:APIKey forKey:@"apiKey"];
         [request setObject:session.session forKey:@"session"];
-        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"taxYear"];
+        [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
         
         NSError* error = nil;
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
@@ -532,6 +538,75 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             {
                 [delegate didUpdateUserInfo];
             }
+            else if([GetItemLists isEqualToString:apiCall])
+            {
+                NSArray* resultLists = [d objectForKey:@"lists"];
+                if(nil != resultLists && [resultLists count] > 0)
+                {
+                    NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:[resultLists count]];
+                    for(NSDictionary* listInfo in resultLists)
+                    {
+                        [lists addObject:[[VPNItemList alloc] initWithDictionary:listInfo]];
+                    }
+                    
+                    [VPNItemList saveItemListsToDisc:lists forTaxYear:currentTaxYear];
+                    [delegate didGetItemLists:lists];
+                }
+                else
+                {
+                    [delegate didGetItemLists:[NSArray array]];
+                }
+            }
+            else if([GetCashLists isEqualToString:apiCall])
+            {
+                NSArray* resultLists = [d objectForKey:@"lists"];
+                if(nil != resultLists && [resultLists count] > 0)
+                {
+                    NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:[resultLists count]];
+                    for(NSDictionary* listInfo in resultLists)
+                    {
+                        [lists addObject:[[VPNCashList alloc] initWithDictionary:listInfo]];
+                    }
+                    
+                    [VPNCashList saveCashListsToDisc:lists forTaxYear:currentTaxYear];
+                    [delegate didGetCashLists:lists];
+                }
+                else
+                {
+                    [delegate didGetCashLists:[NSArray array]];
+                }
+            }
+            else if([GetMileageLists isEqualToString:apiCall])
+            {
+                NSArray* resultLists = [d objectForKey:@"lists"];
+                if(nil != resultLists && [resultLists count] > 0)
+                {
+                    NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:[resultLists count]];
+                    for(NSDictionary* listInfo in resultLists)
+                    {
+                        [lists addObject:[[VPNMileageList alloc] initWithDictionary:listInfo]];
+                    }
+                    
+                    [VPNMileageList saveMileageListsToDisc:lists forTaxYear:currentTaxYear];
+                    [delegate didGetMileageLists:lists];
+                }
+                else
+                {
+                    [delegate didGetMileageLists:[NSArray array]];
+                }
+            }
+            else if([GetCategoryList isEqualToString:apiCall])
+            {
+                NSArray* resultLists = [d objectForKey:@"categories"];
+                if(nil != resultLists && [resultLists count] > 0)
+                {
+                    [delegate didGetCategoryList:d];
+                }
+                else
+                {
+                    [delegate didGetCategoryList:[NSDictionary dictionary]];
+                }
+            }
         }
         else
         {
@@ -551,6 +626,15 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate changePasswordFailedWithError:apiError];
             else if([UpdateUserInfo isEqualToString:apiCall])
                 [delegate updateUserInfoFailedWithError:apiError];
+            else if([GetItemLists isEqualToString:apiCall])
+                [delegate getItemListsFailedWithError:apiError];
+            else if([GetCashLists isEqualToString:apiCall])
+                [delegate getCashListsFailedWithError:apiError];
+            else if([GetMileageLists isEqualToString:apiCall])
+                [delegate getMileageListsFailedWithError:apiError];
+            else if([GetCategoryList isEqualToString:apiCall])
+                [delegate getCategoryListFailedWithError:apiError];
+            
         }
     }
     else
@@ -567,6 +651,14 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate changePasswordFailedWithError:jsonError];
         else if([UpdateUserInfo isEqualToString:apiCall])
             [delegate updateUserInfoFailedWithError:jsonError];
+        else if([GetItemLists isEqualToString:apiCall])
+            [delegate getItemListsFailedWithError:jsonError];
+        else if([GetCashLists isEqualToString:apiCall])
+            [delegate getCashListsFailedWithError:jsonError];
+        else if([GetMileageLists isEqualToString:apiCall])
+            [delegate getMileageListsFailedWithError:jsonError];
+        else if([GetCategoryList isEqualToString:apiCall])
+            [delegate getCategoryListFailedWithError:jsonError];
     }
 }
 
@@ -584,6 +676,15 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate changePasswordFailedWithError:error];
     else if([UpdateUserInfo isEqualToString:apiCall])
         [delegate updateUserInfoFailedWithError:error];
+    else if([GetItemLists isEqualToString:apiCall])
+        [delegate getItemListsFailedWithError:error];
+    else if([GetCashLists isEqualToString:apiCall])
+        [delegate getCashListsFailedWithError:error];
+    else if([GetMileageLists isEqualToString:apiCall])
+        [delegate getMileageListsFailedWithError:error];
+    else if([GetCategoryList isEqualToString:apiCall])
+        [delegate getCategoryListFailedWithError:error];
+    
 }
 
 

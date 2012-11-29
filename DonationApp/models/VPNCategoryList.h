@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VPNCategoryList : NSObject
+@interface VPNCategoryList : NSObject <NSCoding>
+
+@property (nonatomic, strong) NSMutableArray* categories;
+
+-(id) initWithDictionary:(NSDictionary*)info;
 
 @end
