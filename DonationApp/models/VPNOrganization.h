@@ -39,4 +39,6 @@
 
 -(id) initWithDictionary:(NSDictionary*)info;
 
+-(void) fillWithBlanks;
+
 @end

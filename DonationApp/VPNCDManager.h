@@ -45,15 +45,20 @@ enum {
 @property (strong, nonatomic) VPNSessionBuilder* sessionBuilder;
 
 @property (assign) int currentTaxYear;
+@property (strong, nonatomic) VPNOrganization* currentOrganization;
 
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
 
 -(void)getUserInfo:(BOOL)forceDownload;
--(void)getOrganizations:(BOOL)forceDownload;
 -(void)getTaxYears:(BOOL)forceDownload;
 -(void)changePassword:(NSString*)newPassword;
 -(void)updateUserInfo:(VPNUser*)user;
+
+-(void)getOrganizations:(BOOL)forceDownload;
+-(void)addOrganization:(VPNOrganization*)organization;
+-(void)updateOrganization:(VPNOrganization*)organization;
+-(void)deleteOrganization:(VPNOrganization*)organization;
 
 -(void)getItemListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 -(void)getCashListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;

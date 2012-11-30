@@ -10,6 +10,9 @@
 #import "VPNOrganizationCell.h"
 
 @interface VPNOrganizationListViewController ()
+{
+    NSIndexPath* deleteIndexPath;
+}
 
 @end
 
@@ -63,7 +66,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [organizations count];
 }
 
@@ -99,9 +101,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [organizations removeObjectAtIndex:indexPath.row];
-    }   
+        deleteIndexPath = indexPath;
+        VPNOrganization* orgToDelete = [organizations objectAtIndex:indexPath.row];
+        [manager deleteOrganization:orgToDelete];        
+    }
 }
 
 /*
@@ -164,8 +167,39 @@
 
 -(void) didGetOrganizations:(NSArray *)newOrganizations
 {
-    self.organizations = newOrganizations;
+    self.organizations = [NSMutableArray array];
+    
+    for(VPNOrganization* newOrg in newOrganizations)
+    {
+        if(newOrg.is_active)
+        {
+            [self.organizations addObject:newOrg];
+        }
+    }
+    
     [self.tableView reloadData];
+}
+
+-(void) getOrganizationsFailedWithError:(NSError *)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"Can't download organizations at this time, please try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+-(void) didDeleteOrganization
+{
+    if(deleteIndexPath != nil)
+    {
+        [organizations removeObjectAtIndex:deleteIndexPath.row];
+        [VPNOrganization saveOrganizationsToDisc:organizations];
+        [self.tableView deleteRowsAtIndexPaths:@[deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];        
+    }
+}
+
+-(void) deleteOrganizationFailedWithError:(NSError *)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Delete Error" message:@"Can't delete organization at this time, please try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];    
 }
 
 @end

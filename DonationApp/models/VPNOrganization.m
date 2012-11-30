@@ -18,6 +18,15 @@
 @synthesize zip_code;
 @synthesize list_count;
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.ID = 0;
+    }
+    return self;
+}
+
 #pragma mark -
 #pragma mark NSCoding
 
@@ -109,6 +118,25 @@
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     return [documentsDirectory stringByAppendingPathComponent:kOrganizationsFilePath];
+}
+
+-(void) fillWithBlanks
+{
+    if(name == nil)
+        name = @"";
+    
+    if(address == nil)
+        address = @"";
+    
+    if(city == nil)
+        city = @"";
+    
+    if(state == nil)
+        state = @"";
+    
+    if(zip_code == nil)
+        zip_code = @"";
+    
 }
 
 @end

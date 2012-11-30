@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VPNUser.h"
 #import "VPNSession.h"
+#import "VPNOrganization.h"
 
 @protocol VPNCDManagerDelegate <NSObject>
 
@@ -28,6 +29,18 @@
 //GetOrganizations
 -(void) didGetOrganizations:(NSArray*)organizations;
 -(void) getOrganizationsFailedWithError:(NSError*)error;
+
+//AddOrganization
+-(void) didAddOrganization:(VPNOrganization*)addedOrganization;
+-(void) addOrganizationFailedWithError:(NSError*)error;
+
+//UpdateOrganization
+-(void) didUpdateOrganization:(VPNOrganization*)updatedOrganization;
+-(void) updateOrganizationFailedWithError:(NSError*)error;
+
+//DeleteOrganization
+-(void) didDeleteOrganization;
+-(void) deleteOrganizationFailedWithError:(NSError*)error;
 
 //ChangePassword
 -(void) didChangePassword;

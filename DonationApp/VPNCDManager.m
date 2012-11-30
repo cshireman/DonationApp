@@ -21,6 +21,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 @synthesize userBuilder;
 @synthesize sessionBuilder;
 @synthesize currentTaxYear;
+@synthesize currentOrganization;
 
 -(id) init
 {
@@ -159,6 +160,135 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     {
         [delegate didGetOrganizations:organizations];
     }
+    
+}
+
+-(void)addOrganization:(VPNOrganization*)organization
+{
+    NSParameterAssert(organization != nil);
+    NSParameterAssert(organization.ID == 0);
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* orgInfo = [[NSMutableDictionary alloc] init];
+    
+    VPNSession* session = [VPNSession currentSession];
+    
+    [organization fillWithBlanks];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    
+    [orgInfo setObject:organization.name forKey:@"name"];
+    [orgInfo setObject:organization.address forKey:@"address1"];
+    [orgInfo setObject:organization.city forKey:@"city"];
+    [orgInfo setObject:organization.state forKey:@"state"];
+    [orgInfo setObject:organization.zip_code forKey:@"zip"];
+    
+    [orgInfo setObject:@"" forKey:@"address2"];
+    [orgInfo setObject:@"" forKey:@"phone"];
+    [orgInfo setObject:@"" forKey:@"fax"];
+
+    [request setObject:orgInfo forKey:@"organization"];
+
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate addOrganizationFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.currentOrganization = organization;
+    [communicator makeAPICall:AddOrganization withContent:jsonString];
+}
+
+-(void)updateOrganization:(VPNOrganization*)organization
+{
+    NSParameterAssert(organization != nil);
+    NSParameterAssert(organization.ID != 0);
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* orgInfo = [[NSMutableDictionary alloc] init];
+    
+    VPNSession* session = [VPNSession currentSession];
+    
+    [organization fillWithBlanks];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    
+    [orgInfo setObject:organization.name forKey:@"name"];
+    [orgInfo setObject:organization.address forKey:@"address1"];
+    [orgInfo setObject:organization.city forKey:@"city"];
+    [orgInfo setObject:organization.state forKey:@"state"];
+    [orgInfo setObject:organization.zip_code forKey:@"zip"];
+    
+    [orgInfo setObject:@"" forKey:@"address2"];
+    [orgInfo setObject:@"" forKey:@"phone"];
+    [orgInfo setObject:@"" forKey:@"fax"];
+    
+    [request setObject:[NSString stringWithFormat:@"%d",organization.ID] forKey:@"id"];
+    [request setObject:orgInfo forKey:@"organization"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate updateOrganizationFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.currentOrganization = organization;
+    [communicator makeAPICall:UpdateOrganization withContent:jsonString];
+    
+}
+
+-(void)deleteOrganization:(VPNOrganization*)organization
+{
+    NSParameterAssert(organization != nil);
+    NSParameterAssert(organization.ID != 0);
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    
+    VPNSession* session = [VPNSession currentSession];
+    
+    [organization fillWithBlanks];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSString stringWithFormat:@"%d",organization.ID] forKey:@"id"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate deleteOrganizationFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.currentOrganization = organization;
+    [communicator makeAPICall:DeleteOrganization withContent:jsonString];
     
 }
 
@@ -457,6 +587,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall
 {
+
     if(response == nil)
     {
         NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerErrorStartSessionCode userInfo:nil];
@@ -514,6 +645,21 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 {
                     [delegate didGetOrganizations:[NSArray array]];
                 }
+            }
+            else if([AddOrganization isEqualToString:apiCall])
+            {
+                NSNumber* newOrgID = [d objectForKey:@"id"];
+                self.currentOrganization.ID = [newOrgID intValue];
+                
+                [delegate didAddOrganization:self.currentOrganization];
+            }
+            else if([UpdateOrganization isEqualToString:apiCall])
+            {
+                [delegate didUpdateOrganization:self.currentOrganization];
+            }
+            else if([DeleteOrganization isEqualToString:apiCall])
+            {
+                [delegate didDeleteOrganization];
             }
             else if([GetYears isEqualToString:apiCall])
             {
@@ -622,6 +768,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate getUserInfoFailedWithError:apiError];
             else if([GetOrganizations isEqual:apiCall])
                 [delegate getOrganizationsFailedWithError:apiError];
+            else if([AddOrganization isEqual:apiCall])
+                [delegate addOrganizationFailedWithError:apiError];
+            else if([UpdateOrganization isEqual:apiCall])
+                [delegate updateOrganizationFailedWithError:apiError];
+            else if([DeleteOrganization isEqual:apiCall])
+                [delegate deleteOrganizationFailedWithError:apiError];
             else if([ChangePassword isEqualToString:apiCall])
                 [delegate changePasswordFailedWithError:apiError];
             else if([UpdateUserInfo isEqualToString:apiCall])
@@ -647,6 +799,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate getUserInfoFailedWithError:jsonError];
         else if([GetOrganizations isEqual:apiCall])
             [delegate getOrganizationsFailedWithError:jsonError];
+        else if([AddOrganization isEqual:apiCall])
+            [delegate addOrganizationFailedWithError:jsonError];
+        else if([UpdateOrganization isEqual:apiCall])
+            [delegate updateOrganizationFailedWithError:jsonError];
+        else if([DeleteOrganization isEqual:apiCall])
+            [delegate deleteOrganizationFailedWithError:jsonError];
         else if([ChangePassword isEqualToString:apiCall])
             [delegate changePasswordFailedWithError:jsonError];
         else if([UpdateUserInfo isEqualToString:apiCall])
@@ -670,6 +828,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate getUserInfoFailedWithError:error];
     else if([GetOrganizations isEqual:apiCall])
         [delegate getOrganizationsFailedWithError:error];
+    else if([AddOrganization isEqual:apiCall])
+        [delegate addOrganizationFailedWithError:error];
+    else if([UpdateOrganization isEqual:apiCall])
+        [delegate updateOrganizationFailedWithError:error];
+    else if([DeleteOrganization isEqual:apiCall])
+        [delegate deleteOrganizationFailedWithError:error];
     else if([GetYears isEqual:apiCall])
         [delegate getTaxYearsFailedWithError:error];
     else if([ChangePassword isEqual:apiCall])

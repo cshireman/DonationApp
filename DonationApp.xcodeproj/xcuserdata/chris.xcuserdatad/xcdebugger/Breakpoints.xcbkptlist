@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNCDManager.m"
-         timestampString = "375862716.34469"
+         timestampString = "375949160.24842"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "477"
-         endingLineNumber = "477"
+         startingLineNumber = "608"
+         endingLineNumber = "608"
          landmarkName = "-receivedResponse:forAPICall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -131,6 +131,45 @@
          startingLineNumber = "349"
          endingLineNumber = "349"
          landmarkName = "-testUpdateUserInfoAPICallCreatesCorrectJSONAndAPICall"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/VPNCDManager.m"
+         timestampString = "375949148.640616"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "590"
+         endingLineNumber = "590"
+         landmarkName = "-receivedResponse:forAPICall:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/VPNCDManager.m"
+         timestampString = "375950433.296874"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "662"
+         endingLineNumber = "662"
+         landmarkName = "-receivedResponse:forAPICall:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/VPNCDManager.m"
+         timestampString = "375950869.065563"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "290"
+         endingLineNumber = "290"
+         landmarkName = "-deleteOrganization:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

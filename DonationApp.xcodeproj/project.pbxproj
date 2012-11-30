@@ -70,6 +70,8 @@
 		836426F8166748C900A70606 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F5166748C900A70606 /* checkbox_checked.png */; };
 		836426F9166748C900A70606 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F6166748C900A70606 /* checkbox_unchecked.png */; };
 		836426FA166748C900A70606 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 836426F6166748C900A70606 /* checkbox_unchecked.png */; };
+		8364271A1668783B00A70606 /* VPNOrganizationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836427191668783B00A70606 /* VPNOrganizationDetailViewController.m */; };
+		8364271B1668783B00A70606 /* VPNOrganizationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836427191668783B00A70606 /* VPNOrganizationDetailViewController.m */; };
 		8368526B1633BC7D00E51EEB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8368526A1633BC7D00E51EEB /* SenTestingKit.framework */; };
 		8368526C1633BC7D00E51EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D84162D175600B63831 /* UIKit.framework */; };
 		8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
@@ -204,6 +206,8 @@
 		836426F21667406C00A70606 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		836426F5166748C900A70606 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		836426F6166748C900A70606 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
+		836427181668783B00A70606 /* VPNOrganizationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNOrganizationDetailViewController.h; path = Controllers/VPNOrganizationDetailViewController.h; sourceTree = "<group>"; };
+		836427191668783B00A70606 /* VPNOrganizationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNOrganizationDetailViewController.m; path = Controllers/VPNOrganizationDetailViewController.m; sourceTree = "<group>"; };
 		836852691633BC7D00E51EEB /* DonationAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonationAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8368526A1633BC7D00E51EEB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		836852701633BC7D00E51EEB /* DonationAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DonationAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -484,6 +488,8 @@
 				83175E8916365A8D000C98B4 /* VPNSelectTaxRateViewController.m */,
 				8390ECC71648C12A000D03AE /* VPNOrganizationListViewController.h */,
 				8390ECC81648C12A000D03AE /* VPNOrganizationListViewController.m */,
+				836427181668783B00A70606 /* VPNOrganizationDetailViewController.h */,
+				836427191668783B00A70606 /* VPNOrganizationDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -712,6 +718,7 @@
 				836426E316672C9300A70606 /* VPNCategory.m in Sources */,
 				836426EB166730F300A70606 /* DonationApp.xcdatamodeld in Sources */,
 				836426F31667406C00A70606 /* DejalActivityView.m in Sources */,
+				8364271A1668783B00A70606 /* VPNOrganizationDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +761,7 @@
 				836426E416672C9300A70606 /* VPNCategory.m in Sources */,
 				836426EC166730F300A70606 /* DonationApp.xcdatamodeld in Sources */,
 				836426F41667406C00A70606 /* DejalActivityView.m in Sources */,
+				8364271B1668783B00A70606 /* VPNOrganizationDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
