@@ -11,5 +11,6 @@
 @interface VPNNotifier : NSObject
 
 +(void) postNotification:(NSString*)notification;
++(void) postNotification:(NSString *)notification withUserInfo:(NSDictionary*)userInfo;
 
 @end

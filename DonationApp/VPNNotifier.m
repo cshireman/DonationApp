@@ -12,7 +12,12 @@
 
 +(void) postNotification:(NSString *)notification
 {
-    NSNotification* note = [NSNotification notificationWithName:notification object:nil];
+    [VPNNotifier postNotification:notification withUserInfo:nil];
+}
+
++(void) postNotification:(NSString *)notification withUserInfo:(NSDictionary*)userInfo
+{
+    NSNotification* note = [NSNotification notificationWithName:notification object:nil userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotification:note];
 }
 

@@ -7,10 +7,13 @@
 //
 
 #import "VPNCDManager.h"
+#import "VPNNotifier.h"
 #import "VPNItemList.h"
 #import "VPNCashList.h"
 #import "VPNMileageList.h"
-#import "VPNCategoryList.h"
+#import "VPNAppDelegate.h"
+#import "Category.h"
+#import "Category+JSONParser.h"
 
 NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
@@ -540,12 +543,23 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
 {
-    NSDictionary* categoryList = nil;
+    NSArray* categoryList = nil;
     currentTaxYear = taxYear;
     
     if(!forceDownload)
     {
-        categoryList = nil;//[VPNCategoryList loadCategoryListsFromDisc:taxYear];
+        NSArray* categories = [Category getByTaxYear:taxYear];
+        if(categories == nil)
+        {
+            NSLog(@"There was an error");
+            [delegate getCategoryListFailedWithError:nil];
+        }
+        
+        if([categories count] > 0)
+        {
+            [delegate didGetCategoryList:categories];
+            return;
+        }
     }
     
     if(categoryList == nil)
@@ -746,7 +760,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 NSArray* resultLists = [d objectForKey:@"categories"];
                 if(nil != resultLists && [resultLists count] > 0)
                 {
-                    [delegate didGetCategoryList:d];
+                    [delegate didGetCategoryList:resultLists];
                 }
                 else
                 {

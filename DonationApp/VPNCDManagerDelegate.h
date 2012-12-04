@@ -63,7 +63,7 @@
 -(void) getMileageListsFailedWithError:(NSError*)error;
 
 //GetCategoryList
--(void) didGetCategoryList:(NSDictionary*)categoryList;
+-(void) didGetCategoryList:(NSArray*)categoryList;
 -(void) getCategoryListFailedWithError:(NSError*)error;
 
 

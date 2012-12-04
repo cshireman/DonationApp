@@ -12,6 +12,10 @@
 
 @interface VPNSelectTaxYearViewController : UITableViewController <VPNCDManagerDelegate>
 
+-(void) setInstallLabel:(NSNotification*)notification;
+-(void) updateInstallLabel:(NSNotification*)notification;
+
+
 //GetItemLists
 -(void) didGetItemLists:(NSArray*)itemLists;
 -(void) getItemListsFailedWithError:(NSError*)error;
@@ -25,7 +29,7 @@
 -(void) getMileageListsFailedWithError:(NSError*)error;
 
 //GetCategoryList
--(void) didGetCategoryList:(NSDictionary*)categoryList;
+-(void) didGetCategoryList:(NSArray*)categoryList;
 -(void) getCategoryListFailedWithError:(NSError*)error;
 
 @end

@@ -9,6 +9,8 @@
 #import "VPNSelectTaxYearViewController.h"
 #import "VPNUser.h"
 #import "VPNAppDelegate.h"
+#import "Category.h"
+#import "Category+JSONParser.h"
 
 #import "DejalActivityView.h"
 
@@ -40,6 +42,9 @@
     manager.delegate = self;
     
     NSLog(@"Tax Years: %@",currentUser.tax_years);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setInstallLabel:) name:@"InstallingCategories" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInstallLabel:) name:@"CategoryInstallProgress" object:nil];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -144,6 +149,7 @@
     [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
+
 #pragma mark -
 #pragma mark Manager Delegate methods
 
@@ -182,7 +188,7 @@
 {
     [DejalActivityView currentActivityView].activityLabel.text = @"Loading Database";
     
-    [manager getCategoryListForTaxYear:currentUser.selected_tax_year forceDownload:YES];
+    [manager getCategoryListForTaxYear:currentUser.selected_tax_year forceDownload:NO];
 }
 
 -(void) getMileageListsFailedWithError:(NSError*)error
@@ -193,8 +199,36 @@
 }
 
 //GetCategoryList
--(void) didGetCategoryList:(NSDictionary*)categoryList
+-(void) didGetCategoryList:(NSArray*)categoryList
 {
+    [DejalActivityView currentActivityView].activityLabel.text = @"Installing: 0%";
+    
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext* context = [appDelegate managedObjectContext];
+    
+    NSNumber* taxYear = [NSNumber numberWithInt:currentUser.selected_tax_year];
+    NSError* error = nil;
+    
+    double i = 0.00;
+    for(NSDictionary* categoryInfo in categoryList)
+    {
+        NSMutableDictionary* mutableCatInfo = [NSMutableDictionary dictionaryWithDictionary:categoryInfo];
+        [mutableCatInfo setValue:taxYear forKey:@"TaxYear"];
+        
+        NSNumber* catID = [mutableCatInfo objectForKey:@"ID"];
+        Category* category  = [Category getByCategoryID:[catID intValue]];
+        [category populateWithDictionary:mutableCatInfo];
+        
+        NSLog(@"Saving Context");
+        [context save:&error];
+        
+        i += 1.0;
+        double progress = (i / [categoryList count])*100.0;
+        
+        [DejalActivityView currentActivityView].activityLabel.text = [NSString stringWithFormat: @"Installing: %.02f%%",progress];
+        NSLog(@"Updating install label: %@",[DejalActivityView currentActivityView].activityLabel.text);
+    }
+    
     [DejalBezelActivityView removeViewAnimated:YES];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController popViewControllerAnimated:YES];

@@ -46,6 +46,18 @@
 		831D8847162FB44500274662 /* VPNMainTabGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831D8846162FB44500274662 /* VPNMainTabGroupViewController.m */; };
 		831D884A162FBAA900274662 /* CD_App_SU_Screen_r3.png in Resources */ = {isa = PBXBuildFile; fileRef = 831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */; };
 		8335A62E164B752D00806A98 /* VPNManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8335A62D164B752D00806A98 /* VPNManagerTests.m */; };
+		834057AC166DBCA700ED39E5 /* ItemValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057AB166DBCA700ED39E5 /* ItemValue.m */; };
+		834057AD166DBCA700ED39E5 /* ItemValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057AB166DBCA700ED39E5 /* ItemValue.m */; };
+		834057B0166DBCD200ED39E5 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057AF166DBCD200ED39E5 /* Item.m */; };
+		834057B1166DBCD200ED39E5 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057AF166DBCD200ED39E5 /* Item.m */; };
+		834057B4166DBCEE00ED39E5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057B3166DBCEE00ED39E5 /* Category.m */; };
+		834057B5166DBCEE00ED39E5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057B3166DBCEE00ED39E5 /* Category.m */; };
+		834057B8166DBDB400ED39E5 /* Category+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057B7166DBDB400ED39E5 /* Category+JSONParser.m */; };
+		834057B9166DBDB400ED39E5 /* Category+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057B7166DBDB400ED39E5 /* Category+JSONParser.m */; };
+		834057BC166DC30900ED39E5 /* Item+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BB166DC30900ED39E5 /* Item+JSONParser.m */; };
+		834057BD166DC30900ED39E5 /* Item+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BB166DC30900ED39E5 /* Item+JSONParser.m */; };
+		834057C0166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */; };
+		834057C1166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */; };
 		834576711665D88100705992 /* VPNItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576701665D88100705992 /* VPNItemList.m */; };
 		834576721665D88100705992 /* VPNItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576701665D88100705992 /* VPNItemList.m */; };
 		834576761665D89700705992 /* VPNCashList.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576751665D89700705992 /* VPNCashList.m */; };
@@ -186,6 +198,18 @@
 		831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CD_App_SU_Screen_r3.png; sourceTree = "<group>"; };
 		8335A62C164B752D00806A98 /* VPNManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNManagerTests.h; sourceTree = "<group>"; };
 		8335A62D164B752D00806A98 /* VPNManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNManagerTests.m; sourceTree = "<group>"; };
+		834057AA166DBCA700ED39E5 /* ItemValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemValue.h; path = models/ItemValue.h; sourceTree = "<group>"; };
+		834057AB166DBCA700ED39E5 /* ItemValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemValue.m; path = models/ItemValue.m; sourceTree = "<group>"; };
+		834057AE166DBCD200ED39E5 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = models/Item.h; sourceTree = "<group>"; };
+		834057AF166DBCD200ED39E5 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = models/Item.m; sourceTree = "<group>"; };
+		834057B2166DBCEE00ED39E5 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = models/Category.h; sourceTree = "<group>"; };
+		834057B3166DBCEE00ED39E5 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = models/Category.m; sourceTree = "<group>"; };
+		834057B6166DBDB400ED39E5 /* Category+JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Category+JSONParser.h"; path = "models/Category+JSONParser.h"; sourceTree = "<group>"; };
+		834057B7166DBDB400ED39E5 /* Category+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Category+JSONParser.m"; path = "models/Category+JSONParser.m"; sourceTree = "<group>"; };
+		834057BA166DC30900ED39E5 /* Item+JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Item+JSONParser.h"; path = "models/Item+JSONParser.h"; sourceTree = "<group>"; };
+		834057BB166DC30900ED39E5 /* Item+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Item+JSONParser.m"; path = "models/Item+JSONParser.m"; sourceTree = "<group>"; };
+		834057BE166DC62300ED39E5 /* ItemValue+JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ItemValue+JSONParser.h"; path = "models/ItemValue+JSONParser.h"; sourceTree = "<group>"; };
+		834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ItemValue+JSONParser.m"; path = "models/ItemValue+JSONParser.m"; sourceTree = "<group>"; };
 		8345766F1665D88100705992 /* VPNItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemList.h; path = models/VPNItemList.h; sourceTree = "<group>"; };
 		834576701665D88100705992 /* VPNItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemList.m; path = models/VPNItemList.m; sourceTree = "<group>"; };
 		834576741665D89600705992 /* VPNCashList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCashList.h; path = models/VPNCashList.h; sourceTree = "<group>"; };
@@ -512,6 +536,12 @@
 		8397DF77162E6CA2000D8633 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				834057B2166DBCEE00ED39E5 /* Category.h */,
+				834057B3166DBCEE00ED39E5 /* Category.m */,
+				834057AE166DBCD200ED39E5 /* Item.h */,
+				834057AF166DBCD200ED39E5 /* Item.m */,
+				834057AA166DBCA700ED39E5 /* ItemValue.h */,
+				834057AB166DBCA700ED39E5 /* ItemValue.m */,
 				836426E116672C9300A70606 /* VPNCategory.h */,
 				836426E216672C9300A70606 /* VPNCategory.m */,
 				8345766F1665D88100705992 /* VPNItemList.h */,
@@ -532,6 +562,12 @@
 				830DF56A1640E4EA00A31818 /* VPNSession.m */,
 				8390ECBE1648BCC0000D03AE /* VPNOrganization.h */,
 				8390ECBF1648BCC0000D03AE /* VPNOrganization.m */,
+				834057B6166DBDB400ED39E5 /* Category+JSONParser.h */,
+				834057B7166DBDB400ED39E5 /* Category+JSONParser.m */,
+				834057BA166DC30900ED39E5 /* Item+JSONParser.h */,
+				834057BB166DC30900ED39E5 /* Item+JSONParser.m */,
+				834057BE166DC62300ED39E5 /* ItemValue+JSONParser.h */,
+				834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -719,6 +755,12 @@
 				836426EB166730F300A70606 /* DonationApp.xcdatamodeld in Sources */,
 				836426F31667406C00A70606 /* DejalActivityView.m in Sources */,
 				8364271A1668783B00A70606 /* VPNOrganizationDetailViewController.m in Sources */,
+				834057AC166DBCA700ED39E5 /* ItemValue.m in Sources */,
+				834057B0166DBCD200ED39E5 /* Item.m in Sources */,
+				834057B4166DBCEE00ED39E5 /* Category.m in Sources */,
+				834057B8166DBDB400ED39E5 /* Category+JSONParser.m in Sources */,
+				834057BC166DC30900ED39E5 /* Item+JSONParser.m in Sources */,
+				834057C0166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +804,12 @@
 				836426EC166730F300A70606 /* DonationApp.xcdatamodeld in Sources */,
 				836426F41667406C00A70606 /* DejalActivityView.m in Sources */,
 				8364271B1668783B00A70606 /* VPNOrganizationDetailViewController.m in Sources */,
+				834057AD166DBCA700ED39E5 /* ItemValue.m in Sources */,
+				834057B1166DBCD200ED39E5 /* Item.m in Sources */,
+				834057B5166DBCEE00ED39E5 /* Category.m in Sources */,
+				834057B9166DBDB400ED39E5 /* Category+JSONParser.m in Sources */,
+				834057BD166DC30900ED39E5 /* Item+JSONParser.m in Sources */,
+				834057C1166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
