@@ -42,9 +42,11 @@
 
 
 +(NSMutableArray*) loadItemListsFromDisc:(int)taxYear;
-+(void) saveItemListsToDisc:(NSArray*)organizations forTaxYear:(int)taxYear;
++(void) saveItemListsToDisc:(NSArray*)itemLists forTaxYear:(int)taxYear;
 +(NSString*) itemListsFilePath:(int)taxYear;
 
 -(id) initWithDictionary:(NSDictionary*)info;
+
+-(double) totalForItems;
 
 @end

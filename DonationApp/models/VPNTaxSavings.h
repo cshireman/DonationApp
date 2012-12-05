@@ -22,5 +22,6 @@
 +(double) calculateTaxSavingsWithItemAmount:(double)itemAmount moneyAmount:(double)moneyAmount mileageAmount:(double)mileageAmount taxRate:(double)taxRate;
 +(double) doubleForTaxRate:(NSString*)taxRate;
 +(double) currentTaxSavings;
++(void) updateTaxSavings;
 
 @end

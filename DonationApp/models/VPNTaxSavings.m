@@ -8,6 +8,10 @@
 
 #import "VPNTaxSavings.h"
 #import "VPNAppDelegate.h"
+#import "VPNItemList.h"
+#import "VPNCashList.h"
+#import "VPNMileageList.h"
+#import "VPNUser.h"
 
 @implementation VPNTaxSavings
 @synthesize itemSubtotal;
@@ -42,6 +46,43 @@
         return 0.35;
     
     return 0.0;
+}
+
++(void) updateTaxSavings
+{
+    VPNUser* user = [VPNUser currentUser];
+    
+    NSArray* itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+    NSArray* cashLists = [VPNCashList loadCashListsFromDisc:user.selected_tax_year];
+    NSArray* mileageLists = [VPNMileageList loadMileageListsFromDisc:user.selected_tax_year];
+    
+    double itemsTotal = 0.00;
+    double cashTotal = 0.00;
+    double mileageTotal = 0.00;
+    
+    for(VPNItemList* itemList in itemLists)
+    {
+        itemsTotal += [itemList totalForItems];
+    }
+    
+    for(VPNCashList* cashList in cashLists)
+    {
+        cashTotal += [cashList.cashDonation doubleValue];
+    }
+    
+    for(VPNMileageList* mileageList in mileageLists)
+    {
+        mileageTotal += [mileageList.mileage doubleValue];
+    }
+    
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* taxRateString = [userDefaults objectForKey:kSelectedTaxRateKey];
+    
+    double taxRate = [VPNTaxSavings doubleForTaxRate:taxRateString];
+    double taxSavings = [VPNTaxSavings calculateTaxSavingsWithItemAmount:itemsTotal moneyAmount:cashTotal mileageAmount:mileageTotal taxRate:taxRate];
+    
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.currentTaxSavings = taxSavings;
 }
 
 +(double) currentTaxSavings

@@ -20,6 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* currentTaxRate = [userDefaults objectForKey:kSelectedTaxRateKey];
+    if(currentTaxRate == nil)
+        [userDefaults setObject:@"25%" forKey:kSelectedTaxRateKey];
+
     return YES;
 }
 							

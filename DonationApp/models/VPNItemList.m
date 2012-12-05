@@ -137,4 +137,20 @@
     return [documentsDirectory stringByAppendingPathComponent:filePath];
 }
 
+-(double) totalForItems
+{
+    if(items == nil || [items count] == 0)
+    {
+        return 0.00;
+    }
+    
+    double itemTotal = 0.00;
+    for(VPNItem* item in items)
+    {
+        itemTotal += (item.quantity * [item.fairMarketValue doubleValue]);
+    }
+    
+    return itemTotal;
+}
+
 @end

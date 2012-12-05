@@ -58,6 +58,8 @@
 		834057BD166DC30900ED39E5 /* Item+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BB166DC30900ED39E5 /* Item+JSONParser.m */; };
 		834057C0166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */; };
 		834057C1166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */; };
+		834057CC166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057CB166EC61000ED39E5 /* VPNDontationListsViewController.m */; };
+		834057CD166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834057CB166EC61000ED39E5 /* VPNDontationListsViewController.m */; };
 		834576711665D88100705992 /* VPNItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576701665D88100705992 /* VPNItemList.m */; };
 		834576721665D88100705992 /* VPNItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576701665D88100705992 /* VPNItemList.m */; };
 		834576761665D89700705992 /* VPNCashList.m in Sources */ = {isa = PBXBuildFile; fileRef = 834576751665D89700705992 /* VPNCashList.m */; };
@@ -210,6 +212,8 @@
 		834057BB166DC30900ED39E5 /* Item+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Item+JSONParser.m"; path = "models/Item+JSONParser.m"; sourceTree = "<group>"; };
 		834057BE166DC62300ED39E5 /* ItemValue+JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ItemValue+JSONParser.h"; path = "models/ItemValue+JSONParser.h"; sourceTree = "<group>"; };
 		834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ItemValue+JSONParser.m"; path = "models/ItemValue+JSONParser.m"; sourceTree = "<group>"; };
+		834057CA166EC61000ED39E5 /* VPNDontationListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDontationListsViewController.h; path = Controllers/VPNDontationListsViewController.h; sourceTree = "<group>"; };
+		834057CB166EC61000ED39E5 /* VPNDontationListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDontationListsViewController.m; path = Controllers/VPNDontationListsViewController.m; sourceTree = "<group>"; };
 		8345766F1665D88100705992 /* VPNItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemList.h; path = models/VPNItemList.h; sourceTree = "<group>"; };
 		834576701665D88100705992 /* VPNItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemList.m; path = models/VPNItemList.m; sourceTree = "<group>"; };
 		834576741665D89600705992 /* VPNCashList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCashList.h; path = models/VPNCashList.h; sourceTree = "<group>"; };
@@ -514,6 +518,8 @@
 				8390ECC81648C12A000D03AE /* VPNOrganizationListViewController.m */,
 				836427181668783B00A70606 /* VPNOrganizationDetailViewController.h */,
 				836427191668783B00A70606 /* VPNOrganizationDetailViewController.m */,
+				834057CA166EC61000ED39E5 /* VPNDontationListsViewController.h */,
+				834057CB166EC61000ED39E5 /* VPNDontationListsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -544,9 +550,9 @@
 				834057AB166DBCA700ED39E5 /* ItemValue.m */,
 				836426E116672C9300A70606 /* VPNCategory.h */,
 				836426E216672C9300A70606 /* VPNCategory.m */,
-				8345766F1665D88100705992 /* VPNItemList.h */,
 				834576801665E13100705992 /* VPNItem.h */,
 				834576811665E13100705992 /* VPNItem.m */,
+				8345766F1665D88100705992 /* VPNItemList.h */,
 				834576701665D88100705992 /* VPNItemList.m */,
 				834576741665D89600705992 /* VPNCashList.h */,
 				834576751665D89700705992 /* VPNCashList.m */,
@@ -761,6 +767,7 @@
 				834057B8166DBDB400ED39E5 /* Category+JSONParser.m in Sources */,
 				834057BC166DC30900ED39E5 /* Item+JSONParser.m in Sources */,
 				834057C0166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
+				834057CC166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +817,7 @@
 				834057B9166DBDB400ED39E5 /* Category+JSONParser.m in Sources */,
 				834057BD166DC30900ED39E5 /* Item+JSONParser.m in Sources */,
 				834057C1166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
+				834057CD166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

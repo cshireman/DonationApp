@@ -10,7 +10,6 @@
 #import "VPNMainTabGroupViewController.h"
 #import "VPNContactInfoCell.h"
 #import "VPNPasswordCell.h"
-#import "VPNTaxSavingsCell.h"
 
 #define kTaxSettingsSection     0
 #define kPasswordSection        1
@@ -66,11 +65,7 @@
 {
     [super viewDidLoad];
     [self configure];
-    
-//    [self.tableView registerClass:[VPNContactInfoCell class] forCellReuseIdentifier:@"ContactInfoCell"];
-//    [self.tableView registerClass:[VPNPasswordCell class] forCellReuseIdentifier:@"ChangePasswordCell"];
-//    [self.tableView registerClass:[VPNTaxSavingsCell class] forCellReuseIdentifier:@"MyTaxSavingsCell"];
-    
+        
     NSLog(@"%@ %@",user.first_name, user.last_name);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished) name:@"LoginFinished" object:nil];
@@ -94,6 +89,7 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    [VPNTaxSavings updateTaxSavings];
     [self.tableView reloadData];
 }
 
@@ -223,12 +219,10 @@
     else if([CellIdentifier isEqualToString:@"MyTaxSavingsCell"])
     {
         if(cell == nil)
-            cell = [[VPNTaxSavingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
  
-        VPNTaxSavingsCell* taxSavingsCell = (VPNTaxSavingsCell*)cell;
-        taxSavingsLabel = taxSavingsCell.taxSavings;
-        
-        taxSavingsLabel.text = [NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]];
+        UILabel* theTaxSavingsLabel = (UILabel*)[cell viewWithTag:1];
+        theTaxSavingsLabel.text = [NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]];
     }
     
     return cell;
