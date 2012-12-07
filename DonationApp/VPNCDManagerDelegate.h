@@ -66,5 +66,9 @@
 -(void) didGetCategoryList:(NSArray*)categoryList;
 -(void) getCategoryListFailedWithError:(NSError*)error;
 
+//DeleteList
+-(void) didDeleteList:(id)list;
+-(void) deleteListFailedWithError:(NSError*)error;
+
 
 @end

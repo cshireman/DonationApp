@@ -18,6 +18,7 @@
 {
     VPNUser* currentUser;
     VPNCDManager* manager;
+    DejalActivityView* loadingView;
 }
 
 @end
@@ -145,7 +146,7 @@
     [currentUser saveAsDefaultUser];
     [self.tableView reloadData];
 
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading Item Lists" width:155];
+    loadingView = [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading Item Lists" width:155];
     [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
@@ -156,7 +157,7 @@
 //GetItemLists
 -(void) didGetItemLists:(NSArray*)itemLists
 {
-    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Cash Lists";
+    loadingView.activityLabel.text = @"Loading Cash Lists";
     
     [manager getCashListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
@@ -171,7 +172,7 @@
 //GetCashLists
 -(void) didGetCashLists:(NSArray*)cashLists
 {
-    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Mileage Lists";
+    loadingView.activityLabel.text = @"Loading Mileage Lists";
     
     [manager getMileageListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
@@ -186,7 +187,7 @@
 //GetMileageLists
 -(void) didGetMileageLists:(NSArray*)mileageLists
 {
-    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Database";
+    loadingView.activityLabel.text = @"Loading Database";
     
     [manager getCategoryListForTaxYear:currentUser.selected_tax_year forceDownload:NO];
 }
@@ -204,7 +205,7 @@
     //Test if we need to install the database or just dismiss the overlay
     if([categoryList count] > 0 && [[categoryList objectAtIndex:0] isKindOfClass:[NSDictionary class]])
     {
-        [DejalBezelActivityView currentActivityView].activityLabel.text = @"Installing: 0%";
+        [loadingView.activityLabel setText:@"Installing"];
         
         VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
         NSManagedObjectContext* context = [appDelegate managedObjectContext];
@@ -228,8 +229,8 @@
             i += 1.0;
             double progress = (i / [categoryList count])*100.0;
             
-            [DejalBezelActivityView currentActivityView].activityLabel.text = [NSString stringWithFormat: @"Installing: %.02f%%",progress];
-            NSLog(@"Updating install label: %@",[DejalBezelActivityView currentActivityView].activityLabel.text);
+            loadingView.activityLabel.text = [NSString stringWithFormat: @"Installing: %.02f%%",progress];
+            NSLog(@"Updating install label: %@",loadingView.activityLabel.text);
         }
     }
     

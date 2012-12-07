@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VPNUser.h";
+#import "VPNCDManagerDelegate.h"
+#import "VPNUser.h"
 
-@interface VPNDontationListsViewController : UITableViewController
+@interface VPNDontationListsViewController : UITableViewController <VPNCDManagerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel* taxSavingsLabel;
 
@@ -26,5 +27,9 @@
 
 - (IBAction)editButtonPushed:(id)sender;
 - (IBAction)addButtonPushed:(id)sender;
+
+//VPNCDManager Delegate methods
+-(void) didDeleteList:(id)list;
+-(void) deleteListFailedWithError:(NSError *)error;
 
 @end

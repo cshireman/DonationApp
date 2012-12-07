@@ -9,6 +9,7 @@
 #import "VPNHomeViewController.h"
 #import "VPNMainTabGroupViewController.h"
 #import "VPNContactInfoCell.h"
+#import "VPNTaxSavingsCell.h"
 #import "VPNPasswordCell.h"
 
 #define kTaxSettingsSection     0
@@ -185,44 +186,85 @@
         CellIdentifier = @"ContactUsCell";
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
     
     // Configure the cell...
     if([CellIdentifier isEqualToString:@"ContactInfoCell"])
     {
+        VPNContactInfoCell *cell = (VPNContactInfoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        
         if(cell == nil)
             cell = [[VPNContactInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        VPNContactInfoCell* contactCell = (VPNContactInfoCell*)cell;
         if(nameField == nil)
-            nameField = contactCell.nameField;
+        {
+            self.nameField = cell.nameField;
+            
+            [cell.nameField removeFromSuperview];
+            [cell addSubview:self.nameField];
+        }
         
         if(emailField == nil)
-            emailField = contactCell.emailField;
+        {
+            self.emailField = cell.emailField;
+            
+            [cell.emailField removeFromSuperview];
+            [cell addSubview:self.emailField];
+        }
         
         nameField.text = [NSString stringWithFormat:@"%@ %@",user.first_name,user.last_name];
         emailField.text = user.email;
+        
+        return cell;
     }
     else if([CellIdentifier isEqualToString:@"ChangePasswordCell"])
     {
+        VPNPasswordCell* cell = (VPNPasswordCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         if(cell == nil)
             cell = [[VPNPasswordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        VPNPasswordCell* passwordCell = (VPNPasswordCell*)cell;
-        
         if(passwordField == nil)
-            passwordField = passwordCell.passwordField;
+        {
+            self.passwordField = cell.passwordField;
+            
+            [cell.passwordField removeFromSuperview];
+            [cell addSubview:self.passwordField];
+        }
         
         if(confirmPasswordField == nil)
-            confirmPasswordField = passwordCell.confirmPasswordField;
+        {
+            self.confirmPasswordField = cell.confirmPasswordField;
+            
+            [cell.confirmPasswordField removeFromSuperview];
+            [cell addSubview:self.confirmPasswordField];
+        }
+        
+        return cell;
     }
     else if([CellIdentifier isEqualToString:@"MyTaxSavingsCell"])
     {
+        VPNTaxSavingsCell *cell = (VPNTaxSavingsCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         if(cell == nil)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[VPNTaxSavingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
  
-        UILabel* theTaxSavingsLabel = (UILabel*)[cell viewWithTag:1];
-        theTaxSavingsLabel.text = [NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]];
+        if(taxSavingsLabel == nil)
+        {
+            self.taxSavingsLabel = cell.taxSavings;
+            
+            [cell.taxSavings removeFromSuperview];
+            [cell addSubview:self.taxSavingsLabel];
+        }
+
+        taxSavingsLabel.text = [NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]];
+        
+        return cell;
+    }
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     return cell;

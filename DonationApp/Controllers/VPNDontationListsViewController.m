@@ -7,6 +7,7 @@
 //
 
 #import "VPNDontationListsViewController.h"
+#import "VPNCDManager.h"
 #import "VPNItem.h"
 #import "VPNOrganization.h"
 #import "VPNItemList.h"
@@ -18,6 +19,8 @@
 @interface VPNDontationListsViewController ()
 {
     NSArray* organizations;
+    NSIndexPath* indexToDelete;
+    VPNCDManager* manager;
 }
 
 @end
@@ -51,6 +54,9 @@
 
     [VPNTaxSavings updateTaxSavings];
     user = [VPNUser currentUser];
+    
+    manager = [[VPNCDManager alloc] init];
+    indexToDelete = nil;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -229,28 +235,41 @@
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+        indexToDelete = indexPath;
+
+        if(indexPath.section == 0)
+        {
+            //Delete from items lists
+        }
+        else if(indexPath.section == 1)
+        {
+            //Delete from cash lists
+        }
+        else if(indexPath.section == 2)
+        {
+            //Delete from mileage lists
+        }
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -282,6 +301,32 @@
 }
 
 #pragma mark -
+#pragma mark VPNCDManagerDelegate methods
+
+-(void) didDeleteList:(id)list
+{
+    if(indexToDelete != nil)
+    {
+        if(indexToDelete.section == 0)
+            [itemLists removeObjectAtIndex:indexToDelete.row];
+        else if (indexToDelete.section == 1)
+            [cashLists removeObjectAtIndex:indexToDelete.row];
+        else if (indexToDelete.section == 2)
+            [mileageLists removeObjectAtIndex:indexToDelete.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[indexToDelete] withRowAnimation:UITableViewRowAnimationFade];
+        indexToDelete = nil;
+    }
+    
+}
+
+-(void) deleteListFailedWithError:(NSError *)error
+{
+    
+}
+
+
+#pragma mark -
 #pragma mark Custom Methods
 
 -(NSString*) organizationNameForID:(int)organizationID
@@ -298,6 +343,7 @@
 }
 
 - (IBAction)editButtonPushed:(id)sender {
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
 - (IBAction)addButtonPushed:(id)sender {
