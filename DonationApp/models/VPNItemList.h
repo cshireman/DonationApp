@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VPNDonationList.h"
 #import "VPNNotifier.h"
 
 #define kItemListsFilePath  @"itemLists"
@@ -23,9 +24,8 @@
 #define kItemListsNotesKey              @"Notes"
 #define kItemListsItemsKey              @"Items"
 
-@interface VPNItemList : NSObject <NSCoding>
+@interface VPNItemList : VPNDonationList <NSCoding>
 
-@property (assign) int ID;
 @property (assign) int listType;
 @property (assign) int companyID;
 

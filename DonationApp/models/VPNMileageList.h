@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VPNDonationList.h"
 #import "VPNNotifier.h"
 
 #define kMileageListsFilePath  @"mileageLists"
@@ -20,9 +21,8 @@
 #define kMileageListsMileageKey            @"Mileage"
 #define kMileageListsNotesKey              @"Notes"
 
-@interface VPNMileageList : NSObject <NSCoding>
+@interface VPNMileageList : VPNDonationList <NSCoding>
 
-@property (assign) int ID;
 @property (assign) int listType;
 @property (assign) int companyID;
 

@@ -133,6 +133,8 @@
 		83BFD928163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
 		83BFD93C163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
 		83BFD93D163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
+		83E469991671B28200376FB0 /* VPNDonationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E469981671B28200376FB0 /* VPNDonationList.m */; };
+		83E4699A1671B28200376FB0 /* VPNDonationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E469981671B28200376FB0 /* VPNDonationList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,6 +304,8 @@
 		83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDCommunicator.m; sourceTree = "<group>"; };
 		83BFD93A163F9A4F00BC64B7 /* VPNUserBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserBuilder.h; sourceTree = "<group>"; };
 		83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserBuilder.m; sourceTree = "<group>"; };
+		83E469971671B28200376FB0 /* VPNDonationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationList.h; path = models/VPNDonationList.h; sourceTree = "<group>"; };
+		83E469981671B28200376FB0 /* VPNDonationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationList.m; path = models/VPNDonationList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -574,6 +578,8 @@
 				834057BB166DC30900ED39E5 /* Item+JSONParser.m */,
 				834057BE166DC62300ED39E5 /* ItemValue+JSONParser.h */,
 				834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */,
+				83E469971671B28200376FB0 /* VPNDonationList.h */,
+				83E469981671B28200376FB0 /* VPNDonationList.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -768,6 +774,7 @@
 				834057BC166DC30900ED39E5 /* Item+JSONParser.m in Sources */,
 				834057C0166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
 				834057CC166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
+				83E469991671B28200376FB0 /* VPNDonationList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,6 +825,7 @@
 				834057BD166DC30900ED39E5 /* Item+JSONParser.m in Sources */,
 				834057C1166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
 				834057CD166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
+				83E4699A1671B28200376FB0 /* VPNDonationList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

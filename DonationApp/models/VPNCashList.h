@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VPNDonationList.h"
 #import "VPNNotifier.h"
 
 #define kCashListsFilePath  @"cashLists"
@@ -20,9 +21,8 @@
 #define kCashListsCashDonationKey       @"CashDonation"
 #define kCashListsNotesKey              @"Notes"
 
-@interface VPNCashList : NSObject <NSCoding>
+@interface VPNCashList : VPNDonationList <NSCoding>
 
-@property (assign) int ID;
 @property (assign) int listType;
 @property (assign) int companyID;
 

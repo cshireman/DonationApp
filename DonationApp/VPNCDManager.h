@@ -14,6 +14,7 @@
 #import "VPNSessionBuilder.h"
 #import "VPNSession.h"
 #import "VPNOrganization.h"
+#import "VPNDonationList.h"
 
 extern NSString* VPNCDManagerError;
 extern NSString* APIErrorDomain;
@@ -46,6 +47,7 @@ enum {
 
 @property (assign) int currentTaxYear;
 @property (strong, nonatomic) VPNOrganization* currentOrganization;
+@property (strong, nonatomic) VPNDonationList* currentDonationList;
 
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
@@ -64,6 +66,8 @@ enum {
 -(void)getCashListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 -(void)getMileageListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
+
+-(void)deleteDonationList:(VPNDonationList*)listToDelete;
 
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;

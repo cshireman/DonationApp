@@ -25,6 +25,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 @synthesize sessionBuilder;
 @synthesize currentTaxYear;
 @synthesize currentOrganization;
+@synthesize currentDonationList;
 
 -(id) init
 {
@@ -541,6 +542,39 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }    
 }
 
+-(void)deleteDonationList:(VPNDonationList*)listToDelete
+{
+    NSParameterAssert(listToDelete != nil);
+    NSParameterAssert(listToDelete.ID != 0);
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSString stringWithFormat:@"%d",listToDelete.ID] forKey:@"id"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate deleteOrganizationFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.currentDonationList = listToDelete;
+    [communicator makeAPICall:DeleteList withContent:jsonString];
+    
+}
+
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload
 {
     NSArray* categoryList = nil;
@@ -593,8 +627,6 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate didGetCategoryList:categoryList];
     }
 }
-
-
 
 #pragma mark -
 #pragma mark Communicator Delegate Methods
@@ -701,7 +733,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             else if([GetItemLists isEqualToString:apiCall])
             {
                 NSArray* resultLists = [d objectForKey:@"lists"];
-                if(nil != resultLists && [resultLists count] > 0)
+                if(nil != resultLists)
                 {
                     NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:[resultLists count]];
                     for(NSDictionary* listInfo in resultLists)
@@ -720,7 +752,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             else if([GetCashLists isEqualToString:apiCall])
             {
                 NSArray* resultLists = [d objectForKey:@"lists"];
-                if(nil != resultLists && [resultLists count] > 0)
+                if(nil != resultLists)
                 {
                     NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:[resultLists count]];
                     for(NSDictionary* listInfo in resultLists)
@@ -739,7 +771,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             else if([GetMileageLists isEqualToString:apiCall])
             {
                 NSArray* resultLists = [d objectForKey:@"lists"];
-                if(nil != resultLists && [resultLists count] > 0)
+                if(nil != resultLists)
                 {
                     NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:[resultLists count]];
                     for(NSDictionary* listInfo in resultLists)
@@ -754,6 +786,10 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 {
                     [delegate didGetMileageLists:[NSArray array]];
                 }
+            }
+            else if([DeleteList isEqualToString:apiCall])
+            {
+                [delegate didDeleteList:currentDonationList];
             }
             else if([GetCategoryList isEqualToString:apiCall])
             {
@@ -798,6 +834,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate getCashListsFailedWithError:apiError];
             else if([GetMileageLists isEqualToString:apiCall])
                 [delegate getMileageListsFailedWithError:apiError];
+            else if([DeleteList isEqualToString:apiCall])
+                [delegate deleteListFailedWithError:apiError];
             else if([GetCategoryList isEqualToString:apiCall])
                 [delegate getCategoryListFailedWithError:apiError];
             
@@ -829,6 +867,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate getCashListsFailedWithError:jsonError];
         else if([GetMileageLists isEqualToString:apiCall])
             [delegate getMileageListsFailedWithError:jsonError];
+        else if([DeleteList isEqualToString:apiCall])
+            [delegate deleteListFailedWithError:jsonError];
         else if([GetCategoryList isEqualToString:apiCall])
             [delegate getCategoryListFailedWithError:jsonError];
     }
@@ -860,6 +900,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate getCashListsFailedWithError:error];
     else if([GetMileageLists isEqualToString:apiCall])
         [delegate getMileageListsFailedWithError:error];
+    else if([DeleteList isEqualToString:apiCall])
+        [delegate deleteListFailedWithError:error];
     else if([GetCategoryList isEqualToString:apiCall])
         [delegate getCategoryListFailedWithError:error];
     

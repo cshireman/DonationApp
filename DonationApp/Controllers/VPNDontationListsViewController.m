@@ -56,6 +56,7 @@
     user = [VPNUser currentUser];
     
     manager = [[VPNCDManager alloc] init];
+    manager.delegate = self;
     indexToDelete = nil;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -68,6 +69,19 @@
 {
     organizations = [VPNOrganization loadOrganizationsFromDisc];
     [self setTitle:[NSString stringWithFormat:@"%d Donations",user.selected_tax_year]];
+    
+    [self updateTotals];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void) updateTotals
+{
+    [VPNTaxSavings updateTaxSavings];
     
     itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
     cashLists = [VPNCashList loadCashListsFromDisc:user.selected_tax_year];
@@ -86,7 +100,7 @@
     {
         cashTotal += [cashList.cashDonation doubleValue];
     }
-
+    
     for(VPNMileageList* mileageList in mileageLists)
     {
         mileageTotal += [mileageList.mileage doubleValue];
@@ -94,13 +108,7 @@
     
     [taxSavingsLabel setText:[NSString stringWithFormat:@"$%.02f",[VPNTaxSavings currentTaxSavings]]];
     
-    [self.tableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.tableView reloadData];    
 }
 
 #pragma mark - Table view data source
@@ -251,18 +259,32 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         indexToDelete = indexPath;
-
+        VPNDonationList* listToDelete = nil;
         if(indexPath.section == 0)
         {
             //Delete from items lists
+            listToDelete = [itemLists objectAtIndex:indexPath.row];
         }
         else if(indexPath.section == 1)
         {
             //Delete from cash lists
+            listToDelete = [cashLists objectAtIndex:indexPath.row];
         }
         else if(indexPath.section == 2)
         {
             //Delete from mileage lists
+            listToDelete = [mileageLists objectAtIndex:indexPath.row];
+        }
+        
+        if(listToDelete != nil)
+        {
+            [manager deleteDonationList:listToDelete];
+        }
+        else
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Selected list could not be found, please contact supper" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            
+            [alert show];
         }
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -303,26 +325,39 @@
 #pragma mark -
 #pragma mark VPNCDManagerDelegate methods
 
--(void) didDeleteList:(id)list
+-(void) didDeleteList:(VPNDonationList*)list
 {
     if(indexToDelete != nil)
     {
         if(indexToDelete.section == 0)
+        {
             [itemLists removeObjectAtIndex:indexToDelete.row];
+            [VPNItemList saveItemListsToDisc:itemLists forTaxYear:user.selected_tax_year];
+        }
         else if (indexToDelete.section == 1)
+        {
             [cashLists removeObjectAtIndex:indexToDelete.row];
+            [VPNCashList saveCashListsToDisc:cashLists forTaxYear:user.selected_tax_year];
+        }
         else if (indexToDelete.section == 2)
+        {
             [mileageLists removeObjectAtIndex:indexToDelete.row];
+            [VPNMileageList saveMileageListsToDisc:mileageLists forTaxYear:user.selected_tax_year];
+        }
         
         [self.tableView deleteRowsAtIndexPaths:@[indexToDelete] withRowAnimation:UITableViewRowAnimationFade];
         indexToDelete = nil;
+        
+        [self performSelector:@selector(updateTotals) withObject:nil afterDelay:0.4];
     }
     
 }
 
 -(void) deleteListFailedWithError:(NSError *)error
 {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Deletion Error" message:@"We could not delete the specified list at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     
+    [alert show];
 }
 
 
