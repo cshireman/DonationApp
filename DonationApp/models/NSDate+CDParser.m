@@ -10,4 +10,14 @@
 
 @implementation NSDate (CDParser)
 
++(NSDate*) dateWithCDValue:(NSString*)cdValue
+{
+    cdValue = [cdValue stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
+    cdValue = [cdValue stringByReplacingOccurrencesOfString:@")/" withString:@""];
+    
+    NSTimeInterval cdInterval = ([cdValue longLongValue] / 1000);
+    
+    return [NSDate dateWithTimeIntervalSince1970:cdInterval];
+}
+
 @end

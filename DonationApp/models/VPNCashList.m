@@ -7,6 +7,7 @@
 //
 
 #import "VPNCashList.h"
+#import "NSDate+CDParser.h"
 
 @implementation VPNCashList
 
@@ -67,8 +68,8 @@
         self.listType = [[info objectForKey:@"ListType"] intValue];
         self.companyID = [[info objectForKey:@"CompanyID"] intValue];
         
-        self.creationDate = [NSDate dateWithTimeIntervalSince1970:[[info objectForKey:@"CreationDate"] doubleValue]];
-        self.donationDate = [NSDate dateWithTimeIntervalSince1970:[[info objectForKey:@"DonationDate"] doubleValue]];
+        self.creationDate = [NSDate dateWithCDValue:[info objectForKey:@"CreationDate"]];
+        self.donationDate = [NSDate dateWithCDValue:[info objectForKey:@"DonationDate"]];
         
         self.name = [info objectForKey:@"Name"];
         self.cashDonation = [info objectForKey:@"CashDonation"];

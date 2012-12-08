@@ -10,4 +10,6 @@
 
 @interface NSDate (CDParser)
 
++(NSDate*) dateWithCDValue:(NSString*)cdValue;
+
 @end

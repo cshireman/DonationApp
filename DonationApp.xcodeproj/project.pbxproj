@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830241B1167390F000B92ED4 /* NSDate+CDParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 830241B0167390F000B92ED4 /* NSDate+CDParser.m */; };
 		830DF5671640E42100A31818 /* VPNSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF5661640E42100A31818 /* VPNSessionTests.m */; };
 		830DF56B1640E4EA00A31818 /* VPNSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56A1640E4EA00A31818 /* VPNSession.m */; };
 		830DF56C1640E4EA00A31818 /* VPNSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56A1640E4EA00A31818 /* VPNSession.m */; };
@@ -148,6 +149,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		830241AF167390F000B92ED4 /* NSDate+CDParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CDParser.h"; path = "models/NSDate+CDParser.h"; sourceTree = "<group>"; };
+		830241B0167390F000B92ED4 /* NSDate+CDParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CDParser.m"; path = "models/NSDate+CDParser.m"; sourceTree = "<group>"; };
 		830DF5651640E42100A31818 /* VPNSessionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionTests.h; sourceTree = "<group>"; };
 		830DF5661640E42100A31818 /* VPNSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionTests.m; sourceTree = "<group>"; };
 		830DF5691640E4EA00A31818 /* VPNSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSession.h; sourceTree = "<group>"; };
@@ -580,6 +583,8 @@
 				834057BF166DC62300ED39E5 /* ItemValue+JSONParser.m */,
 				83E469971671B28200376FB0 /* VPNDonationList.h */,
 				83E469981671B28200376FB0 /* VPNDonationList.m */,
+				830241AF167390F000B92ED4 /* NSDate+CDParser.h */,
+				830241B0167390F000B92ED4 /* NSDate+CDParser.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -775,6 +780,7 @@
 				834057C0166DC62300ED39E5 /* ItemValue+JSONParser.m in Sources */,
 				834057CC166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
 				83E469991671B28200376FB0 /* VPNDonationList.m in Sources */,
+				830241B1167390F000B92ED4 /* NSDate+CDParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
