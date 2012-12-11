@@ -542,6 +542,78 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }    
 }
 
+-(void)addDonationList:(VPNDonationList*)listToAdd
+{
+    NSParameterAssert(listToAdd != nil);
+    NSParameterAssert(listToAdd.ID == 0);
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    
+    VPNSession* session = [VPNSession currentSession];
+    VPNUser* user = [VPNUser currentUser];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSNumber numberWithInt:user.selected_tax_year] forKey:@"year"];
+    [request setObject:[NSNumber numberWithInt:listToAdd.listType] forKey:@"listType"];
+    
+    [request setObject:[listToAdd toDictionary] forKey:@"list"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate addListFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.currentDonationList = listToAdd;
+    [communicator makeAPICall:AddList withContent:jsonString];
+}
+
+-(void)updateDonationList:(VPNDonationList*)listToUpdate
+{
+    NSParameterAssert(listToUpdate != nil);
+    NSParameterAssert(listToUpdate.ID != 0);
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    
+    VPNSession* session = [VPNSession currentSession];    
+    VPNUser* user = [VPNUser currentUser];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSString stringWithFormat:@"%d",listToUpdate.ID] forKey:@"id"];
+    
+    [request setObject:[listToUpdate toDictionary] forKey:@"list"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate updateListFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.currentDonationList = listToUpdate;
+    [communicator makeAPICall:UpdateList withContent:jsonString];
+}
+
+
 -(void)deleteDonationList:(VPNDonationList*)listToDelete
 {
     NSParameterAssert(listToDelete != nil);
@@ -787,6 +859,15 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                     [delegate didGetMileageLists:[NSArray array]];
                 }
             }
+            else if([AddList isEqualToString:apiCall])
+            {
+                currentDonationList.ID = [[d objectForKey:@"id"] intValue];
+                [delegate didAddList:currentDonationList];
+            }
+            else if([UpdateList isEqualToString:apiCall])
+            {
+                [delegate didUpdateList:currentDonationList];
+            }
             else if([DeleteList isEqualToString:apiCall])
             {
                 [delegate didDeleteList:currentDonationList];
@@ -834,6 +915,10 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate getCashListsFailedWithError:apiError];
             else if([GetMileageLists isEqualToString:apiCall])
                 [delegate getMileageListsFailedWithError:apiError];
+            else if([AddList isEqualToString:apiCall])
+                [delegate addListFailedWithError:apiError];
+            else if([UpdateList isEqualToString:apiCall])
+                [delegate updateListFailedWithError:apiError];
             else if([DeleteList isEqualToString:apiCall])
                 [delegate deleteListFailedWithError:apiError];
             else if([GetCategoryList isEqualToString:apiCall])
@@ -867,6 +952,10 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate getCashListsFailedWithError:jsonError];
         else if([GetMileageLists isEqualToString:apiCall])
             [delegate getMileageListsFailedWithError:jsonError];
+        else if([AddList isEqualToString:apiCall])
+            [delegate addListFailedWithError:jsonError];
+        else if([UpdateList isEqualToString:apiCall])
+            [delegate updateListFailedWithError:jsonError];
         else if([DeleteList isEqualToString:apiCall])
             [delegate deleteListFailedWithError:jsonError];
         else if([GetCategoryList isEqualToString:apiCall])
@@ -902,6 +991,10 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate getMileageListsFailedWithError:error];
     else if([DeleteList isEqualToString:apiCall])
         [delegate deleteListFailedWithError:error];
+    else if([AddList isEqualToString:apiCall])
+        [delegate addListFailedWithError:error];
+    else if([UpdateList isEqualToString:apiCall])
+        [delegate updateListFailedWithError:error];
     else if([GetCategoryList isEqualToString:apiCall])
         [delegate getCategoryListFailedWithError:error];
     

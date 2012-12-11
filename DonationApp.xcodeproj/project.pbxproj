@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		830241B1167390F000B92ED4 /* NSDate+CDParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 830241B0167390F000B92ED4 /* NSDate+CDParser.m */; };
+		8307A1D01676FF2700A54380 /* VPNAddDonationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */; };
 		830DF5671640E42100A31818 /* VPNSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF5661640E42100A31818 /* VPNSessionTests.m */; };
 		830DF56B1640E4EA00A31818 /* VPNSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56A1640E4EA00A31818 /* VPNSession.m */; };
 		830DF56C1640E4EA00A31818 /* VPNSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 830DF56A1640E4EA00A31818 /* VPNSession.m */; };
@@ -151,6 +152,8 @@
 /* Begin PBXFileReference section */
 		830241AF167390F000B92ED4 /* NSDate+CDParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CDParser.h"; path = "models/NSDate+CDParser.h"; sourceTree = "<group>"; };
 		830241B0167390F000B92ED4 /* NSDate+CDParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CDParser.m"; path = "models/NSDate+CDParser.m"; sourceTree = "<group>"; };
+		8307A1CE1676FF2600A54380 /* VPNAddDonationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNAddDonationListViewController.h; path = DonationApp/Controllers/VPNAddDonationListViewController.h; sourceTree = "<group>"; };
+		8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNAddDonationListViewController.m; path = DonationApp/Controllers/VPNAddDonationListViewController.m; sourceTree = "<group>"; };
 		830DF5651640E42100A31818 /* VPNSessionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionTests.h; sourceTree = "<group>"; };
 		830DF5661640E42100A31818 /* VPNSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionTests.m; sourceTree = "<group>"; };
 		830DF5691640E4EA00A31818 /* VPNSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSession.h; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				8307A1CE1676FF2600A54380 /* VPNAddDonationListViewController.h */,
+				8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */,
 				836426E9166730F300A70606 /* DonationApp.xcdatamodeld */,
 				836426E61667305100A70606 /* CoreData.framework */,
 				8397DF87162E81DA000D8633 /* iAd.framework */,
@@ -781,6 +786,7 @@
 				834057CC166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
 				83E469991671B28200376FB0 /* VPNDonationList.m in Sources */,
 				830241B1167390F000B92ED4 /* NSDate+CDParser.m in Sources */,
+				8307A1D01676FF2700A54380 /* VPNAddDonationListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

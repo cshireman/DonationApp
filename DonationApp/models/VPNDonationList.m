@@ -11,5 +11,14 @@
 @implementation VPNDonationList
 
 @synthesize ID;
+@synthesize listType;
+@synthesize companyID;
+@synthesize creationDate;
+@synthesize donationDate;
+
+-(NSMutableDictionary*)toDictionary
+{
+    return [NSMutableDictionary dictionary];
+}
 
 @end

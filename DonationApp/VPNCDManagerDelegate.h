@@ -70,5 +70,13 @@
 -(void) didDeleteList:(id)list;
 -(void) deleteListFailedWithError:(NSError*)error;
 
+//AddList
+-(void) didAddList:(id)list;
+-(void) addListFailedWithError:(NSError*)error;
+
+//UpdateList
+-(void) didUpdateList:(id)list;
+-(void) updateListFailedWithError:(NSError*)error;
+
 
 @end

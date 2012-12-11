@@ -65,9 +65,14 @@ enum {
 -(void)getItemListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 -(void)getCashListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 -(void)getMileageListsForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
+
+-(void)addDonationList:(VPNDonationList*)listToAdd;
+-(void)updateDonationList:(VPNDonationList*)listToUpdate;
+-(void)deleteDonationList:(VPNDonationList*)listToDelete;
+
+
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 
--(void)deleteDonationList:(VPNDonationList*)listToDelete;
 
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;

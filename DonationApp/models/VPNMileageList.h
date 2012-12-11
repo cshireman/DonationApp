@@ -22,13 +22,7 @@
 #define kMileageListsNotesKey              @"Notes"
 
 @interface VPNMileageList : VPNDonationList <NSCoding>
-
-@property (assign) int listType;
-@property (assign) int companyID;
-
-@property (nonatomic, strong) NSDate* creationDate;
-@property (nonatomic, strong) NSDate* donationDate;
-
+`
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, strong) NSNumber* mileage;
 @property (nonatomic, copy) NSString* notes;

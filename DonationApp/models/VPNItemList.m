@@ -154,4 +154,30 @@
     return itemTotal;
 }
 
+-(NSMutableDictionary*)toDictionary
+{
+    NSMutableDictionary* info = [super toDictionary];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+
+    [info setObject:[NSNumber numberWithInt:self.companyID] forKey:@"companyID"];
+    [info setObject:[formatter stringFromDate:self.creationDate] forKey:@"creationDate"];
+    [info setObject:[formatter stringFromDate:self.donationDate] forKey:@"donationDate"];
+    [info setObject:self.name forKey:@"name"];
+    
+    [info setObject:self.notes forKey:@"notes"];
+    [info setObject:self.name forKey:@"name"];
+    [info setObject:self.dateAquired forKey:@"dateAquired"];
+    [info setObject:self.howAquired forKey:@"howAquired"];
+    
+    [info setObject:costBasis forKey:@"costBasis"];
+    [info setObject:@"" forKey:@"cashDonation"];
+    [info setObject:@"" forKey:@"miles"];
+    
+    return info;
+}
+
+
 @end

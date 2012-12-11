@@ -114,4 +114,29 @@
     return [documentsDirectory stringByAppendingPathComponent:filePath];
 }
 
+-(NSMutableDictionary*)toDictionary
+{
+    NSMutableDictionary* info = [super toDictionary];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    [info setObject:[NSNumber numberWithInt:self.companyID] forKey:@"companyID"];
+    [info setObject:[formatter stringFromDate:self.creationDate] forKey:@"creationDate"];
+    [info setObject:[formatter stringFromDate:self.donationDate] forKey:@"donationDate"];
+    [info setObject:self.name forKey:@"name"];
+    
+    [info setObject:self.notes forKey:@"notes"];
+    [info setObject:self.name forKey:@"name"];
+    [info setObject:@"" forKey:@"dateAquired"];
+    [info setObject:@"" forKey:@"howAquired"];
+    
+    [info setObject:@"" forKey:@"costBasis"];
+    [info setObject:@"" forKey:@"cashDonation"];
+    [info setObject:self.mileage forKey:@"miles"];
+    
+    return info;
+}
+
 @end

@@ -24,13 +24,12 @@
 #define kItemListsNotesKey              @"Notes"
 #define kItemListsItemsKey              @"Items"
 
+#define kItemListSourcePurchased        @"I purchased them"
+#define kItemListSourceGift             @"They were a gift"
+#define kItemListSourceInherited        @"I inherited them"
+#define kItemListSourceExchanged        @"I exchanged them"
+
 @interface VPNItemList : VPNDonationList <NSCoding>
-
-@property (assign) int listType;
-@property (assign) int companyID;
-
-@property (nonatomic, strong) NSDate* creationDate;
-@property (nonatomic, strong) NSDate* donationDate;
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* dateAquired;
@@ -39,7 +38,6 @@
 @property (nonatomic, strong) NSNumber* costBasis;
 @property (nonatomic, copy) NSString* notes;
 @property (nonatomic, strong) NSMutableArray* items;
-
 
 +(NSMutableArray*) loadItemListsFromDisc:(int)taxYear;
 +(void) saveItemListsToDisc:(NSArray*)itemLists forTaxYear:(int)taxYear;

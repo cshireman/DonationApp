@@ -23,12 +23,6 @@
 
 @interface VPNCashList : VPNDonationList <NSCoding>
 
-@property (assign) int listType;
-@property (assign) int companyID;
-
-@property (nonatomic, strong) NSDate* creationDate;
-@property (nonatomic, strong) NSDate* donationDate;
-
 @property (nonatomic, copy) NSString* name;
 
 @property (nonatomic, strong) NSNumber* cashDonation;
