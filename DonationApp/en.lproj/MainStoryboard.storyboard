@@ -845,7 +845,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="taxSavingsLabel" destination="aBj-3w-L54" id="uM1-12-dq4"/>
-                        <segue destination="cr6-3o-1nK" kind="push" id="eUN-nc-hUi"/>
+                        <segue destination="cr6-3o-1nK" kind="push" identifier="AddListSegue" id="eUN-nc-hUi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pv4-vL-jwt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -971,7 +971,7 @@
                                                     <rect key="frame" x="42" y="35" width="258" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="How much was your donation?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WdG-If-ZQ1">
                                                     <rect key="frame" x="20" y="10" width="193" height="21"/>
@@ -991,7 +991,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MileageCell" rowHeight="75" id="wJy-Ge-5VQ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MileageAmountCell" rowHeight="75" id="wJy-Ge-5VQ">
                                         <rect key="frame" x="0.0" y="291" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1002,7 +1002,7 @@
                                                     <rect key="frame" x="20" y="35" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enter your miles driven for charity." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1OG-U6-Hpy">
                                                     <rect key="frame" x="20" y="10" width="216" height="21"/>
@@ -1032,6 +1032,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="startAddingItemsPushed:" destination="cr6-3o-1nK" eventType="touchUpInside" id="EpG-Wa-5Qj"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" minimumFontSize="17" id="yxi-1o-pRi">
                                 <rect key="frame" x="20" y="242" width="280" height="30"/>
@@ -1043,7 +1046,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New List" id="pV2-dq-stt">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="wGm-mP-qkF"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="wGm-mP-qkF">
+                            <connections>
+                                <action selector="donePushed:" destination="cr6-3o-1nK" id="Fsc-Tj-9bk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="wwo-CN-gFH" id="sgD-fH-8p4"/>
@@ -1053,6 +1060,7 @@
                         <outlet property="listTable" destination="8uz-t2-dgo" id="eGo-4k-m3e"/>
                         <outlet property="organizationPicker" destination="17X-fh-26n" id="ENF-3d-IHA"/>
                         <outlet property="organizationPickerView" destination="bk4-ee-KGZ" id="VJW-sY-CVX"/>
+                        <outlet property="startAddingItemsButton" destination="ETD-qn-FLz" id="vLY-Pf-NbO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSY-Un-55V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1077,7 +1085,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         </pickerView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="bk4-ee-KGZ" userLabel="Organization Picker View">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
@@ -1100,7 +1108,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         </pickerView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="3Oh-dd-UzZ" userLabel="Date Picker View">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
@@ -1125,7 +1133,7 @@
                                 <!--2012-12-11 06:45:36 +0000-->
                             </date>
                             <timeZone key="timeZone" name="America/Los_Angeles">
-                                <mutableData key="data">
+                                <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -1143,11 +1151,11 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                             </timeZone>
                         </datePicker>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="2003" y="634"/>
@@ -1309,6 +1317,138 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="arrow_icon.jpg" width="40" height="40"/>
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
+    <classes>
+        <class className="VPNAddDonationListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNAddDonationListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="datePickerDonePushed:"/>
+                <relationship kind="action" name="donePushed:"/>
+                <relationship kind="action" name="itemSourcePickerDonePushed:"/>
+                <relationship kind="action" name="keyboardDone:"/>
+                <relationship kind="action" name="organizationPickerDonePushed:"/>
+                <relationship kind="action" name="startAddingItemsPushed:"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="datePickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="itemSourcePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="itemSourcePickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIView"/>
+                <relationship kind="outlet" name="listTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="organizationPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="organizationPickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="startAddingItemsButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="VPNContactInfoCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNContactInfoCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNDontationListsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDontationListsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addButtonPushed:"/>
+                <relationship kind="action" name="editButtonPushed:"/>
+                <relationship kind="outlet" name="taxSavingsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNHomeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNHomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logoutPushed:"/>
+                <relationship kind="action" name="updatePushed:"/>
+                <relationship kind="outlet" name="bannerView" candidateClass="ADBannerView"/>
+                <relationship kind="outlet" name="optOutSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="optOutView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="updateButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="VPNLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissKeyboard"/>
+                <relationship kind="action" name="loginPushed:"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNMainTabGroupViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNMainTabGroupViewController.h"/>
+        </class>
+        <class className="VPNOrganizationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="localityLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNOrganizationDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deletePushed:"/>
+                <relationship kind="action" name="donePushed:"/>
+                <relationship kind="outlet" name="addressField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="cityField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="zipField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNOrganizationListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editPushed"/>
+            </relationships>
+        </class>
+        <class className="VPNPasswordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNPasswordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNSelectTaxRateViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxRateViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="savePushed:"/>
+                <relationship kind="outlet" name="taxRateTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNSelectTaxYearViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxYearViewController.h"/>
+        </class>
+        <class className="VPNSplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSplashViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="secondImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="VPNTaxSavingsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNTaxSavingsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="taxSavings" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNUserSignupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNUserSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="submitPushed:"/>
+                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="taxYearTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

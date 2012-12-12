@@ -18,6 +18,17 @@
 @property (nonatomic, strong) NSDate* creationDate;
 @property (nonatomic, strong) NSDate* donationDate;
 
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, copy) NSString* dateAquired;
+@property (nonatomic, copy) NSString* howAquired;
+
+@property (nonatomic, strong) NSNumber* costBasis;
+@property (nonatomic, strong) NSNumber* cashDonation;
+@property (nonatomic, strong) NSNumber* mileage;
+
+@property (nonatomic, copy) NSString* notes;
+@property (nonatomic, strong) NSMutableArray* items;
+
 
 -(NSMutableDictionary*)toDictionary;
 

@@ -377,10 +377,13 @@
     return @"Unknown";
 }
 
-- (IBAction)editButtonPushed:(id)sender {
+- (IBAction)editButtonPushed:(id)sender
+{
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
-- (IBAction)addButtonPushed:(id)sender {
+- (IBAction)addButtonPushed:(id)sender
+{
+    [self performSegueWithIdentifier:@"AddListSegue" sender:self];
 }
 @end

@@ -23,12 +23,6 @@
 
 @interface VPNCashList : VPNDonationList <NSCoding>
 
-@property (nonatomic, copy) NSString* name;
-
-@property (nonatomic, strong) NSNumber* cashDonation;
-@property (nonatomic, copy) NSString* notes;
-
-
 +(NSMutableArray*) loadCashListsFromDisc:(int)taxYear;
 +(void) saveCashListsToDisc:(NSArray*)organizations forTaxYear:(int)taxYear;
 +(NSString*) cashListsFilePath:(int)taxYear;

@@ -15,6 +15,14 @@
 @synthesize companyID;
 @synthesize creationDate;
 @synthesize donationDate;
+@synthesize name;
+@synthesize dateAquired;
+@synthesize howAquired;
+@synthesize costBasis;
+@synthesize cashDonation;
+@synthesize mileage;
+@synthesize notes;
+@synthesize items;
 
 -(NSMutableDictionary*)toDictionary
 {

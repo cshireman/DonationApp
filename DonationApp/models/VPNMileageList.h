@@ -22,10 +22,7 @@
 #define kMileageListsNotesKey              @"Notes"
 
 @interface VPNMileageList : VPNDonationList <NSCoding>
-`
-@property (nonatomic, copy) NSString* name;
-@property (nonatomic, strong) NSNumber* mileage;
-@property (nonatomic, copy) NSString* notes;
+
 
 +(NSMutableArray*) loadMileageListsFromDisc:(int)taxYear;
 +(void) saveMileageListsToDisc:(NSArray*)organizations forTaxYear:(int)taxYear;

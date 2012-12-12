@@ -93,6 +93,7 @@
 		8368526D1633BC7D00E51EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83195D86162D175600B63831 /* Foundation.framework */; };
 		836852731633BC7D00E51EEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 836852711633BC7D00E51EEB /* InfoPlist.strings */; };
 		8372B08E16423A4800C6E762 /* VPNCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8372B08D16423A4800C6E762 /* VPNCommunicatorTests.m */; };
+		837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */; };
 		8387D48C165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
 		8387D48D165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
 		8387D491165615DB00FE7C0E /* VPNSelectTaxYearViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D490165615DB00FE7C0E /* VPNSelectTaxYearViewControllerTests.m */; };
@@ -252,6 +253,7 @@
 		8372B08C16423A4800C6E762 /* VPNCommunicatorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCommunicatorTests.h; sourceTree = "<group>"; };
 		8372B08D16423A4800C6E762 /* VPNCommunicatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCommunicatorTests.m; sourceTree = "<group>"; };
 		8374CCFE1642302B0013C678 /* VPNCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCommunicatorDelegate.h; sourceTree = "<group>"; };
+		837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardDoneToolbarView.xib; path = CustomViews/KeyboardDoneToolbarView.xib; sourceTree = "<group>"; };
 		8387D48A165615B800FE7C0E /* VPNSelectTaxYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNSelectTaxYearViewController.h; path = Controllers/VPNSelectTaxYearViewController.h; sourceTree = "<group>"; };
 		8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNSelectTaxYearViewController.m; path = Controllers/VPNSelectTaxYearViewController.m; sourceTree = "<group>"; };
 		8387D48F165615DB00FE7C0E /* VPNSelectTaxYearViewControllerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSelectTaxYearViewControllerTests.h; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				837E604516785B0B00CA1FB7 /* CustomViews */,
 				836426F11667406C00A70606 /* DejalActivityView.h */,
 				836426F21667406C00A70606 /* DejalActivityView.m */,
 				8390ECCE1648C9E3000D03AE /* CustomCells */,
@@ -495,6 +498,14 @@
 				836852771633BC7D00E51EEB /* DonationAppTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		837E604516785B0B00CA1FB7 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */,
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		8383DD98163834AE009467F1 /* libraries */ = {
@@ -707,6 +718,7 @@
 				83AD5A42165E893000347FB3 /* VPNOverlayViewController.xib in Resources */,
 				836426F7166748C900A70606 /* checkbox_checked.png in Resources */,
 				836426F9166748C900A70606 /* checkbox_unchecked.png in Resources */,
+				837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

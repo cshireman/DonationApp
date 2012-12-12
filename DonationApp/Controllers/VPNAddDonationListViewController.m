@@ -10,20 +10,41 @@
 #import "VPNItemList.h"
 #import "VPNCashList.h"
 #import "VPNMileageList.h"
+#import "VPNUser.h"
 
 @interface VPNAddDonationListViewController ()
 {
     BOOL datePickerDisplayed;
     BOOL organizationPickerDisplayed;
     BOOL itemSourcePickerDisplayed;
+    
+    NSArray* organizations;
+    NSArray* itemSources;
+    
+    UITextField* currentField;
 }
 
 @end
 
 @implementation VPNAddDonationListViewController
+
 @synthesize listTable;
-@synthesize listTypeSelector;
+
+@synthesize datePickerView;
+@synthesize organizationPickerView;
+@synthesize itemSourcePickerView;
+
+@synthesize datePicker;
+@synthesize organizationPicker;
+@synthesize itemSourcePicker;
+
+@synthesize selectedListType;
+
 @synthesize donationList;
+@synthesize organization;
+
+@synthesize keyboardToolbar;
+@synthesize startAddingItemsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,11 +58,60 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSBundle mainBundle] loadNibNamed:@"KeyboardDoneToolbarView" owner:self options:nil];
+    
+    organizations = [VPNOrganization loadOrganizationsFromDisc];
+    itemSources = @[@"I purchased them.",@"They were a gift.",@"I inherited them.",@"I made an exchange"];
+    
 	// Do any additional setup after loading the view.
     donationList = [[VPNDonationList alloc] init];
     donationList.listType = 0;
     donationList.donationDate = [NSDate date];
     donationList.creationDate = [NSDate date];
+    donationList.howAquired = [itemSources objectAtIndex:0];
+    
+    selectedListType = 0;
+    
+    [datePicker addTarget:self
+                     action:@selector(updateListDate:)
+           forControlEvents:UIControlEventValueChanged];
+    
+    VPNUser* user = [VPNUser currentUser];
+    NSString* minDate = [NSString stringWithFormat:@"%d0101",user.selected_tax_year];
+    NSString* maxDate = [NSString stringWithFormat:@"%d1231",user.selected_tax_year];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    
+    datePicker.minimumDate = [dateFormat dateFromString:minDate];
+    datePicker.maximumDate = [dateFormat dateFromString:maxDate];
+    
+    datePicker.datePickerMode = UIDatePickerModeDate;
+ 
+    organizationPicker.dataSource = self;
+    organizationPicker.delegate = self;
+    
+    itemSourcePicker.dataSource = self;
+    itemSourcePicker.delegate = self;
+    
+    //Add picker views to frame
+    CGRect mainFrame = self.view.frame;
+    CGRect pickerFrame = CGRectMake(0, mainFrame.size.height, 320, mainFrame.size.height);
+    
+    datePickerView.frame = pickerFrame;
+    organizationPickerView.frame = pickerFrame;
+    itemSourcePickerView.frame = pickerFrame;
+    
+    [self.view addSubview:datePickerView];
+    [self.view addSubview:organizationPickerView];
+    [self.view addSubview:itemSourcePickerView];
+    
+    [self.view bringSubviewToFront:datePickerView];
+    [self.view bringSubviewToFront:organizationPickerView];
+    [self.view bringSubviewToFront:itemSourcePickerView];
+    
+    self.listTable.scrollEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +123,25 @@
 #pragma mark -
 #pragma mark UITableViewDataSource Methods
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch(indexPath.row)
+    {
+        case 0:
+        case 1:
+        case 2:
+            return 44;
+        case 3:
+            if(selectedListType == 0)
+                return 62;
+            else if(selectedListType == 1 || selectedListType == 2)
+                return 75;
+        default: break;
+    }
+
+    return 1000;
+}
+
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* CellIdentifier = @"Cell";
@@ -62,11 +151,11 @@
         case 1: CellIdentifier = @"OrganizationCell"; break;
         case 2: CellIdentifier = @"ListTypeCell"; break;
         case 3:
-            if(listTypeSelector.selectedSegmentIndex == 0)
+            if(selectedListType == 0)
                 CellIdentifier = @"ItemSourceCell";
-            else if(listTypeSelector.selectedSegmentIndex == 1)
+            else if(selectedListType == 1)
                 CellIdentifier = @"CashAmountCell";
-            else if(listTypeSelector.selectedSegmentIndex == 2)
+            else if(selectedListType == 2)
                 CellIdentifier = @"MileageAmountCell";
             
             break;
@@ -104,7 +193,7 @@
         [listSelector addTarget:self
                              action:@selector(updateListType:)
                    forControlEvents:UIControlEventValueChanged];
-        [listSelector setSelectedSegmentIndex:self.donationList.listType];
+        [listSelector setSelectedSegmentIndex:selectedListType];
     }
     else if([CellIdentifier isEqualToString:@"ItemSourceCell"])
     {
@@ -116,6 +205,7 @@
     else if([CellIdentifier isEqualToString:@"CashAmountCell"])
     {
         UITextField* cashAmountField = (UITextField*)[cell viewWithTag:1];
+        cashAmountField.delegate = self;
         
         VPNCashList* cashList = (VPNCashList*)self.donationList;
         cashAmountField.text = [cashList.cashDonation stringValue];
@@ -123,6 +213,7 @@
     else if([CellIdentifier isEqualToString:@"MileageAmountCell"])
     {
         UITextField* mileageAmountField = (UITextField*)[cell viewWithTag:1];
+        mileageAmountField.delegate = self;
         
         VPNMileageList* mileageList = (VPNMileageList*)self.donationList;
         mileageAmountField.text = [mileageList.mileage stringValue];
@@ -133,7 +224,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 10;
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -142,10 +233,84 @@
 
 #pragma mark -
 #pragma mark UITableViewDelegate Methods
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    switch(indexPath.row)
+    {
+        case 0:
+            [self displayDatePicker];
+            break;
+        case 1:
+            [self displayOrganizationPicker];
+            break;
+        case 3:
+            if(selectedListType == 0)
+                [self displayItemSourcePicker];
+            
+            break;
+        default:
+            break;
+    }
 }
+
+#pragma mark -
+#pragma mark UIPickerViewDelegate Methods
+
+-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if(pickerView == organizationPicker)
+    {
+        VPNOrganization* currentOrg = [organizations objectAtIndex:row];
+        return currentOrg.name;
+    }
+    else if(pickerView == itemSourcePicker)
+    {
+        return [itemSources objectAtIndex:row];
+    }
+    
+    return @"";
+}
+
+-(void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(pickerView == organizationPicker)
+    {
+        organization = [organizations objectAtIndex:row];
+    }
+    else if(pickerView == itemSourcePicker)
+    {
+        VPNItemList* itemList = (VPNItemList*)self.donationList;
+        itemList.howAquired = [itemSources objectAtIndex:row];
+    }
+    
+    [self.listTable reloadData];
+}
+
+#pragma mark -
+#pragma mark UIPickerViewDataSource Methods
+
+-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    if(pickerView == organizationPicker)
+    {
+        return [organizations count];
+    }
+    else if(pickerView == itemSourcePicker)
+    {
+        return [itemSources count];
+    }
+
+    return 0;
+}
+
 
 #pragma mark -
 #pragma mark Custom Methods
@@ -160,13 +325,15 @@
     [self hideOrganizationPicker];
 }
 
--(IBAction) itemSourceDonePushed:(id)sender
+-(IBAction) itemSourcePickerDonePushed:(id)sender
 {
     [self hideItemSourcePicker];
 }
 
--(IBAction) displayDatePicker
+-(void) displayDatePicker
 {
+    [self keyboardDone:nil];    
+    
     if(organizationPickerDisplayed)
         [self hideOrganizationPicker];
     
@@ -179,7 +346,7 @@
         datePickerDisplayed = YES;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.datePickerView.frame;
-            frame.origin.y -= frame.size.height;
+            frame.origin.y -= (frame.size.height+93);
             
             self.datePickerView.frame = frame;
         }
@@ -194,7 +361,7 @@
         datePickerDisplayed = NO;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.datePickerView.frame;
-            frame.origin.y += frame.size.height;
+            frame.origin.y += (frame.size.height+93);
             
             self.datePickerView.frame = frame;
         }
@@ -203,8 +370,10 @@
 }
 
 
--(IBAction) displayOrganizationPicker
+-(void) displayOrganizationPicker
 {
+    [self keyboardDone:nil];    
+    
     if(datePickerDisplayed)
         [self hideDatePicker];
     
@@ -217,7 +386,7 @@
         organizationPickerDisplayed = YES;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.organizationPickerView.frame;
-            frame.origin.y -= frame.size.height;
+            frame.origin.y -= (frame.size.height+93);
             
             self.organizationPickerView.frame = frame;
         }
@@ -233,7 +402,7 @@
         organizationPickerDisplayed = NO;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.organizationPickerView.frame;
-            frame.origin.y += frame.size.height;
+            frame.origin.y += (frame.size.height+93);
             
             self.organizationPickerView.frame = frame;
         }
@@ -241,8 +410,10 @@
     }
 }
 
--(IBAction) displayItemSourcePicker
+-(void) displayItemSourcePicker
 {
+    [self keyboardDone:nil];
+    
     if(datePickerDisplayed)
         [self hideDatePicker];
     
@@ -255,7 +426,7 @@
         itemSourcePickerDisplayed = YES;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.itemSourcePickerView.frame;
-            frame.origin.y -= frame.size.height;
+            frame.origin.y -= (frame.size.height+93);
             
             self.itemSourcePickerView.frame = frame;
         }
@@ -271,7 +442,7 @@
         itemSourcePickerDisplayed = NO;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.itemSourcePickerView.frame;
-            frame.origin.y += frame.size.height;
+            frame.origin.y += (frame.size.height+93);
             
             self.itemSourcePickerView.frame = frame;
         }
@@ -279,9 +450,75 @@
     }
 }
 
+-(void) updateListType:(UISegmentedControl*)segmentedControl
+{
+    selectedListType = (int)segmentedControl.selectedSegmentIndex;
+    
+    if(selectedListType == 0)
+        [self.startAddingItemsButton setHidden:NO];
+    else
+        [self.startAddingItemsButton setHidden:YES];
+    
+    [self.listTable reloadData];
+}
+
+-(void) updateListDate:(UIDatePicker*)localDatePicker
+{
+    donationList.donationDate = [localDatePicker.date copy];
+    [self.listTable reloadData];
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate Methods
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    //Scroll table view up
+    NSIndexPath* fieldRow = [NSIndexPath indexPathForRow:3 inSection:0];
+
+    self.listTable.scrollEnabled = YES;
+    [self.listTable scrollToRowAtIndexPath:fieldRow atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    self.listTable.scrollEnabled = NO;
+    
+    currentField = textField;
+    [currentField setInputAccessoryView:self.keyboardToolbar];
+}
+
+-(IBAction) keyboardDone:(id)sender
+{
+    //Scroll table view down
+    NSIndexPath* fieldRow = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    self.listTable.scrollEnabled = YES;
+    [self.listTable scrollToRowAtIndexPath:fieldRow atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    self.listTable.scrollEnabled = NO;
+    
+    if(currentField != nil)
+    {
+        if(selectedListType == 1)
+            donationList.cashDonation = [NSNumber numberWithDouble:[currentField.text doubleValue]];
+        else if(selectedListType == 2)
+            donationList.mileage = [NSNumber numberWithDouble:[currentField.text doubleValue]];
+        
+        [currentField resignFirstResponder];
+    }
+}
+
+-(IBAction) donePushed:(id)sender
+{
+    //Validate values
+    //start API call
+}
+
+-(IBAction) startAddingItemsPushed:(id)sender
+{
+    //Validate values
+    //start API call
+}
+
 
 - (void)viewDidUnload {
-    [self setListTypeSelector:nil];
     [super viewDidUnload];
 }
+
 @end

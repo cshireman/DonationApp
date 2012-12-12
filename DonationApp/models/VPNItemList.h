@@ -31,13 +31,6 @@
 
 @interface VPNItemList : VPNDonationList <NSCoding>
 
-@property (nonatomic, copy) NSString* name;
-@property (nonatomic, copy) NSString* dateAquired;
-@property (nonatomic, copy) NSString* howAquired;
-
-@property (nonatomic, strong) NSNumber* costBasis;
-@property (nonatomic, copy) NSString* notes;
-@property (nonatomic, strong) NSMutableArray* items;
 
 +(NSMutableArray*) loadItemListsFromDisc:(int)taxYear;
 +(void) saveItemListsToDisc:(NSArray*)itemLists forTaxYear:(int)taxYear;
