@@ -38,6 +38,4 @@
 
 -(id) initWithDictionary:(NSDictionary*)info;
 
--(double) totalForItems;
-
 @end

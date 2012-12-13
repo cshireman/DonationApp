@@ -28,6 +28,9 @@
 
 @property (strong, nonatomic) IBOutlet UIView* keyboardToolbar;
 @property (strong, nonatomic) IBOutlet UIButton* startAddingItemsButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
+
+@property (strong, nonatomic) IBOutlet UITextField* notesField;
 
 @property (strong, nonatomic) VPNDonationList* donationList;
 @property (strong, nonatomic) VPNOrganization* organization;
@@ -42,6 +45,8 @@
 
 -(IBAction) donePushed:(id)sender;
 -(IBAction) startAddingItemsPushed:(id)sender;
+
+-(IBAction) finishedEditingItems:(UIStoryboardSegue*)segue;
 
 //UITableView DataSource methods
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VPNDonationList : NSObject
+@interface VPNDonationList : NSObject <NSCoding>
 
 @property (assign) int ID;
 @property (assign) int listType;
@@ -31,5 +31,6 @@
 
 
 -(NSMutableDictionary*)toDictionary;
+-(double) totalForItems;
 
 @end

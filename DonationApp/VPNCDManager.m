@@ -557,7 +557,9 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     [request setObject:[NSNumber numberWithInt:user.selected_tax_year] forKey:@"year"];
     [request setObject:[NSNumber numberWithInt:listToAdd.listType] forKey:@"listType"];
     
-    [request setObject:[listToAdd toDictionary] forKey:@"list"];
+    NSDictionary* listInfo = [listToAdd toDictionary];
+    NSLog(@"List Info: %@",listInfo);
+    [request setObject:listInfo forKey:@"list"];
     
     NSError* error = nil;
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
@@ -573,7 +575,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }
     
     NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
+    NSLog(@"Request: %@",jsonString);
     self.currentDonationList = listToAdd;
     [communicator makeAPICall:AddList withContent:jsonString];
 }
@@ -721,6 +723,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     if(error == nil)
     {
         NSDictionary* d = [responseInfo objectForKey:@"d"];
+        NSLog(@"Result: %@",d);
         
         if([@"SUCCESS" isEqualToString:[d objectForKey:@"status"]])
         {

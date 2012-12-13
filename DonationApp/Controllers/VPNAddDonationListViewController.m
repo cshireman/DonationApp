@@ -7,6 +7,7 @@
 //
 
 #import "VPNAddDonationListViewController.h"
+#import "VPNCDManager.h"
 #import "VPNItemList.h"
 #import "VPNCashList.h"
 #import "VPNMileageList.h"
@@ -22,6 +23,10 @@
     NSArray* itemSources;
     
     UITextField* currentField;
+    
+    id submittingButton;
+    
+    VPNCDManager* manager;
 }
 
 @end
@@ -45,6 +50,9 @@
 
 @synthesize keyboardToolbar;
 @synthesize startAddingItemsButton;
+@synthesize doneButton;
+
+@synthesize notesField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,15 +67,29 @@
 {
     [super viewDidLoad];
     
+    manager = [[VPNCDManager alloc] init];
+    manager.delegate = self;
+    
     [[NSBundle mainBundle] loadNibNamed:@"KeyboardDoneToolbarView" owner:self options:nil];
     
     organizations = [VPNOrganization loadOrganizationsFromDisc];
     itemSources = @[@"I purchased them.",@"They were a gift.",@"I inherited them.",@"I made an exchange"];
+
+    VPNUser* user = [VPNUser currentUser];
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //Shift date to current year for default value
+    [dateFormat setDateFormat:@"MMdd"];
+    NSString* currentDay = [dateFormat stringFromDate:[NSDate date]];
+    
+    NSString* taxYearFormat = [NSString stringWithFormat:@"%d%@",user.selected_tax_year,currentDay];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
     
 	// Do any additional setup after loading the view.
     donationList = [[VPNDonationList alloc] init];
     donationList.listType = 0;
-    donationList.donationDate = [NSDate date];
+    donationList.name = @"";
+    donationList.donationDate = [dateFormat dateFromString:taxYearFormat];
     donationList.creationDate = [NSDate date];
     donationList.howAquired = [itemSources objectAtIndex:0];
     
@@ -77,12 +99,8 @@
                      action:@selector(updateListDate:)
            forControlEvents:UIControlEventValueChanged];
     
-    VPNUser* user = [VPNUser currentUser];
     NSString* minDate = [NSString stringWithFormat:@"%d0101",user.selected_tax_year];
     NSString* maxDate = [NSString stringWithFormat:@"%d1231",user.selected_tax_year];
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyyMMdd"];
     
     datePicker.minimumDate = [dateFormat dateFromString:minDate];
     datePicker.maximumDate = [dateFormat dateFromString:maxDate];
@@ -112,6 +130,13 @@
     [self.view bringSubviewToFront:itemSourcePickerView];
     
     self.listTable.scrollEnabled = NO;
+    
+    doneButton.enabled = NO;
+    startAddingItemsButton.enabled = NO;
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -244,6 +269,15 @@
             [self displayDatePicker];
             break;
         case 1:
+            if(organization == nil)
+            {
+                organization = [organizations objectAtIndex:0];
+                [self.listTable reloadData];
+                
+                startAddingItemsButton.enabled = YES;
+                doneButton.enabled = YES;
+            }
+            
             [self displayOrganizationPicker];
             break;
         case 3:
@@ -279,11 +313,11 @@
     if(pickerView == organizationPicker)
     {
         organization = [organizations objectAtIndex:row];
+        donationList.companyID = organization.ID;
     }
     else if(pickerView == itemSourcePicker)
     {
-        VPNItemList* itemList = (VPNItemList*)self.donationList;
-        itemList.howAquired = [itemSources objectAtIndex:row];
+        donationList.howAquired = [itemSources objectAtIndex:row];
     }
     
     [self.listTable reloadData];
@@ -344,6 +378,7 @@
     if(!datePickerDisplayed)
     {
         datePickerDisplayed = YES;
+        datePicker.date = donationList.donationDate;
         [UIView animateWithDuration:0.4f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             CGRect frame = self.datePickerView.frame;
             frame.origin.y -= (frame.size.height+93);
@@ -506,19 +541,74 @@
 
 -(IBAction) donePushed:(id)sender
 {
-    //Validate values
-    //start API call
+    submittingButton = sender;
+    donationList.listType = selectedListType;
+    donationList.notes = notesField.text;
+    donationList.costBasis = [NSNumber numberWithInt:0];
+
+    if(organization == nil)
+        organization = [organizations objectAtIndex:0];
+    
+    donationList.companyID = organization.ID;
+    donationList.name = organization.name;
+    
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //Shift date to current year for default value
+    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    donationList.dateAquired = [dateFormat stringFromDate:donationList.donationDate];
+
+    
+    [manager addDonationList:donationList];
 }
 
 -(IBAction) startAddingItemsPushed:(id)sender
 {
-    //Validate values
-    //start API call
+    [self donePushed:sender];
 }
 
+-(IBAction) finishedEditingItems:(UIStoryboardSegue*)segue
+{
+    //Should have poped to this controller;
+}
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
+#pragma mark -
+#pragma mark VPNCDManagerDelegate methods
+
+-(void) didAddList:(VPNDonationList*)list
+{
+    VPNUser* user = [VPNUser currentUser];
+    
+    if(list.listType == 0)
+    {
+        NSMutableArray* itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+        [itemLists addObject:list];
+        [VPNItemList saveItemListsToDisc:itemLists forTaxYear:user.selected_tax_year];
+    }
+    else if(list.listType == 1)
+    {
+        NSMutableArray* cashLists = [VPNCashList loadCashListsFromDisc:user.selected_tax_year];
+        [cashLists addObject:list];
+        [VPNCashList saveCashListsToDisc:cashLists forTaxYear:user.selected_tax_year];
+    }
+    else if(list.listType == 2)
+    {
+        NSMutableArray* mileageLists = [VPNMileageList loadMileageListsFromDisc:user.selected_tax_year];
+        [mileageLists addObject:list];
+        [VPNMileageList saveMileageListsToDisc:mileageLists forTaxYear:user.selected_tax_year];
+    }
+    
+    if(submittingButton == doneButton)
+        [self.navigationController popViewControllerAnimated:YES];
+    else if(submittingButton == startAddingItemsButton)
+        [self performSegueWithIdentifier:@"ItemListSegue" sender:submittingButton];
+}
+
+-(void) addListFailedWithError:(NSError *)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Add List Error" message:@"Unable to add your donation list at this time, please try again later" delegate:nil cancelButtonTitle:@"close" otherButtonTitles: nil];
+    
+    [alert show];
 }
 
 @end
