@@ -253,18 +253,16 @@
     UILabel* dateLabel = (UILabel*)[cell viewWithTag:2];
     UILabel* amountLabel = (UILabel*)[cell viewWithTag:3];
         
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
     if(indexPath.section == 0) // Item Lists
     {
         VPNItemList* itemList = [itemLists objectAtIndex:indexPath.row];
         
         organizationLabel.text = [self organizationNameForID:itemList.companyID];
-        
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterShortStyle];
-        [formatter setTimeStyle:NSDateFormatterNoStyle];
-        
         dateLabel.text = [formatter stringFromDate:itemList.donationDate];
-        
         amountLabel.text = [NSString stringWithFormat:@"$%.02f",[itemList totalForItems]];
     }
     else if(indexPath.section == 1) // Cash Lists
@@ -272,11 +270,6 @@
         VPNDonationListGroup* listGroup = [cashListGroup objectAtIndex:indexPath.row];
         
         organizationLabel.text = listGroup.organization.name;
-        
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterShortStyle];
-        [formatter setTimeStyle:NSDateFormatterNoStyle];
-        
         dateLabel.text = [NSString stringWithFormat:@"Last Donation: %@",[formatter stringFromDate:listGroup.lastDonationDate]];
         amountLabel.text = [NSString stringWithFormat:@"$%.02f",[listGroup totalForAllLists]];
     }
@@ -285,11 +278,6 @@
         VPNDonationListGroup* listGroup = [mileageListGroup objectAtIndex:indexPath.row];
         
         organizationLabel.text = listGroup.organization.name;
-        
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterShortStyle];
-        [formatter setTimeStyle:NSDateFormatterNoStyle];
-        
         dateLabel.text = [NSString stringWithFormat:@"Last Donation: %@",[formatter stringFromDate:listGroup.lastDonationDate]];
         amountLabel.text = [NSString stringWithFormat:@"$%.02f",[listGroup totalForAllLists]];
     }

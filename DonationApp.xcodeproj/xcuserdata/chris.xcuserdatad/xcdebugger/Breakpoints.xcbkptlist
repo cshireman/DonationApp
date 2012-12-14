@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/Controllers/VPNDontationListsViewController.m"
-         timestampString = "377161255.498341"
+         timestampString = "377186332.101401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "281"
-         endingLineNumber = "281"
+         startingLineNumber = "274"
+         endingLineNumber = "274"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/Controllers/VPNDontationListsViewController.m"
-         timestampString = "377161255.498341"
+         timestampString = "377186332.101401"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "407"
-         endingLineNumber = "407"
+         startingLineNumber = "395"
+         endingLineNumber = "395"
          landmarkName = "-didDeleteList:"
          landmarkType = "5">
       </FileBreakpoint>

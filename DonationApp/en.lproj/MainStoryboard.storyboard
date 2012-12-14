@@ -751,10 +751,10 @@
             </objects>
             <point key="canvasLocation" x="2003" y="-86"/>
         </scene>
-        <!--Table View Controller - Mileage Donations-->
+        <!--Mileage List View Controller - Mileage Donations-->
         <scene sceneID="7Lp-kp-apu">
             <objects>
-                <tableViewController id="eF6-KC-Mh1" sceneMemberID="viewController">
+                <tableViewController id="eF6-KC-Mh1" customClass="VPNMileageListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6XG-10-chl">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -775,7 +775,9 @@
                             <outlet property="delegate" destination="eF6-KC-Mh1" id="HBT-Nu-db6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Mileage Donations" id="cOb-GN-j4h"/>
+                    <navigationItem key="navigationItem" title="Mileage Donations" id="cOb-GN-j4h">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="aTV-7z-BA9"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="FPM-ww-F1T" kind="push" id="GvI-DN-fI9"/>
                     </connections>
@@ -1313,6 +1315,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="eBay Item" id="YmO-1q-ACW"/>
+                    <connections>
+                        <segue destination="XFe-XX-YqB" kind="push" id="RQg-YL-ioz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUr-LT-Xfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1328,10 +1333,28 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Custom Item" id="uGq-KU-VKT"/>
+                    <connections>
+                        <segue destination="XFe-XX-YqB" kind="push" id="nt4-d5-pPY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lqx-a5-cDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4271" y="1286"/>
+        </scene>
+        <!--View Controller - Photo-->
+        <scene sceneID="wxf-Bz-5t5">
+            <objects>
+                <viewController id="XFe-XX-YqB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Woc-hX-fPV">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Photo" id="j7f-OZ-wGQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nc9-cs-CDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4784" y="979"/>
         </scene>
         <!--Navigation Controller - Donations-->
         <scene sceneID="58d-iv-nGr">
@@ -1375,10 +1398,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1532" y="1334"/>
         </scene>
-        <!--Table View Controller - Cash Donations-->
+        <!--Cash List View Controller - Cash Donations-->
         <scene sceneID="kzR-tX-cf2">
             <objects>
-                <tableViewController id="jfM-11-FhK" sceneMemberID="viewController">
+                <tableViewController id="jfM-11-FhK" customClass="VPNCashListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ilJ-c2-xl1">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1399,7 +1422,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="jfM-11-FhK" id="b1a-8w-cw0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Cash Donations" id="OjI-YV-KqI"/>
+                    <navigationItem key="navigationItem" title="Cash Donations" id="OjI-YV-KqI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vrx-TV-j2v"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="djn-sZ-fib" kind="push" id="soY-gh-6Kt"/>
                     </connections>
@@ -1566,150 +1591,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="arrow_icon.jpg" width="40" height="40"/>
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
-    <classes>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
-        </class>
-        <class className="VPNAddDonationListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNAddDonationListViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="datePickerDonePushed:"/>
-                <relationship kind="action" name="donePushed:"/>
-                <relationship kind="action" name="finishedEditingItems:" candidateClass="UIStoryboardSegue"/>
-                <relationship kind="action" name="itemSourcePickerDonePushed:"/>
-                <relationship kind="action" name="keyboardDone:"/>
-                <relationship kind="action" name="organizationPickerDonePushed:"/>
-                <relationship kind="action" name="startAddingItemsPushed:"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="datePickerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="itemSourcePicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="itemSourcePickerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIView"/>
-                <relationship kind="outlet" name="listTable" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="organizationPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="organizationPickerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="startAddingItemsButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="VPNContactInfoCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNContactInfoCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="VPNDonationItemListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDonationItemListViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backPushed:"/>
-            </relationships>
-        </class>
-        <class className="VPNDontationListsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDontationListsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addButtonPushed:"/>
-                <relationship kind="action" name="editButtonPushed:"/>
-                <relationship kind="outlet" name="taxSavingsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="VPNHomeViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNHomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logoutPushed:"/>
-                <relationship kind="action" name="updatePushed:"/>
-                <relationship kind="outlet" name="bannerView" candidateClass="ADBannerView"/>
-                <relationship kind="outlet" name="optOutSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="optOutView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="updateButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="VPNLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissKeyboard"/>
-                <relationship kind="action" name="loginPushed:"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="VPNMainTabGroupViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNMainTabGroupViewController.h"/>
-        </class>
-        <class className="VPNOrganizationCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="localityLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="VPNOrganizationDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deletePushed:"/>
-                <relationship kind="action" name="donePushed:"/>
-                <relationship kind="outlet" name="addressField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="cityField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="stateField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="zipField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="VPNOrganizationListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationListViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="editPushed"/>
-            </relationships>
-        </class>
-        <class className="VPNPasswordCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNPasswordCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="VPNSelectTaxRateViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxRateViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelPushed:"/>
-                <relationship kind="action" name="savePushed:"/>
-                <relationship kind="outlet" name="taxRateTable" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="VPNSelectTaxYearViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxYearViewController.h"/>
-        </class>
-        <class className="VPNSplashViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSplashViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="firstImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="secondImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="VPNTaxSavingsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNTaxSavingsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="taxSavings" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="VPNUserSignupViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNUserSignupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelPushed:"/>
-                <relationship kind="action" name="submitPushed:"/>
-                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="taxYearTable" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -1719,5 +1600,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <segue reference="aQI-nu-Yoy"/>
         <segue reference="Hdk-UB-VSS"/>
         <segue reference="aJ7-nV-fr8"/>
+        <segue reference="RQg-YL-ioz"/>
     </inferredMetricsTieBreakers>
 </document>
