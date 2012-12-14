@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNCDManagerDelegate.h"
+#import "VPNDonationListGroup.h"
 #import "VPNUser.h"
 
 @interface VPNDontationListsViewController : UITableViewController <VPNCDManagerDelegate>
@@ -17,6 +18,9 @@
 @property (strong, nonatomic) NSMutableArray* itemLists;
 @property (strong, nonatomic) NSMutableArray* cashLists;
 @property (strong, nonatomic) NSMutableArray* mileageLists;
+
+@property (strong, nonatomic) NSMutableArray* cashListGroup;
+@property (strong, nonatomic) NSMutableArray* mileageListGroup;
 
 @property (strong, nonatomic) VPNUser* user;
 

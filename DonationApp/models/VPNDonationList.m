@@ -67,6 +67,11 @@
     return info;
 }
 
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"ID:%d, CompanyID:%d",self.ID,self.companyID];
+}
+
 #pragma mark -
 #pragma mark NSCoding
 
@@ -115,6 +120,32 @@
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark NSCopying
+
+-(id) copyWithZone:(NSZone *)zone
+{
+    VPNDonationList *copy = [[[self class] allocWithZone: zone] init];
+
+    [copy setID:[self ID]];
+    [copy setListType:[self listType]];
+    [copy setCompanyID:[self companyID]];
+    [copy setCreationDate:[self creationDate]];
+    [copy setDonationDate:[self donationDate]];
+    
+    [copy setName:[self name]];
+    [copy setDateAquired:[self dateAquired]];
+    [copy setHowAquired:[self howAquired]];
+    [copy setCostBasis:[self costBasis]];
+    [copy setCashDonation:[self cashDonation]];
+    
+    [copy setMileage:[self mileage]];
+    [copy setNotes:[self notes]];
+    [copy setItems:[self items]];
+    
+    return copy;
 }
 
 -(double) totalForItems

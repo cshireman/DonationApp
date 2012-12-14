@@ -78,6 +78,28 @@
     return self;
 }
 
+-(id) copyWithZone:(NSZone *)zone
+{
+    VPNItem* copy = [[[self class] allocWithZone:zone] init];
+    
+    [copy setID:[self ID]];
+    [copy setCreationDate:[self creationDate]];
+    [copy setCondition:[self condition]];
+    [copy setValuation:[self valuation]];
+    [copy setCategoryID:[self categoryID]];
+    
+    [copy setItemID:[self itemID]];
+    [copy setName:[self name]];
+    [copy setQuantity:[self quantity]];
+    [copy setFairMarketValue:[self fairMarketValue]];
+    [copy setIsCustomItem:[self isCustomItem]];
+    
+    [copy setIsCustomValue:[self isCustomValue]];
+    [copy setNotes:[self notes]];
+    
+    return copy;
+}
+
 -(id) initWithDictionary:(NSDictionary*)info
 {
     self = [super init];

@@ -59,7 +59,14 @@
     }
     
     if(listToDelete != nil)
+    {
+        NSLog(@"Removing list: %@",listToDelete);
         [donationLists removeObject:listToDelete];
+    }
+    else
+    {
+        NSLog(@"Not removing list:%@",listToRemove);
+    }
     
     [self updateLastDonationDate];
 }

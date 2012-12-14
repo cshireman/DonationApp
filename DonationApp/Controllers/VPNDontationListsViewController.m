@@ -21,6 +21,8 @@
     NSArray* organizations;
     NSIndexPath* indexToDelete;
     VPNCDManager* manager;
+    
+    NSMutableArray* donationListsToDelete;
 }
 
 @end
@@ -38,6 +40,9 @@
 @synthesize itemsTotal;
 @synthesize cashTotal;
 @synthesize mileageTotal;
+
+@synthesize cashListGroup;
+@synthesize mileageListGroup;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -58,6 +63,11 @@
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
     indexToDelete = nil;
+    
+    cashListGroup = [[NSMutableArray alloc] init];
+    mileageListGroup = [[NSMutableArray alloc] init];
+    donationListsToDelete = [[NSMutableArray alloc] init];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -79,6 +89,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(VPNDonationListGroup*) findDonationList:(VPNDonationList*)listToFind inListGroup:(NSMutableArray*)listGroup
+{
+    VPNDonationListGroup* foundListGroup = nil;
+    for(VPNDonationListGroup* group in listGroup)
+    {
+        if(group.organization.ID == listToFind.companyID)
+        {
+            foundListGroup = group;
+            break;
+        }
+    }
+    
+    return foundListGroup;
+}
+
+-(void) removeDonationList:(VPNDonationList*)listToRemove fromListGroup:(NSMutableArray*)listGroup
+{
+    VPNDonationListGroup* foundListGroup = [self findDonationList:listToRemove inListGroup:listGroup];
+    
+    if(foundListGroup == nil)
+    {
+        return;
+    }
+    
+    [foundListGroup removeDonationList:listToRemove];
+}
+
+-(void) addDonationList:(VPNDonationList*)listToAdd toListGroup:(NSMutableArray*)listGroup
+{
+    VPNDonationListGroup* foundListGroup = [self findDonationList:listToAdd inListGroup:listGroup];
+    
+    if(foundListGroup == nil)
+    {
+        foundListGroup = [[VPNDonationListGroup alloc] init];
+        foundListGroup.listType = listToAdd.listType;
+        foundListGroup.organization = [self organizationForID:listToAdd.companyID];
+        [listGroup addObject:foundListGroup];
+    }
+    
+    [foundListGroup addDonationList:listToAdd];
+}
+
 -(void) updateTotals
 {
     [VPNTaxSavings updateTaxSavings];
@@ -87,10 +139,13 @@
     cashLists = [VPNCashList loadCashListsFromDisc:user.selected_tax_year];
     mileageLists = [VPNMileageList loadMileageListsFromDisc:user.selected_tax_year];
     
+    [cashListGroup removeAllObjects];
+    [mileageListGroup removeAllObjects];
+    
     itemsTotal = 0.00;
     cashTotal = 0.00;
     mileageTotal = 0.00;
-    
+        
     for(VPNItemList* itemList in itemLists)
     {
         itemsTotal += [itemList totalForItems];
@@ -98,11 +153,13 @@
     
     for(VPNCashList* cashList in cashLists)
     {
+        [self addDonationList:cashList toListGroup:cashListGroup];
         cashTotal += [cashList.cashDonation doubleValue];
     }
     
     for(VPNMileageList* mileageList in mileageLists)
     {
+        [self addDonationList:mileageList toListGroup:mileageListGroup];
         mileageTotal += [mileageList.mileage doubleValue];
     }
     
@@ -179,8 +236,8 @@
     switch(section)
     {
         case 0: return [itemLists count];
-        case 1: return [cashLists count];
-        case 2: return [mileageLists count];
+        case 1: return [cashListGroup count];
+        case 2: return [mileageListGroup count];
             
     }
     return 0;
@@ -212,31 +269,29 @@
     }
     else if(indexPath.section == 1) // Cash Lists
     {
-        VPNCashList* cashList = [cashLists objectAtIndex:indexPath.row];
+        VPNDonationListGroup* listGroup = [cashListGroup objectAtIndex:indexPath.row];
         
-        organizationLabel.text = [self organizationNameForID:cashList.companyID];
+        organizationLabel.text = listGroup.organization.name;
         
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterShortStyle];
         [formatter setTimeStyle:NSDateFormatterNoStyle];
         
-        dateLabel.text = [NSString stringWithFormat:@"Last Donation: %@",[formatter stringFromDate:cashList.donationDate]];
-        
-        amountLabel.text = [NSString stringWithFormat:@"$%.02f",[cashList.cashDonation doubleValue]];
+        dateLabel.text = [NSString stringWithFormat:@"Last Donation: %@",[formatter stringFromDate:listGroup.lastDonationDate]];
+        amountLabel.text = [NSString stringWithFormat:@"$%.02f",[listGroup totalForAllLists]];
     }
     else if(indexPath.section == 2) // Mileage Lists
     {
-        VPNMileageList* mileageList = [mileageLists objectAtIndex:indexPath.row];
+        VPNDonationListGroup* listGroup = [mileageListGroup objectAtIndex:indexPath.row];
         
-        organizationLabel.text = [self organizationNameForID:mileageList.companyID];
+        organizationLabel.text = listGroup.organization.name;
         
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterShortStyle];
         [formatter setTimeStyle:NSDateFormatterNoStyle];
         
-        dateLabel.text = [NSString stringWithFormat:@"Last Entry: %@",[formatter stringFromDate:mileageList.donationDate]];
-        
-        amountLabel.text = [NSString stringWithFormat:@"%d Miles",[mileageList.mileage intValue]];
+        dateLabel.text = [NSString stringWithFormat:@"Last Donation: %@",[formatter stringFromDate:listGroup.lastDonationDate]];
+        amountLabel.text = [NSString stringWithFormat:@"$%.02f",[listGroup totalForAllLists]];
     }
     
     
@@ -260,6 +315,8 @@
         // Delete the row from the data source
         indexToDelete = indexPath;
         VPNDonationList* listToDelete = nil;
+        VPNDonationListGroup* groupToDelete = nil;
+        
         if(indexPath.section == 0)
         {
             //Delete from items lists
@@ -268,17 +325,24 @@
         else if(indexPath.section == 1)
         {
             //Delete from cash lists
-            listToDelete = [cashLists objectAtIndex:indexPath.row];
+            groupToDelete = [cashListGroup objectAtIndex:indexPath.row];
         }
         else if(indexPath.section == 2)
         {
             //Delete from mileage lists
-            listToDelete = [mileageLists objectAtIndex:indexPath.row];
+            groupToDelete = [mileageListGroup objectAtIndex:indexPath.row];
         }
         
         if(listToDelete != nil)
         {
             [manager deleteDonationList:listToDelete];
+        }
+        else if (groupToDelete != nil)
+        {
+            donationListsToDelete = [NSMutableArray arrayWithArray:groupToDelete.donationLists];
+            if([donationListsToDelete count] > 0)
+                [manager deleteDonationList:[donationListsToDelete objectAtIndex:0]];
+            
         }
         else
         {
@@ -333,22 +397,66 @@
         {
             [itemLists removeObjectAtIndex:indexToDelete.row];
             [VPNItemList saveItemListsToDisc:itemLists forTaxYear:user.selected_tax_year];
+            [self.tableView deleteRowsAtIndexPaths:@[indexToDelete] withRowAnimation:UITableViewRowAnimationFade];
+            [self performSelector:@selector(updateTotals) withObject:nil afterDelay:0.4];
+            indexToDelete = nil;
         }
         else if (indexToDelete.section == 1)
         {
-            [cashLists removeObjectAtIndex:indexToDelete.row];
+            [cashLists removeObject:list];
+            if([donationListsToDelete count] > 0)
+                [donationListsToDelete removeObjectAtIndex:0];
+            
+            VPNDonationListGroup* group = [self findDonationList:list inListGroup:cashListGroup];
+            if(group != nil)
+            {
+                [group removeDonationList:list];
+                if([group.donationLists count] == 0)
+                {
+                    [cashListGroup removeObjectAtIndex:indexToDelete.row];
+                    
+                    [self.tableView deleteRowsAtIndexPaths:@[indexToDelete] withRowAnimation:UITableViewRowAnimationFade];
+                    [self performSelector:@selector(updateTotals) withObject:nil afterDelay:0.4];
+                    indexToDelete = nil;
+                }
+                else
+                {
+                    if([donationListsToDelete count] > 0)
+                        [manager deleteDonationList:[donationListsToDelete objectAtIndex:0]];
+                }
+            }
+                
             [VPNCashList saveCashListsToDisc:cashLists forTaxYear:user.selected_tax_year];
         }
         else if (indexToDelete.section == 2)
         {
-            [mileageLists removeObjectAtIndex:indexToDelete.row];
+            [mileageLists removeObject:list];
+            if([donationListsToDelete count] > 0)
+                [donationListsToDelete removeObjectAtIndex:0];
+            
+            VPNDonationListGroup* group = [self findDonationList:list inListGroup:mileageListGroup];
+            if(group != nil)
+            {
+                [group removeDonationList:list];
+                if([group.donationLists count] == 0)
+                {
+                    [mileageListGroup removeObjectAtIndex:indexToDelete.row];
+                    
+                    [self.tableView deleteRowsAtIndexPaths:@[indexToDelete] withRowAnimation:UITableViewRowAnimationFade];
+                    [self performSelector:@selector(updateTotals) withObject:nil afterDelay:0.4];
+                    indexToDelete = nil;
+                }
+                else
+                {
+                    if([donationListsToDelete count] > 0)
+                        [manager deleteDonationList:[donationListsToDelete objectAtIndex:0]];
+                }                
+            }
+            
             [VPNMileageList saveMileageListsToDisc:mileageLists forTaxYear:user.selected_tax_year];
         }
         
-        [self.tableView deleteRowsAtIndexPaths:@[indexToDelete] withRowAnimation:UITableViewRowAnimationFade];
-        indexToDelete = nil;
         
-        [self performSelector:@selector(updateTotals) withObject:nil afterDelay:0.4];
     }
     
 }
@@ -364,17 +472,26 @@
 #pragma mark -
 #pragma mark Custom Methods
 
--(NSString*) organizationNameForID:(int)organizationID
+-(VPNOrganization*) organizationForID:(int)organizationID
 {
     for(VPNOrganization* currentOrg in organizations)
     {
         if(currentOrg.ID == organizationID)
         {
-            return currentOrg.name;
+            return currentOrg;
         }
     }
+    
+    return nil;
+}
 
-    return @"Unknown";
+-(NSString*) organizationNameForID:(int)organizationID
+{
+    VPNOrganization* org = [self organizationForID:organizationID];
+    if(org == nil)
+        return @"Unknown";
+    
+    return org.name;
 }
 
 - (IBAction)editButtonPushed:(id)sender

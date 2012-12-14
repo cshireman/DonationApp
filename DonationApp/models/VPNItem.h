@@ -22,7 +22,7 @@
 #define kVPNItemNotesKey                @"Notes"
 
 
-@interface VPNItem : NSObject <NSCoding>
+@interface VPNItem : NSObject <NSCoding, NSCopying>
 
 @property (assign) int ID;
 

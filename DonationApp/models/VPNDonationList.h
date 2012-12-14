@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VPNDonationList : NSObject <NSCoding>
+@interface VPNDonationList : NSObject <NSCoding,NSCopying>
 
 @property (assign) int ID;
 @property (assign) int listType;
