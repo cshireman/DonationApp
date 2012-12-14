@@ -29,8 +29,10 @@
 @property (nonatomic, copy) NSString* notes;
 @property (nonatomic, strong) NSMutableArray* items;
 
++(void) removeDonationListFromGlobalList:(VPNDonationList*)listToRemove;
 
 -(NSMutableDictionary*)toDictionary;
 -(double) totalForItems;
+
 
 @end

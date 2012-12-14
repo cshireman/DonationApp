@@ -138,12 +138,12 @@
 		83BFD928163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
 		83BFD93C163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
 		83BFD93D163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
-		83CE69E3167B082D00CC334A /* VPNItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69E2167B082D00CC334A /* VPNItemListViewController.m */; };
-		83CE69E4167B082D00CC334A /* VPNItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69E2167B082D00CC334A /* VPNItemListViewController.m */; };
 		83CE69E8167B084D00CC334A /* VPNCashListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69E7167B084D00CC334A /* VPNCashListViewController.m */; };
 		83CE69E9167B084D00CC334A /* VPNCashListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69E7167B084D00CC334A /* VPNCashListViewController.m */; };
 		83CE69EC167B086D00CC334A /* VPNMileageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69EB167B086D00CC334A /* VPNMileageListViewController.m */; };
 		83CE69ED167B086D00CC334A /* VPNMileageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69EB167B086D00CC334A /* VPNMileageListViewController.m */; };
+		83CE69F0167B69B100CC334A /* VPNListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69EF167B69B000CC334A /* VPNListViewController.m */; };
+		83CE69F1167B69B100CC334A /* VPNListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69EF167B69B000CC334A /* VPNListViewController.m */; };
 		83E469991671B28200376FB0 /* VPNDonationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E469981671B28200376FB0 /* VPNDonationList.m */; };
 		83E4699A1671B28200376FB0 /* VPNDonationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E469981671B28200376FB0 /* VPNDonationList.m */; };
 /* End PBXBuildFile section */
@@ -161,16 +161,16 @@
 /* Begin PBXFileReference section */
 		830241AF167390F000B92ED4 /* NSDate+CDParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CDParser.h"; path = "models/NSDate+CDParser.h"; sourceTree = "<group>"; };
 		830241B0167390F000B92ED4 /* NSDate+CDParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CDParser.m"; path = "models/NSDate+CDParser.m"; sourceTree = "<group>"; };
-		8307A1CE1676FF2600A54380 /* VPNAddDonationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNAddDonationListViewController.h; path = DonationApp/Controllers/VPNAddDonationListViewController.h; sourceTree = "<group>"; };
-		8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNAddDonationListViewController.m; path = DonationApp/Controllers/VPNAddDonationListViewController.m; sourceTree = "<group>"; };
+		8307A1CE1676FF2600A54380 /* VPNAddDonationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNAddDonationListViewController.h; path = Controllers/VPNAddDonationListViewController.h; sourceTree = "<group>"; };
+		8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNAddDonationListViewController.m; path = Controllers/VPNAddDonationListViewController.m; sourceTree = "<group>"; };
 		830DF5651640E42100A31818 /* VPNSessionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionTests.h; sourceTree = "<group>"; };
 		830DF5661640E42100A31818 /* VPNSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionTests.m; sourceTree = "<group>"; };
 		830DF5691640E4EA00A31818 /* VPNSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSession.h; sourceTree = "<group>"; };
 		830DF56A1640E4EA00A31818 /* VPNSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSession.m; sourceTree = "<group>"; };
 		830DF56D1640E5F100A31818 /* VPNSessionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNSessionBuilder.h; sourceTree = "<group>"; };
 		830DF56E1640E5F200A31818 /* VPNSessionBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNSessionBuilder.m; sourceTree = "<group>"; };
-		8315D2BC1679BA1F00A35DCF /* VPNDonationItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationItemListViewController.h; path = DonationApp/Controllers/VPNDonationItemListViewController.h; sourceTree = "<group>"; };
-		8315D2BD1679BA1F00A35DCF /* VPNDonationItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationItemListViewController.m; path = DonationApp/Controllers/VPNDonationItemListViewController.m; sourceTree = "<group>"; };
+		8315D2BC1679BA1F00A35DCF /* VPNDonationItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationItemListViewController.h; path = Controllers/VPNDonationItemListViewController.h; sourceTree = "<group>"; };
+		8315D2BD1679BA1F00A35DCF /* VPNDonationItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationItemListViewController.m; path = Controllers/VPNDonationItemListViewController.m; sourceTree = "<group>"; };
 		8315D2BF167A2B2500A35DCF /* VPNDonationListGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationListGroup.h; path = models/VPNDonationListGroup.h; sourceTree = "<group>"; };
 		8315D2C0167A2B2500A35DCF /* VPNDonationListGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationListGroup.m; path = models/VPNDonationListGroup.m; sourceTree = "<group>"; };
 		83175E7916364E3E000C98B4 /* VPNUserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserTest.h; sourceTree = "<group>"; };
@@ -323,12 +323,12 @@
 		83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDCommunicator.m; sourceTree = "<group>"; };
 		83BFD93A163F9A4F00BC64B7 /* VPNUserBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserBuilder.h; sourceTree = "<group>"; };
 		83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserBuilder.m; sourceTree = "<group>"; };
-		83CE69E1167B082D00CC334A /* VPNItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemListViewController.h; path = Controllers/VPNItemListViewController.h; sourceTree = "<group>"; };
-		83CE69E2167B082D00CC334A /* VPNItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemListViewController.m; path = Controllers/VPNItemListViewController.m; sourceTree = "<group>"; };
 		83CE69E6167B084D00CC334A /* VPNCashListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCashListViewController.h; path = Controllers/VPNCashListViewController.h; sourceTree = "<group>"; };
 		83CE69E7167B084D00CC334A /* VPNCashListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNCashListViewController.m; path = Controllers/VPNCashListViewController.m; sourceTree = "<group>"; };
 		83CE69EA167B086D00CC334A /* VPNMileageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNMileageListViewController.h; path = Controllers/VPNMileageListViewController.h; sourceTree = "<group>"; };
 		83CE69EB167B086D00CC334A /* VPNMileageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNMileageListViewController.m; path = Controllers/VPNMileageListViewController.m; sourceTree = "<group>"; };
+		83CE69EE167B69B000CC334A /* VPNListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNListViewController.h; path = Controllers/VPNListViewController.h; sourceTree = "<group>"; };
+		83CE69EF167B69B000CC334A /* VPNListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNListViewController.m; path = Controllers/VPNListViewController.m; sourceTree = "<group>"; };
 		83E469971671B28200376FB0 /* VPNDonationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationList.h; path = models/VPNDonationList.h; sourceTree = "<group>"; };
 		83E469981671B28200376FB0 /* VPNDonationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationList.m; path = models/VPNDonationList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -365,10 +365,6 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
-				8315D2BC1679BA1F00A35DCF /* VPNDonationItemListViewController.h */,
-				8315D2BD1679BA1F00A35DCF /* VPNDonationItemListViewController.m */,
-				8307A1CE1676FF2600A54380 /* VPNAddDonationListViewController.h */,
-				8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */,
 				836426E9166730F300A70606 /* DonationApp.xcdatamodeld */,
 				836426E61667305100A70606 /* CoreData.framework */,
 				8397DF87162E81DA000D8633 /* iAd.framework */,
@@ -538,6 +534,12 @@
 		8390ECC21648C0D5000D03AE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				83CE69EE167B69B000CC334A /* VPNListViewController.h */,
+				83CE69EF167B69B000CC334A /* VPNListViewController.m */,
+				8315D2BC1679BA1F00A35DCF /* VPNDonationItemListViewController.h */,
+				8315D2BD1679BA1F00A35DCF /* VPNDonationItemListViewController.m */,
+				8307A1CE1676FF2600A54380 /* VPNAddDonationListViewController.h */,
+				8307A1CF1676FF2600A54380 /* VPNAddDonationListViewController.m */,
 				83AD5A3D165E881600347FB3 /* VPNOverlayViewController.h */,
 				83AD5A3E165E881600347FB3 /* VPNOverlayViewController.m */,
 				83AD5A41165E893000347FB3 /* VPNOverlayViewController.xib */,
@@ -561,8 +563,6 @@
 				836427191668783B00A70606 /* VPNOrganizationDetailViewController.m */,
 				834057CA166EC61000ED39E5 /* VPNDontationListsViewController.h */,
 				834057CB166EC61000ED39E5 /* VPNDontationListsViewController.m */,
-				83CE69E1167B082D00CC334A /* VPNItemListViewController.h */,
-				83CE69E2167B082D00CC334A /* VPNItemListViewController.m */,
 				83CE69E6167B084D00CC334A /* VPNCashListViewController.h */,
 				83CE69E7167B084D00CC334A /* VPNCashListViewController.m */,
 				83CE69EA167B086D00CC334A /* VPNMileageListViewController.h */,
@@ -826,9 +826,9 @@
 				8307A1D01676FF2700A54380 /* VPNAddDonationListViewController.m in Sources */,
 				8315D2BE1679BA1F00A35DCF /* VPNDonationItemListViewController.m in Sources */,
 				8315D2C1167A2B2500A35DCF /* VPNDonationListGroup.m in Sources */,
-				83CE69E3167B082D00CC334A /* VPNItemListViewController.m in Sources */,
 				83CE69E8167B084D00CC334A /* VPNCashListViewController.m in Sources */,
 				83CE69EC167B086D00CC334A /* VPNMileageListViewController.m in Sources */,
+				83CE69F0167B69B100CC334A /* VPNListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,9 +881,9 @@
 				834057CD166EC61000ED39E5 /* VPNDontationListsViewController.m in Sources */,
 				83E4699A1671B28200376FB0 /* VPNDonationList.m in Sources */,
 				8315D2C2167A2B2500A35DCF /* VPNDonationListGroup.m in Sources */,
-				83CE69E4167B082D00CC334A /* VPNItemListViewController.m in Sources */,
 				83CE69E9167B084D00CC334A /* VPNCashListViewController.m in Sources */,
 				83CE69ED167B086D00CC334A /* VPNMileageListViewController.m in Sources */,
+				83CE69F1167B69B100CC334A /* VPNListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

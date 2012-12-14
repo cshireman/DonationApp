@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VPNListViewController.h"
 
-@interface VPNMileageListViewController : UITableViewController
+@interface VPNMileageListViewController : VPNListViewController
 
 @end

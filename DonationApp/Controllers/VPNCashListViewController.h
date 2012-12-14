@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VPNListViewController.h"
 
-@interface VPNCashListViewController : UITableViewController
+@interface VPNCashListViewController : VPNListViewController
 
 @end

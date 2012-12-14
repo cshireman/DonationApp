@@ -7,7 +7,11 @@
 //
 
 #import "VPNDonationList.h"
+#import "VPNItemList.h"
+#import "VPNCashList.h"
+#import "VPNMileageList.h"
 #import "VPNItem.h"
+#import "VPNUser.h"
 
 @implementation VPNDonationList
 
@@ -162,6 +166,48 @@
     }
     
     return itemTotal;
+}
+
++(void) removeDonationListFromGlobalList:(VPNDonationList*)listToRemove
+{
+    NSMutableArray* donationLists = nil;
+    VPNUser* user = [VPNUser currentUser];
+    
+    //Get lists from disc
+    if(listToRemove.listType == 0)
+        donationLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+    else if(listToRemove.listType == 1)
+        donationLists = [VPNCashList loadCashListsFromDisc:user.selected_tax_year];
+    else if(listToRemove.listType == 2)
+        donationLists = [VPNMileageList loadMileageListsFromDisc:user.selected_tax_year];
+    
+    //Find matching list
+    VPNDonationList* listToDelete = nil;
+    
+    for(VPNDonationList* list in donationLists)
+    {
+        if(list.ID == listToRemove.ID)
+        {
+            listToDelete = list;
+            break;
+        }
+    }
+    
+    //If list found
+    if(listToDelete != nil)
+    {
+        //Delete list
+        [donationLists removeObject:listToDelete];
+        
+        //Save result to disc
+        if(listToRemove.listType == 0)
+            [VPNItemList saveItemListsToDisc:donationLists forTaxYear:user.selected_tax_year];
+        else if(listToRemove.listType == 1)
+            [VPNCashList saveCashListsToDisc:donationLists forTaxYear:user.selected_tax_year];
+        else if(listToRemove.listType == 2)
+            [VPNMileageList saveMileageListsToDisc:donationLists forTaxYear:user.selected_tax_year];
+        
+    }
 }
 
 
