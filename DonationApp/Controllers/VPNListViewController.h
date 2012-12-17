@@ -14,8 +14,9 @@
 #define kHeaderLabelTag     1
 #define kAmountLabelTag     2
 
-@interface VPNListViewController : UITableViewController <VPNCDManagerDelegate>
+@interface VPNListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNCDManagerDelegate>
 
+@property (strong, nonatomic) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) VPNDonationListGroup* group;
 @property (strong, nonatomic) VPNUser* user;
 

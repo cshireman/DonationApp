@@ -24,16 +24,6 @@
 @synthesize user;
 @synthesize total;
 
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,11 +77,24 @@
     amountLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     amountLabel.frame = CGRectMake(160,0, 150, 21);
     amountLabel.textAlignment = UITextAlignmentRight;
-        
+    
+    [headerLabel setText:[self tableView:tableView titleForHeaderInSection:section]];
+    [amountLabel setText:[self tableView:tableView amountForHeaderInSection:section]];
+
     [headerView addSubview:headerLabel];
     [headerView addSubview:amountLabel];
     
     return headerView;
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Donations";
+}
+
+-(NSString*)tableView:(UITableView *)tableView amountForHeaderInSection:(NSInteger)section
+{
+    return [NSString stringWithFormat:@"%.02f",[group totalForAllLists]];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

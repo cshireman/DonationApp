@@ -14,15 +14,6 @@
 
 @implementation VPNMileageListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,26 +33,28 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+#pragma mark -
+#pragma mark UITableViewDataSource methods
+
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return @"Cash Donations";
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSString*)tableView:(UITableView *)tableView amountForHeaderInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [NSString stringWithFormat:@"$%.02f",[self.group totalForAllLists]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    VPNDonationList* donationList = [self.group.donationLists objectAtIndex:indexPath.row];
     
     // Configure the cell...
+    UILabel* amountLabel = (UILabel*)[cell viewWithTag:3];
+    amountLabel.text = [NSString stringWithFormat:@"%.02f",[donationList.cashDonation doubleValue]];
     
     return cell;
 }

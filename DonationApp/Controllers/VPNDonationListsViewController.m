@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
-#import "VPNDontationListsViewController.h"
+#import "VPNDonationListsViewController.h"
 #import "VPNCDManager.h"
 #import "VPNItem.h"
 #import "VPNOrganization.h"
@@ -16,7 +16,7 @@
 #import "VPNUser.h"
 #import "VPNTaxSavings.h"
 
-@interface VPNDontationListsViewController ()
+@interface VPNDonationListsViewController ()
 {
     NSArray* organizations;
     NSIndexPath* indexToDelete;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation VPNDontationListsViewController
+@implementation VPNDonationListsViewController
 
 @synthesize taxSavingsLabel;
 
@@ -346,13 +346,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    switch(indexPath.section)
+    {
+        case 0:
+            [self performSegueWithIdentifier:@"ManageItemListSegue" sender:[itemLists objectAtIndex:indexPath.row]];
+            break;
+        case 1:
+            [self performSegueWithIdentifier:@"CashListSegue" sender:[cashListGroup objectAtIndex:indexPath.row]];
+            break;
+        case 2:
+            [self performSegueWithIdentifier:@"MileageListSegue" sender:[mileageListGroup objectAtIndex:indexPath.row]];
+        default:
+            break;
+    }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark -
@@ -437,6 +445,21 @@
     [alert show];
 }
 
+
+#pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(setItemList:)])
+    {
+        [segue.destinationViewController setValue:sender forKey:@"itemList"];
+    }
+    else if([segue.destinationViewController respondsToSelector:@selector(setGroup:)])
+    {
+        [segue.destinationViewController setValue:sender forKey:@"group"];
+    }
+}
 
 #pragma mark -
 #pragma mark Custom Methods
