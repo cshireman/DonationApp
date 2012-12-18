@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNCDManagerDelegate.h"
+#import "VPNEditDonationListDelegate.h"
 #import "VPNDonationListGroup.h"
 #import "VPNUser.h"
 
 #define kHeaderLabelTag     1
 #define kAmountLabelTag     2
 
-@interface VPNListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNCDManagerDelegate>
+@interface VPNListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNCDManagerDelegate, VPNEditDonationListDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) VPNDonationListGroup* group;
@@ -28,5 +29,8 @@
 //VPNCDManager Delegate methods
 -(void) didDeleteList:(id)list;
 -(void) deleteListFailedWithError:(NSError *)error;
+
+//VPNEditDonationList Delegate Methods
+-(void) didFinishEditingDonationList:(VPNDonationList*)donationList;
 
 @end

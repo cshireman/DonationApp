@@ -21,6 +21,22 @@
 #define kVPNItemIsCustomValueKey        @"IsCustomValue"
 #define kVPNItemNotesKey                @"Notes"
 
+typedef enum
+{
+    Fair=0,
+    Good=1,
+    VeryGood=2,
+    Excellent=3,
+    Mint=4
+} ItemCondition;
+
+typedef enum
+{
+    Other=1,
+    OnlineAuction=2,
+    ComparableSales=3,
+    ThriftStore=4
+} ItemValuation;
 
 @interface VPNItem : NSObject <NSCoding, NSCopying>
 
@@ -28,8 +44,8 @@
 
 @property (strong, nonatomic) NSDate* creationDate;
 
-@property (assign) int condition;
-@property (assign) int valuation;
+@property (assign) ItemCondition condition;
+@property (assign) ItemValuation valuation;
 @property (assign) int categoryID;
 @property (assign) int itemID;
 

@@ -7,9 +7,12 @@
 //
 
 #import "VPNCashListViewController.h"
+#import "VPNDonationList.h"
 
 @interface VPNCashListViewController ()
-
+{
+    VPNDonationList* listToManage;
+}
 @end
 
 @implementation VPNCashListViewController
@@ -67,29 +70,48 @@
 }
 
 
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    listToManage = [self.group.donationLists objectAtIndex:indexPath.row];
+    listToManage.listType = CashList;
+    
+    [self performSegueWithIdentifier:@"AddEditCashListSegue" sender:self];
 }
+
+#pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
+    {
+        [segue.destinationViewController setValue:self forKey:@"delegate"];
+    }
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setDonationList:)])
+    {
+        [segue.destinationViewController setValue:listToManage forKey:@"donationList"];
+    }
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setOrganization:)])
+    {
+        [segue.destinationViewController setValue:self.group.organization forKey:@"organization"];
+    }
+    
+}
+
+#pragma mark -
+#pragma mark Custom Methods
+
+- (IBAction)addButtonPushed:(id)sender
+{
+    listToManage = [[VPNDonationList alloc] init];
+    listToManage.listType = CashList;
+    
+    [self performSegueWithIdentifier:@"AddEditCashListSegue" sender:self];
+}
+
 
 @end

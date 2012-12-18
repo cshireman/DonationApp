@@ -751,7 +751,7 @@
             </objects>
             <point key="canvasLocation" x="2003" y="-86"/>
         </scene>
-        <!--Mileage List View Controller - Mileage Lists-->
+        <!--Mileage List View Controller - Charitable Mileage-->
         <scene sceneID="Icq-L5-aFq">
             <objects>
                 <viewController id="W7V-xp-Oqg" customClass="VPNMileageListViewController" sceneMemberID="viewController">
@@ -810,7 +810,7 @@
                                         <rect key="frame" x="20" y="9" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Add Mileage List">
+                                        <state key="normal" title="Add a Mileage Entry">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -827,7 +827,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Mileage Lists" id="36B-EE-LI3">
+                    <navigationItem key="navigationItem" title="Charitable Mileage" id="36B-EE-LI3">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="lOa-zh-xg5"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="1F9-I3-zE5">
                             <connections>
                                 <action selector="editButtonPushed:" destination="W7V-xp-Oqg" id="tl0-yb-W0w"/>
@@ -836,42 +837,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="dj9-ec-3cL" id="Fjg-L2-FHy"/>
-                        <segue destination="FPM-ww-F1T" kind="push" identifier="AddEditMileageListSegue" id="eNs-Jb-0mV"/>
+                        <segue destination="cr6-3o-1nK" kind="push" identifier="AddEditMileageListSegue" id="VAV-6Z-F3h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPA-4B-rJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2992" y="-78"/>
-        </scene>
-        <!--Table View Controller - Edit Mileage Donation-->
-        <scene sceneID="zUl-EM-YfM">
-            <objects>
-                <tableViewController id="FPM-ww-F1T" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="CYF-TP-uHW">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="GD0-Dd-cW7">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="FPM-ww-F1T" id="s4H-VM-5Z2"/>
-                            <outlet property="delegate" destination="FPM-ww-F1T" id="2zD-z8-nSG"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Edit Mileage Donation" id="4nY-K7-67m"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3hw-10-hNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3430" y="-78"/>
+            <point key="canvasLocation" x="2499" y="41"/>
         </scene>
         <!--Navigation Controller - Organizations-->
         <scene sceneID="49O-EH-Jqj">
@@ -954,6 +925,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Donations" id="fdE-Zf-fJI">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="uNJ-1s-3KO"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="2AK-ec-kHZ">
                             <connections>
                                 <action selector="editButtonPushed:" destination="8Cy-ph-Lh3" id="53m-uO-P0w"/>
@@ -968,9 +940,9 @@
                     <connections>
                         <outlet property="taxSavingsLabel" destination="aBj-3w-L54" id="uM1-12-dq4"/>
                         <segue destination="cr6-3o-1nK" kind="push" identifier="AddListSegue" id="eUN-nc-hUi"/>
-                        <segue destination="Kgo-V5-SSq" kind="push" identifier="ManageItemListSegue" id="Hdk-UB-VSS"/>
                         <segue destination="BXc-B8-Sdr" kind="push" identifier="CashListSegue" id="ewO-zC-mgi"/>
                         <segue destination="W7V-xp-Oqg" kind="push" identifier="MileageListSegue" id="4QJ-vM-Fuh"/>
+                        <segue destination="eBQ-yK-HSt" kind="push" identifier="ManageItemListSegue" id="fFg-b8-hXm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pv4-vL-jwt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1188,7 +1160,7 @@
                         <outlet property="organizationPicker" destination="17X-fh-26n" id="ENF-3d-IHA"/>
                         <outlet property="organizationPickerView" destination="bk4-ee-KGZ" id="VJW-sY-CVX"/>
                         <outlet property="startAddingItemsButton" destination="ETD-qn-FLz" id="vLY-Pf-NbO"/>
-                        <segue destination="Kgo-V5-SSq" kind="push" identifier="ItemListSegue" id="gAv-j1-Rih"/>
+                        <segue destination="eBQ-yK-HSt" kind="push" identifier="ItemListSegue" id="JgW-iW-Uj2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSY-Un-55V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1288,46 +1260,136 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2499" y="634"/>
         </scene>
-        <!--Donation Item List View Controller - Item Donations-->
-        <scene sceneID="rk7-Gc-hrU">
+        <!--Donation Item List View Controller - Donation Items-->
+        <scene sceneID="Tab-wX-Ln7">
             <objects>
-                <tableViewController id="Kgo-V5-SSq" customClass="VPNDonationItemListViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0c3-X2-bSH">
+                <viewController id="eBQ-yK-HSt" customClass="VPNDonationItemListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pl8-6K-mug">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CGc-kz-Nse">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5pU-rl-CTE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="305"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="gQu-AM-U6A">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Organization" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kvd-WC-xMg">
+                                            <rect key="frame" x="20" y="3" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="DonationDate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D0e-FO-8Mn">
+                                            <rect key="frame" x="20" y="20" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="COu-ME-D2W">
+                                            <rect key="frame" x="274" y="6" width="29" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="editListPushed:" destination="eBQ-yK-HSt" eventType="touchUpInside" id="KEL-s1-sE5"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Kgo-V5-SSq" id="Pwh-gv-48y"/>
-                            <outlet property="delegate" destination="Kgo-V5-SSq" id="hNL-lj-DxZ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Item Donations" id="0DO-jR-DTZ">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="beW-4d-yT9">
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="fol-Bj-KS3">
+                                        <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eBQ-yK-HSt" id="uPd-OS-PiQ"/>
+                                    <outlet property="delegate" destination="eBQ-yK-HSt" id="Dqb-i7-ba8"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" id="FPn-Y8-tR8">
+                                <rect key="frame" x="0.0" y="305" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="auu-wo-L80">
+                                        <rect key="frame" x="14" y="9" width="149" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Add Custom Item">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addCustomItemPushed:" destination="eBQ-yK-HSt" eventType="touchUpInside" id="eWz-Q9-zj1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P96-YO-HlS">
+                                        <rect key="frame" x="171" y="9" width="129" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Add eBay Item">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addItemPushed:" destination="eBQ-yK-HSt" eventType="touchUpInside" id="W9X-pd-zhb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Donation Items" id="gak-kw-KC3">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="vQU-nF-7RG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="izE-UA-bPq">
                             <connections>
-                                <action selector="backPushed:" destination="Kgo-V5-SSq" id="ub7-cA-UY1"/>
+                                <action selector="backPushed:" destination="eBQ-yK-HSt" id="9T2-1c-drT"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="zup-am-Rls">
+                            <connections>
+                                <action selector="editPushed:" destination="eBQ-yK-HSt" id="jvZ-nL-3Hg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="8VY-Ol-Gbm" kind="push" id="99d-wC-e7e"/>
-                        <segue destination="1Gt-wV-Iuw" kind="push" id="7rK-QK-sSi"/>
-                        <segue destination="drF-lv-DNy" kind="push" id="aJ7-nV-fr8"/>
+                        <outlet property="donationListInfoLabel" destination="D0e-FO-8Mn" id="lOL-Mg-sey"/>
+                        <outlet property="organizationLabel" destination="Kvd-WC-xMg" id="Jc2-7u-gnJ"/>
+                        <outlet property="tableView" destination="5pU-rl-CTE" id="k26-0T-sX2"/>
+                        <segue destination="8VY-Ol-Gbm" kind="push" identifier="ItemSearchSegue" id="x92-0R-Ytm"/>
+                        <segue destination="drF-lv-DNy" kind="push" identifier="EditItemSegue" id="jEP-vW-rmk"/>
+                        <segue destination="1Gt-wV-Iuw" kind="push" identifier="EditCustomItemSegue" id="vr0-20-Lc0"/>
+                        <segue destination="cr6-3o-1nK" kind="push" identifier="EditDonationListSegue" id="xZe-Ub-trX"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aO1-Sp-fMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eZw-mC-OdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2992" y="634"/>
+            <point key="canvasLocation" x="3091" y="634"/>
         </scene>
         <!--Table View Controller - Item Search-->
         <scene sceneID="kEB-AA-3aB">
@@ -1385,7 +1447,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="1Gt-wV-Iuw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ghs-cv-5d0">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1514,7 +1576,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <rect key="frame" x="20" y="5" width="280" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Add Cash List">
+                                        <state key="normal" title="Add a Money Donation">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1532,6 +1594,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cash Lists" id="NK0-7p-reL">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="sGA-cQ-LWx"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="uxt-OZ-26R">
                             <connections>
                                 <action selector="editButtonPushed:" destination="BXc-B8-Sdr" id="7zJ-2e-hGi"/>
@@ -1540,42 +1603,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="xqX-Gx-zAT" id="Bql-K7-tW7"/>
-                        <segue destination="djn-sZ-fib" kind="push" identifier="AddEditCashListSegue" id="48Q-58-LF0"/>
+                        <segue destination="cr6-3o-1nK" kind="push" identifier="AddEditCashListSegue" id="sIa-g4-8qs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewc-vT-wId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2985" y="1286"/>
-        </scene>
-        <!--Table View Controller - Edit Cash Donation-->
-        <scene sceneID="Ego-vr-lmD">
-            <objects>
-                <tableViewController id="djn-sZ-fib" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KPY-KG-f6M">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="WAl-fk-7ld">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="djn-sZ-fib" id="JHt-YV-Svz"/>
-                            <outlet property="delegate" destination="djn-sZ-fib" id="yU1-zW-BfN"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Edit Cash Donation" id="eXZ-ve-2AJ"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lic-xL-Vf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3430" y="1286"/>
+            <point key="canvasLocation" x="2499" y="1275"/>
         </scene>
         <!--Navigation Controller - Reports-->
         <scene sceneID="jHn-u4-W40">
@@ -1742,10 +1775,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
             </relationships>
         </class>
-        <class className="VPNDonationItemListViewController" superclassName="UITableViewController">
+        <class className="VPNDonationItemListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDonationItemListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addCustomItemPushed:"/>
+                <relationship kind="action" name="addItemPushed:"/>
                 <relationship kind="action" name="backPushed:"/>
+                <relationship kind="action" name="editListPushed:"/>
+                <relationship kind="action" name="editPushed:"/>
+                <relationship kind="outlet" name="donationListInfoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="organizationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="VPNDonationListsViewController" superclassName="UITableViewController">
@@ -1869,9 +1909,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="aQI-nu-Yoy"/>
-        <segue reference="Hdk-UB-VSS"/>
-        <segue reference="aJ7-nV-fr8"/>
+        <segue reference="JgW-iW-Uj2"/>
+        <segue reference="xZe-Ub-trX"/>
+        <segue reference="jEP-vW-rmk"/>
         <segue reference="RQg-YL-ioz"/>
+        <segue reference="aQI-nu-Yoy"/>
     </inferredMetricsTieBreakers>
 </document>

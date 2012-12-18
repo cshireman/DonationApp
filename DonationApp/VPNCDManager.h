@@ -15,6 +15,7 @@
 #import "VPNSession.h"
 #import "VPNOrganization.h"
 #import "VPNDonationList.h"
+#import "VPNItem.h"
 
 extern NSString* VPNCDManagerError;
 extern NSString* APIErrorDomain;
@@ -70,9 +71,11 @@ enum {
 -(void)updateDonationList:(VPNDonationList*)listToUpdate;
 -(void)deleteDonationList:(VPNDonationList*)listToDelete;
 
+-(void)addDonationListItem:(VPNItem*)itemToAdd;
+-(void)updateDonationListItem:(VPNItem*)itemToUpdate;
+-(void)deleteDonationListItem:(VPNItem*)itemToDelete;
 
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
-
 
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;

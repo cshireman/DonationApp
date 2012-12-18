@@ -85,8 +85,8 @@
         self.donationDate = [NSDate dateWithCDValue:[info objectForKey:@"DonationDate"]];
         
         self.name = [info objectForKey:@"Name"];
-        self.dateAquired = [info objectForKey:@"DateAquired"];
-        self.howAquired = [info objectForKey:@"HowAquired"];
+        self.dateAquired = [info objectForKey:@"DateAcquired"];
+        self.howAquired = [info objectForKey:@"HowAcquired"];
         
         self.costBasis = [info objectForKey:@"CostBasis"];
         self.notes = [info objectForKey:@"Notes"];
@@ -150,7 +150,6 @@
     [info setObject:[NSNumber numberWithInt:self.companyID] forKey:@"companyID"];
     [info setObject:[formatter stringFromDate:self.creationDate] forKey:@"creationDate"];
     [info setObject:[formatter stringFromDate:self.donationDate] forKey:@"donationDate"];
-    [info setObject:self.name forKey:@"name"];
     
     [info setObject:self.notes forKey:@"notes"];
     [info setObject:self.name forKey:@"name"];

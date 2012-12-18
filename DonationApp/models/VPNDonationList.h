@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum{
+    ItemList = 0,
+    CashList = 1,
+    MileageList = 2
+    
+} DonationListType;
+
 @interface VPNDonationList : NSObject <NSCoding,NSCopying>
 
 @property (assign) int ID;
-@property (assign) int listType;
+@property (assign) DonationListType listType;
 
 @property (assign) int companyID;
 

@@ -588,7 +588,6 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
     
     VPNSession* session = [VPNSession currentSession];    
-    VPNUser* user = [VPNUser currentUser];
     
     [request setObject:APIKey forKey:@"apiKey"];
     [request setObject:session.session forKey:@"session"];
@@ -646,6 +645,21 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     
     self.currentDonationList = listToDelete;
     [communicator makeAPICall:DeleteList withContent:jsonString];
+    
+}
+
+-(void)addDonationListItem:(VPNItem*)itemToAdd
+{
+    
+}
+
+-(void)updateDonationListItem:(VPNItem*)itemToUpdate
+{
+    
+}
+
+-(void)deleteDonationListItem:(VPNItem*)itemToDelete
+{
     
 }
 

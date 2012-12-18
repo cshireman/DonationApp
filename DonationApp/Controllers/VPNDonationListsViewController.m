@@ -451,9 +451,10 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.destinationViewController respondsToSelector:@selector(setItemList:)])
+    if([segue.destinationViewController respondsToSelector:@selector(setDonationList:)])
     {
-        [segue.destinationViewController setValue:sender forKey:@"itemList"];
+        [segue.destinationViewController setValue:sender forKey:@"donationList"];
+
     }
     else if([segue.destinationViewController respondsToSelector:@selector(setGroup:)])
     {
@@ -493,6 +494,6 @@
 
 - (IBAction)addButtonPushed:(id)sender
 {
-    [self performSegueWithIdentifier:@"AddListSegue" sender:self];
+    [self performSegueWithIdentifier:@"AddListSegue" sender:nil];
 }
 @end

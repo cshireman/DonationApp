@@ -12,9 +12,11 @@
 #import "VPNOrganization.h"
 #import "VPNCDManager.h"
 #import "VPNCDManagerDelegate.h"
-
+#import "VPNEditDonationListDelegate.h"
 
 @interface VPNAddDonationListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, VPNCDManagerDelegate>
+
+@property (strong, nonatomic) id<VPNEditDonationListDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UITableView* listTable;
 

@@ -37,6 +37,8 @@
 +(void) saveOrganizationsToDisc:(NSArray*)organizations;
 +(NSString*) organizationFilePath;
 
++(VPNOrganization*) organizationForID:(int)organizationID;
+
 -(id) initWithDictionary:(NSDictionary*)info;
 
 -(void) fillWithBlanks;

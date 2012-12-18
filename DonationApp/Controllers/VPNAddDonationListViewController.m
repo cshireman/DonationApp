@@ -19,6 +19,8 @@
     BOOL organizationPickerDisplayed;
     BOOL itemSourcePickerDisplayed;
     
+    BOOL showTypeSelector;
+    
     NSArray* organizations;
     NSArray* itemSources;
     
@@ -32,6 +34,8 @@
 @end
 
 @implementation VPNAddDonationListViewController
+
+@synthesize delegate;
 
 @synthesize listTable;
 
@@ -86,14 +90,49 @@
     [dateFormat setDateFormat:@"yyyyMMdd"];
     
 	// Do any additional setup after loading the view.
-    donationList = [[VPNDonationList alloc] init];
-    donationList.listType = 0;
-    donationList.name = @"";
-    donationList.donationDate = [dateFormat dateFromString:taxYearFormat];
-    donationList.creationDate = [NSDate date];
-    donationList.howAquired = [itemSources objectAtIndex:0];
-    
-    selectedListType = 0;
+    if(donationList == nil)
+    {
+        showTypeSelector = YES;
+        
+        donationList = [[VPNDonationList alloc] init];
+        donationList.listType = 0;
+        donationList.name = @"";
+        donationList.donationDate = [dateFormat dateFromString:taxYearFormat];
+        donationList.creationDate = [NSDate date];
+        donationList.howAquired = [itemSources objectAtIndex:0];
+        
+        selectedListType = 0;
+    }
+    else
+    {
+        showTypeSelector = NO;
+        
+        //Adding a new list
+        if(donationList.ID == 0)
+        {
+            donationList.name = @"";
+            donationList.donationDate = [dateFormat dateFromString:taxYearFormat];
+            donationList.creationDate = [NSDate date];
+            donationList.howAquired = [itemSources objectAtIndex:0];
+            
+            if(donationList.listType == CashList)
+                self.title = @"New Donation";
+            else if(donationList.listType == MileageList)
+                self.title = @"New Mileage";
+        }
+        else
+        {
+            if(donationList.listType == ItemList)
+                self.title = @"Donation Items";
+            else if(donationList.listType == CashList)
+                self.title = @"Edit Donation";
+            else if(donationList.listType == MileageList)
+                self.title = @"Edit Mileage";
+        }
+        
+        selectedListType = donationList.listType;
+        [startAddingItemsButton setHidden:YES];
+    }
     
     [datePicker addTarget:self
                      action:@selector(updateListDate:)
@@ -131,7 +170,11 @@
     
     self.listTable.scrollEnabled = NO;
     
-    doneButton.enabled = NO;
+    if(organization == nil)
+        doneButton.enabled = NO;
+    else
+        doneButton.enabled = YES;
+    
     startAddingItemsButton.enabled = NO;
 }
 
@@ -150,18 +193,37 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch(indexPath.row)
+    if(showTypeSelector)
     {
-        case 0:
-        case 1:
-        case 2:
-            return 44;
-        case 3:
-            if(selectedListType == 0)
-                return 62;
-            else if(selectedListType == 1 || selectedListType == 2)
-                return 75;
-        default: break;
+        switch(indexPath.row)
+        {
+            case 0:
+            case 1:
+            case 2:
+                return 44;
+            case 3:
+                if(selectedListType == 0)
+                    return 62;
+                else if(selectedListType == 1 || selectedListType == 2)
+                    return 75;
+            default: break;
+        }
+    }
+    else
+    {
+        switch(indexPath.row)
+        {
+            case 0:
+            case 1:
+                return 44;
+            case 2:
+                if(selectedListType == 0)
+                    return 62;
+                else if(selectedListType == 1 || selectedListType == 2)
+                    return 75;
+            default: break;
+        }
+        
     }
 
     return 1000;
@@ -170,21 +232,42 @@
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* CellIdentifier = @"Cell";
-    switch(indexPath.row)
+    if(showTypeSelector)
     {
-        case 0: CellIdentifier = @"DonationDateCell"; break;
-        case 1: CellIdentifier = @"OrganizationCell"; break;
-        case 2: CellIdentifier = @"ListTypeCell"; break;
-        case 3:
-            if(selectedListType == 0)
-                CellIdentifier = @"ItemSourceCell";
-            else if(selectedListType == 1)
-                CellIdentifier = @"CashAmountCell";
-            else if(selectedListType == 2)
-                CellIdentifier = @"MileageAmountCell";
-            
-            break;
-        default: break;
+        switch(indexPath.row)
+        {
+            case 0: CellIdentifier = @"DonationDateCell"; break;
+            case 1: CellIdentifier = @"OrganizationCell"; break;
+            case 2: CellIdentifier = @"ListTypeCell"; break;
+            case 3:
+                if(selectedListType == 0)
+                    CellIdentifier = @"ItemSourceCell";
+                else if(selectedListType == 1)
+                    CellIdentifier = @"CashAmountCell";
+                else if(selectedListType == 2)
+                    CellIdentifier = @"MileageAmountCell";
+                
+                break;
+            default: break;
+        }
+    }
+    else
+    {
+        switch(indexPath.row)
+        {
+            case 0: CellIdentifier = @"DonationDateCell"; break;
+            case 1: CellIdentifier = @"OrganizationCell"; break;
+            case 2:
+                if(selectedListType == 0)
+                    CellIdentifier = @"ItemSourceCell";
+                else if(selectedListType == 1)
+                    CellIdentifier = @"CashAmountCell";
+                else if(selectedListType == 2)
+                    CellIdentifier = @"MileageAmountCell";
+                
+                break;
+            default: break;
+        }
     }
     
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -263,31 +346,63 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    switch(indexPath.row)
+    if(showTypeSelector)
     {
-        case 0:
-            [self displayDatePicker];
-            break;
-        case 1:
-            if(organization == nil)
-            {
-                organization = [organizations objectAtIndex:0];
-                [self.listTable reloadData];
+        switch(indexPath.row)
+        {
+            case 0:
+                [self displayDatePicker];
+                break;
+            case 1:
+                if(organization == nil)
+                {
+                    organization = [organizations objectAtIndex:0];
+                    [self.listTable reloadData];
+                    
+                    startAddingItemsButton.enabled = YES;
+                    doneButton.enabled = YES;
+                }
+                
+                [self displayOrganizationPicker];
+                break;
+            case 3:
+                if(selectedListType == 0)
+                    [self displayItemSourcePicker];
+                
+                break;
+            default:
+                break;
+        }
+    }
+    else
+    {
+        switch(indexPath.row)
+        {
+            case 0:
+                [self displayDatePicker];
+                break;
+            case 1:
+                if(organization == nil)
+                {
+                    organization = [organizations objectAtIndex:0];
+                    [self.listTable reloadData];
+                }
                 
                 startAddingItemsButton.enabled = YES;
                 doneButton.enabled = YES;
-            }
-            
-            [self displayOrganizationPicker];
-            break;
-        case 3:
-            if(selectedListType == 0)
-                [self displayItemSourcePicker];
-            
-            break;
-        default:
-            break;
+                
+                [self displayOrganizationPicker];
+                break;
+            case 2:
+                if(selectedListType == 0)
+                    [self displayItemSourcePicker];
+                
+                break;
+            default:
+                break;
+        }
     }
+    
 }
 
 #pragma mark -
@@ -510,6 +625,8 @@
 {
     //Scroll table view up
     NSIndexPath* fieldRow = [NSIndexPath indexPathForRow:3 inSection:0];
+    if(!showTypeSelector)
+        fieldRow = [NSIndexPath indexPathForRow:2 inSection:0];
 
     self.listTable.scrollEnabled = YES;
     [self.listTable scrollToRowAtIndexPath:fieldRow atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -552,14 +669,19 @@
     donationList.companyID = organization.ID;
     donationList.name = organization.name;
     
+    if(donationList.howAquired == nil)
+        donationList.howAquired = @"I purchased them.";
+    
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //Shift date to current year for default value
     [dateFormat setDateFormat:@"MM/dd/YYYY"];
     donationList.dateAquired = [dateFormat stringFromDate:donationList.donationDate];
 
-    
-    [manager addDonationList:donationList];
+    if(donationList.ID == 0)
+        [manager addDonationList:donationList];
+    else
+        [manager updateDonationList:donationList];
 }
 
 -(IBAction) startAddingItemsPushed:(id)sender
@@ -567,13 +689,65 @@
     [self donePushed:sender];
 }
 
--(IBAction) finishedEditingItems:(UIStoryboardSegue*)segue
-{
-    //Should have poped to this controller;
-}
-
 #pragma mark -
 #pragma mark VPNCDManagerDelegate methods
+
+-(void) didUpdateList:(VPNDonationList*)list
+{
+    VPNUser* user = [VPNUser currentUser];
+    
+    if(list.listType == ItemList)
+    {
+        NSMutableArray* itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+        
+        for(int i = 0; i < [itemLists count]; i++)
+        {
+            VPNDonationList* itemList = [itemLists objectAtIndex:i];
+            if(itemList.ID == list.ID)
+            {
+                [itemLists replaceObjectAtIndex:i withObject:list];
+                break;
+            }
+        }
+        
+        [VPNItemList saveItemListsToDisc:itemLists forTaxYear:user.selected_tax_year];
+    }
+    else if(list.listType == CashList)
+    {
+        NSMutableArray* cashLists = [VPNCashList loadCashListsFromDisc:user.selected_tax_year];
+        
+        for(int i = 0; i < [cashLists count]; i++)
+        {
+            VPNDonationList* cashList = [cashLists objectAtIndex:i];
+            if(cashList.ID == list.ID)
+            {
+                [cashLists replaceObjectAtIndex:i withObject:list];
+                break;
+            }
+        }
+        
+        [VPNCashList saveCashListsToDisc:cashLists forTaxYear:user.selected_tax_year];
+    }
+    else if(list.listType == MileageList)
+    {
+        NSMutableArray* mileageLists = [VPNMileageList loadMileageListsFromDisc:user.selected_tax_year];
+        
+        for(int i = 0; i < [mileageLists count]; i++)
+        {
+            VPNDonationList* mileageList = [mileageLists objectAtIndex:i];
+            if(mileageList.ID == list.ID)
+            {
+                [mileageLists replaceObjectAtIndex:i withObject:list];
+                break;
+            }
+        }
+        
+        [VPNMileageList saveMileageListsToDisc:mileageLists forTaxYear:user.selected_tax_year];
+    }
+
+    [delegate didFinishEditingDonationList:donationList];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void) didAddList:(VPNDonationList*)list
 {
@@ -599,14 +773,26 @@
     }
     
     if(submittingButton == doneButton)
+    {
+        [delegate didFinishEditingDonationList:list];
         [self.navigationController popViewControllerAnimated:YES];
+    }
     else if(submittingButton == startAddingItemsButton)
+    {
         [self performSegueWithIdentifier:@"ItemListSegue" sender:submittingButton];
+    }
 }
 
 -(void) addListFailedWithError:(NSError *)error
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Add List Error" message:@"Unable to add your donation list at this time, please try again later" delegate:nil cancelButtonTitle:@"close" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Add List Error" message:@"Unable to add your donation list at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
+}
+
+-(void) updateListFailedWithError:(NSError *)error
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update List Error" message:@"Unable to update your donation list at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     
     [alert show];
 }

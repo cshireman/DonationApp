@@ -13,6 +13,7 @@
 #import "VPNItem.h"
 #import "VPNUser.h"
 
+
 @implementation VPNDonationList
 
 @synthesize ID;
@@ -51,7 +52,7 @@
         [info setObject:self.dateAquired forKey:@"dateAquired"];
         [info setObject:self.howAquired forKey:@"howAquired"];
         
-        [info setObject:costBasis forKey:@"costBasis"];
+        [info setObject:self.costBasis forKey:@"costBasis"];
         [info setObject:@"" forKey:@"cashDonation"];
         [info setObject:@"" forKey:@"miles"];
     }

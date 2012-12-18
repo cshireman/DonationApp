@@ -201,6 +201,38 @@
     [alert show];
 }
 
+#pragma mark -
+#pragma mark VPNEditDonationListDelegate Methods
+
+-(void) didFinishEditingDonationList:(VPNDonationList*)donationList
+{
+    BOOL listFound = NO;
+    for(int i = 0; i < [group.donationLists count]; i++)
+    {
+        VPNDonationList* existingList = [group.donationLists objectAtIndex:i];
+        if(donationList.ID == existingList.ID)
+        {
+            if(donationList.companyID == group.organization.ID)
+            {
+                [group.donationLists replaceObjectAtIndex:i withObject:donationList];
+            }
+            else
+            {
+                [group.donationLists removeObjectAtIndex:i];
+            }
+            
+            listFound = YES;
+            break;
+        }
+    }
+    
+    if(!listFound)
+    {
+        [group.donationLists addObject:donationList];
+    }
+    
+    [self.tableView reloadData];
+}
 
 #pragma mark -
 #pragma mark Custom Methods

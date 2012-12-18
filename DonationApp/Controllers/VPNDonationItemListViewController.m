@@ -14,19 +14,21 @@
 
 @implementation VPNDonationItemListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize organizationLabel;
+@synthesize donationListInfoLabel;
+@synthesize tableView;
+@synthesize donationList;
+@synthesize organization;
+@synthesize itemGroups;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    if(organization == nil)
+        organization = [VPNOrganization organizationForID:donationList.companyID];
+    
+    [self updateHeaderInfo];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -44,14 +46,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 0;
 }
@@ -126,4 +126,89 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (IBAction)addCustomItemPushed:(id)sender {
+    [self performSegueWithIdentifier:@"EditCustomItemSegue" sender:self];
+}
+
+- (IBAction)addItemPushed:(id)sender {
+    [self performSegueWithIdentifier:@"ItemSearchSegue" sender:self];
+}
+
+- (IBAction)editListPushed:(id)sender {
+    [self performSegueWithIdentifier:@"EditDonationListSegue" sender:self];
+}
+
+- (IBAction)editPushed:(id)sender {
+    [self.tableView setEditing:![self.tableView isEditing] animated:YES];
+}
+
+-(void) updateHeaderInfo
+{    
+    organizationLabel.text = organization.name;
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    NSString* listDate = [formatter stringFromDate:donationList.donationDate];
+    NSString* itemSource = donationList.howAquired;
+    
+    donationListInfoLabel.text = [NSString stringWithFormat:@"%@ (%@)",listDate,itemSource];
+}
+
+#pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
+    {
+        [segue.destinationViewController setValue:self forKey:@"delegate"];
+    }
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setDonationList:)])
+    {
+        [segue.destinationViewController setValue:donationList forKey:@"donationList"];
+    }
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setOrganization:)])
+    {
+        [segue.destinationViewController setValue:organization forKey:@"organization"];
+    }
+    
+}
+
+#pragma mark -
+#pragma mark VPNCDManagerDelegate Methods
+
+-(void)didDeleteListItem:(id)item
+{
+    
+}
+
+-(void)deleteListItemFailedWithError:(NSError *)error
+{
+    
+}
+
+#pragma mark -
+#pragma mark VPNEditDonationListDelegate Methods
+
+-(void)didFinishEditingDonationList:(VPNDonationList *)localDonationList
+{
+    donationList = localDonationList;
+    if(donationList.companyID != organization.ID)
+    {
+        organization = [VPNOrganization organizationForID:donationList.companyID];
+    }
+
+    [self updateHeaderInfo];
+}
+
+- (void)viewDidUnload {
+    [self setOrganizationLabel:nil];
+    [self setDonationListInfoLabel:nil];
+    [self setTableView:nil];
+    [super viewDidUnload];
+}
 @end

@@ -120,6 +120,20 @@
     return [documentsDirectory stringByAppendingPathComponent:kOrganizationsFilePath];
 }
 
++(VPNOrganization*) organizationForID:(int)organizationID
+{
+    NSArray* orgs = [VPNOrganization loadOrganizationsFromDisc];
+    
+    for(VPNOrganization* org in orgs)
+    {
+        if(org.ID == organizationID)
+            return org;
+    }
+    
+    return nil;
+}
+
+
 -(void) fillWithBlanks
 {
     if(name == nil)
@@ -138,5 +152,6 @@
         zip_code = @"";
     
 }
+
 
 @end
