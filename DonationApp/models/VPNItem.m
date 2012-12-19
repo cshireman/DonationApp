@@ -112,7 +112,7 @@
 
         self.condition = [[info objectForKey:@"Condition"] intValue];
         self.valuation = [[info objectForKey:@"Valuation"] intValue];
-        self.categoryID = [[info objectForKey:@"CategoryID"] intValue];
+        self.categoryID = [[info objectForKey:@"Category"] intValue];
         self.itemID = [[info objectForKey:@"ItemID"] intValue];
         
         self.name = [info objectForKey:@"Name"];
@@ -128,6 +128,33 @@
     }
     
     return self;
+}
+
+-(NSDictionary*) toDictionary
+{
+    NSMutableDictionary* info = [NSMutableDictionary dictionary];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"M/d/y"];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    [info setObject:[formatter stringFromDate:self.creationDate] forKey:@"creationDate"];
+    
+    [info setObject:[NSNumber numberWithInt:self.condition] forKey:@"condition"];
+    [info setObject:[NSNumber numberWithInt:self.valuation] forKey:@"valuation"];
+    [info setObject:[NSNumber numberWithInt:self.categoryID] forKey:@"category"];
+    [info setObject:[NSNumber numberWithInt:self.itemID] forKey:@"itemID"];
+    
+    [info setObject:self.name forKey:@"name"];
+    [info setObject:[NSNumber numberWithInt:self.quantity] forKey:@"quantity"];
+    [info setObject:self.fairMarketValue forKey:@"fairMarketValue"];
+    [info setObject:[NSNumber numberWithBool:self.isCustomItem] forKey:@"isCustomItem"];
+    [info setObject:[NSNumber numberWithBool:self.isCustomValue] forKey:@"isCustomValue"];
+    
+    [info setObject:self.notes forKey:@"notes"];
+    
+    return info;
+    
 }
 
 @end

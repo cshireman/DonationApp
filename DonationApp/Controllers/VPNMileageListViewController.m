@@ -41,12 +41,12 @@
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"Cash Donations";
+    return @"Mileage Donations";
 }
 
 -(NSString*)tableView:(UITableView *)tableView amountForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"$%.02f",[self.group totalForAllLists]];
+    return [NSString stringWithFormat:@"%.02f Miles",[self.group totalForAllLists]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

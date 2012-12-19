@@ -107,6 +107,8 @@
 		8390ECCD1648C145000D03AE /* VPNOrganizationsListViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECCC1648C145000D03AE /* VPNOrganizationsListViewControllerTests.m */; };
 		8390ECD11648CA08000D03AE /* VPNOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECD01648CA08000D03AE /* VPNOrganizationCell.m */; };
 		8390ECD21648CA08000D03AE /* VPNOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECD01648CA08000D03AE /* VPNOrganizationCell.m */; };
+		8392F9AD1681425200AE8E87 /* VPNItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392F9AC1681425200AE8E87 /* VPNItemGroup.m */; };
+		8392F9AE1681425200AE8E87 /* VPNItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392F9AC1681425200AE8E87 /* VPNItemGroup.m */; };
 		8393FED3165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */; };
 		8393FED4165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */; };
 		8393FED8165B3CBA00BD52A2 /* VPNPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */; };
@@ -280,6 +282,8 @@
 		8390ECCC1648C145000D03AE /* VPNOrganizationsListViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNOrganizationsListViewControllerTests.m; sourceTree = "<group>"; };
 		8390ECCF1648CA08000D03AE /* VPNOrganizationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNOrganizationCell.h; path = CustomCells/VPNOrganizationCell.h; sourceTree = "<group>"; };
 		8390ECD01648CA08000D03AE /* VPNOrganizationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNOrganizationCell.m; path = CustomCells/VPNOrganizationCell.m; sourceTree = "<group>"; };
+		8392F9AB1681425200AE8E87 /* VPNItemGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemGroup.h; path = models/VPNItemGroup.h; sourceTree = "<group>"; };
+		8392F9AC1681425200AE8E87 /* VPNItemGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemGroup.m; path = models/VPNItemGroup.m; sourceTree = "<group>"; };
 		8393FED1165B3CAA00BD52A2 /* VPNContactInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNContactInfoCell.h; sourceTree = "<group>"; };
 		8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNContactInfoCell.m; sourceTree = "<group>"; };
 		8393FED6165B3CBA00BD52A2 /* VPNPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNPasswordCell.h; sourceTree = "<group>"; };
@@ -591,6 +595,8 @@
 		8397DF77162E6CA2000D8633 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				8392F9AB1681425200AE8E87 /* VPNItemGroup.h */,
+				8392F9AC1681425200AE8E87 /* VPNItemGroup.m */,
 				834057B2166DBCEE00ED39E5 /* Category.h */,
 				834057B3166DBCEE00ED39E5 /* Category.m */,
 				834057AE166DBCD200ED39E5 /* Item.h */,
@@ -831,6 +837,7 @@
 				83CE69E8167B084D00CC334A /* VPNCashListViewController.m in Sources */,
 				83CE69EC167B086D00CC334A /* VPNMileageListViewController.m in Sources */,
 				83CE69F0167B69B100CC334A /* VPNListViewController.m in Sources */,
+				8392F9AD1681425200AE8E87 /* VPNItemGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,6 +893,7 @@
 				83CE69E9167B084D00CC334A /* VPNCashListViewController.m in Sources */,
 				83CE69ED167B086D00CC334A /* VPNMileageListViewController.m in Sources */,
 				83CE69F1167B69B100CC334A /* VPNListViewController.m in Sources */,
+				8392F9AE1681425200AE8E87 /* VPNItemGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

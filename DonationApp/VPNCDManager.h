@@ -49,6 +49,7 @@ enum {
 @property (assign) int currentTaxYear;
 @property (strong, nonatomic) VPNOrganization* currentOrganization;
 @property (strong, nonatomic) VPNDonationList* currentDonationList;
+@property (strong, nonatomic) VPNItem* currentListItem;
 
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
@@ -71,9 +72,9 @@ enum {
 -(void)updateDonationList:(VPNDonationList*)listToUpdate;
 -(void)deleteDonationList:(VPNDonationList*)listToDelete;
 
--(void)addDonationListItem:(VPNItem*)itemToAdd;
--(void)updateDonationListItem:(VPNItem*)itemToUpdate;
--(void)deleteDonationListItem:(VPNItem*)itemToDelete;
+-(void)addDonationListItem:(VPNItem*)itemToAdd toDonationList:(VPNDonationList*)donationList;
+-(void)updateDonationListItem:(VPNItem*)itemToUpdate onDonationList:(VPNDonationList*)donationList;
+-(void)deleteDonationListItem:(VPNItem*)itemToDelete fromDonationList:(VPNDonationList*)donationList;
 
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 

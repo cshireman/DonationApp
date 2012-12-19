@@ -7,8 +7,12 @@
 //
 
 #import "VPNDonationItemListViewController.h"
+#import "VPNItemGroup.h"
 
 @interface VPNDonationItemListViewController ()
+{
+    NSArray* conditionNames;
+}
 
 @end
 
@@ -25,10 +29,15 @@
 {
     [super viewDidLoad];
     
+    conditionNames = @[@"Fair",@"Good",@"Very Good",@"Excellent",@"Mint/New"];
+    
     if(organization == nil)
         organization = [VPNOrganization organizationForID:donationList.companyID];
     
     [self updateHeaderInfo];
+    
+    itemGroups = [NSMutableArray arrayWithArray:[VPNItemGroup groupsFromItemsInDonationList:donationList]];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -43,6 +52,11 @@
 }
 
 #pragma mark - Table view data source
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    VPNItemGroup* itemGroup = [itemGroups objectAtIndex:indexPath.row];
+    return 90+([itemGroup.conditions count]*15);
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -53,15 +67,80 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return [itemGroups count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)localTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"ItemGroupCell";
+    UITableViewCell *cell = [localTableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    VPNItemGroup* itemGroup = [itemGroups objectAtIndex:indexPath.row];
+    
+    UILabel* categoryLabel = (UILabel*)[cell viewWithTag:1];
+    UILabel* itemNameLabel = (UILabel*)[cell viewWithTag:2];
+    
+    categoryLabel.text = itemGroup.categoryName;
+    itemNameLabel.text = itemGroup.itemName;
+    
+    CGRect rowRect = CGRectMake(0, 66, 256, 15);
+    NSArray* conditions = itemGroup.conditions;
+    NSDictionary* summary = itemGroup.summary;
+
+    for(int i = [conditionNames count] - 1; i >= 0; i--)
+    {
+        NSNumber* conditionNumber = [NSNumber numberWithInt:i];
+        if([conditions containsObject:conditionNumber])
+        {
+            UIView* rowView = [[UIView alloc] initWithFrame:rowRect];
+
+            UILabel* quantityLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 23, 15)];
+            quantityLabel.font = [UIFont systemFontOfSize:12];
+            quantityLabel.text = [NSString stringWithFormat:@"%d",[[summary objectForKey:[NSString stringWithFormat:@"quantity_%d",i]] intValue]];
+
+            UILabel* conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 65, 15)];
+            conditionLabel.font = [UIFont systemFontOfSize:12];
+            conditionLabel.text = [conditionNames objectAtIndex:i];
+            conditionLabel.minimumFontSize = 10;
+
+            UILabel* fmvLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 96, 15)];
+            fmvLabel.font = [UIFont systemFontOfSize:12];
+            fmvLabel.text = [NSString stringWithFormat:@"$%.02f",[[summary objectForKey:[NSString stringWithFormat:@"fmv_%d",i]] doubleValue]];
+            fmvLabel.textAlignment = UITextAlignmentCenter;
+
+            UILabel* subtotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(208, 0, 48, 15)];
+            subtotalLabel.font = [UIFont systemFontOfSize:12];
+            subtotalLabel.text = [NSString stringWithFormat:@"$%.02f",[[summary objectForKey:[NSString stringWithFormat:@"subtotal_%d",i]] doubleValue]];
+            subtotalLabel.textAlignment = UITextAlignmentRight;
+            
+            [rowView addSubview:quantityLabel];
+            [rowView addSubview:conditionLabel];
+            [rowView addSubview:fmvLabel];
+            [rowView addSubview:subtotalLabel];
+            
+            [cell.contentView addSubview:rowView];
+            
+            rowRect.origin.y += 15;
+        }
+    }
+    
+    UIView* totalView = [[UIView alloc] initWithFrame:rowRect];
+    
+    UILabel* totalTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 96, 15)];
+    totalTitleLabel.font = [UIFont boldSystemFontOfSize:12];
+    totalTitleLabel.text = @"Total:";
+    totalTitleLabel.textAlignment = UITextAlignmentCenter;
+    
+    UILabel* totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(208, 0, 48, 15)];
+    totalLabel.font = [UIFont boldSystemFontOfSize:12];
+    totalLabel.text = [NSString stringWithFormat:@"$%.02f",[[summary objectForKey:@"total"] doubleValue]];
+    totalLabel.textAlignment = UITextAlignmentRight;
+    
+    [totalView addSubview:totalTitleLabel];
+    [totalView addSubview:totalLabel];
+    
+    [cell.contentView addSubview:totalView];
     
     return cell;
 }

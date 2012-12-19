@@ -23,6 +23,8 @@
 
 @interface Category (CoreDataGeneratedAccessors)
 
++(Category*) loadCategoryForID:(int)categoryID;
+
 - (void)addCategoriesObject:(Category *)value;
 - (void)removeCategoriesObject:(Category *)value;
 - (void)addCategories:(NSSet *)values;

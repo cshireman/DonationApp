@@ -62,4 +62,6 @@ typedef enum
 
 -(id) initWithDictionary:(NSDictionary*)info;
 
+-(NSDictionary*) toDictionary;
+
 @end

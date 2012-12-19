@@ -155,13 +155,13 @@
 
 -(double) totalForItems
 {
-    if(items == nil || [items count] == 0)
+    if(self.items == nil || [self.items count] == 0)
     {
         return 0.00;
     }
     
     double itemTotal = 0.00;
-    for(VPNItem* item in items)
+    for(VPNItem* item in self.items)
     {
         itemTotal += (item.quantity * [item.fairMarketValue doubleValue]);
     }
