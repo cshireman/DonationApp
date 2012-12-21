@@ -109,6 +109,16 @@
 		8390ECD21648CA08000D03AE /* VPNOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8390ECD01648CA08000D03AE /* VPNOrganizationCell.m */; };
 		8392F9AD1681425200AE8E87 /* VPNItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392F9AC1681425200AE8E87 /* VPNItemGroup.m */; };
 		8392F9AE1681425200AE8E87 /* VPNItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392F9AC1681425200AE8E87 /* VPNItemGroup.m */; };
+		8392F9C31682E07700AE8E87 /* VPNEditCustomItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392F9C21682E07700AE8E87 /* VPNEditCustomItemViewController.m */; };
+		8392F9C41682E07700AE8E87 /* VPNEditCustomItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392F9C21682E07700AE8E87 /* VPNEditCustomItemViewController.m */; };
+		8392FA091683A1DF00AE8E87 /* VPNCustomItemConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392FA081683A1DF00AE8E87 /* VPNCustomItemConditionCell.m */; };
+		8392FA0A1683A1DF00AE8E87 /* VPNCustomItemConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392FA081683A1DF00AE8E87 /* VPNCustomItemConditionCell.m */; };
+		8392FA0E1683A52100AE8E87 /* VPNCustomItemConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8392FA0D1683A52100AE8E87 /* VPNCustomItemConditionCell.xib */; };
+		8392FA0F1683A52100AE8E87 /* VPNCustomItemConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8392FA0D1683A52100AE8E87 /* VPNCustomItemConditionCell.xib */; };
+		8392FA191683EB6E00AE8E87 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 8392FA181683EB6E00AE8E87 /* camera.png */; };
+		8392FA1C16842A0A00AE8E87 /* VPNModalPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8392FA1B16842A0A00AE8E87 /* VPNModalPickerView.xib */; };
+		8392FA1F16842ABD00AE8E87 /* VPNModalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392FA1E16842ABD00AE8E87 /* VPNModalPickerView.m */; };
+		8392FA2016842ABD00AE8E87 /* VPNModalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392FA1E16842ABD00AE8E87 /* VPNModalPickerView.m */; };
 		8393FED3165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */; };
 		8393FED4165B3CAA00BD52A2 /* VPNContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */; };
 		8393FED8165B3CBA00BD52A2 /* VPNPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */; };
@@ -284,6 +294,17 @@
 		8390ECD01648CA08000D03AE /* VPNOrganizationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNOrganizationCell.m; path = CustomCells/VPNOrganizationCell.m; sourceTree = "<group>"; };
 		8392F9AB1681425200AE8E87 /* VPNItemGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemGroup.h; path = models/VPNItemGroup.h; sourceTree = "<group>"; };
 		8392F9AC1681425200AE8E87 /* VPNItemGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemGroup.m; path = models/VPNItemGroup.m; sourceTree = "<group>"; };
+		8392F9C11682E07700AE8E87 /* VPNEditCustomItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNEditCustomItemViewController.h; path = Controllers/VPNEditCustomItemViewController.h; sourceTree = "<group>"; };
+		8392F9C21682E07700AE8E87 /* VPNEditCustomItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNEditCustomItemViewController.m; path = Controllers/VPNEditCustomItemViewController.m; sourceTree = "<group>"; };
+		8392FA071683A1DF00AE8E87 /* VPNCustomItemConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCustomItemConditionCell.h; path = CustomCells/VPNCustomItemConditionCell.h; sourceTree = "<group>"; };
+		8392FA081683A1DF00AE8E87 /* VPNCustomItemConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNCustomItemConditionCell.m; path = CustomCells/VPNCustomItemConditionCell.m; sourceTree = "<group>"; };
+		8392FA0C1683A2CA00AE8E87 /* VPNCustomItemConditionCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCustomItemConditionCellDelegate.h; path = Protocols/VPNCustomItemConditionCellDelegate.h; sourceTree = "<group>"; };
+		8392FA0D1683A52100AE8E87 /* VPNCustomItemConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VPNCustomItemConditionCell.xib; sourceTree = "<group>"; };
+		8392FA181683EB6E00AE8E87 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		8392FA1B16842A0A00AE8E87 /* VPNModalPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VPNModalPickerView.xib; sourceTree = "<group>"; };
+		8392FA1D16842ABD00AE8E87 /* VPNModalPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNModalPickerView.h; path = CustomViews/VPNModalPickerView.h; sourceTree = "<group>"; };
+		8392FA1E16842ABD00AE8E87 /* VPNModalPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNModalPickerView.m; path = CustomViews/VPNModalPickerView.m; sourceTree = "<group>"; };
+		8392FA2116842B4B00AE8E87 /* VPNModalPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNModalPickerDelegate.h; path = Protocols/VPNModalPickerDelegate.h; sourceTree = "<group>"; };
 		8393FED1165B3CAA00BD52A2 /* VPNContactInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNContactInfoCell.h; sourceTree = "<group>"; };
 		8393FED2165B3CAA00BD52A2 /* VPNContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNContactInfoCell.m; sourceTree = "<group>"; };
 		8393FED6165B3CBA00BD52A2 /* VPNPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNPasswordCell.h; sourceTree = "<group>"; };
@@ -408,6 +429,7 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				8392FA0B1683A2AB00AE8E87 /* Protocols */,
 				837E604516785B0B00CA1FB7 /* CustomViews */,
 				836426F11667406C00A70606 /* DejalActivityView.h */,
 				836426F21667406C00A70606 /* DejalActivityView.m */,
@@ -455,6 +477,7 @@
 		83195DB7162D25AC00B63831 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8392FA181683EB6E00AE8E87 /* camera.png */,
 				836426F5166748C900A70606 /* checkbox_checked.png */,
 				836426F6166748C900A70606 /* checkbox_unchecked.png */,
 				831D8849162FBAA900274662 /* CD_App_SU_Screen_r3.png */,
@@ -524,6 +547,9 @@
 			isa = PBXGroup;
 			children = (
 				837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */,
+				8392FA1B16842A0A00AE8E87 /* VPNModalPickerView.xib */,
+				8392FA1D16842ABD00AE8E87 /* VPNModalPickerView.h */,
+				8392FA1E16842ABD00AE8E87 /* VPNModalPickerView.m */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -573,6 +599,8 @@
 				83CE69E7167B084D00CC334A /* VPNCashListViewController.m */,
 				83CE69EA167B086D00CC334A /* VPNMileageListViewController.h */,
 				83CE69EB167B086D00CC334A /* VPNMileageListViewController.m */,
+				8392F9C11682E07700AE8E87 /* VPNEditCustomItemViewController.h */,
+				8392F9C21682E07700AE8E87 /* VPNEditCustomItemViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -588,8 +616,20 @@
 				8393FED7165B3CBA00BD52A2 /* VPNPasswordCell.m */,
 				8393FEDA165B3CCF00BD52A2 /* VPNTaxSavingsCell.h */,
 				8393FEDB165B3CCF00BD52A2 /* VPNTaxSavingsCell.m */,
+				8392FA071683A1DF00AE8E87 /* VPNCustomItemConditionCell.h */,
+				8392FA081683A1DF00AE8E87 /* VPNCustomItemConditionCell.m */,
+				8392FA0D1683A52100AE8E87 /* VPNCustomItemConditionCell.xib */,
 			);
 			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		8392FA0B1683A2AB00AE8E87 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8392FA0C1683A2CA00AE8E87 /* VPNCustomItemConditionCellDelegate.h */,
+				8392FA2116842B4B00AE8E87 /* VPNModalPickerDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		8397DF77162E6CA2000D8633 /* models */ = {
@@ -752,6 +792,9 @@
 				836426F7166748C900A70606 /* checkbox_checked.png in Resources */,
 				836426F9166748C900A70606 /* checkbox_unchecked.png in Resources */,
 				837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */,
+				8392FA0E1683A52100AE8E87 /* VPNCustomItemConditionCell.xib in Resources */,
+				8392FA191683EB6E00AE8E87 /* camera.png in Resources */,
+				8392FA1C16842A0A00AE8E87 /* VPNModalPickerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +806,7 @@
 				83AD5A43165E893000347FB3 /* VPNOverlayViewController.xib in Resources */,
 				836426F8166748C900A70606 /* checkbox_checked.png in Resources */,
 				836426FA166748C900A70606 /* checkbox_unchecked.png in Resources */,
+				8392FA0F1683A52100AE8E87 /* VPNCustomItemConditionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,6 +882,9 @@
 				83CE69EC167B086D00CC334A /* VPNMileageListViewController.m in Sources */,
 				83CE69F0167B69B100CC334A /* VPNListViewController.m in Sources */,
 				8392F9AD1681425200AE8E87 /* VPNItemGroup.m in Sources */,
+				8392F9C31682E07700AE8E87 /* VPNEditCustomItemViewController.m in Sources */,
+				8392FA091683A1DF00AE8E87 /* VPNCustomItemConditionCell.m in Sources */,
+				8392FA1F16842ABD00AE8E87 /* VPNModalPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +941,9 @@
 				83CE69ED167B086D00CC334A /* VPNMileageListViewController.m in Sources */,
 				83CE69F1167B69B100CC334A /* VPNListViewController.m in Sources */,
 				8392F9AE1681425200AE8E87 /* VPNItemGroup.m in Sources */,
+				8392F9C41682E07700AE8E87 /* VPNEditCustomItemViewController.m in Sources */,
+				8392FA0A1683A1DF00AE8E87 /* VPNCustomItemConditionCell.m in Sources */,
+				8392FA2016842ABD00AE8E87 /* VPNModalPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

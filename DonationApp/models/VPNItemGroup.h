@@ -20,14 +20,20 @@
 @property (assign) BOOL isCustom;
 @property (strong, nonatomic) NSMutableArray* conditions;
 
-@property (strong, nonatomic) NSString* categoryName;
-@property (strong, nonatomic) NSString* itemName;
+@property (copy, nonatomic) NSString* categoryName;
+@property (copy, nonatomic) NSString* itemName;
 @property (strong, nonatomic) UIImage* image;
 
 +(NSArray*) groupsFromItemsInDonationList:(VPNDonationList*)donationList;
 
 -(NSDictionary*) buildItemSummary;
 -(NSString*) imageFilename;
+
+-(int) quantityForCondition:(ItemCondition)condition;
+-(double) valueForCondition:(ItemCondition)condition;
+
+-(void) setQuantity:(int)quantity forCondition:(ItemCondition)condition;
+-(void) setValue:(double)value forCondition:(ItemCondition)condition;
 
 -(void)saveImageToDisc:(UIImage*)image;
 -(UIImage*)loadImageFromDisc;

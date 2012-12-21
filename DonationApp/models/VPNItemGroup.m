@@ -73,6 +73,55 @@
     return groupValues;
 }
 
+-(int) quantityForCondition:(ItemCondition)condition
+{
+    int quantity = 0;
+    for(VPNItem* item in items)
+    {
+        if(item.condition == condition)
+            quantity += item.quantity;
+    }
+    
+    return quantity;
+}
+
+-(double) valueForCondition:(ItemCondition)condition
+{
+    double value = 0.00;
+    for(VPNItem* item in items)
+    {
+        if(item.condition == condition)
+            value += [item.fairMarketValue doubleValue];
+    }
+    
+    return value;
+}
+
+-(void) setQuantity:(int)quantity forCondition:(ItemCondition)condition
+{
+    for(VPNItem* item in items)
+    {
+        if(item.condition == condition)
+        {
+            item.quantity = quantity;
+            break;
+        }
+    }
+}
+
+-(void) setValue:(double)value forCondition:(ItemCondition)condition
+{
+    for(VPNItem* item in items)
+    {
+        if(item.condition == condition)
+        {
+            item.fairMarketValue = [NSNumber numberWithDouble:value];
+            break;
+        }
+    }
+}
+
+
 -(BOOL) addValue:(NSNumber*)value toObjectWithKey:(NSString*)key inDictionary:(NSMutableDictionary*)info
 {
     NSNumber* quantity = [info objectForKey:key];

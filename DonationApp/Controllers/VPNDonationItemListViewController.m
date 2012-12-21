@@ -12,6 +12,7 @@
 @interface VPNDonationItemListViewController ()
 {
     NSArray* conditionNames;
+    VPNItemGroup* groupToEdit;
 }
 
 @end
@@ -206,6 +207,10 @@
 }
 
 - (IBAction)addCustomItemPushed:(id)sender {
+    groupToEdit = [[VPNItemGroup alloc] init];
+    groupToEdit.isCustom = YES;
+    groupToEdit.donationList = self.donationList;
+    
     [self performSegueWithIdentifier:@"EditCustomItemSegue" sender:self];
 }
 
@@ -255,6 +260,10 @@
         [segue.destinationViewController setValue:organization forKey:@"organization"];
     }
     
+    if([segue.destinationViewController respondsToSelector:@selector(setGroup:)])
+    {
+        [segue.destinationViewController setValue:groupToEdit forKey:@"group"];
+    }
 }
 
 #pragma mark -
