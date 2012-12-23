@@ -10,6 +10,10 @@
 #import "VPNModalPickerView.h"
 #import "Category.h"
 
+static CGFloat keyboardHeight = 216;
+static CGFloat toolbarHeight = 44;
+static CGFloat tabBarHeight = 49;
+
 @interface VPNEditCustomItemViewController ()
 {
     VPNModalPickerView* modalPicker;
@@ -22,10 +26,10 @@
 @implementation VPNEditCustomItemViewController
 
 @synthesize customItemCellNib;
+@synthesize itemNameCellNib;
 @synthesize doneToolbarNib;
 
 @synthesize group;
-@synthesize itemNameField;
 @synthesize tableView;
 @synthesize doneButton;
 @synthesize doneToolbar;
@@ -38,6 +42,16 @@
     }
     
     return customItemCellNib;
+}
+
+-(UINib*) itemNameCellNib
+{
+    if(itemNameCellNib == nil)
+    {
+        self.itemNameCellNib = [VPNItemNameCell nib];
+    }
+    
+    return itemNameCellNib;
 }
 
 -(UINib*) doneToolbarNib
@@ -63,11 +77,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    itemNameField = [[UITextField alloc] init];
-    itemNameField.text = group.itemName;
-    itemNameField.placeholder = @"Enter Item Name";
-    
+        
     modalPicker = [[VPNModalPickerView alloc] initWithNibName:[VPNModalPickerView nibName]];
     categories = [Category loadCategoriesForCategoryID:0];
     
@@ -76,6 +86,7 @@
     
     doneToolbar = [VPNDoneToolbar doneToolbarFromFromNib:[VPNDoneToolbar nib]];
     doneToolbar.delegate = self;
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -109,14 +120,14 @@
     if(indexPath.section == 0 && indexPath.row == 0)
         CellIdentifier = @"CategoryCell";
     else if(indexPath.section == 0 && indexPath.row == 1)
-        CellIdentifier = @"ItemCell";
+        CellIdentifier = @"VPNItemNameCell";
     else if(indexPath.section == 1 && indexPath.row == 0)
         CellIdentifier = @"ColumnHeaderCell";
     else if(indexPath.section == 1 && indexPath.row == 6)
         CellIdentifier = @"PhotoCell";
     
     
-    if(![CellIdentifier isEqualToString:@"VPNCustomItemConditionCell"])
+    if(![CellIdentifier isEqualToString:@"VPNCustomItemConditionCell"] && ![CellIdentifier isEqualToString:@"VPNItemNameCell"])
     {
         cell = [localTableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
@@ -134,12 +145,20 @@
             else
                 categoryLabel.text = group.categoryName;
         }
-        else if([CellIdentifier isEqualToString:@"ItemCell"])
-        {
-            [self replaceTextField:itemNameField inCell:cell forTag:1];
-        }
     }
-    else
+    else if([CellIdentifier isEqualToString:@"VPNItemNameCell"])
+    {
+        VPNItemNameCell *itemNameCell = [VPNItemNameCell cellForTableView:localTableView fromNib:self.itemNameCellNib];
+        
+        itemNameCell.delegate = self;
+        
+        itemNameCell.indexPath = indexPath;
+        [itemNameCell setText:group.itemName];
+        
+        return itemNameCell;
+        
+    }
+    else if([CellIdentifier isEqualToString:@"VPNCustomItemConditionCell"])
     {
         VPNCustomItemConditionCell *conditionCell = [VPNCustomItemConditionCell cellForTableView:localTableView fromNib:self.customItemCellNib];
         
@@ -262,20 +281,27 @@
     }
 }
 
+
+
 -(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath
 {
-    quantityField.inputAccessoryView = doneToolbar;
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self shrinkTable];
     
+    quantityField.inputAccessoryView = doneToolbar;
     currentTextField = quantityField;
+
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 -(void) fmvField:(UITextField*)fmvField focusedAtIndexPath:(NSIndexPath*)indexPath
 {
+    [self shrinkTable];
+    
     fmvField.inputAccessoryView = doneToolbar;
+    currentTextField = fmvField;
+    
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
-    currentTextField = fmvField;
 }
 
 
@@ -320,11 +346,47 @@
 
 -(void) doneToolbarButtonPushed:(id)sender
 {
+    [self expandTable];
+    
     if(currentTextField != nil)
     {
         [currentTextField resignFirstResponder];
         currentTextField = nil;
     }
+}
+
+#pragma mark -
+#pragma mark VPNItemNameCellDelegate Methods
+
+-(void) itemNameFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
+{
+    group.itemName = text;
+}
+
+-(void) itemNameField:(UITextField *)itemNameField focusedAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self shrinkTable];
+    itemNameField.inputAccessoryView = doneToolbar;
+    currentTextField = itemNameField;
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+#pragma mark -
+#pragma mark Custom Methods
+
+-(void) expandTable
+{
+    CGRect tableFrame = self.tableView.frame;
+    tableFrame.size.height += (keyboardHeight + toolbarHeight - tabBarHeight);
+    self.tableView.frame = tableFrame;
+}
+
+-(void) shrinkTable
+{
+    CGRect tableFrame = self.tableView.frame;
+    tableFrame.size.height -= (keyboardHeight + toolbarHeight - tabBarHeight);
+    self.tableView.frame = tableFrame;
 }
 
 

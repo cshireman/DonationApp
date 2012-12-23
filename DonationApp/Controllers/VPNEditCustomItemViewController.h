@@ -10,19 +10,20 @@
 #import "VPNItemGroup.h"
 #import "VPNCustomItemConditionCellDelegate.h"
 #import "VPNCustomItemConditionCell.h"
+#import "VPNItemNameCellDelegate.h"
+#import "VPNItemNameCell.h"
 #import "VPNModalPickerDelegate.h"
 #import "VPNModalPickerView.h"
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
 
-@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate>
+@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate>
 
 @property (retain, nonatomic) UINib* customItemCellNib;
+@property (retain, nonatomic) UINib* itemNameCellNib;
 @property (retain, nonatomic) UINib* doneToolbarNib;
 
 @property (strong, nonatomic) VPNItemGroup* group;
-
-@property (strong, nonatomic) UITextField* itemNameField;
 
 @property (strong, nonatomic) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
