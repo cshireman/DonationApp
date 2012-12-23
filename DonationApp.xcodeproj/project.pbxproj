@@ -150,6 +150,8 @@
 		83BFD928163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
 		83BFD93C163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
 		83BFD93D163F9A5000BC64B7 /* VPNUserBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */; };
+		83C8E2F01686D623001190E2 /* VPNDoneToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8E2EF1686D623001190E2 /* VPNDoneToolbar.m */; };
+		83C8E2F51686D653001190E2 /* VPNDoneToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83C8E2F41686D653001190E2 /* VPNDoneToolbar.xib */; };
 		83CE69E8167B084D00CC334A /* VPNCashListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69E7167B084D00CC334A /* VPNCashListViewController.m */; };
 		83CE69E9167B084D00CC334A /* VPNCashListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69E7167B084D00CC334A /* VPNCashListViewController.m */; };
 		83CE69EC167B086D00CC334A /* VPNMileageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69EB167B086D00CC334A /* VPNMileageListViewController.m */; };
@@ -349,6 +351,10 @@
 		83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDCommunicator.m; sourceTree = "<group>"; };
 		83BFD93A163F9A4F00BC64B7 /* VPNUserBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNUserBuilder.h; sourceTree = "<group>"; };
 		83BFD93B163F9A4F00BC64B7 /* VPNUserBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNUserBuilder.m; sourceTree = "<group>"; };
+		83C8E2EE1686D623001190E2 /* VPNDoneToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDoneToolbar.h; path = CustomViews/VPNDoneToolbar.h; sourceTree = "<group>"; };
+		83C8E2EF1686D623001190E2 /* VPNDoneToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDoneToolbar.m; path = CustomViews/VPNDoneToolbar.m; sourceTree = "<group>"; };
+		83C8E2F41686D653001190E2 /* VPNDoneToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNDoneToolbar.xib; path = CustomViews/VPNDoneToolbar.xib; sourceTree = "<group>"; };
+		83C8E2F61686D73E001190E2 /* VPNDoneToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDoneToolbarDelegate.h; path = Protocols/VPNDoneToolbarDelegate.h; sourceTree = "<group>"; };
 		83CE69E6167B084D00CC334A /* VPNCashListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNCashListViewController.h; path = Controllers/VPNCashListViewController.h; sourceTree = "<group>"; };
 		83CE69E7167B084D00CC334A /* VPNCashListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNCashListViewController.m; path = Controllers/VPNCashListViewController.m; sourceTree = "<group>"; };
 		83CE69EA167B086D00CC334A /* VPNMileageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNMileageListViewController.h; path = Controllers/VPNMileageListViewController.h; sourceTree = "<group>"; };
@@ -550,6 +556,10 @@
 				8392FA1B16842A0A00AE8E87 /* VPNModalPickerView.xib */,
 				8392FA1D16842ABD00AE8E87 /* VPNModalPickerView.h */,
 				8392FA1E16842ABD00AE8E87 /* VPNModalPickerView.m */,
+				83C8E2EE1686D623001190E2 /* VPNDoneToolbar.h */,
+				83C8E2EF1686D623001190E2 /* VPNDoneToolbar.m */,
+				83C8E2F41686D653001190E2 /* VPNDoneToolbar.xib */,
+				83C8E2F61686D73E001190E2 /* VPNDoneToolbarDelegate.h */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -795,6 +805,7 @@
 				8392FA0E1683A52100AE8E87 /* VPNCustomItemConditionCell.xib in Resources */,
 				8392FA191683EB6E00AE8E87 /* camera.png in Resources */,
 				8392FA1C16842A0A00AE8E87 /* VPNModalPickerView.xib in Resources */,
+				83C8E2F51686D653001190E2 /* VPNDoneToolbar.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +896,7 @@
 				8392F9C31682E07700AE8E87 /* VPNEditCustomItemViewController.m in Sources */,
 				8392FA091683A1DF00AE8E87 /* VPNCustomItemConditionCell.m in Sources */,
 				8392FA1F16842ABD00AE8E87 /* VPNModalPickerView.m in Sources */,
+				83C8E2F01686D623001190E2 /* VPNDoneToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

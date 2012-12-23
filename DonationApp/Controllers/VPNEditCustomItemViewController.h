@@ -12,10 +12,13 @@
 #import "VPNCustomItemConditionCell.h"
 #import "VPNModalPickerDelegate.h"
 #import "VPNModalPickerView.h"
+#import "VPNDoneToolbarDelegate.h"
+#import "VPNDoneToolbar.h"
 
-@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate>
+@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate>
 
 @property (retain, nonatomic) UINib* customItemCellNib;
+@property (retain, nonatomic) UINib* doneToolbarNib;
 
 @property (strong, nonatomic) VPNItemGroup* group;
 
@@ -23,6 +26,11 @@
 
 @property (strong, nonatomic) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
+
+@property (strong, nonatomic) VPNDoneToolbar* doneToolbar;
+
+//VPNDoneToolbarDelegate methods
+-(void) doneToolbarButtonPushed:(id)sender;
 
 //UITableView DataSource methods
 
@@ -32,6 +40,5 @@
 
 //UITableView Delegate methods
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-
 
 @end

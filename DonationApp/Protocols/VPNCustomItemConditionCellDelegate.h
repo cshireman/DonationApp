@@ -14,4 +14,7 @@
 -(void) quantityUpdated:(int)quantity atIndexPath:(NSIndexPath*)indexPath;
 -(void) fmvUpdated:(double)fmv atIndexPath:(NSIndexPath*)indexPath;
 
+-(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath;
+-(void) fmvField:(UITextField*)fmvField focusedAtIndexPath:(NSIndexPath*)indexPath;
+
 @end

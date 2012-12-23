@@ -14,17 +14,21 @@
 {
     VPNModalPickerView* modalPicker;
     NSArray* categories;
+    
+    UITextField* currentTextField;
 }
 @end
 
 @implementation VPNEditCustomItemViewController
 
 @synthesize customItemCellNib;
+@synthesize doneToolbarNib;
 
 @synthesize group;
 @synthesize itemNameField;
 @synthesize tableView;
 @synthesize doneButton;
+@synthesize doneToolbar;
 
 -(UINib*) customItemCellNib
 {
@@ -35,6 +39,17 @@
     
     return customItemCellNib;
 }
+
+-(UINib*) doneToolbarNib
+{
+    if(doneToolbarNib == nil)
+    {
+        self.doneToolbarNib = [VPNDoneToolbar nib];
+    }
+    
+    return doneToolbarNib;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +73,9 @@
     
     modalPicker.options = categories;
     modalPicker.delegate = self;
+    
+    doneToolbar = [VPNDoneToolbar doneToolbarFromFromNib:[VPNDoneToolbar nib]];
+    doneToolbar.delegate = self;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -181,6 +199,18 @@
 
 #pragma mark -
 #pragma mark UITableViewDelegate Methods
+
+-(BOOL) tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 1 && indexPath.row != 6)
+        return NO;
+    
+    if(indexPath.section == 0 && indexPath.row == 1)
+        return NO;
+    
+    return YES;
+}
+
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0 && indexPath.row == 0)
@@ -232,6 +262,23 @@
     }
 }
 
+-(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath
+{
+    quantityField.inputAccessoryView = doneToolbar;
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+    currentTextField = quantityField;
+}
+
+-(void) fmvField:(UITextField*)fmvField focusedAtIndexPath:(NSIndexPath*)indexPath
+{
+    fmvField.inputAccessoryView = doneToolbar;
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+    currentTextField = fmvField;
+}
+
+
 #pragma mark -
 #pragma mark VPNModalPickerViewDelegate
 
@@ -260,6 +307,25 @@
     NSLog(@"Picker displayed");
 }
 
+#pragma mark -
+#pragma mark UITextFieldDelegate methods
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    currentTextField = textField;
+}
+
+#pragma mark -
+#pragma mark VPNDoneToolbarDelegate Methods
+
+-(void) doneToolbarButtonPushed:(id)sender
+{
+    if(currentTextField != nil)
+    {
+        [currentTextField resignFirstResponder];
+        currentTextField = nil;
+    }
+}
 
 
 @end

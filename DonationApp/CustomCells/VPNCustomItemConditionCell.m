@@ -92,5 +92,13 @@
     return YES;
 }
 
+-(void) textFieldDidBeginEditing:(UITextField *)localTextField
+{
+    if(localTextField == quantityField)
+        [delegate quantityField:localTextField focusedAtIndexPath:indexPath];
+    else if(localTextField == fmvField)
+        [delegate fmvField:localTextField focusedAtIndexPath:indexPath];
+}
+
 
 @end
