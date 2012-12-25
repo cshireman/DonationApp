@@ -63,12 +63,18 @@
 
 -(void) setQuantity:(int)quantity
 {
-    quantityField.text = [NSString stringWithFormat:@"%d",quantity];
+    if(quantity != 0)
+        quantityField.text = [NSString stringWithFormat:@"%d",quantity];
+    else
+        quantityField.text = @"";
 }
 
 -(void) setFMV:(double)fmv
 {
-    fmvField.text = [NSString stringWithFormat:@"%.02f",fmv];
+    if(fmv != 0.00)
+        fmvField.text = [NSString stringWithFormat:@"%.02f",fmv];
+    else
+        fmvField.text = @"";
 }
 
 -(void) setConditionText:(NSString*)conditionText

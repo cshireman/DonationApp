@@ -312,6 +312,7 @@ static CGFloat tabBarHeight = 49;
 {
     Category* localCategory = [categories objectAtIndex:selectedIndex];
     group.categoryName = localCategory.name;
+    group.categoryID = [localCategory.categoryID intValue];
     
     NSLog(@"Category Name: %@",group.categoryName);
 }
@@ -374,6 +375,57 @@ static CGFloat tabBarHeight = 49;
 
 #pragma mark -
 #pragma mark Custom Methods
+
+-(BOOL) isGroupValid:(NSMutableArray**) errors
+{
+    BOOL isValid = YES;
+    
+    if(group.categoryID == 0)
+    {
+        isValid = NO;
+        [*errors addObject:@"Please select a category.\r\n"];
+    }
+    
+    if(group.itemName == nil || [group.itemName length] == 0)
+    {
+        isValid = NO;
+        [*errors addObject:@"Please set an item name.\r\n"];
+    }
+    
+    if([group totalQuantityForAllConditons] == 0)
+    {
+        isValid = NO;
+        [*errors addObject:@"One item must have a quantity.\r\n"];
+    }
+    
+    if([group totalValueForAllConditions] == 0.00)
+    {
+        isValid = NO;
+        [*errors addObject:@"One item must have a value.\r\n"];
+    }
+    
+    return isValid;
+}
+
+-(IBAction) doneButtonPushed:(id)sender
+{
+    NSMutableArray* errorMessages = [[NSMutableArray alloc] init];
+    if([self isGroupValid:&errorMessages])
+    {
+        
+    }
+    else
+    {
+        NSString* error = @"The following errors occured:\r\n";
+        for(NSString* currentError in errorMessages)
+        {
+            error = [error stringByAppendingString:currentError];
+        }
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Item" message:error delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
+}
 
 -(void) expandTable
 {

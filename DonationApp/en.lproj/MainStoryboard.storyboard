@@ -1591,7 +1591,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Custom Item" id="uGq-KU-VKT">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="806-oT-ttc"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="806-oT-ttc">
+                            <connections>
+                                <action selector="doneButtonPushed:" destination="1Gt-wV-Iuw" id="hJR-El-7Ad"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -1932,6 +1936,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="VPNEditCustomItemViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNEditCustomItemViewController.h"/>
             <relationships>
+                <relationship kind="action" name="doneButtonPushed:"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

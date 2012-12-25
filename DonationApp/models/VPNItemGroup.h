@@ -17,7 +17,9 @@
 @property (strong, nonatomic) NSMutableDictionary* summary;
 
 @property (assign) int itemID;
+@property (assign) int categoryID;
 @property (assign) BOOL isCustom;
+
 @property (strong, nonatomic) NSMutableArray* conditions;
 
 @property (copy, nonatomic) NSString* categoryName;
@@ -34,6 +36,9 @@
 
 -(void) setQuantity:(int)quantity forCondition:(ItemCondition)condition;
 -(void) setValue:(double)value forCondition:(ItemCondition)condition;
+
+-(int) totalQuantityForAllConditons;
+-(double) totalValueForAllConditions;
 
 -(void)saveImageToDisc:(UIImage*)image;
 -(UIImage*)loadImageFromDisc;

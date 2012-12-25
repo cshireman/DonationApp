@@ -15,6 +15,7 @@
 @synthesize items;
 @synthesize summary;
 @synthesize itemID;
+@synthesize categoryID;
 @synthesize isCustom;
 @synthesize conditions;
 
@@ -141,6 +142,33 @@
     [info setObject:quantity forKey:key];
     return existed;
 }
+
+-(int) totalQuantityForAllConditons
+{
+    int total = 0;
+    
+    total += [self quantityForCondition:Mint];
+    total += [self quantityForCondition:Excellent];
+    total += [self quantityForCondition:VeryGood];
+    total += [self quantityForCondition:Good];
+    total += [self quantityForCondition:Fair];
+    
+    return total;
+}
+
+-(double) totalValueForAllConditions
+{
+    double total = 0.00;
+    
+    total += [self valueForCondition:Mint];
+    total += [self valueForCondition:Excellent];
+    total += [self valueForCondition:VeryGood];
+    total += [self valueForCondition:Good];
+    total += [self valueForCondition:Fair];
+    
+    return total;    
+}
+
 
 -(NSDictionary*) buildItemSummary
 {

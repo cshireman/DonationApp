@@ -30,6 +30,8 @@
 
 @property (strong, nonatomic) VPNDoneToolbar* doneToolbar;
 
+-(IBAction) doneButtonPushed:(id)sender;
+
 //VPNDoneToolbarDelegate methods
 -(void) doneToolbarButtonPushed:(id)sender;
 
