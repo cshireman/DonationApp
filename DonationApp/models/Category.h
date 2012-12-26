@@ -19,14 +19,17 @@
 @property (nonatomic, retain) NSNumber * parentCategoryID;
 @property (nonatomic, retain) NSSet *categories;
 @property (nonatomic, retain) NSSet *items;
+
++(Category*) loadCategoryForID:(int)categoryID;
++(NSArray*) loadCategoriesForCategoryID:(int)categoryID;
++(NSArray*) keywordSearch:(NSString*)keyword;
+
+-(NSString*) description;
+
 @end
 
 @interface Category (CoreDataGeneratedAccessors)
 
-+(Category*) loadCategoryForID:(int)categoryID;
-+(NSArray*) loadCategoriesForCategoryID:(int)categoryID;
-
--(NSString*) description;
 
 - (void)addCategoriesObject:(Category *)value;
 - (void)removeCategoriesObject:(Category *)value;

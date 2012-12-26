@@ -1435,21 +1435,38 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3091" y="634"/>
         </scene>
-        <!--Table View Controller - Item Search-->
+        <!--Item Search View Controller - Item Search-->
         <scene sceneID="kEB-AA-3aB">
             <objects>
-                <tableViewController id="8VY-Ol-Gbm" sceneMemberID="viewController">
+                <tableViewController id="8VY-Ol-Gbm" customClass="VPNItemSearchViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YCG-ep-eFu">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="cA4-FB-OUP">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="8VY-Ol-Gbm" id="ce7-OB-YPx"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="msl-ss-WBM">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="hJy-B4-Eiu" style="IBUITableViewCellStyleDefault" id="msl-ss-WBM">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hJy-B4-Eiu">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
@@ -1461,6 +1478,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tableView>
                     <navigationItem key="navigationItem" title="Item Search" id="Jbl-Nd-esM"/>
                     <connections>
+                        <outlet property="itemSearchBar" destination="cA4-FB-OUP" id="tm6-8N-xcJ"/>
                         <segue destination="drF-lv-DNy" kind="push" id="rZP-W3-ekM"/>
                     </connections>
                 </tableViewController>
@@ -1876,15 +1894,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
     <classes>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
-        </class>
         <class className="VPNAddDonationListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNAddDonationListViewController.h"/>
             <relationships>
                 <relationship kind="action" name="datePickerDonePushed:"/>
                 <relationship kind="action" name="donePushed:"/>
-                <relationship kind="action" name="finishedEditingItems:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="itemSourcePickerDonePushed:"/>
                 <relationship kind="action" name="keyboardDone:"/>
                 <relationship kind="action" name="organizationPickerDonePushed:"/>
@@ -1950,6 +1964,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="optOutSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="optOutView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="updateButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="VPNItemSearchViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNItemSearchViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="const" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="itemSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>
         <class className="VPNListViewController" superclassName="UIViewController">
@@ -2057,7 +2078,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <segue reference="eUN-nc-hUi"/>
         <segue reference="aQI-nu-Yoy"/>
         <segue reference="fFg-b8-hXm"/>
-        <segue reference="jEP-vW-rmk"/>
+        <segue reference="rZP-W3-ekM"/>
         <segue reference="nt4-d5-pPY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,6 +17,11 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *values;
 @property (nonatomic, retain) Category *category;
+
++(Item*) loadItemForID:(int)itemID;
++(NSArray*) loadItemsForCategoryID:(int)categoryID;
++(NSArray*) keywordSearch:(NSString*)keyword;
+
 @end
 
 @interface Item (CoreDataGeneratedAccessors)

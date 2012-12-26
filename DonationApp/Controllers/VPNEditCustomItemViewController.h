@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNItemGroup.h"
+#import "VPNItemGroupDelegate.h"
 #import "VPNCustomItemConditionCellDelegate.h"
 #import "VPNCustomItemConditionCell.h"
 #import "VPNItemNameCellDelegate.h"
@@ -17,7 +18,7 @@
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
 
-@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate>
+@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate>
 
 @property (retain, nonatomic) UINib* customItemCellNib;
 @property (retain, nonatomic) UINib* itemNameCellNib;
@@ -34,6 +35,10 @@
 
 //VPNDoneToolbarDelegate methods
 -(void) doneToolbarButtonPushed:(id)sender;
+
+//VPNItemGroupDelegate
+-(void) didFinishSavingItemGroup;
+-(void) saveFailedWithError:(NSError*)error;
 
 //UITableView DataSource methods
 

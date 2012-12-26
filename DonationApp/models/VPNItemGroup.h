@@ -9,8 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "VPNDonationList.h"
 #import "VPNItem.h"
+#import "VPNCDManager.h"
+#import "VPNItemGroupDelegate.h"
 
-@interface VPNItemGroup : NSObject
+@interface VPNItemGroup : NSObject <VPNCDManagerDelegate>
+{
+    NSMutableArray* itemsToAdd;
+    NSMutableArray* itemsToUpdate;
+    NSMutableArray* itemsToDelete;
+    
+    VPNCDManager* manager;
+}
+
+@property (strong, nonatomic) id<VPNItemGroupDelegate> delegate;
 
 @property (strong, nonatomic) VPNDonationList* donationList;
 @property (strong, nonatomic) NSMutableArray* items;
@@ -42,5 +53,20 @@
 
 -(void)saveImageToDisc:(UIImage*)image;
 -(UIImage*)loadImageFromDisc;
+
+-(void) save;
+
+//AddListItem
+-(void) didAddListItem:(id)item;
+-(void) addListItemFailedWithError:(NSError*)error;
+
+//UpdateListItem
+-(void) didUpdateListItem:(id)item;
+-(void) updateListItemFailedWithError:(NSError*)error;
+
+//DeleteListItem
+-(void) didDeleteListItem:(id)item;
+-(void) deleteListItemFailedWithError:(NSError*)error;
+
 
 @end

@@ -48,8 +48,6 @@
 -(IBAction) donePushed:(id)sender;
 -(IBAction) startAddingItemsPushed:(id)sender;
 
--(IBAction) finishedEditingItems:(UIStoryboardSegue*)segue;
-
 //UITableView DataSource methods
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;

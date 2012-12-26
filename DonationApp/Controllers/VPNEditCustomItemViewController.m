@@ -10,6 +10,8 @@
 #import "VPNModalPickerView.h"
 #import "Category.h"
 
+#import "DejalActivityView.h"
+
 static CGFloat keyboardHeight = 216;
 static CGFloat toolbarHeight = 44;
 static CGFloat tabBarHeight = 49;
@@ -374,6 +376,24 @@ static CGFloat tabBarHeight = 49;
 }
 
 #pragma mark -
+#pragma mark VPNItemGroupDelegate
+
+-(void) didFinishSavingItemGroup
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) saveFailedWithError:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Save Error" message:@"Unable to save your items at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
+    
+}
+
+#pragma mark -
 #pragma mark Custom Methods
 
 -(BOOL) isGroupValid:(NSMutableArray**) errors
@@ -412,7 +432,8 @@ static CGFloat tabBarHeight = 49;
     NSMutableArray* errorMessages = [[NSMutableArray alloc] init];
     if([self isGroupValid:&errorMessages])
     {
-        
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving" width:155];
+        [group save];
     }
     else
     {

@@ -248,4 +248,18 @@
 }
 
 
+#pragma mark -
+#pragma mark Custom Methods
+
+-(void) setInstallLabel:(NSNotification*)notification
+{
+    
+}
+
+-(void) updateInstallLabel:(NSNotification*)notification
+{
+    
+}
+
+
 @end

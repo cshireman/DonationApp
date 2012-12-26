@@ -68,6 +68,26 @@
     return [context executeFetchRequest:fetchRequest error:&error];
 }
 
++(NSArray*) keywordSearch:(NSString*)keyword
+{
+    VPNUser* user = [VPNUser currentUser];
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext* context = appDelegate.managedObjectContext;
+    
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:context];
+    
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"(name like '%%%@%%' AND taxYear = %d)",keyword,user.selected_tax_year];
+    [fetchRequest setPredicate:pred];
+    [fetchRequest setEntity:entity];
+    
+    NSError* error;
+    
+    return [context executeFetchRequest:fetchRequest error:&error];
+    
+}
+
 -(NSString*) description
 {
     return self.name;

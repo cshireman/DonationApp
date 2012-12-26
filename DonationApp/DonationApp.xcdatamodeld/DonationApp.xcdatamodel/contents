@@ -5,7 +5,7 @@
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="parentCategoryID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="taxYear" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="categories" inverseEntity="Category" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="category" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES">
@@ -21,7 +21,7 @@
         <relationship name="item" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="values" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="160" positionY="192" width="128" height="133"/>
+        <element name="Category" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Item" positionX="342" positionY="336" width="128" height="103"/>
         <element name="ItemValue" positionX="520" positionY="417" width="128" height="103"/>
     </elements>

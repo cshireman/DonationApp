@@ -85,6 +85,11 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     [communicator makeAPICall:LoginUser withContent:jsonString];
 }
 
+-(void)startSessionForUserFailedWithError:(NSError*)error
+{
+    
+}
+
 -(void) getUserInfo:(BOOL)forceDownload
 {
     VPNUser* user = nil;

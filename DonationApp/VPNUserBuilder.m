@@ -25,10 +25,7 @@
             *error = [NSError errorWithDomain:VPNUserBuilderError code:VPNUserBuilderInvalidJSONError userInfo:nil];
         }
     }
-    
-    VPNUser* user = [[VPNUser alloc] init];
-    
-    
+        
     return nil;
 }
 

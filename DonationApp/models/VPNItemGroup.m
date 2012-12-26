@@ -11,6 +11,8 @@
 
 @implementation VPNItemGroup
 
+@synthesize delegate;
+
 @synthesize donationList;
 @synthesize items;
 @synthesize summary;
@@ -100,25 +102,47 @@
 
 -(void) setQuantity:(int)quantity forCondition:(ItemCondition)condition
 {
+    BOOL itemFound = NO;
     for(VPNItem* item in items)
     {
         if(item.condition == condition)
         {
+            itemFound = YES;
             item.quantity = quantity;
             break;
         }
+    }
+    
+    if(!itemFound)
+    {
+        VPNItem* newItem = [[VPNItem alloc] init];
+        newItem.quantity = quantity;
+        newItem.condition = condition;
+        
+        [items addObject:newItem];
     }
 }
 
 -(void) setValue:(double)value forCondition:(ItemCondition)condition
 {
+    BOOL itemFound = NO;
     for(VPNItem* item in items)
     {
         if(item.condition == condition)
         {
+            itemFound = YES;
             item.fairMarketValue = [NSNumber numberWithDouble:value];
             break;
         }
+    }
+    
+    if(!itemFound)
+    {
+        VPNItem* newItem = [[VPNItem alloc] init];
+        newItem.fairMarketValue = [NSNumber numberWithDouble:value];
+        newItem.condition = condition;
+        
+        [items addObject:newItem];
     }
 }
 
@@ -201,9 +225,9 @@
     return summary;
 }
 
--(void) saveImageToDisc:(UIImage*)image
+-(void) saveImageToDisc:(UIImage*)localImage
 {
-    NSData* imageData = UIImagePNGRepresentation(image);
+    NSData* imageData = UIImagePNGRepresentation(localImage);
     NSString* filePath = [self imageFilename];
     
     [imageData writeToFile:filePath atomically:YES];
@@ -225,5 +249,88 @@
     
     return [documentsDirectory stringByAppendingPathComponent:filePath];
 }
+
+-(void) save
+{
+    if(manager == nil)
+        manager = [[VPNCDManager alloc] init];
+    
+    //Build list of items to add, update, and delete
+    itemsToAdd = [NSMutableArray array];
+    itemsToUpdate = [NSMutableArray array];
+    itemsToDelete = [NSMutableArray array];
+    
+    for(VPNItem* currentItem in items)
+    {
+        currentItem.itemID = itemID;
+        currentItem.categoryID = categoryID;
+        currentItem.name = itemName;
+        currentItem.isCustomItem = isCustom;
+        currentItem.isCustomValue = isCustom;
+        
+        if(currentItem.ID == 0 && currentItem.quantity != 0)
+            [itemsToAdd addObject:currentItem];
+        else if(currentItem.ID != 0 && currentItem.quantity != 0)
+            [itemsToUpdate addObject:currentItem];
+        else if(currentItem.ID != 0 && currentItem.quantity == 0)
+            [itemsToDelete addObject:currentItem];
+    }
+    
+    [self saveNextItem];
+}
+
+-(void) saveNextItem
+{
+    if([itemsToAdd count] > 0)
+    {
+        [manager addDonationListItem:[itemsToAdd objectAtIndex:0] toDonationList:donationList];
+    }
+    else if([itemsToUpdate count] > 0)
+    {
+        [manager updateDonationListItem:[itemsToUpdate objectAtIndex:0] onDonationList:donationList];
+    }
+    else if([itemsToDelete count] > 0)
+    {
+        [manager deleteDonationListItem:[itemsToDelete objectAtIndex:0] fromDonationList:donationList];
+    }
+    else
+    {
+        //All lists are empty, finished processing so inform delegate
+        [delegate didFinishSavingItemGroup];
+    }
+}
+
+#pragma mark -
+#pragma mark VPNCDManagerDelegate Methods
+
+-(void) didAddListItem:(id)item
+{
+    [self saveNextItem];
+}
+-(void) addListItemFailedWithError:(NSError*)error
+{
+    [delegate saveFailedWithError:error];
+}
+
+-(void) didUpdateListItem:(id)item
+{
+    [self saveNextItem];
+}
+
+-(void) updateListItemFailedWithError:(NSError*)error
+{
+    [delegate saveFailedWithError:error];
+}
+
+-(void) didDeleteListItem:(id)item
+{
+    [self saveNextItem];    
+}
+
+-(void) deleteListItemFailedWithError:(NSError*)error
+{
+    [delegate saveFailedWithError:error];    
+}
+
 
 @end

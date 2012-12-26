@@ -148,6 +148,8 @@
 		83B653A91687CACB0029C4A2 /* VPNItemNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B653A71687CACB0029C4A2 /* VPNItemNameCell.m */; };
 		83B653AB1687CB740029C4A2 /* VPNItemNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B653AA1687CB740029C4A2 /* VPNItemNameCell.xib */; };
 		83B653AC1687CB740029C4A2 /* VPNItemNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B653AA1687CB740029C4A2 /* VPNItemNameCell.xib */; };
+		83B653B0168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */; };
+		83B653B1168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
@@ -352,6 +354,9 @@
 		83B653A61687CACB0029C4A2 /* VPNItemNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemNameCell.h; path = CustomCells/VPNItemNameCell.h; sourceTree = "<group>"; };
 		83B653A71687CACB0029C4A2 /* VPNItemNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemNameCell.m; path = CustomCells/VPNItemNameCell.m; sourceTree = "<group>"; };
 		83B653AA1687CB740029C4A2 /* VPNItemNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNItemNameCell.xib; path = CustomCells/VPNItemNameCell.xib; sourceTree = "<group>"; };
+		83B653AD168B7E9A0029C4A2 /* VPNItemGroupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemGroupDelegate.h; path = DonationApp/Protocols/VPNItemGroupDelegate.h; sourceTree = "<group>"; };
+		83B653AE168B89DF0029C4A2 /* VPNItemSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemSearchViewController.h; path = Controllers/VPNItemSearchViewController.h; sourceTree = "<group>"; };
+		83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemSearchViewController.m; path = Controllers/VPNItemSearchViewController.m; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -405,6 +410,7 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				83B653AD168B7E9A0029C4A2 /* VPNItemGroupDelegate.h */,
 				83124DFF168032A200911399 /* VPNEditDonationListDelegate.h */,
 				836426E9166730F300A70606 /* DonationApp.xcdatamodeld */,
 				836426E61667305100A70606 /* CoreData.framework */,
@@ -584,6 +590,8 @@
 		8390ECC21648C0D5000D03AE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				83B653AE168B89DF0029C4A2 /* VPNItemSearchViewController.h */,
+				83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */,
 				83CE69EE167B69B000CC334A /* VPNListViewController.h */,
 				83CE69EF167B69B000CC334A /* VPNListViewController.m */,
 				8315D2BC1679BA1F00A35DCF /* VPNDonationItemListViewController.h */,
@@ -912,6 +920,7 @@
 				8392FA1F16842ABD00AE8E87 /* VPNModalPickerView.m in Sources */,
 				83C8E2F01686D623001190E2 /* VPNDoneToolbar.m in Sources */,
 				83B653A81687CACB0029C4A2 /* VPNItemNameCell.m in Sources */,
+				83B653B0168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +981,7 @@
 				8392FA0A1683A1DF00AE8E87 /* VPNCustomItemConditionCell.m in Sources */,
 				8392FA2016842ABD00AE8E87 /* VPNModalPickerView.m in Sources */,
 				83B653A91687CACB0029C4A2 /* VPNItemNameCell.m in Sources */,
+				83B653B1168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,7 +1032,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Shireman (3BDJ874E99)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1037,6 +1047,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D1FAE16A-122E-4FF0-A519-420B4C656477";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1050,7 +1061,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Shireman (3BDJ874E99)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1058,6 +1069,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D1FAE16A-122E-4FF0-A519-420B4C656477";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1066,6 +1078,7 @@
 		83195DB0162D175600B63831 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
@@ -1075,6 +1088,7 @@
 					"\"$(SRCROOT)/usr/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1082,6 +1096,7 @@
 		83195DB1162D175600B63831 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
@@ -1091,6 +1106,7 @@
 					"\"$(SRCROOT)/usr/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
