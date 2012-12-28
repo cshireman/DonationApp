@@ -77,7 +77,7 @@
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:context];
     
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"(name like '%%%@%%' AND taxYear = %d)",keyword,user.selected_tax_year];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"(name contains[cd] %@ AND taxYear = %d)",keyword,user.selected_tax_year];
     [fetchRequest setPredicate:pred];
     [fetchRequest setEntity:entity];
     
