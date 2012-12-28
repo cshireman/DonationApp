@@ -30,6 +30,7 @@
 @property (assign) int itemID;
 @property (assign) int categoryID;
 @property (assign) BOOL isCustom;
+@property (assign) BOOL isNew;
 
 @property (strong, nonatomic) NSMutableArray* conditions;
 
@@ -55,6 +56,7 @@
 -(UIImage*)loadImageFromDisc;
 
 -(void) save;
+-(void) deleteAllItems;
 
 //AddListItem
 -(void) didAddListItem:(id)item;

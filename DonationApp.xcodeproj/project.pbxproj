@@ -357,6 +357,7 @@
 		83B653AD168B7E9A0029C4A2 /* VPNItemGroupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemGroupDelegate.h; path = DonationApp/Protocols/VPNItemGroupDelegate.h; sourceTree = "<group>"; };
 		83B653AE168B89DF0029C4A2 /* VPNItemSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemSearchViewController.h; path = Controllers/VPNItemSearchViewController.h; sourceTree = "<group>"; };
 		83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemSearchViewController.m; path = Controllers/VPNItemSearchViewController.m; sourceTree = "<group>"; };
+		83B653B2168D68630029C4A2 /* VPNEditCustomItemDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNEditCustomItemDelegate.h; path = Protocols/VPNEditCustomItemDelegate.h; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -655,6 +656,7 @@
 		8392FA0B1683A2AB00AE8E87 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				83B653B2168D68630029C4A2 /* VPNEditCustomItemDelegate.h */,
 				8392FA0C1683A2CA00AE8E87 /* VPNCustomItemConditionCellDelegate.h */,
 				8392FA2116842B4B00AE8E87 /* VPNModalPickerDelegate.h */,
 				83B653A41687CA780029C4A2 /* VPNItemNameCellDelegate.h */,

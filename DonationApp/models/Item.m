@@ -17,6 +17,7 @@
 
 @dynamic itemID;
 @dynamic name;
+@dynamic taxYear;
 @dynamic values;
 @dynamic category;
 

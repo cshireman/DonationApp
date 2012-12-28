@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSNumber * itemID;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * taxYear;
 @property (nonatomic, retain) NSSet *values;
 @property (nonatomic, retain) Category *category;
 

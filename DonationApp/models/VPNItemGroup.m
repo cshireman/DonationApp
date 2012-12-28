@@ -19,6 +19,7 @@
 @synthesize itemID;
 @synthesize categoryID;
 @synthesize isCustom;
+@synthesize isNew;
 @synthesize conditions;
 
 @synthesize categoryName;
@@ -33,6 +34,9 @@
     for(VPNItem* item in items)
     {
         NSString* key = [[NSNumber numberWithInt:item.itemID] stringValue];
+        if(item.isCustomItem)
+            key = item.name;
+        
         VPNItemGroup* itemGroup = [groups objectForKey:key];
         
         if(itemGroup == nil)
@@ -48,9 +52,15 @@
             Category* category = [Category loadCategoryForID:item.categoryID];
             
             if(category != nil)
+            {
                 itemGroup.categoryName = category.name;
+                itemGroup.categoryID = [category.categoryID intValue];
+            }
             else
+            {
                 itemGroup.categoryName = @"Unknown";
+                itemGroup.categoryID = 0;
+            }
             
             //TODO: Add code to get category info from core data
         }
@@ -119,6 +129,9 @@
         newItem.quantity = quantity;
         newItem.condition = condition;
         
+        if(items == nil)
+            items = [NSMutableArray array];        
+        
         [items addObject:newItem];
     }
 }
@@ -141,6 +154,9 @@
         VPNItem* newItem = [[VPNItem alloc] init];
         newItem.fairMarketValue = [NSNumber numberWithDouble:value];
         newItem.condition = condition;
+        
+        if(items == nil)
+            items = [NSMutableArray array];
         
         [items addObject:newItem];
     }
@@ -201,6 +217,9 @@
     
     double total = 0.00;
     
+    if(self.isCustom)
+        NSLog(@"Custom Item Found");
+    
     for(VPNItem* item in items)
     {
         NSString* quantityKey = [NSString stringWithFormat:@"quantity_%d",item.condition];
@@ -253,7 +272,10 @@
 -(void) save
 {
     if(manager == nil)
+    {
         manager = [[VPNCDManager alloc] init];
+        manager.delegate = self;
+    }
     
     //Build list of items to add, update, and delete
     itemsToAdd = [NSMutableArray array];
@@ -265,15 +287,25 @@
         currentItem.itemID = itemID;
         currentItem.categoryID = categoryID;
         currentItem.name = itemName;
+        currentItem.valuation = Other;
+        
         currentItem.isCustomItem = isCustom;
         currentItem.isCustomValue = isCustom;
+        currentItem.notes = @"";
         
         if(currentItem.ID == 0 && currentItem.quantity != 0)
+        {
+            currentItem.creationDate = [NSDate date];
             [itemsToAdd addObject:currentItem];
+        }
         else if(currentItem.ID != 0 && currentItem.quantity != 0)
+        {
             [itemsToUpdate addObject:currentItem];
+        }
         else if(currentItem.ID != 0 && currentItem.quantity == 0)
+        {
             [itemsToDelete addObject:currentItem];
+        }
     }
     
     [self saveNextItem];
@@ -300,11 +332,30 @@
     }
 }
 
+-(void) deleteAllItems
+{
+    if(manager == nil)
+    {
+        manager = [[VPNCDManager alloc] init];
+        manager.delegate = self;
+    }
+
+    
+    itemsToAdd = [NSMutableArray array];
+    itemsToUpdate = [NSMutableArray array];
+    itemsToDelete = [NSMutableArray arrayWithArray:items];
+    
+    [self saveNextItem];
+}
+
 #pragma mark -
 #pragma mark VPNCDManagerDelegate Methods
 
 -(void) didAddListItem:(id)item
 {
+    if([itemsToAdd count] > 0)
+        [itemsToAdd removeObjectAtIndex:0];
+    
     [self saveNextItem];
 }
 -(void) addListItemFailedWithError:(NSError*)error
@@ -314,6 +365,9 @@
 
 -(void) didUpdateListItem:(id)item
 {
+    if([itemsToUpdate count] > 0)
+        [itemsToUpdate removeObjectAtIndex:0];
+    
     [self saveNextItem];
 }
 
@@ -324,6 +378,9 @@
 
 -(void) didDeleteListItem:(id)item
 {
+    if([itemsToDelete count] > 0)
+        [itemsToDelete removeObjectAtIndex:0];
+    
     [self saveNextItem];    
 }
 

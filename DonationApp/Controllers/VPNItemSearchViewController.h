@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VPNDonationList.h";
+#import "VPNDonationList.h"
 
 @interface VPNItemSearchViewController : UITableViewController <UISearchBarDelegate>
 

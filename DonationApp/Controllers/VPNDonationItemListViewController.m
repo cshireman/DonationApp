@@ -8,11 +8,14 @@
 
 #import "VPNDonationItemListViewController.h"
 #import "VPNItemGroup.h"
+#import "VPNItemList.h"
+#import "DejalActivityView.h"
 
 @interface VPNDonationItemListViewController ()
 {
     NSArray* conditionNames;
     VPNItemGroup* groupToEdit;
+    VPNCDManager* manager;
 }
 
 @end
@@ -30,6 +33,9 @@
 {
     [super viewDidLoad];
     
+    manager = [[VPNCDManager alloc] init];
+    manager.delegate = self;
+    
     conditionNames = @[@"Fair",@"Good",@"Very Good",@"Excellent",@"Mint/New"];
     
     if(organization == nil)
@@ -37,13 +43,37 @@
     
     [self updateHeaderInfo];
     
-    itemGroups = [NSMutableArray arrayWithArray:[VPNItemGroup groupsFromItemsInDonationList:donationList]];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void) refreshItemGroups
+{
+    //Reload the donation list from disc when the view appears - get most up to date information
+    if(donationList != nil)
+    {
+        VPNUser* user = [VPNUser currentUser];
+        NSArray* itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+        
+        for(VPNDonationList* currentList in itemLists)
+        {
+            if(currentList.ID == donationList.ID)
+            {
+                donationList = currentList;
+            }
+        }
+    }
+    
+    itemGroups = [NSMutableArray arrayWithArray:[VPNItemGroup groupsFromItemsInDonationList:donationList]];
+    [self.tableView reloadData];    
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self refreshItemGroups];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +114,15 @@
     
     categoryLabel.text = itemGroup.categoryName;
     itemNameLabel.text = itemGroup.itemName;
+    
+    //Remove all other subviews from content view
+    NSArray* subviews = [cell.contentView subviews];
+    for(UIView* subview in subviews)
+    {
+        if(subview != categoryLabel && subview != itemNameLabel)
+            [subview removeFromSuperview];
+    }
+    
     
     CGRect rowRect = CGRectMake(0, 66, 256, 15);
     NSArray* conditions = itemGroup.conditions;
@@ -146,28 +185,29 @@
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Deleting" width:155];
+        
+        VPNItemGroup *groupToDelete = [itemGroups objectAtIndex:indexPath.row];
+        groupToDelete.delegate = self;
+        [groupToDelete deleteAllItems];
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -189,13 +229,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    groupToEdit = [itemGroups objectAtIndex:indexPath.row];
+    groupToEdit.isNew = NO;
+    
+    if(groupToEdit.isCustom)
+        [self performSegueWithIdentifier:@"EditCustomItemSegue" sender:self];
+    else
+        [self performSegueWithIdentifier:@"EditDonationListSegue" sender:self];
 }
 
 #pragma mark -
@@ -209,6 +249,7 @@
 - (IBAction)addCustomItemPushed:(id)sender {
     groupToEdit = [[VPNItemGroup alloc] init];
     groupToEdit.isCustom = YES;
+    groupToEdit.isNew = YES;
     groupToEdit.donationList = self.donationList;
     
     [self performSegueWithIdentifier:@"EditCustomItemSegue" sender:self];
@@ -266,18 +307,151 @@
     }
 }
 
+
 #pragma mark -
-#pragma mark VPNCDManagerDelegate Methods
+#pragma mark VPNEditCustomItemDelegate methods
 
--(void)didDeleteListItem:(id)item
+-(void) itemGroupAdded:(VPNItemGroup*) addedGroup
 {
+    return;
+    
+    BOOL itemGroupFound = NO;
+    if(addedGroup.isCustom)
+    {
+        for(VPNItemGroup* currentGroup in itemGroups)
+        {
+            if(currentGroup.isCustom && [currentGroup.itemName isEqualToString:addedGroup.itemName])
+            {
+                itemGroupFound = YES;
+                
+                NSMutableArray* newItems = addedGroup.items;
+                NSMutableArray* currentItems = currentGroup.items;
+                
+                for(VPNItem* newItem in newItems)
+                {
+                    for(VPNItem* currentItem in currentItems)
+                    {
+                        if(newItem.condition == currentItem.condition)
+                        {
+                            currentItem.quantity += newItem.quantity;
+                        }
+                    }
+                }
+                
+                [currentGroup buildItemSummary];
+            }
+        }
+    }
+    else
+    {
+        for(VPNItemGroup* currentGroup in itemGroups)
+        {
+            if(!currentGroup.isCustom && currentGroup.itemID == addedGroup.itemID)
+            {
+                itemGroupFound = YES;
+                
+                NSMutableArray* newItems = addedGroup.items;
+                NSMutableArray* currentItems = currentGroup.items;
+                
+                for(VPNItem* newItem in newItems)
+                {
+                    for(VPNItem* currentItem in currentItems)
+                    {
+                        if(newItem.condition == currentItem.condition)
+                        {
+                            currentItem.quantity += newItem.quantity;
+                        }
+                    }
+                }
+                
+                [currentGroup buildItemSummary];
+            }
+        }        
+    }
+    
+    if(!itemGroupFound)
+        [itemGroups addObject:addedGroup];
+    
+    [self.tableView reloadData];
+}
+
+-(void) itemGroupUpdated:(VPNItemGroup*) updatedGroup
+{
+    return;
+    
+    VPNItemGroup* groupToReplace = nil;
+    
+    for(VPNItemGroup* currentGroup in itemGroups)
+    {
+        if(updatedGroup.isCustom)
+        {
+            if([updatedGroup.itemName isEqualToString:currentGroup.itemName] && currentGroup.isCustom)
+            {
+                groupToReplace = currentGroup;
+                break;
+            }
+        }
+        else
+        {
+            if(!currentGroup.isCustom && updatedGroup.itemID == currentGroup.itemID)
+            {
+                groupToReplace = currentGroup;
+                break;
+            }
+        }
+    }
+    
+    [updatedGroup buildItemSummary];
+    if(groupToReplace == nil)
+    {
+        [itemGroups addObject:updatedGroup];
+    }
+    else
+    {
+        int index = [itemGroups indexOfObject:groupToReplace];
+        [itemGroups replaceObjectAtIndex:index withObject:updatedGroup];
+    }
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark VPNItemGroupDelegate
+
+-(void) didFinishSavingItemGroup
+{
+    VPNUser* currentUser = [VPNUser currentUser];
+    [DejalBezelActivityView currentActivityView].activityLabel.text = @"Updating Item Lists";
+    
+    [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
+}
+
+-(void) saveFailedWithError:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Save Error" message:@"Unable to save your items at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
     
 }
 
--(void)deleteListItemFailedWithError:(NSError *)error
+#pragma mark -
+#pragma mark VPNCDManagerDelegate methods
+
+-(void) didGetItemLists:(NSArray *)itemLists
 {
-    
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self refreshItemGroups];
 }
+
+-(void) getItemListsFailedWithError:(NSError *)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update Error" message:@"Unable to update your items at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
+}
+
 
 #pragma mark -
 #pragma mark VPNEditDonationListDelegate Methods

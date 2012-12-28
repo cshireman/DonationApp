@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "VPNEditDonationListDelegate.h"
 #import "VPNCDManagerDelegate.h"
+#import "VPNEditDonationListDelegate.h"
+#import "VPNEditCustomItemDelegate.h"
 #import "VPNCDManager.h"
+#import "VPNItemGroup.h"
+#import "VPNItemGroupDelegate.h"
 
-@interface VPNDonationItemListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNEditDonationListDelegate,VPNCDManagerDelegate>
+@interface VPNDonationItemListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNEditDonationListDelegate,VPNEditCustomItemDelegate,VPNCDManagerDelegate,VPNItemGroupDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *organizationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *donationListInfoLabel;
@@ -28,9 +32,9 @@
 - (IBAction)addItemPushed:(id)sender;
 - (IBAction)editListPushed:(id)sender;
 
-//VPNCDManagerDelegate Methods
--(void)didDeleteListItem:(id)item;
--(void)deleteListItemFailedWithError:(NSError *)error;
 
+//VPNEditDonationListDelegate Methods
+-(void) itemGroupAdded:(VPNItemGroup*) addedGroup;
+-(void) itemGroupUpdated:(VPNItemGroup*) updatedGroup;
 
 @end

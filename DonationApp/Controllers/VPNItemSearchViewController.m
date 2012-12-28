@@ -14,6 +14,7 @@
 @interface VPNItemSearchViewController ()
 {
     Category* currentCategory;
+    int currentCategoryID;
     NSArray* categories;
     NSArray* items;
     
@@ -49,8 +50,10 @@
 
 -(void) loadCurrentCategory
 {
-    categories = [Category loadCategoriesForCategoryID:[currentCategory.categoryID intValue]];
-    items = [Item loadItemsForCategoryID:[currentCategory.categoryID intValue]];
+    currentCategory = [Category loadCategoryForID:currentCategoryID];
+    
+    categories = [Category loadCategoriesForCategoryID:currentCategoryID];
+    items = [NSArray arrayWithArray:[currentCategory.items allObjects]];
     
     results = [NSMutableArray arrayWithArray:categories];
     [results addObjectsFromArray:items];
@@ -58,13 +61,13 @@
 
 -(void) backButtonPushed
 {
-    if([currentCategory.categoryID intValue] != 0)
+    if(currentCategoryID != 0)
     {
-        currentCategory.categoryID = currentCategory.parentCategoryID;
+        currentCategoryID = [currentCategory.parentCategoryID intValue];
         [self loadCurrentCategory];
         
         NSIndexSet* indexSet = [[NSIndexSet alloc] initWithIndex:0];
-        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationRight];
     }
     
     //Remove back button if at the root level
@@ -81,8 +84,8 @@
     
     backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPushed)];
     
-    currentCategory = [[Category alloc] init];
-    [currentCategory setCategoryID:[NSNumber numberWithInt:0]];
+    currentCategoryID = 0;
+    
     [self loadCurrentCategory];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -147,11 +150,13 @@
         self.navigationItem.leftBarButtonItem = backButton;
         [itemSearchBar setHidden:YES];
         
-        currentCategory = (Category*)resultObject;
+        Category* selectedCategory = (Category*)resultObject;
+        currentCategoryID = [selectedCategory.categoryID intValue];
+        
         [self loadCurrentCategory];
         
         NSIndexSet* indexSet = [[NSIndexSet alloc] initWithIndex:0];
-        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationLeft];
     }
     else
     {

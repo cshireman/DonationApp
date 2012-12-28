@@ -110,6 +110,7 @@
             
             Item* newItem = [Item getByItemID:itemID]; //Need to change
             [newItem populateWithDictionary:item];
+            newItem.taxYear = self.taxYear;
             
             [itemSet addObject:newItem];
         }

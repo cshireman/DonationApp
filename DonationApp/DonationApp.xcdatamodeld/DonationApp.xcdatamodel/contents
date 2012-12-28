@@ -11,6 +11,7 @@
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taxYear" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="category" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="items" inverseEntity="Category" syncable="YES"/>
         <relationship name="values" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ItemValue" inverseName="item" inverseEntity="ItemValue" syncable="YES"/>
     </entity>
@@ -22,7 +23,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Item" positionX="342" positionY="336" width="128" height="103"/>
+        <element name="Item" positionX="342" positionY="336" width="128" height="120"/>
         <element name="ItemValue" positionX="520" positionY="417" width="128" height="103"/>
     </elements>
 </model>

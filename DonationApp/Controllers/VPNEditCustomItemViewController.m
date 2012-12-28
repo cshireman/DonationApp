@@ -19,6 +19,7 @@ static CGFloat tabBarHeight = 49;
 @interface VPNEditCustomItemViewController ()
 {
     VPNModalPickerView* modalPicker;
+    VPNCDManager* manager;
     NSArray* categories;
     
     UITextField* currentTextField;
@@ -35,6 +36,8 @@ static CGFloat tabBarHeight = 49;
 @synthesize tableView;
 @synthesize doneButton;
 @synthesize doneToolbar;
+
+@synthesize delegate;
 
 -(UINib*) customItemCellNib
 {
@@ -79,7 +82,10 @@ static CGFloat tabBarHeight = 49;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    manager = [[VPNCDManager alloc] init];
+    manager.delegate = self;
+    
     modalPicker = [[VPNModalPickerView alloc] initWithNibName:[VPNModalPickerView nibName]];
     categories = [Category loadCategoriesForCategoryID:0];
     
@@ -380,8 +386,10 @@ static CGFloat tabBarHeight = 49;
 
 -(void) didFinishSavingItemGroup
 {
-    [DejalBezelActivityView removeViewAnimated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    VPNUser* currentUser = [VPNUser currentUser];
+    [DejalBezelActivityView currentActivityView].activityLabel.text = @"Updating Item Lists";
+    
+    [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
 -(void) saveFailedWithError:(NSError*)error
@@ -391,6 +399,23 @@ static CGFloat tabBarHeight = 49;
     
     [alert show];
     
+}
+
+#pragma mark -
+#pragma mark VPNCDManagerDelegate methods
+
+-(void) didGetItemLists:(NSArray *)itemLists
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) getItemListsFailedWithError:(NSError *)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update Error" message:@"Unable to update your items at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
 }
 
 #pragma mark -
@@ -433,6 +458,7 @@ static CGFloat tabBarHeight = 49;
     if([self isGroupValid:&errorMessages])
     {
         [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving" width:155];
+        group.delegate = self;
         [group save];
     }
     else
@@ -451,6 +477,9 @@ static CGFloat tabBarHeight = 49;
 -(void) expandTable
 {
     CGRect tableFrame = self.tableView.frame;
+    if(tableFrame.size.height >= 367)
+        return;
+    
     tableFrame.size.height += (keyboardHeight + toolbarHeight - tabBarHeight);
     self.tableView.frame = tableFrame;
 }
@@ -458,6 +487,9 @@ static CGFloat tabBarHeight = 49;
 -(void) shrinkTable
 {
     CGRect tableFrame = self.tableView.frame;
+    if(tableFrame.size.height < 367)
+        return;
+    
     tableFrame.size.height -= (keyboardHeight + toolbarHeight - tabBarHeight);
     self.tableView.frame = tableFrame;
 }

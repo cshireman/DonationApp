@@ -136,20 +136,34 @@
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M/d/y"];
-    [formatter setTimeStyle:NSDateFormatterNoStyle];
     
-    [info setObject:[formatter stringFromDate:self.creationDate] forKey:@"creationDate"];
+    NSString* createDate = [formatter stringFromDate:self.creationDate];
+    
+    [info setObject:createDate forKey:@"creationDate"];
     
     [info setObject:[NSNumber numberWithInt:self.condition] forKey:@"condition"];
     [info setObject:[NSNumber numberWithInt:self.valuation] forKey:@"valuation"];
     [info setObject:[NSNumber numberWithInt:self.categoryID] forKey:@"category"];
-    [info setObject:[NSNumber numberWithInt:self.itemID] forKey:@"itemID"];
+    
+    if(self.isCustomItem)
+        [info setObject:@"" forKey:@"itemID"];
+    else
+        [info setObject:[NSNumber numberWithInt:self.itemID] forKey:@"itemID"];
     
     [info setObject:self.name forKey:@"name"];
     [info setObject:[NSNumber numberWithInt:self.quantity] forKey:@"quantity"];
     [info setObject:self.fairMarketValue forKey:@"fairMarketValue"];
-    [info setObject:[NSNumber numberWithBool:self.isCustomItem] forKey:@"isCustomItem"];
-    [info setObject:[NSNumber numberWithBool:self.isCustomValue] forKey:@"isCustomValue"];
+    
+    if(self.isCustomItem)
+    {
+        [info setObject:@"1" forKey:@"isCustomItem"];
+        [info setObject:@"1" forKey:@"isCustomValue"];
+    }
+    else
+    {
+        [info setObject:@"0" forKey:@"isCustomItem"];
+        [info setObject:@"0" forKey:@"isCustomValue"];
+    }
     
     [info setObject:self.notes forKey:@"notes"];
     

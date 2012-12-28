@@ -17,8 +17,11 @@
 #import "VPNModalPickerView.h"
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
+#import "VPNEditCustomItemDelegate.h"
 
-@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate>
+@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate>
+
+@property (strong, nonatomic) id<VPNEditCustomItemDelegate> delegate;
 
 @property (retain, nonatomic) UINib* customItemCellNib;
 @property (retain, nonatomic) UINib* itemNameCellNib;
