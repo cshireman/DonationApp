@@ -11,6 +11,9 @@
 #import "VPNItemList.h"
 #import "DejalActivityView.h"
 
+#import "Item.h"
+#import "Category.h"
+
 @interface VPNDonationItemListViewController ()
 {
     NSArray* conditionNames;
@@ -232,10 +235,18 @@
     groupToEdit = [itemGroups objectAtIndex:indexPath.row];
     groupToEdit.isNew = NO;
     
+    if(groupToEdit.categoryID == 0 && groupToEdit.itemID != 0)
+    {
+        Item* tempItem = [Item loadItemForID:groupToEdit.itemID];
+        Category* tempCat = tempItem.category;
+        
+        groupToEdit.categoryID = [tempCat.categoryID intValue];
+    }
+    
     if(groupToEdit.isCustom)
         [self performSegueWithIdentifier:@"EditCustomItemSegue" sender:self];
     else
-        [self performSegueWithIdentifier:@"EditDonationListSegue" sender:self];
+        [self performSegueWithIdentifier:@"EditItemSegue" sender:self];
 }
 
 #pragma mark -
