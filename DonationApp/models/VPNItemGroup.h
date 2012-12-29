@@ -56,6 +56,7 @@
 -(double) totalValueForAllConditions;
 
 -(void)saveImageToDisc:(UIImage*)image;
+-(void)deleteImageFromDisc;
 -(UIImage*)loadImageFromDisc;
 
 -(void) save;

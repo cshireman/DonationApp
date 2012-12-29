@@ -95,6 +95,8 @@ static CGFloat tabBarHeight = 49;
     doneToolbar = [VPNDoneToolbar doneToolbarFromFromNib:[VPNDoneToolbar nib]];
     doneToolbar.delegate = self;
     
+    [group loadImageFromDisc];
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -152,6 +154,15 @@ static CGFloat tabBarHeight = 49;
                 categoryLabel.text = @"Please Choose";
             else
                 categoryLabel.text = group.categoryName;
+        }
+        else if([CellIdentifier isEqualToString:@"PhotoCell"])
+        {
+            UIButton* photoButton = (UIButton*)[cell viewWithTag:1];
+            
+            if(group.image == nil)
+                [photoButton setHidden:YES];
+            else
+                [photoButton setHidden:NO];
         }
     }
     else if([CellIdentifier isEqualToString:@"VPNItemNameCell"])
@@ -254,8 +265,95 @@ static CGFloat tabBarHeight = 49;
         
         [modalPicker show];
     }
+    else if(indexPath.section == 1 && indexPath.row == 6)
+    {
+        if(group.image == nil)
+        {
+            UIActionSheet* imageSourceSheet = [[UIActionSheet alloc] initWithTitle:@"Image Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose Existing", nil];
+            
+            [imageSourceSheet showInView:self.view];
+        }
+        else
+        {
+            [self performSegueWithIdentifier:@"CustomItemViewPhotoSegue" sender:self];
+        }
+    }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate method
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 2)
+        return;
+    
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    if(buttonIndex == 1)
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    UIImagePickerController* imageController = [[UIImagePickerController alloc] init];
+    imageController.sourceType = sourceType;
+    imageController.delegate = self;
+    imageController.allowsEditing = YES;
+    
+    [self presentViewController:imageController animated:YES completion:^{}];
+}
+
+#pragma mark -
+#pragma mark UIImagePickerControllerDelegate methods
+
+-(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    group.image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    if(group.image == nil)
+    {
+        group.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+-(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark -
+#pragma mark VPNViewPhotoDelegate methods
+
+-(void) viewPhotoViewControllerDeletedPhoto
+{
+    group.image = nil;
+    [self.tableView reloadData];
+}
+
+-(void) viewPhotoViewControllerUpdatedPhoto:(UIImage *)updatedImage
+{
+    group.image = updatedImage;
+    [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController* destController = segue.destinationViewController;
+    if([destController respondsToSelector:@selector(setImage:)])
+    {
+        [destController setValue:group.image forKey:@"image"];
+    }
+    
+    if([destController respondsToSelector:@selector(setDelegate:)])
+    {
+        [destController setValue:self forKey:@"delegate"];
+    }
 }
 
 #pragma mark -
@@ -387,6 +485,7 @@ static CGFloat tabBarHeight = 49;
 -(void) didFinishSavingItemGroup
 {
     VPNUser* currentUser = [VPNUser currentUser];
+    
     [DejalBezelActivityView currentActivityView].activityLabel.text = @"Updating Item Lists";
     
     [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
@@ -417,6 +516,7 @@ static CGFloat tabBarHeight = 49;
     
     [alert show];
 }
+
 
 #pragma mark -
 #pragma mark Custom Methods

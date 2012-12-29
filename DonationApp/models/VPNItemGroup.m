@@ -275,6 +275,14 @@
     [imageData writeToFile:filePath atomically:YES];
 }
 
+-(void)deleteImageFromDisc
+{
+    NSString* filePath = [self imageFilename];
+    NSError* error = nil;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+}
+
 -(UIImage*) loadImageFromDisc
 {
     NSString* filePath = [self imageFilename];
@@ -288,6 +296,8 @@
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     NSString* filePath = [NSString stringWithFormat:@"%d_%d",donationList.ID,itemID];
+    if(isCustom)
+        filePath = [NSString stringWithFormat:@"%d_%@",donationList.ID,itemName];
     
     return [documentsDirectory stringByAppendingPathComponent:filePath];
 }
@@ -330,6 +340,11 @@
             [itemsToDelete addObject:currentItem];
         }
     }
+    
+    if(image != nil)
+        [self saveImageToDisc:image];
+    else
+        [self deleteImageFromDisc];
     
     [self saveNextItem];
 }

@@ -18,8 +18,9 @@
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
 #import "VPNEditCustomItemDelegate.h"
+#import "VPNViewPhotoDelegate.h"
 
-@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate>
+@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate>
 
 @property (strong, nonatomic) id<VPNEditCustomItemDelegate> delegate;
 

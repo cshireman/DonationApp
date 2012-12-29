@@ -98,6 +98,7 @@
 		837B262E168E7F8400454BD4 /* VPNEditItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B262D168E7F8400454BD4 /* VPNEditItemViewController.m */; };
 		837B2633168E800800454BD4 /* VPNItemConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B2632168E800800454BD4 /* VPNItemConditionCell.m */; };
 		837B2635168EBF2300454BD4 /* VPNItemConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837B2634168EBF2300454BD4 /* VPNItemConditionCell.xib */; };
+		837B2638168F891D00454BD4 /* VPNViewPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B2637168F891D00454BD4 /* VPNViewPhotoViewController.m */; };
 		837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */; };
 		8387D48C165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
 		8387D48D165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
@@ -294,6 +295,9 @@
 		837B2631168E800800454BD4 /* VPNItemConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemConditionCell.h; path = CustomCells/VPNItemConditionCell.h; sourceTree = "<group>"; };
 		837B2632168E800800454BD4 /* VPNItemConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemConditionCell.m; path = CustomCells/VPNItemConditionCell.m; sourceTree = "<group>"; };
 		837B2634168EBF2300454BD4 /* VPNItemConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNItemConditionCell.xib; path = CustomCells/VPNItemConditionCell.xib; sourceTree = "<group>"; };
+		837B2636168F891D00454BD4 /* VPNViewPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNViewPhotoViewController.h; path = Controllers/VPNViewPhotoViewController.h; sourceTree = "<group>"; };
+		837B2637168F891D00454BD4 /* VPNViewPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNViewPhotoViewController.m; path = Controllers/VPNViewPhotoViewController.m; sourceTree = "<group>"; };
+		837B2639168F89F500454BD4 /* VPNViewPhotoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNViewPhotoDelegate.h; path = Protocols/VPNViewPhotoDelegate.h; sourceTree = "<group>"; };
 		837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardDoneToolbarView.xib; path = CustomViews/KeyboardDoneToolbarView.xib; sourceTree = "<group>"; };
 		8387D48A165615B800FE7C0E /* VPNSelectTaxYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNSelectTaxYearViewController.h; path = Controllers/VPNSelectTaxYearViewController.h; sourceTree = "<group>"; };
 		8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNSelectTaxYearViewController.m; path = Controllers/VPNSelectTaxYearViewController.m; sourceTree = "<group>"; };
@@ -600,6 +604,8 @@
 		8390ECC21648C0D5000D03AE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				837B2636168F891D00454BD4 /* VPNViewPhotoViewController.h */,
+				837B2637168F891D00454BD4 /* VPNViewPhotoViewController.m */,
 				837B262C168E7F8400454BD4 /* VPNEditItemViewController.h */,
 				837B262D168E7F8400454BD4 /* VPNEditItemViewController.m */,
 				83B653AE168B89DF0029C4A2 /* VPNItemSearchViewController.h */,
@@ -670,6 +676,7 @@
 		8392FA0B1683A2AB00AE8E87 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				837B2639168F89F500454BD4 /* VPNViewPhotoDelegate.h */,
 				83B653B2168D68630029C4A2 /* VPNEditCustomItemDelegate.h */,
 				8392FA0C1683A2CA00AE8E87 /* VPNCustomItemConditionCellDelegate.h */,
 				8392FA2116842B4B00AE8E87 /* VPNModalPickerDelegate.h */,
@@ -941,6 +948,7 @@
 				83B653B0168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */,
 				837B262E168E7F8400454BD4 /* VPNEditItemViewController.m in Sources */,
 				837B2633168E800800454BD4 /* VPNItemConditionCell.m in Sources */,
+				837B2638168F891D00454BD4 /* VPNViewPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

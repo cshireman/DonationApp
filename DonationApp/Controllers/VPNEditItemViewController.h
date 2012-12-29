@@ -13,8 +13,9 @@
 #import "VPNItemConditionCell.h"
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
+#import "VPNViewPhotoDelegate.h"
 
-@interface VPNEditItemViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,VPNItemConditionCellDelegate,VPNDoneToolbarDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate>
+@interface VPNEditItemViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,VPNItemConditionCellDelegate,VPNDoneToolbarDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate>
 
 @property (retain, nonatomic) UINib* itemCellNib;
 @property (retain, nonatomic) UINib* doneToolbarNib;

@@ -63,6 +63,8 @@ static CGFloat tabBarHeight = 49;
     
     doneToolbar = [VPNDoneToolbar doneToolbarFromFromNib:[VPNDoneToolbar nib]];
     doneToolbar.delegate = self;
+    
+    [group loadImageFromDisc];    
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,6 +123,15 @@ static CGFloat tabBarHeight = 49;
             UILabel* itemLabel = (UILabel*)[cell viewWithTag:1];
             itemLabel.text = group.itemName;
         }
+        else if([CellIdentifier isEqualToString:@"PhotoCell"])
+        {
+            UIButton* photoButton = (UIButton*)[cell viewWithTag:1];
+            
+            if(group.image == nil)
+                [photoButton setHidden:YES];
+            else
+                [photoButton setHidden:NO];
+        }
     }
     else if([CellIdentifier isEqualToString:@"VPNItemConditionCell"])
     {
@@ -176,9 +187,98 @@ static CGFloat tabBarHeight = 49;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    if(indexPath.section == 1 && indexPath.row == 6)
+    {
+        if(group.image == nil)
+        {
+            UIActionSheet* imageSourceSheet = [[UIActionSheet alloc] initWithTitle:@"Image Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose Existing", nil];
+            
+            [imageSourceSheet showInView:self.view];
+        }
+        else
+        {
+            [self performSegueWithIdentifier:@"ItemViewPhotoSegue" sender:self];
+        }
+    }
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate method
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 2)
+        return;
+    
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    if(buttonIndex == 1)
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    UIImagePickerController* imageController = [[UIImagePickerController alloc] init];
+    imageController.sourceType = sourceType;
+    imageController.delegate = self;
+    imageController.allowsEditing = YES;
+    
+    [self presentViewController:imageController animated:YES completion:^{}];
+}
+
+#pragma mark -
+#pragma mark UIImagePickerControllerDelegate methods
+
+-(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    group.image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    if(group.image == nil)
+    {
+        group.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+-(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark -
+#pragma mark VPNViewPhotoDelegate methods
+
+-(void) viewPhotoViewControllerDeletedPhoto
+{
+    group.image = nil;
+    [self.tableView reloadData];
+}
+
+-(void) viewPhotoViewControllerUpdatedPhoto:(UIImage *)updatedImage
+{
+    group.image = updatedImage;
+    [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController* destController = segue.destinationViewController;
+    if([destController respondsToSelector:@selector(setImage:)])
+    {
+        [destController setValue:group.image forKey:@"image"];
+    }
+    
+    if([destController respondsToSelector:@selector(setDelegate:)])
+    {
+        [destController setValue:self forKey:@"delegate"];
+    }
+}
+
 
 #pragma mark -
 #pragma mark VPNCustomItemConditionCellDelegate Methods
