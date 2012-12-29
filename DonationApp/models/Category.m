@@ -15,6 +15,7 @@
 
 @dynamic categoryID;
 @dynamic name;
+@dynamic path;
 @dynamic taxYear;
 @dynamic parentCategoryID;
 @dynamic categories;

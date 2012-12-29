@@ -17,6 +17,7 @@
 
 @dynamic itemID;
 @dynamic name;
+@dynamic path;
 @dynamic taxYear;
 @dynamic values;
 @dynamic category;

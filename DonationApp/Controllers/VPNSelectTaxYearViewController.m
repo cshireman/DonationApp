@@ -223,14 +223,12 @@
             Category* category  = [Category getByCategoryID:[catID intValue]];
             [category populateWithDictionary:mutableCatInfo];
             
-            NSLog(@"Saving Context");
             [context save:&error];
             
             i += 1.0;
             double progress = (i / [categoryList count])*100.0;
             
             loadingView.activityLabel.text = [NSString stringWithFormat: @"Installing: %.02f%%",progress];
-            NSLog(@"Updating install label: %@",loadingView.activityLabel.text);
         }
     }
     

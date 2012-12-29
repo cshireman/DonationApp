@@ -73,6 +73,19 @@
     self.name = (NSString*)[info objectForKey:@"Name"];
     self.taxYear = (NSNumber*)[info objectForKey:@"TaxYear"];
     
+    NSString* catPath = (NSString*)[info objectForKey:@"Path"];
+    
+    if(catPath == nil)
+    {
+        self.path = @"";
+        catPath = self.name;
+    }
+    else
+    {
+        self.path = catPath;
+        catPath = [catPath stringByAppendingFormat:@": %@",self.name];
+    }
+    
     NSNumber* parentCatID = (NSNumber*)[info objectForKey:@"ParentCategoryID"];
     if(parentCatID != nil)
         self.parentCategoryID = parentCatID;
@@ -88,10 +101,11 @@
             NSMutableDictionary* mutableSubCat = [NSMutableDictionary dictionaryWithDictionary:subCat];
             [mutableSubCat setValue:self.categoryID forKey:@"ParentCategoryID"];
             [mutableSubCat setValue:self.taxYear forKey:@"TaxYear"];
+            [mutableSubCat setValue:catPath forKey:@"Path"];
             
             int subcatID = [[subCat objectForKey:@"ID"] intValue];
             
-            Category* newCat = [Category getByCategoryID:subcatID]; //Need to change
+            Category* newCat = [Category getByCategoryID:subcatID];
             [newCat populateWithDictionary:mutableSubCat];
             
             [subcatSet addObject:newCat];
@@ -109,7 +123,9 @@
             int itemID = [[item objectForKey:@"ID"] intValue];
             
             Item* newItem = [Item getByItemID:itemID]; //Need to change
+            
             [newItem populateWithDictionary:item];
+            newItem.path = catPath;
             newItem.taxYear = self.taxYear;
             
             [itemSet addObject:newItem];

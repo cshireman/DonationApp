@@ -71,10 +71,10 @@
     }
     
     //Remove back button if at the root level
-    if([currentCategory.categoryID intValue] == 0)
+    if(currentCategoryID == 0)
     {
         self.navigationItem.leftBarButtonItem = nil;
-        [itemSearchBar setHidden:NO];
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 320, 1) animated:YES];
     }
 }
 
@@ -118,37 +118,72 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    if([itemSearchBar.text length] > 0)
+    {
+        CellIdentifier = @"SearchResultCell";
+    }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     id resultObject = [results objectAtIndex:indexPath.row];
     
-    if([resultObject isKindOfClass:[Category class]])
+    if([itemSearchBar.text length] > 0)
     {
-        Category* category = (Category*)resultObject;
-        cell.textLabel.text = category.name;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        UILabel* pathLabel = (UILabel*)[cell viewWithTag:1];
+        UILabel* nameLabel = (UILabel*)[cell viewWithTag:2];
+        
+        if([resultObject isKindOfClass:[Category class]])
+        {
+            Category* category = (Category*)resultObject;
+            
+            nameLabel.text = category.name;
+            pathLabel.text = category.path;
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
+        {
+            Item* item = (Item*)resultObject;
+            
+            nameLabel.text = item.name;
+            pathLabel.text = item.path;
+            
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        }
+        
     }
     else
     {
-        Item* item = (Item*)resultObject;
-        cell.textLabel.text = item.name;
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    }
+        [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
         
+        if([resultObject isKindOfClass:[Category class]])
+        {
+            Category* category = (Category*)resultObject;
+            cell.textLabel.text = category.name;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
+        {
+            Item* item = (Item*)resultObject;
+            cell.textLabel.text = item.name;
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        }
+    }
+    
     return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
     id resultObject = [results objectAtIndex:indexPath.row];
     
     if([resultObject isKindOfClass:[Category class]])
     {
         self.navigationItem.leftBarButtonItem = backButton;
-        [itemSearchBar setHidden:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         
         Category* selectedCategory = (Category*)resultObject;
         currentCategoryID = [selectedCategory.categoryID intValue];
@@ -195,6 +230,8 @@
 -(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar setText:@""];
+    [searchBar resignFirstResponder];
+    
     [self loadCurrentCategory];
     [self.tableView reloadData];
 }
