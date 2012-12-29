@@ -11,6 +11,7 @@
 #import "VPNItem.h"
 #import "VPNCDManager.h"
 #import "VPNItemGroupDelegate.h"
+#import "Item.h"
 
 @interface VPNItemGroup : NSObject <VPNCDManagerDelegate>
 {
@@ -19,6 +20,8 @@
     NSMutableArray* itemsToDelete;
     
     VPNCDManager* manager;
+    Item* dbItem;
+    
 }
 
 @property (strong, nonatomic) id<VPNItemGroupDelegate> delegate;

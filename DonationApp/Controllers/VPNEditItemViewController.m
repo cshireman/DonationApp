@@ -7,6 +7,9 @@
 //
 
 #import "VPNEditItemViewController.h"
+#import "DejalActivityView.h"
+#import "VPNDonationItemListViewController.h"
+
 static CGFloat keyboardHeight = 216;
 static CGFloat toolbarHeight = 44;
 static CGFloat tabBarHeight = 49;
@@ -14,6 +17,7 @@ static CGFloat tabBarHeight = 49;
 @interface VPNEditItemViewController ()
 {
     VPNCDManager* manager;
+    UITextField* currentTextField; 
 }
 
 
@@ -28,7 +32,9 @@ static CGFloat tabBarHeight = 49;
 @synthesize doneButton;
 @synthesize doneToolbar;
 
--(UINib*) customItemCellNib
+@synthesize tableView;
+
+-(UINib*) itemCellNib
 {
     if(itemCellNib == nil)
     {
@@ -46,15 +52,6 @@ static CGFloat tabBarHeight = 49;
     }
     
     return doneToolbarNib;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
@@ -78,34 +75,34 @@ static CGFloat tabBarHeight = 49;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    if(section == 0)
+        return 2;
+    else
+        return 7;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)localTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* CellIdentifier = @"VPNCustomItemConditionCell";
+    NSString* CellIdentifier = @"VPNItemConditionCell";
     UITableViewCell* cell = nil;
     
     if(indexPath.section == 0 && indexPath.row == 0)
         CellIdentifier = @"CategoryCell";
     else if(indexPath.section == 0 && indexPath.row == 1)
-        CellIdentifier = @"VPNItemNameCell";
+        CellIdentifier = @"ItemCell";
     else if(indexPath.section == 1 && indexPath.row == 0)
         CellIdentifier = @"ColumnHeaderCell";
     else if(indexPath.section == 1 && indexPath.row == 6)
         CellIdentifier = @"PhotoCell";
     
     
-    if(![CellIdentifier isEqualToString:@"VPNCustomItemConditionCell"] && ![CellIdentifier isEqualToString:@"VPNItemNameCell"])
+    if(![CellIdentifier isEqualToString:@"VPNItemConditionCell"])
     {
         cell = [localTableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
@@ -117,28 +114,17 @@ static CGFloat tabBarHeight = 49;
         if([CellIdentifier isEqualToString:@"CategoryCell"])
         {
             UILabel* categoryLabel = (UILabel*)[cell viewWithTag:1];
-            
-            if(nil == group.categoryName || [group.categoryName isEqualToString:@""])
-                categoryLabel.text = @"Please Choose";
-            else
-                categoryLabel.text = group.categoryName;
+            categoryLabel.text = group.categoryName;
         }
-    }
-    else if([CellIdentifier isEqualToString:@"VPNItemNameCell"])
-    {
-        VPNItemNameCell *itemNameCell = [VPNItemNameCell cellForTableView:localTableView fromNib:self.itemNameCellNib];
-        
-        itemNameCell.delegate = self;
-        
-        itemNameCell.indexPath = indexPath;
-        [itemNameCell setText:group.itemName];
-        
-        return itemNameCell;
-        
+        else if([CellIdentifier isEqualToString:@"ItemCell"])
+        {
+            UILabel* itemLabel = (UILabel*)[cell viewWithTag:1];
+            itemLabel.text = group.itemName;
+        }
     }
     else if([CellIdentifier isEqualToString:@"VPNItemConditionCell"])
     {
-        VPNItemConditionCell *conditionCell = [VPNItemConditionCell cellForTableView:tableView fromNib:self.itemCellNib];
+        VPNItemConditionCell *conditionCell = [VPNItemConditionCell cellForTableView:localTableView fromNib:self.itemCellNib];
         
         conditionCell.delegate = self;
         
@@ -181,56 +167,175 @@ static CGFloat tabBarHeight = 49;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+-(BOOL) tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if(indexPath.section == 1 && indexPath.row == 6)
+        return YES;
+    
+    return NO;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark VPNCustomItemConditionCellDelegate Methods
+
+-(void) quantityUpdated:(int)quantity atIndexPath:(NSIndexPath*)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    NSLog(@"Updating Quantity: %d for row %d",quantity,indexPath.row);
+    switch(indexPath.row)
+    {
+        case 1: [group setQuantity:quantity forCondition:Mint]; break;
+        case 2: [group setQuantity:quantity forCondition:Excellent]; break;
+        case 3: [group setQuantity:quantity forCondition:VeryGood]; break;
+        case 4: [group setQuantity:quantity forCondition:Good]; break;
+        case 5: [group setQuantity:quantity forCondition:Fair]; break;
+        default: break;
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+-(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath
 {
+    [self shrinkTable];
+    
+    quantityField.inputAccessoryView = doneToolbar;
+    currentTextField = quantityField;
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark -
+#pragma mark VPNDoneToolbarDelegate Methods
+
+-(void) doneToolbarButtonPushed:(id)sender
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    [self expandTable];
+    
+    if(currentTextField != nil)
+    {
+        [currentTextField resignFirstResponder];
+        currentTextField = nil;
+    }
 }
-*/
 
-#pragma mark - Table view delegate
+#pragma mark -
+#pragma mark VPNItemGroupDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void) didFinishSavingItemGroup
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    VPNUser* currentUser = [VPNUser currentUser];
+    [DejalBezelActivityView currentActivityView].activityLabel.text = @"Updating Item Lists";
+    
+    [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
+
+-(void) saveFailedWithError:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Save Error" message:@"Unable to save your items at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
+    
+}
+
+#pragma mark -
+#pragma mark VPNCDManagerDelegate methods
+
+-(void) didGetItemLists:(NSArray *)itemLists
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    NSArray* controllers = self.navigationController.viewControllers;
+    UIViewController* destController = nil;
+    
+    for(UIViewController* currentController in controllers)
+    {
+        if([currentController isKindOfClass:[VPNDonationItemListViewController class]])
+        {
+            destController = currentController;
+            break;
+        }
+    }
+    
+    if(destController != nil)
+    {
+        [self.navigationController popToViewController:destController animated:YES];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+-(void) getItemListsFailedWithError:(NSError *)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update Error" message:@"Unable to update your items at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
+}
+
+#pragma mark -
+#pragma mark Custom Methods
+
+-(BOOL) isGroupValid:(NSMutableArray**) errors
+{
+    BOOL isValid = YES;
+    
+    if([group totalQuantityForAllConditons] == 0)
+    {
+        isValid = NO;
+        [*errors addObject:@"One item must have a quantity.\r\n"];
+    }
+    
+    return isValid;
+}
+
+-(IBAction) doneButtonPushed:(id)sender
+{
+    NSMutableArray* errorMessages = [[NSMutableArray alloc] init];
+    if([self isGroupValid:&errorMessages])
+    {
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving" width:155];
+        group.delegate = self;
+        [group save];
+    }
+    else
+    {
+        NSString* error = @"The following errors occured:\r\n";
+        for(NSString* currentError in errorMessages)
+        {
+            error = [error stringByAppendingString:currentError];
+        }
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Item" message:error delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+-(void) expandTable
+{
+    CGRect tableFrame = self.tableView.frame;
+    if(tableFrame.size.height >= 367)
+        return;
+    
+    tableFrame.size.height += (keyboardHeight + toolbarHeight - tabBarHeight);
+    self.tableView.frame = tableFrame;
+}
+
+-(void) shrinkTable
+{
+    CGRect tableFrame = self.tableView.frame;
+    if(tableFrame.size.height < 367)
+        return;
+    
+    tableFrame.size.height -= (keyboardHeight + toolbarHeight - tabBarHeight);
+    self.tableView.frame = tableFrame;
+}
+
 
 @end

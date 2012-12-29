@@ -8,6 +8,8 @@
 
 #import "VPNItemGroup.h"
 #import "Category.h"
+#import "Item.h"
+#import "ItemValue.h"
 
 @implementation VPNItemGroup
 
@@ -100,14 +102,35 @@
 
 -(double) valueForCondition:(ItemCondition)condition
 {
-    double value = 0.00;
-    for(VPNItem* item in items)
+    if(isCustom)
     {
-        if(item.condition == condition)
-            value += [item.fairMarketValue doubleValue];
+        double value = 0.00;
+        for(VPNItem* item in items)
+        {
+            if(item.condition == condition)
+                value += [item.fairMarketValue doubleValue];
+        }
+        
+        return value;
+    }
+    else
+    {
+        if(dbItem == nil)
+        {
+            dbItem = [Item loadItemForID:itemID];
+        }
+        
+        NSSet* values = dbItem.values;
+        for(ItemValue* itemValue in values)
+        {
+            if([itemValue.condition intValue] == condition)
+            {
+                return [itemValue.value doubleValue];
+            }
+        }
     }
     
-    return value;
+    return 0.00;
 }
 
 -(void) setQuantity:(int)quantity forCondition:(ItemCondition)condition

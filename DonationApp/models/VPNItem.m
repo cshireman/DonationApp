@@ -152,7 +152,11 @@
     
     [info setObject:self.name forKey:@"name"];
     [info setObject:[NSNumber numberWithInt:self.quantity] forKey:@"quantity"];
-    [info setObject:self.fairMarketValue forKey:@"fairMarketValue"];
+    
+    if(self.fairMarketValue == nil)
+        [info setObject:@"" forKey:@"fairMarketValue"];
+    else
+        [info setObject:self.fairMarketValue forKey:@"fairMarketValue"];
     
     if(self.isCustomItem)
     {

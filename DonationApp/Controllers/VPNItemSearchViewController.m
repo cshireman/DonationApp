@@ -202,9 +202,10 @@
         group.itemName = item.name;
         
         group.categoryID = [currentCategory.categoryID intValue];
-        group.categoryName = currentCategory.name;
+        group.categoryName = item.path;
         
         group.donationList = donationList;
+        group.isNew = YES;
         
         [self performSegueWithIdentifier:@"AddItemSegue" sender:self];
     }

@@ -14,16 +14,16 @@
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
 
-@interface VPNEditItemViewController : UITableViewController <VPNItemConditionCellDelegate,UITextFieldDelegate,VPNDoneToolbarDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate>
+@interface VPNEditItemViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,VPNItemConditionCellDelegate,VPNDoneToolbarDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate>
 
 @property (retain, nonatomic) UINib* itemCellNib;
 @property (retain, nonatomic) UINib* doneToolbarNib;
 
 @property (strong, nonatomic) VPNItemGroup* group;
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
-
 @property (strong, nonatomic) VPNDoneToolbar* doneToolbar;
+
+@property (strong, nonatomic) IBOutlet UITableView* tableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
 
 -(IBAction) doneButtonPushed:(id)sender;
 
