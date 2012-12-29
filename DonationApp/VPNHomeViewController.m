@@ -333,6 +333,12 @@
     UIViewController* destination = (UIViewController*)segue.destinationViewController;
     if([destination respondsToSelector:@selector(setDelegate:)])
         [destination setValue:self forKey:@"delegate"];
+    
+    if([destination respondsToSelector:@selector(setCanPurchase:)])
+    {
+        [destination performSelector:@selector(setCanPurchase:) withObject:[NSNumber numberWithBool:YES]];
+    }
+    
 }
 
 #pragma mark -

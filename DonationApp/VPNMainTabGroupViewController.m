@@ -109,6 +109,11 @@
                [[viewControllers objectAtIndex:0] setValue:self forKey:@"delegate"];
         }
     }
+    
+    if([destination respondsToSelector:@selector(setCanPurchase:)])
+    {
+        [destination performSelector:@selector(setCanPurchase:) withObject:[NSNumber numberWithBool:YES]];
+    }
 }
 
 

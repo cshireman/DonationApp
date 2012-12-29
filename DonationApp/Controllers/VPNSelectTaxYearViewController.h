@@ -12,6 +12,12 @@
 
 @interface VPNSelectTaxYearViewController : UITableViewController <VPNCDManagerDelegate>
 
+@property (assign) BOOL showPurchaseButton;
+
+@property (strong, nonatomic) IBOutlet UIView* purchaseView;
+
+-(void) setCanPurchase:(NSNumber*)canPurchase;
+
 -(void) setInstallLabel:(NSNotification*)notification;
 -(void) updateInstallLabel:(NSNotification*)notification;
 

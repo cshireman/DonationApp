@@ -99,6 +99,9 @@
 		837B2633168E800800454BD4 /* VPNItemConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B2632168E800800454BD4 /* VPNItemConditionCell.m */; };
 		837B2635168EBF2300454BD4 /* VPNItemConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837B2634168EBF2300454BD4 /* VPNItemConditionCell.xib */; };
 		837B2638168F891D00454BD4 /* VPNViewPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B2637168F891D00454BD4 /* VPNViewPhotoViewController.m */; };
+		837B263C168FA03400454BD4 /* VPNReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B263B168FA03300454BD4 /* VPNReportsViewController.m */; };
+		837B263F168FAD9400454BD4 /* VPNDonationReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B263E168FAD9400454BD4 /* VPNDonationReportsViewController.m */; };
+		837B2640168FAD9400454BD4 /* VPNDonationReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B263E168FAD9400454BD4 /* VPNDonationReportsViewController.m */; };
 		837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */; };
 		8387D48C165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
 		8387D48D165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
@@ -298,6 +301,11 @@
 		837B2636168F891D00454BD4 /* VPNViewPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNViewPhotoViewController.h; path = Controllers/VPNViewPhotoViewController.h; sourceTree = "<group>"; };
 		837B2637168F891D00454BD4 /* VPNViewPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNViewPhotoViewController.m; path = Controllers/VPNViewPhotoViewController.m; sourceTree = "<group>"; };
 		837B2639168F89F500454BD4 /* VPNViewPhotoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNViewPhotoDelegate.h; path = Protocols/VPNViewPhotoDelegate.h; sourceTree = "<group>"; };
+		837B263A168FA03300454BD4 /* VPNReportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNReportsViewController.h; path = Controllers/VPNReportsViewController.h; sourceTree = "<group>"; };
+		837B263B168FA03300454BD4 /* VPNReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNReportsViewController.m; path = Controllers/VPNReportsViewController.m; sourceTree = "<group>"; };
+		837B263D168FAD9300454BD4 /* VPNDonationReportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationReportsViewController.h; path = Controllers/VPNDonationReportsViewController.h; sourceTree = "<group>"; };
+		837B263E168FAD9400454BD4 /* VPNDonationReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationReportsViewController.m; path = Controllers/VPNDonationReportsViewController.m; sourceTree = "<group>"; };
+		837B2641168FADC600454BD4 /* VPNDonationReportsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationReportsDelegate.h; path = Protocols/VPNDonationReportsDelegate.h; sourceTree = "<group>"; };
 		837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardDoneToolbarView.xib; path = CustomViews/KeyboardDoneToolbarView.xib; sourceTree = "<group>"; };
 		8387D48A165615B800FE7C0E /* VPNSelectTaxYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNSelectTaxYearViewController.h; path = Controllers/VPNSelectTaxYearViewController.h; sourceTree = "<group>"; };
 		8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNSelectTaxYearViewController.m; path = Controllers/VPNSelectTaxYearViewController.m; sourceTree = "<group>"; };
@@ -604,6 +612,10 @@
 		8390ECC21648C0D5000D03AE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				837B263D168FAD9300454BD4 /* VPNDonationReportsViewController.h */,
+				837B263E168FAD9400454BD4 /* VPNDonationReportsViewController.m */,
+				837B263A168FA03300454BD4 /* VPNReportsViewController.h */,
+				837B263B168FA03300454BD4 /* VPNReportsViewController.m */,
 				837B2636168F891D00454BD4 /* VPNViewPhotoViewController.h */,
 				837B2637168F891D00454BD4 /* VPNViewPhotoViewController.m */,
 				837B262C168E7F8400454BD4 /* VPNEditItemViewController.h */,
@@ -676,6 +688,7 @@
 		8392FA0B1683A2AB00AE8E87 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				837B2641168FADC600454BD4 /* VPNDonationReportsDelegate.h */,
 				837B2639168F89F500454BD4 /* VPNViewPhotoDelegate.h */,
 				83B653B2168D68630029C4A2 /* VPNEditCustomItemDelegate.h */,
 				8392FA0C1683A2CA00AE8E87 /* VPNCustomItemConditionCellDelegate.h */,
@@ -949,6 +962,8 @@
 				837B262E168E7F8400454BD4 /* VPNEditItemViewController.m in Sources */,
 				837B2633168E800800454BD4 /* VPNItemConditionCell.m in Sources */,
 				837B2638168F891D00454BD4 /* VPNViewPhotoViewController.m in Sources */,
+				837B263C168FA03400454BD4 /* VPNReportsViewController.m in Sources */,
+				837B263F168FAD9400454BD4 /* VPNDonationReportsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1025,7 @@
 				8392FA2016842ABD00AE8E87 /* VPNModalPickerView.m in Sources */,
 				83B653A91687CACB0029C4A2 /* VPNItemNameCell.m in Sources */,
 				83B653B1168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */,
+				837B2640168FAD9400454BD4 /* VPNDonationReportsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

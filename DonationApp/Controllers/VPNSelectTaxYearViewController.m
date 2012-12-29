@@ -25,6 +25,9 @@
 
 @implementation VPNSelectTaxYearViewController
 
+@synthesize showPurchaseButton;
+@synthesize purchaseView;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -51,6 +54,12 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:NO];
+    if(showPurchaseButton)
+    {
+        [purchaseView setHidden:NO];
+    }
+    else
+        [purchaseView setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -235,6 +244,7 @@
     [VPNTaxSavings updateTaxSavings];
     
     [DejalBezelActivityView removeViewAnimated:YES];
+    
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -248,6 +258,12 @@
 
 #pragma mark -
 #pragma mark Custom Methods
+
+-(void) setCanPurchase:(NSNumber*)canPurchase
+{
+    showPurchaseButton = [canPurchase boolValue];
+}
+
 
 -(void) setInstallLabel:(NSNotification*)notification
 {
