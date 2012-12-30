@@ -9,6 +9,8 @@
 #import "VPNReportsViewController.h"
 #import "VPNUser.h"
 
+#import "DejalActivityView.h"
+
 @interface VPNReportsViewController ()
 {
     VPNCDManager* manager;
@@ -43,6 +45,9 @@
     
     sendItemizedReport = NO;
     sendTaxSummaryReport = NO;
+    
+    if(donationLists == nil)
+        donationLists = [[NSMutableArray alloc] init];
     
     [donationLists removeAllObjects];
 }
@@ -174,6 +179,52 @@
 }
 
 #pragma mark -
+#pragma mark VPNCDManagerDelegate Methods
+
+-(void) didSendItemizedSummaryReport
+{
+    [self processNextReport];
+}
+
+-(void) didSendTaxPrepSummaryReport
+{
+    [self processNextReport];
+}
+
+-(void) didSendDonationListReportWithValues
+{
+    if([donationLists count] > 0)
+    {
+        [donationLists removeObjectAtIndex:0];
+    }
+        
+    [self processNextReport];
+}
+
+-(void) handleReportError
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error Sending Reports" message:@"Reports could not be sent at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alert show];
+}
+
+-(void) sendDonationListReportWithValuesFailedWithError:(NSError *)error
+{
+    [self handleReportError];
+}
+
+-(void) sendItemizedSummaryReportFailedWithError:(NSError *)error
+{
+    [self handleReportError];
+}
+
+-(void) sendTaxPrepSummaryReportFailedWithError:(NSError *)error
+{
+    [self handleReportError];
+}
+
+#pragma mark -
 #pragma mark VPNDonationReportsDelegate Methods
 
 -(void) donationReportsControllerSelectedDonationLists:(NSArray*)selectedDonationLists
@@ -185,10 +236,39 @@
 #pragma mark -
 #pragma mark Custom Methods
 
+-(void) processNextReport
+{
+    VPNUser* user = [VPNUser currentUser];
+    
+    if(sendItemizedReport)
+    {
+        sendItemizedReport = NO;
+        [manager sendItemizedSummaryReport:user.selected_tax_year];
+    }
+    else if(sendTaxSummaryReport)
+    {
+        sendTaxSummaryReport = NO;
+        [manager sendTaxPrepSummaryReport:user.selected_tax_year];
+    }
+    else if([donationLists count] > 0)
+    {
+        [manager sendDonationListReportWithValues:[donationLists objectAtIndex:0]];
+    }
+    else
+    {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Reports Sent" message:@"All selected reports have been sent." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        
+        [alert show];
+    }
+}
+
 - (IBAction)taxYearButtonPushed:(id)sender {
     [self performSegueWithIdentifier:@"SelectTaxYearSegue" sender:self];
 }
 
 - (IBAction)emailReportsPushed:(id)sender {
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Sending Reports" width:155];
+    [self processNextReport];
 }
 @end

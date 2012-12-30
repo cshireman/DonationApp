@@ -78,6 +78,10 @@ enum {
 
 -(void)getCategoryListForTaxYear:(int)taxYear forceDownload:(BOOL)forceDownload;
 
+-(void)sendItemizedSummaryReport:(int)taxYear;
+-(void)sendTaxPrepSummaryReport:(int)taxYear;
+-(void)sendDonationListReportWithValues:(VPNDonationList*)donationList;
+
 //Communicator delegate
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;
 -(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall;

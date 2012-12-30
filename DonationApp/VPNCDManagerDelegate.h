@@ -90,5 +90,18 @@
 -(void) didDeleteListItem:(id)item;
 -(void) deleteListItemFailedWithError:(NSError*)error;
 
+//SendItemizedSummaryReport
+-(void) didSendItemizedSummaryReport;
+-(void) sendItemizedSummaryReportFailedWithError:(NSError*)error;
+
+//SendTextSummaryReport
+-(void) didSendTaxPrepSummaryReport;
+-(void) sendTaxPrepSummaryReportFailedWithError:(NSError*)error;
+
+//SendItemizedSummaryReport
+-(void) didSendDonationListReportWithValues;
+-(void) sendDonationListReportWithValuesFailedWithError:(NSError*)error;
+
+
 
 @end

@@ -69,6 +69,8 @@
     static NSString *CellIdentifier = @"SelectAllCell";
     if(indexPath.row > 0)
         CellIdentifier = @"DonationListCell";
+    else
+        CellIdentifier = @"SelectAllCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     

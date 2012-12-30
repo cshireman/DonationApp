@@ -831,12 +831,103 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }
 }
 
+-(void)sendItemizedSummaryReport:(int)taxYear
+{
+    currentTaxYear = taxYear;
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate sendItemizedSummaryReportFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"Request: %@",jsonString);
+    [communicator makeAPICall:SendItemizedSummaryReport withContent:jsonString];
+}
+
+-(void)sendTaxPrepSummaryReport:(int)taxYear
+{
+    currentTaxYear = taxYear;
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate sendTaxPrepSummaryReportFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"Request: %@",jsonString);
+    
+    [communicator makeAPICall:SendTaxPrepSummaryReport withContent:jsonString];
+    
+}
+
+-(void)sendDonationListReportWithValues:(VPNDonationList*)donationList
+{
+    currentDonationList = donationList;
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[NSNumber numberWithInt:donationList.ID] forKey:@"listID"];
+    [request setObject:[NSNumber numberWithInt:1] forKey:@"includeValues"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate sendDonationListReportWithValuesFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"Request: %@",jsonString);
+    
+    [communicator makeAPICall:SendDonationListReportWithValues withContent:jsonString];
+    
+}
+
 #pragma mark -
 #pragma mark Communicator Delegate Methods
 
 -(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall
 {
-
     if(response == nil)
     {
         NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerErrorStartSessionCode userInfo:nil];
@@ -852,6 +943,13 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     if(error == nil)
     {
         NSDictionary* d = [responseInfo objectForKey:@"d"];
+        
+        //Handle invalid response
+        if(d == nil)
+        {
+            d = [[NSDictionary alloc] initWithObjects:@[@"FAILURE",[NSNumber numberWithInt:12],@"Internal Server Error"] forKeys:@[@"status",@"errorCode",@"errorMessage"]];
+        }
+        
         NSLog(@"Result: %@",d);
         
         if([@"SUCCESS" isEqualToString:[d objectForKey:@"status"]])
@@ -1029,6 +1127,18 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                     [delegate didGetCategoryList:[NSDictionary dictionary]];
                 }
             }
+            else if([SendItemizedSummaryReport isEqualToString:apiCall])
+            {
+                [delegate didSendItemizedSummaryReport];
+            }
+            else if([SendTaxPrepSummaryReport isEqualToString:apiCall])
+            {
+                [delegate didSendTaxPrepSummaryReport];
+            }
+            else if([SendDonationListReportWithValues isEqualToString:apiCall])
+            {
+                [delegate didSendDonationListReportWithValues];
+            }
         }
         else
         {
@@ -1075,6 +1185,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate deleteListItemFailedWithError:apiError];
             else if([GetCategoryList isEqualToString:apiCall])
                 [delegate getCategoryListFailedWithError:apiError];
+            else if([SendItemizedSummaryReport isEqualToString:apiCall])
+                [delegate sendItemizedSummaryReportFailedWithError:apiError];
+            else if([SendTaxPrepSummaryReport isEqualToString:apiCall])
+                [delegate sendTaxPrepSummaryReportFailedWithError:apiError];
+            else if([SendDonationListReportWithValues isEqualToString:apiCall])
+                [delegate sendDonationListReportWithValuesFailedWithError:apiError];
             
         }
     }
@@ -1118,6 +1234,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate deleteListItemFailedWithError:jsonError];
         else if([GetCategoryList isEqualToString:apiCall])
             [delegate getCategoryListFailedWithError:jsonError];
+        else if([SendItemizedSummaryReport isEqualToString:apiCall])
+            [delegate sendItemizedSummaryReportFailedWithError:jsonError];
+        else if([SendTaxPrepSummaryReport isEqualToString:apiCall])
+            [delegate sendTaxPrepSummaryReportFailedWithError:jsonError];
+        else if([SendDonationListReportWithValues isEqualToString:apiCall])
+            [delegate sendDonationListReportWithValuesFailedWithError:jsonError];
     }
 }
 
@@ -1161,6 +1283,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate deleteListItemFailedWithError:error];
     else if([GetCategoryList isEqualToString:apiCall])
         [delegate getCategoryListFailedWithError:error];
+    else if([SendItemizedSummaryReport isEqualToString:apiCall])
+        [delegate sendItemizedSummaryReportFailedWithError:error];
+    else if([SendTaxPrepSummaryReport isEqualToString:apiCall])
+        [delegate sendTaxPrepSummaryReportFailedWithError:error];
+    else if([SendDonationListReportWithValues isEqualToString:apiCall])
+        [delegate sendDonationListReportWithValuesFailedWithError:error];
     
 }
 
