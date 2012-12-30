@@ -8,9 +8,17 @@
 
 #import "VPNUserSignupViewController.h"
 #import "VPNUser.h"
+#import "VPNCDManager.h"
+#import "DejalActivityView.h"
 
 @interface VPNUserSignupViewController ()
-
+{
+    int currentYear;
+    int prevYear;
+    int selectedTaxYear;
+    
+    VPNCDManager* manager;
+}
 @end
 
 @implementation VPNUserSignupViewController
@@ -28,7 +36,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    manager = [[VPNCDManager alloc] init];
+    manager.delegate = self;
+    
+    NSDate* today = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:today];
+    
+    currentYear = [components year];
+    prevYear = currentYear - 1;
+    
+    selectedTaxYear = currentYear;
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,10 +79,37 @@
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     
-    cell.textLabel.text = @"Year";
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
+    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+    
+    if(indexPath.row == 0)
+    {
+        cell.textLabel.text = [NSString stringWithFormat:@"%d",prevYear];
+        if(selectedTaxYear == prevYear)
+            cell.imageView.image = [UIImage imageNamed:@"checkbox_checked"];
+        else
+            cell.imageView.image = [UIImage imageNamed:@"checkbox_unchecked"];
+    }
+    else if(indexPath.row == 1)
+    {
+        cell.textLabel.text = [NSString stringWithFormat:@"%d",currentYear];
+        if(selectedTaxYear == currentYear)
+            cell.imageView.image = [UIImage imageNamed:@"checkbox_checked"];
+        else
+            cell.imageView.image = [UIImage imageNamed:@"checkbox_unchecked"];
+    }
+    
     return cell;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0)
+        selectedTaxYear = prevYear;
+    else if(indexPath.row == 1)
+        selectedTaxYear = currentYear;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView reloadData];
 }
 
 #pragma mark -
@@ -103,6 +148,29 @@
 }
 
 #pragma mark -
+#pragma mark VPNCDManagerDelegate Methods
+
+-(void) didRegisterTrialUser:(VPNUser *)user
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    user.tax_years = [[NSMutableArray alloc] initWithCapacity:1];
+    [user.tax_years addObject:@"2012"];
+    
+    [user saveAsDefaultUser];
+    [VPNUser saveUserToDisc:user];
+    [self.navigationController popViewControllerAnimated:YES];    
+}
+
+-(void) registerTrialUserFailedWithError:(NSError *)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"Unable to create your account at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+}
+
+#pragma mark -
 #pragma mark Customer Methods
 
 -(IBAction)cancelPushed:(id)sender
@@ -112,20 +180,18 @@
 
 -(IBAction)submitPushed:(id)sender
 {
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Registering" width:155];
+    
     VPNUser* user = [[VPNUser alloc] init];
     
     user.first_name = self.firstNameField.text;
     user.last_name = self.lastNameField.text;
     user.username = self.emailField.text;
     user.password = self.passwordField.text;
+    user.email = self.emailField.text;
     user.is_email_opted_in = YES;
     
-    user.tax_years = [[NSMutableArray alloc] initWithCapacity:1];
-    [user.tax_years addObject:@"2012"];
-    
-    [user saveAsDefaultUser];
-    [VPNUser saveUserToDisc:user];
-    [self.navigationController popViewControllerAnimated:YES];
+    [manager registerTrialUser:user withTaxYear:selectedTaxYear];
 }
 
 

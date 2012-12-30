@@ -27,6 +27,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 @synthesize currentOrganization;
 @synthesize currentDonationList;
 @synthesize currentListItem;
+@synthesize currentUser;
 
 -(id) init
 {
@@ -87,6 +88,49 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 
 -(void)startSessionForUserFailedWithError:(NSError*)error
 {
+    
+}
+
+-(void)registerTrialUser:(VPNUser*)trialUser withTaxYear:(int)taxYear
+{
+    if(trialUser == nil || trialUser.username == nil || trialUser.password == nil)
+    {
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidUserError userInfo:nil];
+        
+        [delegate registerTrialUserFailedWithError:error];
+        return;
+    }
+    
+    currentUser = trialUser;
+    
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:trialUser.username forKey:@"username"];
+    [request setObject:trialUser.password forKey:@"password"];
+    [request setObject:trialUser.first_name forKey:@"firstName"];
+    [request setObject:trialUser.last_name forKey:@"lastName"];
+
+    [request setObject:@"" forKey:@"company"];
+    [request setObject:trialUser.email forKey:@"email"];
+    [request setObject:[NSNumber numberWithInt:taxYear] forKey:@"year"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate registerTrialUserFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:RegisterTrialUser withContent:jsonString];
     
 }
 
@@ -967,13 +1011,17 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 
                 [delegate didStartSession];
             }
+            if([RegisterTrialUser isEqualToString:apiCall])
+            {
+                [delegate didRegisterTrialUser:currentUser];
+            }
             else if([GetUserInfo isEqual:apiCall])
             {
-                VPNUser* currentUser = [VPNUser currentUser];
-                [currentUser populateWithDictionary:[d objectForKey:@"user"]];
-                [VPNUser saveUserToDisc:currentUser];
+                VPNUser* myUser = [VPNUser currentUser];
+                [myUser populateWithDictionary:[d objectForKey:@"user"]];
+                [VPNUser saveUserToDisc:myUser];
                 
-                [delegate didGetUser:currentUser];
+                [delegate didGetUser:myUser];
             }
             else if([GetOrganizations isEqual:apiCall])
             {
@@ -1151,6 +1199,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             
             if([LoginUser isEqual:apiCall])
                 [delegate startingSessionFailedWithError:apiError];
+            else if([RegisterTrialUser isEqual:apiCall])
+                [delegate registerTrialUserFailedWithError:apiError];
             else if([GetUserInfo isEqual:apiCall])
                 [delegate getUserInfoFailedWithError:apiError];
             else if([GetOrganizations isEqual:apiCall])
@@ -1200,6 +1250,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         
         if([LoginUser isEqual:apiCall])
             [delegate startingSessionFailedWithError:jsonError];
+        else if([RegisterTrialUser isEqual:apiCall])
+            [delegate registerTrialUserFailedWithError:jsonError];
         else if([GetUserInfo isEqual:apiCall])
             [delegate getUserInfoFailedWithError:jsonError];
         else if([GetOrganizations isEqual:apiCall])
@@ -1247,6 +1299,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 {
     if([LoginUser isEqual:apiCall])
         [delegate startingSessionFailedWithError:error];
+    else if([RegisterTrialUser isEqual:apiCall])
+        [delegate registerTrialUserFailedWithError:error];
     else if([GetUserInfo isEqual:apiCall])
         [delegate getUserInfoFailedWithError:error];
     else if([GetOrganizations isEqual:apiCall])

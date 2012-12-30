@@ -50,9 +50,12 @@ enum {
 @property (strong, nonatomic) VPNOrganization* currentOrganization;
 @property (strong, nonatomic) VPNDonationList* currentDonationList;
 @property (strong, nonatomic) VPNItem* currentListItem;
+@property (strong, nonatomic) VPNUser* currentUser;
 
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
+
+-(void)registerTrialUser:(VPNUser*)trialUser withTaxYear:(int)taxYear;
 
 -(void)getUserInfo:(BOOL)forceDownload;
 -(void)getTaxYears:(BOOL)forceDownload;

@@ -52,27 +52,23 @@
         manager = [[VPNCDManager alloc] init];
     
     if(manager.delegate == nil)
-        manager.delegate = self;
-    
-    if(user == nil)
-    {
-        user = [VPNUser currentUser];
-    }
+        manager.delegate = self;    
 }
 
 - (void)viewDidLoad
 {    
     [super viewDidLoad];
     [self configure];
-    
-    if(user != nil)
-    {
-        usernameField.text = user.username;
-        passwordField.text = user.password;
-    }
-    
+        
     scrollView.contentSize = CGSizeMake(320, 700);
     self.scrollView.scrollEnabled = NO;
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    user = [VPNUser currentUser];
+    usernameField.text = user.username;
+    passwordField.text = user.password;    
 }
 
 - (void)didReceiveMemoryWarning

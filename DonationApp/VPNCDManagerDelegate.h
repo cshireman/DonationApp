@@ -18,6 +18,10 @@
 -(void) startingSessionFailedWithError:(NSError*)error;
 -(void) didStartSession;
 
+//RegisterTrialUser
+-(void) didRegisterTrialUser:(VPNUser*)user;
+-(void) registerTrialUserFailedWithError:(NSError*)error;
+
 //GetUser
 -(void) didGetUser:(VPNUser*)user;
 -(void) getUserInfoFailedWithError:(NSError*)error;

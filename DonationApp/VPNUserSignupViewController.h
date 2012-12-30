@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VPNCDManagerDelegate.h"
 
-@interface VPNUserSignupViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface VPNUserSignupViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, VPNCDManagerDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView* taxYearTable;
 

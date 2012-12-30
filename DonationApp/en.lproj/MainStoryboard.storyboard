@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" id="aUr-t3-mHZ">
-                                <rect key="frame" x="20" y="20" width="280" height="30"/>
+                                <rect key="frame" x="20" y="39" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -136,7 +136,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" id="oq0-fa-Fq7">
-                                <rect key="frame" x="20" y="58" width="280" height="30"/>
+                                <rect key="frame" x="20" y="77" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -145,7 +145,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" id="cEA-bk-23b">
-                                <rect key="frame" x="20" y="96" width="280" height="30"/>
+                                <rect key="frame" x="20" y="115" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -154,7 +154,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="5eG-TN-coy">
-                                <rect key="frame" x="20" y="134" width="280" height="30"/>
+                                <rect key="frame" x="20" y="153" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
@@ -163,7 +163,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" id="Qvh-qr-Ozg">
-                                <rect key="frame" x="20" y="172" width="280" height="30"/>
+                                <rect key="frame" x="20" y="191" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -172,19 +172,19 @@
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RBY-Hh-GS4">
-                                <rect key="frame" x="20" y="210" width="280" height="88"/>
+                                <rect key="frame" x="10" y="258" width="300" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="YearCell" textLabel="fB8-e5-4oY" style="IBUITableViewCellStyleDefault" id="LD0-ro-tp8">
-                                        <rect key="frame" x="0.0" y="46" width="280" height="46"/>
+                                        <rect key="frame" x="0.0" y="46" width="300" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="240" height="43"/>
+                                            <rect key="frame" x="10" y="1" width="260" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fB8-e5-4oY">
-                                                    <rect key="frame" x="10" y="0.0" width="220" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="240" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -230,6 +230,20 @@
                                     <action selector="submitPushed:" destination="enf-C1-b0j" eventType="touchUpInside" id="8EP-qe-kle"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enter Account Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="azw-Qe-0hA">
+                                <rect key="frame" x="20" y="10" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select Tax Year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RtR-Zm-Nhz">
+                                <rect key="frame" x="20" y="239" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -842,7 +856,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPA-4B-rJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2499" y="41"/>
+            <point key="canvasLocation" x="2739" y="41"/>
         </scene>
         <!--Navigation Controller - Organizations-->
         <scene sceneID="49O-EH-Jqj">
@@ -1258,7 +1272,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2499" y="634"/>
+            <point key="canvasLocation" x="2739" y="634"/>
         </scene>
         <!--Donation Item List View Controller - Donation Items-->
         <scene sceneID="Tab-wX-Ln7">
@@ -1433,7 +1447,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZw-mC-OdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3091" y="634"/>
+            <point key="canvasLocation" x="3331" y="634"/>
         </scene>
         <!--Item Search View Controller - Add Donation Item-->
         <scene sceneID="kEB-AA-3aB">
@@ -1511,7 +1525,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48x-9U-ufd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3837" y="634"/>
+            <point key="canvasLocation" x="4077" y="634"/>
         </scene>
         <!--Edit Item View Controller - New Item-->
         <scene sceneID="ZNw-O4-H0q">
@@ -1966,7 +1980,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewc-vT-wId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2499" y="1275"/>
+            <point key="canvasLocation" x="2739" y="1275"/>
         </scene>
         <!--Navigation Controller - Reports-->
         <scene sceneID="jHn-u4-W40">
@@ -2503,10 +2517,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="aQI-nu-Yoy"/>
-        <segue reference="fFg-b8-hXm"/>
-        <segue reference="jEP-vW-rmk"/>
-        <segue reference="xZe-Ub-trX"/>
+        <segue reference="sIa-g4-8qs"/>
+        <segue reference="JgW-iW-Uj2"/>
         <segue reference="nt4-d5-pPY"/>
+        <segue reference="rZP-W3-ekM"/>
         <segue reference="lXZ-ve-Me6"/>
     </inferredMetricsTieBreakers>
 </document>
