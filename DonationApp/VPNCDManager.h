@@ -57,6 +57,10 @@ enum {
 
 -(void)registerTrialUser:(VPNUser*)trialUser withTaxYear:(int)taxYear;
 
+-(void)getPurchaseOptions;
+-(void)validatePromoCode:(NSString*)promoCode;
+-(void)addPurchasedYearWithInfo:(NSDictionary*)purchaseInfo;
+
 -(void)getUserInfo:(BOOL)forceDownload;
 -(void)getTaxYears:(BOOL)forceDownload;
 -(void)changePassword:(NSString*)newPassword;

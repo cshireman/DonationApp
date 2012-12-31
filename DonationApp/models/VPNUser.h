@@ -8,23 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-#define kUsernameKey        @"username"
-#define kPasswordKey        @"password"
-#define kFirstNameKey       @"first_name"
-#define kLastNameKey        @"last_name"
-#define kPhoneKey           @"phone"
-#define kCompanyKey         @"company"
-#define kEmailKey           @"email"
-#define kAddress1Key        @"address1"
-#define kAddress2Key        @"address2"
-#define kCityKey            @"city"
-#define kStateKey           @"state"
-#define kZipKey             @"zip"
-#define kIsEmailOptedInKey  @"is_email_opted_in"
-#define kTaxYearsKey        @"tax_years"
-#define kSelectedTaxYearKey @"selected_tax_year"
+#define kUsernameKey            @"username"
+#define kPasswordKey            @"password"
+#define kFirstNameKey           @"first_name"
+#define kLastNameKey            @"last_name"
+#define kPhoneKey               @"phone"
+#define kCompanyKey             @"company"
+#define kEmailKey               @"email"
+#define kAddress1Key            @"address1"
+#define kAddress2Key            @"address2"
+#define kCityKey                @"city"
+#define kStateKey               @"state"
+#define kZipKey                 @"zip"
+#define kIsEmailOptedInKey      @"is_email_opted_in"
+#define kIsTrialKey             @"is_trial"
+#define kTaxYearsKey            @"tax_years"
+#define kAvailableTaxYearsKey   @"available_tax_years"
+#define kSelectedTaxYearKey     @"selected_tax_year"
+#define kSingleRateKey          @"single_rate"
+#define kDiscountRateKey        @"discount_rate"
 
-#define kUserFilename       @"user_file"
+#define kUserFilename           @"user_file"
 
 @interface VPNUser : NSObject <NSCoding, NSCopying>
 
@@ -42,9 +46,15 @@
 @property (copy, nonatomic) NSString* zip;
 
 @property (assign) BOOL is_email_opted_in;
+@property (assign) BOOL is_trial;
 
 @property (strong, nonatomic) NSMutableArray* tax_years;
-@property (assign)            int selected_tax_year;
+@property (strong, nonatomic) NSMutableArray* available_tax_years;
+
+@property (assign) int selected_tax_year;
+@property (assign) double single_rate;
+@property (assign) double discount_rate;
+
 
 +(VPNUser*) currentUser;
 +(VPNUser*) loadUserFromDisc;

@@ -21,6 +21,7 @@
 -(void) setInstallLabel:(NSNotification*)notification;
 -(void) updateInstallLabel:(NSNotification*)notification;
 
+-(IBAction) buyNowPushed:(UIButton*)sender;
 
 //GetItemLists
 -(void) didGetItemLists:(NSArray*)itemLists;

@@ -41,11 +41,8 @@
 {
     [super viewDidLoad];
     
-    currentUser = [VPNUser currentUser];
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
-    
-    NSLog(@"Tax Years: %@",currentUser.tax_years);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setInstallLabel:) name:@"InstallingCategories" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInstallLabel:) name:@"CategoryInstallProgress" object:nil];
@@ -53,6 +50,8 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    currentUser = [VPNUser currentUser];
+    
     [self.navigationController setNavigationBarHidden:NO];
     if(showPurchaseButton)
     {
@@ -60,6 +59,8 @@
     }
     else
         [purchaseView setHidden:YES];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -262,6 +263,11 @@
 -(void) setCanPurchase:(NSNumber*)canPurchase
 {
     showPurchaseButton = [canPurchase boolValue];
+}
+
+-(IBAction) buyNowPushed:(UIButton*)sender
+{
+    [self performSegueWithIdentifier:@"BuyNowSegue" sender:self];
 }
 
 

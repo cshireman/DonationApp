@@ -30,6 +30,18 @@
 -(void) didGetTaxYears:(NSArray*)taxYears;
 -(void) getTaxYearsFailedWithError:(NSError*)error;
 
+//GetPurchaseOptions
+-(void) didGetPurchaseOptions:(NSDictionary*)info;
+-(void) getPurchaseOptionsFailedWithError:(NSError*)error;
+
+//ValidatePromoCode
+-(void) didValidatePromoCode:(NSDictionary*)info;
+-(void) validatePromoCodeFailedWithError:(NSError*)error;
+
+//AddPurchasedYear
+-(void) didAddPurchasedYear:(NSDictionary*)info;
+-(void) addPurchasedYearFailedWithError:(NSError*)error;
+
 //GetOrganizations
 -(void) didGetOrganizations:(NSArray*)organizations;
 -(void) getOrganizationsFailedWithError:(NSError*)error;

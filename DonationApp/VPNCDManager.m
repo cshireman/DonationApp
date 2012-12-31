@@ -134,6 +134,90 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     
 }
 
+-(void)getPurchaseOptions
+{
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate getPurchaseOptionsFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:GetPurchaseOptions withContent:jsonString];
+}
+
+-(void)validatePromoCode:(NSString*)promoCode
+{
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:promoCode forKey:@"code"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate validatePromoCodeFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:ValidatePromoCode withContent:jsonString];
+}
+
+-(void)addPurchasedYearWithInfo:(NSDictionary*)purchaseInfo
+{
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    [request setObject:[purchaseInfo objectForKey:@"year"] forKey:@"year"];
+    [request setObject:[purchaseInfo objectForKey:@"purchasePrice"] forKey:@"purchasePrice"];
+    [request setObject:[purchaseInfo objectForKey:@"promoCode"] forKey:@"promoCode"];
+    [request setObject:@"iPhone" forKey:@"referenceID"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate addPurchasedYearFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:AddPurchasedYear withContent:jsonString];
+}
+
+
 -(void) getUserInfo:(BOOL)forceDownload
 {
     VPNUser* user = nil;
@@ -1023,6 +1107,35 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 
                 [delegate didGetUser:myUser];
             }
+            else if([GetPurchaseOptions isEqualToString:apiCall])
+            {
+                NSArray* resultYears = [d objectForKey:@"availableYears"];
+                VPNUser* user = [VPNUser currentUser];
+                
+                user.available_tax_years = [NSMutableArray arrayWithArray:resultYears];
+                user.single_rate = [[d objectForKey:@"singleRate"] doubleValue];
+                user.discount_rate = [[d objectForKey:@"discountRate"] doubleValue];
+                
+                [user saveAsDefaultUser];
+                
+                [delegate didGetPurchaseOptions:d];
+                
+            }
+            else if([ValidatePromoCode isEqualToString:apiCall])
+            {
+                VPNUser* user = [VPNUser currentUser];
+                
+                user.single_rate = [[d objectForKey:@"singleRate"] doubleValue];
+                user.discount_rate = [[d objectForKey:@"discountRate"] doubleValue];
+                
+                [user saveAsDefaultUser];
+                
+                [delegate didValidatePromoCode:d];
+            }
+            else if([AddPurchasedYear isEqualToString:apiCall])
+            {
+                [delegate didAddPurchasedYear:d];
+            }
             else if([GetOrganizations isEqual:apiCall])
             {
                 NSArray* resultOrgs = [d objectForKey:@"organizations"];
@@ -1203,6 +1316,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate registerTrialUserFailedWithError:apiError];
             else if([GetUserInfo isEqual:apiCall])
                 [delegate getUserInfoFailedWithError:apiError];
+            else if([GetPurchaseOptions isEqual:apiCall])
+                [delegate getPurchaseOptionsFailedWithError:apiError];
+            else if([ValidatePromoCode isEqual:apiCall])
+                [delegate validatePromoCodeFailedWithError:apiError];
+            else if([AddPurchasedYear isEqual:apiCall])
+                [delegate addPurchasedYearFailedWithError:apiError];
             else if([GetOrganizations isEqual:apiCall])
                 [delegate getOrganizationsFailedWithError:apiError];
             else if([AddOrganization isEqual:apiCall])
@@ -1254,6 +1373,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate registerTrialUserFailedWithError:jsonError];
         else if([GetUserInfo isEqual:apiCall])
             [delegate getUserInfoFailedWithError:jsonError];
+        else if([GetPurchaseOptions isEqual:apiCall])
+            [delegate getPurchaseOptionsFailedWithError:jsonError];
+        else if([ValidatePromoCode isEqual:apiCall])
+            [delegate validatePromoCodeFailedWithError:jsonError];
+        else if([AddPurchasedYear isEqual:apiCall])
+            [delegate addPurchasedYearFailedWithError:jsonError];
         else if([GetOrganizations isEqual:apiCall])
             [delegate getOrganizationsFailedWithError:jsonError];
         else if([AddOrganization isEqual:apiCall])
@@ -1303,6 +1428,12 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate registerTrialUserFailedWithError:error];
     else if([GetUserInfo isEqual:apiCall])
         [delegate getUserInfoFailedWithError:error];
+    else if([GetPurchaseOptions isEqual:apiCall])
+        [delegate getPurchaseOptionsFailedWithError:error];
+    else if([ValidatePromoCode isEqual:apiCall])
+        [delegate validatePromoCodeFailedWithError:error];
+    else if([AddPurchasedYear isEqual:apiCall])
+        [delegate addPurchasedYearFailedWithError:error];
     else if([GetOrganizations isEqual:apiCall])
         [delegate getOrganizationsFailedWithError:error];
     else if([AddOrganization isEqual:apiCall])

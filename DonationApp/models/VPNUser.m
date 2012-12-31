@@ -26,8 +26,12 @@
 @synthesize state;
 @synthesize zip;
 @synthesize tax_years;
+@synthesize available_tax_years;
 @synthesize is_email_opted_in;
+@synthesize is_trial;
 @synthesize selected_tax_year;
+@synthesize single_rate;
+@synthesize discount_rate;
 
 
 #pragma mark -
@@ -49,8 +53,12 @@
     [coder encodeObject:self.zip forKey:kZipKey];
     
     [coder encodeBool:self.is_email_opted_in forKey:kIsEmailOptedInKey];
+    [coder encodeBool:self.is_trial forKey:kIsTrialKey];
     [coder encodeObject:self.tax_years forKey:kTaxYearsKey];
+    [coder encodeObject:self.available_tax_years forKey:kAvailableTaxYearsKey];
     [coder encodeInt:self.selected_tax_year forKey:kSelectedTaxYearKey];
+    [coder encodeDouble:self.single_rate forKey:kSingleRateKey];
+    [coder encodeDouble:self.discount_rate forKey:kDiscountRateKey];
 }
 
 -(id)initWithCoder:(NSCoder *)coder
@@ -73,8 +81,13 @@
         zip = [coder decodeObjectForKey:kZipKey];
         
         is_email_opted_in = [coder decodeBoolForKey:kIsEmailOptedInKey];
+        is_trial = [coder decodeBoolForKey:kIsTrialKey];
         tax_years = [coder decodeObjectForKey:kTaxYearsKey];
+        available_tax_years = [coder decodeObjectForKey:kAvailableTaxYearsKey];
         selected_tax_year = [coder decodeIntForKey:kSelectedTaxYearKey];
+        
+        single_rate = [coder decodeDoubleForKey:kSingleRateKey];
+        discount_rate = [coder decodeDoubleForKey:kDiscountRateKey];
     }
     
     return self;
@@ -98,9 +111,13 @@
     
     copy.zip = self.zip;
     copy.is_email_opted_in = self.is_email_opted_in;
+    copy.is_trial = self.is_trial;
     
     copy.tax_years = [self.tax_years copyWithZone:zone];
+    copy.available_tax_years = [self.available_tax_years copyWithZone:zone];
     copy.selected_tax_year = self.selected_tax_year;
+    copy.single_rate = self.single_rate;
+    copy.discount_rate = self.discount_rate;
     
     return copy;
 }
