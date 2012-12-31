@@ -104,6 +104,7 @@
 		837B2640168FAD9400454BD4 /* VPNDonationReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B263E168FAD9400454BD4 /* VPNDonationReportsViewController.m */; };
 		837B26441690DAF200454BD4 /* VPNPurchaseTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B26431690DAF100454BD4 /* VPNPurchaseTaxYearViewController.m */; };
 		837B26451690DAF200454BD4 /* VPNPurchaseTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B26431690DAF100454BD4 /* VPNPurchaseTaxYearViewController.m */; };
+		837B264716911B0A00454BD4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837B264616911B0900454BD4 /* StoreKit.framework */; };
 		837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */; };
 		8387D48C165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
 		8387D48D165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
@@ -310,6 +311,7 @@
 		837B2641168FADC600454BD4 /* VPNDonationReportsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationReportsDelegate.h; path = Protocols/VPNDonationReportsDelegate.h; sourceTree = "<group>"; };
 		837B26421690DAF000454BD4 /* VPNPurchaseTaxYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNPurchaseTaxYearViewController.h; path = Controllers/VPNPurchaseTaxYearViewController.h; sourceTree = "<group>"; };
 		837B26431690DAF100454BD4 /* VPNPurchaseTaxYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNPurchaseTaxYearViewController.m; path = Controllers/VPNPurchaseTaxYearViewController.m; sourceTree = "<group>"; };
+		837B264616911B0900454BD4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardDoneToolbarView.xib; path = CustomViews/KeyboardDoneToolbarView.xib; sourceTree = "<group>"; };
 		8387D48A165615B800FE7C0E /* VPNSelectTaxYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNSelectTaxYearViewController.h; path = Controllers/VPNSelectTaxYearViewController.h; sourceTree = "<group>"; };
 		8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNSelectTaxYearViewController.m; path = Controllers/VPNSelectTaxYearViewController.m; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				837B264716911B0A00454BD4 /* StoreKit.framework in Frameworks */,
 				836426E71667305100A70606 /* CoreData.framework in Frameworks */,
 				8397DF88162E81DA000D8633 /* iAd.framework in Frameworks */,
 				83195DB6162D234300B63831 /* QuartzCore.framework in Frameworks */,
@@ -436,6 +439,7 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				837B264616911B0900454BD4 /* StoreKit.framework */,
 				83B653AD168B7E9A0029C4A2 /* VPNItemGroupDelegate.h */,
 				83124DFF168032A200911399 /* VPNEditDonationListDelegate.h */,
 				836426E9166730F300A70606 /* DonationApp.xcdatamodeld */,
