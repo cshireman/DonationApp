@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
+
 #import "VPNHomeViewController.h"
 #import "VPNMainTabGroupViewController.h"
 #import "VPNContactInfoCell.h"
@@ -70,6 +72,7 @@
     NSLog(@"%@ %@",user.first_name, user.last_name);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished) name:@"LoginFinished" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAds) name:@"RemoveAds" object:nil];
 
     //Load up cells to get field and label references
     NSIndexPath* contactInfoIndexPath = [NSIndexPath indexPathForRow:0 inSection:kContactInfoSection];
@@ -92,6 +95,11 @@
 {
     [VPNTaxSavings updateTaxSavings];
     [self.tableView reloadData];
+}
+
+-(void) removeAds
+{
+    [self.bannerView setHidden:YES];
 }
 
 -(void) loginFinished
@@ -323,6 +331,24 @@
             [self performSegueWithIdentifier:@"SelectTaxRateSegue" sender:self];
         
     }
+    else if(indexPath.section == kContactUsSection)
+    {
+        MFMailComposeViewController* mailController = [[MFMailComposeViewController alloc] init];
+        
+        [mailController setSubject:@"Contact Us"];
+        [mailController setToRecipients:@[@"support@charitydeductions.com"]];
+        mailController.mailComposeDelegate = self;
+        
+        [self presentViewController:mailController animated:YES completion:^{}];
+    }
+}
+
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate
+
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -361,6 +387,9 @@
     user.selected_tax_year = 0;
     [user saveAsDefaultUser];
     
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Logged Out" message:@"You have successfully logged out." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
+    
     [VPNNotifier postNotification:@"Logout"];
 }
 
@@ -379,13 +408,11 @@
         else
         {
             [VPNNotifier postNotification:@"PasswordMismatchError"];
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"The passwords you entered do not match, please try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Passwords don't match, please try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
             [alert show];
             return;
         }
     }
-    
-    [manager getUserInfo:YES];
 }
 
 
@@ -419,21 +446,19 @@
     currentUser.password = passwordField.text;
     [currentUser saveAsDefaultUser];
     
-    [VPNNotifier postNotification:@"UserInfoUpdated"];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your password has been saved!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-    [alert show];    
+    [manager getUserInfo:YES];
 }
 
 -(void) changePasswordFailedWithError:(NSError*)error
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Password Update Error" message:@"We could not save your password at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to update password, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
 }
 
 -(void) didUpdateUserInfo
 {
     [VPNNotifier postNotification:@"UserInfoUpdated"];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your information has been saved!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update Complete" message:@"Your account details have been updated" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
 

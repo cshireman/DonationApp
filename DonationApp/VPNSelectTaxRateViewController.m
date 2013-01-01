@@ -115,6 +115,7 @@
 {
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:self.selectedTaxRate forKey:kSelectedTaxRateKey];
+    [userDefaults synchronize];
     
     [VPNTaxSavings updateTaxSavings];
     

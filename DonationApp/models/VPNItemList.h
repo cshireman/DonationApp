@@ -35,7 +35,9 @@
 +(NSMutableArray*) loadItemListsFromDisc:(int)taxYear;
 +(void) saveItemListsToDisc:(NSArray*)itemLists forTaxYear:(int)taxYear;
 +(NSString*) itemListsFilePath:(int)taxYear;
++(double) ebayItemTotal;
 
 -(id) initWithDictionary:(NSDictionary*)info;
+
 
 @end

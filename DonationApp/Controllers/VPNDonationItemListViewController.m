@@ -31,6 +31,8 @@
 @synthesize donationList;
 @synthesize organization;
 @synthesize itemGroups;
+@synthesize addCustomItemButton;
+@synthesize addEbayItemButton;
 
 - (void)viewDidLoad
 {
@@ -38,6 +40,9 @@
     
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
+    
+    [addCustomItemButton useGreenConfirmStyle];
+    [addEbayItemButton useGreenConfirmStyle];
     
     conditionNames = @[@"Fair",@"Good",@"Very Good",@"Excellent",@"Mint/New"];
     
@@ -250,6 +255,17 @@
 }
 
 #pragma mark -
+#pragma mark UIAlertViewDelegate Methods
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex != alertView.cancelButtonIndex)
+    {
+        [self performSegueWithIdentifier:@"PurchaseTaxYearSegue" sender:self];
+    }
+}
+
+#pragma mark -
 #pragma mark Custom Methods
 
 -(IBAction) backPushed:(id)sender
@@ -267,7 +283,31 @@
 }
 
 - (IBAction)addItemPushed:(id)sender {
-    [self performSegueWithIdentifier:@"ItemSearchSegue" sender:self];
+    VPNUser* user = [VPNUser currentUser];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL instructionsShown = [[defaults objectForKey:@"ebay_instructions_shown"] boolValue];
+    
+    if(user.is_trial && !instructionsShown)
+    {
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"ebay_instructions_shown"];
+        [defaults synchronize];
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"eBay® Values" message:@"You're on your way to greater tax savings using our eBay® database of Fair Market Values.  Our tax savings calculator estimates how much you're saving.  Try our eBay values up to $500 for FREE.  To keep using eBay values after that, you'll need to pay to upgrade." delegate:nil cancelButtonTitle:@"Continue" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    double itemTotal = [VPNItemList ebayItemTotal];
+    
+    if((user.is_trial && itemTotal < 500.00) || !user.is_trial)
+    {
+        [self performSegueWithIdentifier:@"ItemSearchSegue" sender:self];
+    }
+    else if(user.is_trial && itemTotal >= 500.00)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Membership Upgrade" message:@"We've saved you over $125 in taxes now.  To save more and continue using our eBay® database of Fair Market Values you'll need to upgrade at the Apple Store." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upgrade", nil];
+        [alert show];
+    }
 }
 
 - (IBAction)editListPushed:(id)sender {
@@ -482,6 +522,8 @@
     [self setOrganizationLabel:nil];
     [self setDonationListInfoLabel:nil];
     [self setTableView:nil];
+    [self setAddCustomItemButton:nil];
+    [self setAddEbayItemButton:nil];
     [super viewDidUnload];
 }
 @end

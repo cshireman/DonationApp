@@ -5,7 +5,7 @@
 //  Created by Chris Shireman on 11/15/12.
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
-
+#import <StoreKit/StoreKit.h>
 #import "VPNSelectTaxYearViewController.h"
 #import "VPNUser.h"
 #import "VPNAppDelegate.h"
@@ -27,6 +27,7 @@
 
 @synthesize showPurchaseButton;
 @synthesize purchaseView;
+@synthesize buyNowButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [buyNowButton useGreenConfirmStyle];
     
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
@@ -252,7 +255,7 @@
 
 -(void) getCategoryListFailedWithError:(NSError*)error
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem our database, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem with our database, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
 }
 
@@ -267,7 +270,16 @@
 
 -(IBAction) buyNowPushed:(UIButton*)sender
 {
-    [self performSegueWithIdentifier:@"BuyNowSegue" sender:self];
+    
+    if([SKPaymentQueue canMakePayments])
+    {
+        [self performSegueWithIdentifier:@"BuyNowSegue" sender:self];
+    }
+    else
+    {        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"InApp Purchase Unavailable" message:@"InApp purchases are currently unavailable.  Please check your settings and try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 
@@ -282,4 +294,8 @@
 }
 
 
+- (void)viewDidUnload {
+    [self setBuyNowButton:nil];
+    [super viewDidUnload];
+}
 @end

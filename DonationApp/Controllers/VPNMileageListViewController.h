@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GradientButton.h"
 #import "VPNListViewController.h"
 
 @interface VPNMileageListViewController : VPNListViewController
+@property (strong, nonatomic) IBOutlet GradientButton *addMileageButton;
 
 @end

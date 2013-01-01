@@ -52,6 +52,32 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }
 }
 
+-(void)idle
+{
+    NSMutableDictionary* request = [[NSMutableDictionary alloc] init];
+    VPNSession* session = [VPNSession currentSession];
+    
+    [request setObject:APIKey forKey:@"apiKey"];
+    [request setObject:session.session forKey:@"session"];
+    
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
+    
+    if(error != nil)
+    {
+        NSMutableDictionary* userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setObject:error forKey:NSUnderlyingErrorKey];
+        NSError* error = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:userInfo];
+        
+        [delegate idleFailedWithError:error];
+        return;
+    }
+    
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [communicator makeAPICall:Idle withContent:jsonString];
+}
+
 -(void)startSessionForUser:(VPNUser*)user
 {
     if(user == nil || user.username == nil || user.password == nil)
@@ -1060,7 +1086,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     {
         NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerErrorStartSessionCode userInfo:nil];
         
-        [delegate startingSessionFailedWithError:jsonError];
+        [self receivedError:jsonError forAPICall:apiCall];
         return;
     }
     
@@ -1095,7 +1121,11 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 
                 [delegate didStartSession];
             }
-            if([RegisterTrialUser isEqualToString:apiCall])
+            else if([Idle isEqualToString:apiCall])
+            {
+                [delegate didIdle];
+            }
+            else if([RegisterTrialUser isEqualToString:apiCall])
             {
                 [delegate didRegisterTrialUser:currentUser];
             }
@@ -1309,9 +1339,13 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             NSDictionary* errorInfo = [NSDictionary dictionaryWithObject:[d objectForKey:@"errorMessage"] forKey:@"errorMessage"];
             
             NSError* apiError = [NSError errorWithDomain:APIErrorDomain code:apiErrorCode userInfo:errorInfo];
+            [self receivedError:apiError forAPICall:apiCall];
             
+            /*
             if([LoginUser isEqual:apiCall])
                 [delegate startingSessionFailedWithError:apiError];
+            else if([Idle isEqual:apiCall])
+                [delegate idleFailedWithError:apiError];
             else if([RegisterTrialUser isEqual:apiCall])
                 [delegate registerTrialUserFailedWithError:apiError];
             else if([GetUserInfo isEqual:apiCall])
@@ -1360,15 +1394,18 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 [delegate sendTaxPrepSummaryReportFailedWithError:apiError];
             else if([SendDonationListReportWithValues isEqualToString:apiCall])
                 [delegate sendDonationListReportWithValuesFailedWithError:apiError];
-            
+            */
         }
     }
     else
     {
         NSError* jsonError = [NSError errorWithDomain:VPNCDManagerError code:VPNCDManagerInvalidJSONError userInfo:nil];
-        
+        [self receivedError:jsonError forAPICall:apiCall];
+        /*
         if([LoginUser isEqual:apiCall])
             [delegate startingSessionFailedWithError:jsonError];
+        else if([Idle isEqual:apiCall])
+            [delegate idleFailedWithError:jsonError];
         else if([RegisterTrialUser isEqual:apiCall])
             [delegate registerTrialUserFailedWithError:jsonError];
         else if([GetUserInfo isEqual:apiCall])
@@ -1417,6 +1454,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             [delegate sendTaxPrepSummaryReportFailedWithError:jsonError];
         else if([SendDonationListReportWithValues isEqualToString:apiCall])
             [delegate sendDonationListReportWithValuesFailedWithError:jsonError];
+         */
     }
 }
 
@@ -1426,6 +1464,8 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         [delegate startingSessionFailedWithError:error];
     else if([RegisterTrialUser isEqual:apiCall])
         [delegate registerTrialUserFailedWithError:error];
+    else if([Idle isEqual:apiCall])
+        [delegate idleFailedWithError:error];
     else if([GetUserInfo isEqual:apiCall])
         [delegate getUserInfoFailedWithError:error];
     else if([GetPurchaseOptions isEqual:apiCall])

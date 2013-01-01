@@ -14,6 +14,10 @@
 @protocol VPNCDManagerDelegate <NSObject>
 
 @optional
+//Idle
+-(void) didIdle;
+-(void) idleFailedWithError:(NSError*)error;
+
 //LoginUser
 -(void) startingSessionFailedWithError:(NSError*)error;
 -(void) didStartSession;

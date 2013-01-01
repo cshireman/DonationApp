@@ -69,7 +69,7 @@
                                             <outlet property="delegate" destination="tuo-mR-WAW" id="cai-OF-www"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q1E-WA-5z4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q1E-WA-5z4" customClass="GradientButton">
                                         <rect key="frame" x="20" y="356" width="130" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -84,7 +84,7 @@
                                             <segue destination="enf-C1-b0j" kind="push" id="jlw-1v-z7N"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="v5D-2n-dxF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="v5D-2n-dxF" customClass="GradientButton">
                                         <rect key="frame" x="170" y="356" width="130" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -109,8 +109,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="UQC-ja-yZJ"/>
                     <connections>
+                        <outlet property="loginButton" destination="v5D-2n-dxF" id="ejo-OX-J1H"/>
                         <outlet property="passwordField" destination="ASx-by-LUO" id="jyx-G4-KUF"/>
                         <outlet property="scrollView" destination="lXt-vL-V1H" id="kg6-LD-3av"/>
+                        <outlet property="signUpButton" destination="q1E-WA-5z4" id="nbQ-n1-YMq"/>
                         <outlet property="usernameField" destination="eVc-nj-3jq" id="ubB-fW-XS4"/>
                     </connections>
                 </viewController>
@@ -200,7 +202,7 @@
                                     <outlet property="delegate" destination="enf-C1-b0j" id="H6i-lz-DWB"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jnR-LD-paR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jnR-LD-paR" customClass="GradientButton">
                                 <rect key="frame" x="20" y="366" width="130" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -215,7 +217,7 @@
                                     <action selector="cancelPushed:" destination="enf-C1-b0j" eventType="touchUpInside" id="sa2-z1-BEY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pAo-mz-YvR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pAo-mz-YvR" customClass="GradientButton">
                                 <rect key="frame" x="170" y="366" width="130" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -252,11 +254,13 @@
                     <navigationItem key="navigationItem" id="0SR-Jo-SgF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="cancelButton" destination="jnR-LD-paR" id="4L3-bb-N1Q"/>
                         <outlet property="confirmPasswordField" destination="Qvh-qr-Ozg" id="Ywq-FB-Fiq"/>
                         <outlet property="emailField" destination="cEA-bk-23b" id="A6I-yB-Z8p"/>
                         <outlet property="firstNameField" destination="aUr-t3-mHZ" id="wBS-wW-pT9"/>
                         <outlet property="lastNameField" destination="oq0-fa-Fq7" id="x4j-7n-v59"/>
                         <outlet property="passwordField" destination="5eG-TN-coy" id="AFV-OK-ps3"/>
+                        <outlet property="submitButton" destination="pAo-mz-YvR" id="V9K-fh-1m8"/>
                         <outlet property="taxYearTable" destination="RBY-Hh-GS4" id="8E0-MR-gWr"/>
                     </connections>
                 </viewController>
@@ -727,7 +731,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DKZ-U3-mZg">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DKZ-U3-mZg" customClass="GradientButton">
                                 <rect key="frame" x="20" y="134" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -822,7 +826,7 @@
                                 <rect key="frame" x="0.0" y="305" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KeM-vG-Ykn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KeM-vG-Ykn" customClass="GradientButton">
                                         <rect key="frame" x="20" y="9" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -852,6 +856,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addMileageButton" destination="KeM-vG-Ykn" id="OF1-qL-Wcz"/>
                         <outlet property="tableView" destination="dj9-ec-3cL" id="Fjg-L2-FHy"/>
                         <segue destination="cr6-3o-1nK" kind="push" identifier="AddEditMileageListSegue" id="VAV-6Z-F3h"/>
                     </connections>
@@ -1134,7 +1139,7 @@
                                     <outlet property="delegate" destination="cr6-3o-1nK" id="Zoc-38-gra"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ETD-qn-FLz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ETD-qn-FLz" customClass="GradientButton">
                                 <rect key="frame" x="20" y="304" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1388,7 +1393,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="305" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="auu-wo-L80">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="auu-wo-L80" customClass="GradientButton">
                                         <rect key="frame" x="14" y="9" width="149" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1403,7 +1408,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <action selector="addCustomItemPushed:" destination="eBQ-yK-HSt" eventType="touchUpInside" id="eWz-Q9-zj1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P96-YO-HlS">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P96-YO-HlS" customClass="GradientButton">
                                         <rect key="frame" x="171" y="9" width="129" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1438,6 +1443,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addCustomItemButton" destination="auu-wo-L80" id="8e8-fg-AkP"/>
+                        <outlet property="addEbayItemButton" destination="P96-YO-HlS" id="VF2-bi-Gow"/>
                         <outlet property="donationListInfoLabel" destination="D0e-FO-8Mn" id="lOL-Mg-sey"/>
                         <outlet property="organizationLabel" destination="Kvd-WC-xMg" id="Jc2-7u-gnJ"/>
                         <outlet property="tableView" destination="5pU-rl-CTE" id="k26-0T-sX2"/>
@@ -1445,6 +1452,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="drF-lv-DNy" kind="push" identifier="EditItemSegue" id="jEP-vW-rmk"/>
                         <segue destination="1Gt-wV-Iuw" kind="push" identifier="EditCustomItemSegue" id="vr0-20-Lc0"/>
                         <segue destination="cr6-3o-1nK" kind="push" identifier="EditDonationListSegue" id="xZe-Ub-trX"/>
+                        <segue destination="i2n-qP-ntm" kind="push" identifier="PurchaseTaxYearSegue" id="afA-o9-LUL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZw-mC-OdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1642,7 +1650,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tSj-7V-FKY">
+                                                <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tSj-7V-FKY" customClass="GradientButton">
                                                     <rect key="frame" x="46" y="5" width="244" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1682,18 +1690,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUr-LT-Xfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4271" y="634"/>
+            <point key="canvasLocation" x="4474" y="568"/>
         </scene>
         <!--Edit Custom Item View Controller - Custom Item-->
         <scene sceneID="NQ7-ZN-Tgb">
             <objects>
                 <viewController id="1Gt-wV-Iuw" customClass="VPNEditCustomItemViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ghs-cv-5d0">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FDM-Sf-KhY">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1772,7 +1780,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JNk-TW-oBc">
+                                                <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JNk-TW-oBc" customClass="GradientButton">
                                                     <rect key="frame" x="46" y="5" width="244" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1824,14 +1832,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="XFe-XX-YqB" customClass="VPNViewPhotoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Woc-hX-fPV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="8Hc-J8-SuT">
-                                <rect key="frame" x="10" y="10" width="300" height="300"/>
+                                <rect key="frame" x="10" y="10" width="300" height="349"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bh3-TI-s3k">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bh3-TI-s3k" customClass="GradientButton">
                                 <rect key="frame" x="10" y="318" width="145" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1846,7 +1854,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="deletePushed:" destination="XFe-XX-YqB" eventType="touchUpInside" id="s7i-Lu-Oyd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JiQ-h0-1e5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JiQ-h0-1e5" customClass="GradientButton">
                                 <rect key="frame" x="163" y="318" width="147" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1946,7 +1954,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="305" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XUI-fU-hUi">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XUI-fU-hUi" customClass="GradientButton">
                                         <rect key="frame" x="20" y="5" width="280" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1976,6 +1984,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addMoneyButton" destination="XUI-fU-hUi" id="D74-hc-lIf"/>
                         <outlet property="tableView" destination="xqX-Gx-zAT" id="Bql-K7-tW7"/>
                         <segue destination="cr6-3o-1nK" kind="push" identifier="AddEditCashListSegue" id="sIa-g4-8qs"/>
                     </connections>
@@ -2084,7 +2093,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hnb-ef-yNh">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hnb-ef-yNh" customClass="GradientButton">
                                 <rect key="frame" x="20" y="317" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -2134,7 +2143,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <rect key="frame" x="0.0" y="136" width="320" height="282"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d2O-Dp-U67">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d2O-Dp-U67" customClass="GradientButton">
                                     <rect key="frame" x="116" y="219" width="89" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -2186,6 +2195,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buyNowButton" destination="d2O-Dp-U67" id="ywT-wD-8Lh"/>
                         <outlet property="purchaseView" destination="WMA-OI-7er" id="Zh4-mq-3Ai"/>
                         <segue destination="i2n-qP-ntm" kind="push" identifier="BuyNowSegue" id="iFH-Fh-DZD"/>
                     </connections>
@@ -2222,7 +2232,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hzu-ht-Nt6">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hzu-ht-Nt6" customClass="GradientButton">
                                 <rect key="frame" x="160" y="87" width="140" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -2266,7 +2276,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="i2n-qP-ntm" id="0yc-kg-PJB"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2tb-WL-DQY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2tb-WL-DQY" customClass="GradientButton">
                                 <rect key="frame" x="20" y="353" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -2408,6 +2418,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
     <classes>
+        <class className="GradientButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
+        </class>
         <class className="VPNAddDonationListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNAddDonationListViewController.h"/>
             <relationships>
@@ -2427,11 +2440,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="notesField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="organizationPicker" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="organizationPickerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="startAddingItemsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startAddingItemsButton" candidateClass="GradientButton"/>
             </relationships>
         </class>
         <class className="VPNCashListViewController" superclassName="VPNListViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNCashListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addMoneyButton" candidateClass="GradientButton"/>
+            </relationships>
         </class>
         <class className="VPNContactInfoCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNContactInfoCell.h"/>
@@ -2448,6 +2464,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="backPushed:"/>
                 <relationship kind="action" name="editListPushed:"/>
                 <relationship kind="action" name="editPushed:"/>
+                <relationship kind="outlet" name="addCustomItemButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="addEbayItemButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="donationListInfoLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="organizationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
@@ -2514,8 +2532,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="dismissKeyboard"/>
                 <relationship kind="action" name="loginPushed:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="signUpButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -2524,6 +2544,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="VPNMileageListViewController" superclassName="VPNListViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNMileageListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addMileageButton" candidateClass="GradientButton"/>
+            </relationships>
         </class>
         <class className="VPNOrganizationCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationCell.h"/>
@@ -2540,7 +2563,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="donePushed:"/>
                 <relationship kind="outlet" name="addressField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="cityField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="stateField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="zipField" candidateClass="UITextField"/>
@@ -2564,8 +2587,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="applyPromoCodePushed:"/>
                 <relationship kind="action" name="buyNowPushed:"/>
-                <relationship kind="outlet" name="applyPromoCodeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buyNowButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="applyPromoCodeButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="buyNowButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="promoCodeField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
@@ -2575,7 +2598,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="emailReportsPushed:"/>
                 <relationship kind="action" name="taxYearButtonPushed:"/>
-                <relationship kind="outlet" name="emailReportsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="emailReportsButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="taxYearLabel" candidateClass="UILabel"/>
             </relationships>
@@ -2592,6 +2615,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxYearViewController.h"/>
             <relationships>
                 <relationship kind="action" name="buyNowPushed:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buyNowButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="purchaseView" candidateClass="UIView"/>
             </relationships>
         </class>
@@ -2613,11 +2637,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="cancelPushed:"/>
                 <relationship kind="action" name="submitPushed:"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="taxYearTable" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -2626,8 +2652,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="changePushed:"/>
                 <relationship kind="action" name="deletePushed:"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="changeButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="GradientButton"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
             </relationships>
         </class>
@@ -2639,10 +2665,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="aQI-nu-Yoy"/>
-        <segue reference="sIa-g4-8qs"/>
-        <segue reference="JgW-iW-Uj2"/>
-        <segue reference="nt4-d5-pPY"/>
-        <segue reference="rZP-W3-ekM"/>
         <segue reference="lXZ-ve-Me6"/>
+        <segue reference="afA-o9-LUL"/>
+        <segue reference="JgW-iW-Uj2"/>
+        <segue reference="xZe-Ub-trX"/>
+        <segue reference="jEP-vW-rmk"/>
+        <segue reference="nt4-d5-pPY"/>
     </inferredMetricsTieBreakers>
 </document>

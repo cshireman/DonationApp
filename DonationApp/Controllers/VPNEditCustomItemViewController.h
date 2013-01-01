@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "VPNItemGroup.h"
 #import "VPNItemGroupDelegate.h"
 #import "VPNCustomItemConditionCellDelegate.h"
@@ -19,8 +20,9 @@
 #import "VPNDoneToolbar.h"
 #import "VPNEditCustomItemDelegate.h"
 #import "VPNViewPhotoDelegate.h"
+#import "GradientButton.h"
 
-@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate>
+@interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) id<VPNEditCustomItemDelegate> delegate;
 

@@ -14,12 +14,15 @@
 #import "VPNCDManager.h"
 #import "VPNItemGroup.h"
 #import "VPNItemGroupDelegate.h"
+#import "GradientButton.h"
 
-@interface VPNDonationItemListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNEditDonationListDelegate,VPNEditCustomItemDelegate,VPNCDManagerDelegate,VPNItemGroupDelegate>
+@interface VPNDonationItemListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNEditDonationListDelegate,VPNEditCustomItemDelegate,VPNCDManagerDelegate,VPNItemGroupDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *organizationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *donationListInfoLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet GradientButton *addCustomItemButton;
+@property (strong, nonatomic) IBOutlet GradientButton *addEbayItemButton;
 
 @property (strong, nonatomic) VPNDonationList* donationList;
 @property (strong, nonatomic) VPNOrganization* organization;

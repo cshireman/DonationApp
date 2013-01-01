@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNLoginViewController.h"
+#import "VPNCDManager.h"
+#import "VPNCDManagerDelegate.h"
 
-@interface VPNMainTabGroupViewController : UITabBarController <VPNLoginViewControllerDelegate>
+@interface VPNMainTabGroupViewController : UITabBarController <VPNLoginViewControllerDelegate,VPNCDManagerDelegate>
 
 -(void) displayLoginScene;
 -(void) displaySelectTaxYearScene;

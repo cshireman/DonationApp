@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 #import "VPNSelectTaxRateViewController.h"
@@ -19,7 +20,7 @@
 #define kMoneySubtotalKey   @"money_subtotal"
 #define kMileageSubtotalKey @"mileage_subtotal"
 
-@interface VPNHomeViewController : UITableViewController <ADBannerViewDelegate, VPNSelectTaxRateViewControllerDelegate, VPNCDManagerDelegate>
+@interface VPNHomeViewController : UITableViewController <ADBannerViewDelegate, VPNSelectTaxRateViewControllerDelegate, VPNCDManagerDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* updateButton;
 @property (strong, nonatomic) IBOutlet UIView* optOutView;

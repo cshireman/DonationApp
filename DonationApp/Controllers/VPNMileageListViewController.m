@@ -16,11 +16,14 @@
 @end
 
 @implementation VPNMileageListViewController
+@synthesize addMileageButton;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    [addMileageButton useGreenConfirmStyle];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -111,4 +114,8 @@
 }
 
 
+- (void)viewDidUnload {
+    [self setAddMileageButton:nil];
+    [super viewDidUnload];
+}
 @end

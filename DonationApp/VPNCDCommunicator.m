@@ -124,6 +124,8 @@
 
 @end
 
+APICallType* Idle = @"Idle";
+
 APICallType* LoginUser = @"LoginUser";
 APICallType* LogoutUser = @"LogoutUser";
 APICallType* RegisterTrialUser = @"RegisterTrialUser";

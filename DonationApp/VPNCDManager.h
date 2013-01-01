@@ -52,6 +52,8 @@ enum {
 @property (strong, nonatomic) VPNItem* currentListItem;
 @property (strong, nonatomic) VPNUser* currentUser;
 
+-(void) idle;
+
 -(void)startSessionForUser:(VPNUser*)user;
 -(void)startSessionForUserFailedWithError:(NSError*)error;
 

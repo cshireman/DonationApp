@@ -40,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [emailReportsButton useGreenConfirmStyle];
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
     
@@ -268,7 +269,16 @@
 }
 
 - (IBAction)emailReportsPushed:(id)sender {
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Sending Reports" width:155];
-    [self processNextReport];
+    if(!sendItemizedReport && !SendTaxPrepSummaryReport && [donationLists count] == 0)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Report Selected" message:@"Please choose at least one report" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        
+        [alert show];
+    }
+    else
+    {
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Sending Reports" width:155];
+        [self processNextReport];
+    }
 }
 @end

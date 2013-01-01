@@ -10,6 +10,7 @@
 #import "VPNCDManager.h"
 #import "VPNCDManagerDelegate.h"
 #import "VPNDonationReportsDelegate.h"
+#import "GradientButton.h"
 
 @interface VPNReportsViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNCDManagerDelegate,VPNDonationReportsDelegate>
 
@@ -19,7 +20,7 @@
 @property (strong, nonatomic) NSMutableArray* donationLists;
 
 @property (strong, nonatomic) IBOutlet UILabel *taxYearLabel;
-@property (strong, nonatomic) IBOutlet UIButton *emailReportsButton;
+@property (strong, nonatomic) IBOutlet GradientButton *emailReportsButton;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)taxYearButtonPushed:(id)sender;

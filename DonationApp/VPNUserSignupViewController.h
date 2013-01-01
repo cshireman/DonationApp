@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNCDManagerDelegate.h"
+#import "GradientButton.h"
 
 @interface VPNUserSignupViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, VPNCDManagerDelegate>
 
@@ -18,6 +19,8 @@
 @property (nonatomic, strong) IBOutlet UITextField* emailField;
 @property (nonatomic, strong) IBOutlet UITextField* passwordField;
 @property (nonatomic, strong) IBOutlet UITextField* confirmPasswordField;
+@property (strong, nonatomic) IBOutlet GradientButton *cancelButton;
+@property (strong, nonatomic) IBOutlet GradientButton *submitButton;
 
 -(IBAction)cancelPushed:(id)sender;
 -(IBAction)submitPushed:(id)sender;

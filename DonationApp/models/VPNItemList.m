@@ -9,6 +9,7 @@
 #import "VPNItemList.h"
 #import "VPNItem.h"
 #import "NSDate+CDParser.h"
+#import "VPNUser.h"
 
 
 @implementation VPNItemList
@@ -138,6 +139,28 @@
     return [documentsDirectory stringByAppendingPathComponent:filePath];
 }
 
++(double) ebayItemTotal
+{
+    VPNUser* user = [VPNUser currentUser];
+    NSArray* itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+    
+    double itemTotal = 0.00;
+    
+    for(VPNItemList* itemList in itemLists)
+    {
+        NSArray* items = itemList.items;
+        
+        for(VPNItem* item in items)
+        {
+            if(!item.isCustomItem)
+            {
+                itemTotal += item.quantity * [item.fairMarketValue doubleValue];
+            }
+        }
+    }
+    
+    return itemTotal;
+}
 
 -(NSMutableDictionary*)toDictionary
 {

@@ -11,6 +11,7 @@
 #import "VPNCDManager.h"
 #import "VPNCDManagerDelegate.h"
 #import "VPNNotifier.h"
+#import "GradientButton.h"
 
 @interface VPNOrganizationDetailViewController : UIViewController <VPNCDManagerDelegate>
 
@@ -20,7 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *stateField;
 @property (strong, nonatomic) IBOutlet UITextField *zipField;
 
-@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+@property (strong, nonatomic) IBOutlet GradientButton *deleteButton;
 
 @property (strong, nonatomic) VPNOrganization* organization;
 

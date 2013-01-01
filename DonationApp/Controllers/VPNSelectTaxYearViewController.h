@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "VPNCDManager.h"
 #import "VPNCDManagerDelegate.h"
+#import "GradientButton.h"
 
 @interface VPNSelectTaxYearViewController : UITableViewController <VPNCDManagerDelegate>
 
 @property (assign) BOOL showPurchaseButton;
 
 @property (strong, nonatomic) IBOutlet UIView* purchaseView;
+@property (strong, nonatomic) IBOutlet GradientButton *buyNowButton;
 
 -(void) setCanPurchase:(NSNumber*)canPurchase;
 

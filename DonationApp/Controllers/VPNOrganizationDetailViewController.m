@@ -45,6 +45,8 @@
     organizations = [VPNOrganization loadOrganizationsFromDisc];
 	// Do any additional setup after loading the view.
     
+    [deleteButton useRedDeleteStyle];
+    
     if(organization == nil)
     {
         organization = [[VPNOrganization alloc] init];

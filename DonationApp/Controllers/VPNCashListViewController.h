@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNListViewController.h"
+#import "GradientButton.h"
 
 @interface VPNCashListViewController : VPNListViewController
+@property (strong, nonatomic) IBOutlet GradientButton *addMoneyButton;
 
 @end

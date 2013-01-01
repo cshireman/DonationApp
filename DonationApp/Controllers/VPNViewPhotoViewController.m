@@ -32,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [deleteButton useRedDeleteStyle];
+    [changeButton useGreenConfirmStyle];
 	// Do any additional setup after loading the view.
 }
 

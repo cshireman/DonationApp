@@ -14,6 +14,8 @@
 #import "VPNCDManagerDelegate.h"
 #import "VPNEditDonationListDelegate.h"
 
+#import "GradientButton.h"
+
 @interface VPNAddDonationListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, VPNCDManagerDelegate>
 
 @property (strong, nonatomic) id<VPNEditDonationListDelegate> delegate;
@@ -29,7 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView* itemSourcePicker;
 
 @property (strong, nonatomic) IBOutlet UIView* keyboardToolbar;
-@property (strong, nonatomic) IBOutlet UIButton* startAddingItemsButton;
+@property (strong, nonatomic) IBOutlet GradientButton* startAddingItemsButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
 
 @property (strong, nonatomic) IBOutlet UITextField* notesField;

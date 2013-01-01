@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNViewPhotoDelegate.h"
+#import "GradientButton.h"
 
 @interface VPNViewPhotoViewController : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
@@ -16,8 +17,8 @@
 @property (strong, nonatomic) UIImage* image;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
-@property (strong, nonatomic) IBOutlet UIButton *changeButton;
+@property (strong, nonatomic) IBOutlet GradientButton *deleteButton;
+@property (strong, nonatomic) IBOutlet GradientButton *changeButton;
 
 - (IBAction)changePushed:(id)sender;
 - (IBAction)deletePushed:(id)sender;

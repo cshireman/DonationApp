@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
+#import <MessageUI/MessageUI.h>
 #import "VPNCDManagerDelegate.h"
+#import "GradientButton.h"
 
-@interface VPNPurchaseTaxYearViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNCDManagerDelegate,UIAlertViewDelegate>
+@interface VPNPurchaseTaxYearViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,VPNCDManagerDelegate,UIAlertViewDelegate,SKPaymentTransactionObserver,SKProductsRequestDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet UIButton *applyPromoCodeButton;
+@property (strong, nonatomic) IBOutlet GradientButton *applyPromoCodeButton;
 @property (strong, nonatomic) IBOutlet UITextField *promoCodeField;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *buyNowButton;
+@property (strong, nonatomic) IBOutlet GradientButton *buyNowButton;
 
 - (IBAction)applyPromoCodePushed:(id)sender;
 - (IBAction)buyNowPushed:(id)sender;

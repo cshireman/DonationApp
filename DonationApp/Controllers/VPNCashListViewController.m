@@ -16,10 +16,12 @@
 @end
 
 @implementation VPNCashListViewController
+@synthesize addMoneyButton;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [addMoneyButton useGreenConfirmStyle];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -114,4 +116,8 @@
 }
 
 
+- (void)viewDidUnload {
+    [self setAddMoneyButton:nil];
+    [super viewDidUnload];
+}
 @end

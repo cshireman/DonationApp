@@ -34,6 +34,8 @@
 
 @end
 
+extern APICallType* Idle;
+
 extern APICallType* LoginUser;
 extern APICallType* LogoutUser;
 extern APICallType* RegisterTrialUser;

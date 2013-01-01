@@ -9,10 +9,15 @@
 #import "VPNEditItemViewController.h"
 #import "DejalActivityView.h"
 #import "VPNDonationItemListViewController.h"
+#import "VPNItemList.h"
+#import "Category.h"
 
 static CGFloat keyboardHeight = 216;
 static CGFloat toolbarHeight = 44;
 static CGFloat tabBarHeight = 49;
+
+static CGFloat warningLimit = 5000.00;
+static CGFloat itemListLimit = 15000.00;
 
 @interface VPNEditItemViewController ()
 {
@@ -125,7 +130,8 @@ static CGFloat tabBarHeight = 49;
         }
         else if([CellIdentifier isEqualToString:@"PhotoCell"])
         {
-            UIButton* photoButton = (UIButton*)[cell viewWithTag:1];
+            GradientButton* photoButton = (GradientButton*)[cell viewWithTag:1];
+            [photoButton useGreenConfirmStyle];
             
             if(group.image == nil)
                 [photoButton setHidden:YES];
@@ -204,6 +210,30 @@ static CGFloat tabBarHeight = 49;
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate Methods
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex != alertView.cancelButtonIndex)
+    {
+        MFMailComposeViewController* mailController = [[MFMailComposeViewController alloc] init];
+        [mailController setToRecipients:@[@"support@charitydeductions.com"]];
+        [mailController setSubject:@"Donation Limit Support Request"];
+        
+        mailController.mailComposeDelegate = self;
+        [self presentModalViewController:mailController animated:YES];
+    }
+}
+
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate Methods
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 #pragma mark -
 #pragma mark UIActionSheetDelegate method
@@ -400,9 +430,39 @@ static CGFloat tabBarHeight = 49;
     NSMutableArray* errorMessages = [[NSMutableArray alloc] init];
     if([self isGroupValid:&errorMessages])
     {
-        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving" width:155];
-        group.delegate = self;
-        [group save];
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        BOOL warningDisplayed = [[defaults objectForKey:@"appraisal_warning_displayed"] boolValue];
+        
+        double groupTotal = [group totalValueForAllConditions];
+        
+        if(!warningDisplayed && groupTotal > warningLimit)
+        {
+            [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"appraisal_warning_displayed"];
+            [defaults synchronize];
+            
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Appraisal Warning" message:@"The IRS requires a qualified appraisal for an item or group of similar items valued above $5000. This app won't qualify. See IRS Pub 561" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        VPNUser* user = [VPNUser currentUser];
+        NSArray* itemLists = [VPNItemList loadItemListsFromDisc:user.selected_tax_year];
+        double totalForLists = 0.00;
+        for(VPNItemList* itemList in itemLists)
+        {
+            totalForLists += [itemList totalForItems];
+        }
+        
+        if((totalForLists + groupTotal) >= itemListLimit)
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Max Donations Reached" message:@"There is a maximum item donation amount of $15,000.  Saving this donation would exceed this limit.  Please make the necessary adjustments and try again." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Contact Us", nil];
+            [alert show];
+        }
+        else
+        {
+            [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving" width:155];
+            group.delegate = self;
+            [group save];
+        }
     }
     else
     {

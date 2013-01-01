@@ -11,6 +11,7 @@
 #import "VPNCDManager.h"
 #import "VPNUser.h"
 #import "VPNNotifier.h"
+#import "GradientButton.h"
 
 @class VPNLoginViewController;
 @protocol VPNLoginViewControllerDelegate <NSObject>
@@ -28,6 +29,9 @@
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) IBOutlet UITextField* usernameField;
 @property (strong, nonatomic) IBOutlet UITextField* passwordField;
+
+@property (strong, nonatomic) IBOutlet GradientButton* loginButton;
+@property (strong, nonatomic) IBOutlet GradientButton* signUpButton;
 
 -(IBAction) loginPushed:(id) sender;
 -(IBAction) dismissKeyboard;

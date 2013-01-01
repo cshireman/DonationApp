@@ -22,6 +22,9 @@
 @synthesize manager;
 @synthesize user;
 
+@synthesize signUpButton;
+@synthesize loginButton;
+
 -(id)init
 {
     self = [super init];
@@ -62,6 +65,9 @@
         
     scrollView.contentSize = CGSizeMake(320, 700);
     self.scrollView.scrollEnabled = NO;
+    
+    [signUpButton useSimpleOrangeStyle];
+    [loginButton useGreenConfirmStyle];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -199,8 +205,13 @@
         return;
     }
     
-    [DejalActivityView currentActivityView].activityLabel.text = @"Loading organizaations";
-    
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Purchase Options";
+    [manager getPurchaseOptions];
+}
+
+-(void) didGetPurchaseOptions:(NSDictionary *)info
+{
+    [DejalActivityView currentActivityView].activityLabel.text = @"Loading Organizations";
     [manager getOrganizations:YES];
 }
 

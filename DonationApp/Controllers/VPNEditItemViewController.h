@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "VPNItemGroup.h"
 #import "VPNItemGroupDelegate.h"
 #import "VPNItemConditionCellDelegate.h"
@@ -14,8 +15,9 @@
 #import "VPNDoneToolbarDelegate.h"
 #import "VPNDoneToolbar.h"
 #import "VPNViewPhotoDelegate.h"
+#import "GradientButton.h"
 
-@interface VPNEditItemViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,VPNItemConditionCellDelegate,VPNDoneToolbarDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate>
+@interface VPNEditItemViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,VPNItemConditionCellDelegate,VPNDoneToolbarDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
 
 @property (retain, nonatomic) UINib* itemCellNib;
 @property (retain, nonatomic) UINib* doneToolbarNib;

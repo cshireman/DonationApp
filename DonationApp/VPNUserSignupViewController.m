@@ -23,6 +23,8 @@
 
 @implementation VPNUserSignupViewController
 @synthesize taxYearTable;
+@synthesize cancelButton;
+@synthesize submitButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,6 +49,25 @@
     prevYear = currentYear - 1;
     
     selectedTaxYear = currentYear;
+    
+    [cancelButton useBlackStyle];
+    [submitButton useGreenConfirmStyle];
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    BOOL instructions_shown = [[defaults objectForKey:@"register_instructions_shown"] boolValue];
+    
+    if(!instructions_shown)
+    {
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"register_instructions_shown"];
+        [defaults synchronize];
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Free Basic Account" message:@"Enter your information and select a tax year. Try our eBay® Fair Market Values (FMVs) for FREE up to $500 in item donations.  To continue using the eBay FMVs, you'll need to upgrade to a paid membership.  Entering your own item, money, and mileage donations is always FREE.  Start your tax savings now!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        
+        [alert show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,9 +186,20 @@
 -(void) registerTrialUserFailedWithError:(NSError *)error
 {
     [DejalBezelActivityView removeViewAnimated:YES];
-
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"Unable to create your account at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-    [alert show];
+    
+    NSDictionary* userInfo = error.userInfo;
+    NSString* errorMessage = [userInfo objectForKey:@"errorMessage"];
+    
+    if([errorMessage isEqualToString:@"Duplicate Email Error"])
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Email Conflict" message:@"It seems we already have a user with that email on file.  Please double check your email address and try again." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Username Unavailable" message:@"That username has already been taken, please choose a different one." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 #pragma mark -
@@ -191,8 +223,34 @@
     user.email = self.emailField.text;
     user.is_email_opted_in = YES;
     
-    [manager registerTrialUser:user withTaxYear:selectedTaxYear];
+    NSString* message = nil;
+    
+    if([user.username length] == 0)
+        message = @"Username is required";
+    else if([user.password length] == 0)
+        message = @"Password is required";
+    else if([user.first_name length] == 0)
+        message = @"First Name is required";
+    else if([user.last_name length] == 0)
+        message = @"Last Name is required";
+    else if([user.email length] == 0)
+        message = @"Email is required";
+    
+    if(message != nil)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Incomplete Form" message:message delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        [manager registerTrialUser:user withTaxYear:selectedTaxYear];
+    }
 }
 
 
+- (void)viewDidUnload {
+    [self setCancelButton:nil];
+    [self setSubmitButton:nil];
+    [super viewDidUnload];
+}
 @end

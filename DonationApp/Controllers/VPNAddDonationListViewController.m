@@ -71,6 +71,8 @@
 {
     [super viewDidLoad];
     
+    [startAddingItemsButton useGreenConfirmStyle];
+    
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
     
