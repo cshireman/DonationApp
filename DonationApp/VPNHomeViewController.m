@@ -341,6 +341,8 @@
         
         [self presentViewController:mailController animated:YES completion:^{}];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark -

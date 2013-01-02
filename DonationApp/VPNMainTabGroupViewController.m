@@ -61,6 +61,11 @@
 	// Do any additional setup after loading the view.
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 -(void) configure
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayLoginScene) name:@"Logout" object:nil];

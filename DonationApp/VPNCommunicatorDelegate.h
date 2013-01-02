@@ -13,7 +13,7 @@ typedef NSString APICallType;
 @protocol VPNCommunicatorDelegate <NSObject>
 
 @optional
--(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;
+-(void) receivedResponse:(NSData*)response forAPICall:(APICallType*)apiCall;
 -(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall;
 
 @end

@@ -92,7 +92,7 @@ enum {
 -(void)sendDonationListReportWithValues:(VPNDonationList*)donationList;
 
 //Communicator delegate
--(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall;
+-(void) receivedResponse:(NSData*)response forAPICall:(APICallType*)apiCall;
 -(void) receivedError:(NSError*)error forAPICall:(APICallType*)apiCall;
 
 @end

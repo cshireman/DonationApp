@@ -15,10 +15,14 @@
 @interface VPNCDCommunicator : NSObject <NSURLConnectionDataDelegate>
 {
     NSMutableArray* validAPICalls;
+    BOOL saveDataToDisc;
+    
 }
 
 @property (strong) NSMutableData* receivedData;
 @property (copy) APICallType* currentCallType;
+
+@property (strong, nonatomic) NSFileHandle* handle;
 
 @property (weak, nonatomic) id<VPNCommunicatorDelegate> delegate;
 @property (strong) NSURLConnection* currentConnection;

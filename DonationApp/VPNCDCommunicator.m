@@ -13,6 +13,7 @@
 @synthesize currentCallType;
 @synthesize currentConnection;
 @synthesize delegate;
+@synthesize handle;
 
 -(id) init
 {
@@ -73,6 +74,15 @@
         [delegate receivedError:error forAPICall:apiCall];
     }
     
+    saveDataToDisc = NO;
+    
+    if([GetCategoryList isEqualToString:apiCall])
+    {
+        saveDataToDisc = YES;
+        [[NSData data] writeToFile:[self dataFilePath] options:NSDataWritingAtomic error:nil];
+        self.handle = [NSFileHandle fileHandleForUpdatingAtPath:[self dataFilePath]];
+    }
+    
     NSString* apiURL = [NSString stringWithFormat:@"http://review.prointegrations.com/charitydeductions/www/api/json/%@",apiCall];
     
     NSData* requestData = [NSData dataWithBytes:[content UTF8String] length:[content length]];
@@ -93,11 +103,23 @@
     
 }
 
+-(NSString*) dataFilePath
+{
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    NSString* filePath = @"data_download_file";
+    
+    return [documentsDirectory stringByAppendingPathComponent:filePath];
+}
+
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    if(nil == receivedData)
+        receivedData = [[NSMutableData alloc] init];
+    
     [receivedData setLength:0];
 }
 
@@ -106,7 +128,15 @@
     if(nil == receivedData)
         receivedData = [[NSMutableData alloc] init];
     
-    [receivedData appendData:data];
+    if(saveDataToDisc)
+    {
+        [handle seekToEndOfFile];
+        [handle writeData:data];
+    }
+    else
+    {
+        [receivedData appendData:data];
+    }
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -117,9 +147,16 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     //read response into dictionary
-    NSString *jsonString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
-//    NSLog(@"Received:%@",jsonString);
-    [delegate receivedResponse:jsonString forAPICall:currentCallType];
+    if(saveDataToDisc)
+    {
+        [handle closeFile];
+        NSData* jsonData = [[NSData alloc] initWithContentsOfFile:[self dataFilePath]];
+        [delegate receivedResponse:jsonData forAPICall:currentCallType];
+    }
+    else
+    {
+        [delegate receivedResponse:self.receivedData forAPICall:currentCallType];
+    }
 }
 
 @end

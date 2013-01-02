@@ -18,7 +18,6 @@
 {
     VPNUser* currentUser;
     VPNCDManager* manager;
-    DejalActivityView* loadingView;
 }
 
 @end
@@ -28,6 +27,7 @@
 @synthesize showPurchaseButton;
 @synthesize purchaseView;
 @synthesize buyNowButton;
+@synthesize loadingView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -159,7 +159,7 @@
     [currentUser saveAsDefaultUser];
     [self.tableView reloadData];
 
-    loadingView = [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading Item Lists" width:155];
+    self.loadingView = [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading Item Lists" width:155];
     [manager getItemListsForTaxYear:currentUser.selected_tax_year forceDownload:YES];
 }
 
@@ -200,8 +200,9 @@
 //GetMileageLists
 -(void) didGetMileageLists:(NSArray*)mileageLists
 {
-    loadingView.activityLabel.text = @"Loading Database";
-    
+    [DejalBezelActivityView removeViewAnimated:NO];
+    loadingView = [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading Database\nThis will take several minutes.\nDo not close the app." width:230];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     [manager getCategoryListForTaxYear:currentUser.selected_tax_year forceDownload:NO];
 }
 
@@ -218,7 +219,8 @@
     //Test if we need to install the database or just dismiss the overlay
     if([categoryList count] > 0 && [[categoryList objectAtIndex:0] isKindOfClass:[NSDictionary class]])
     {
-        [loadingView.activityLabel setText:@"Installing"];
+        [DejalBezelActivityView removeViewAnimated:NO];
+        loadingView = [DejalBezelActivityView activityViewForView:self.view withLabel:@"Installing: 0.0%%" width:230];
         
         VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
         NSManagedObjectContext* context = [appDelegate managedObjectContext];
@@ -233,7 +235,7 @@
             [mutableCatInfo setValue:taxYear forKey:@"TaxYear"];
             
             NSNumber* catID = [mutableCatInfo objectForKey:@"ID"];
-            Category* category  = [Category getByCategoryID:[catID intValue]];
+            Category* category  = [Category newCategoryForCategoryID:[catID intValue]];
             [category populateWithDictionary:mutableCatInfo];
             
             [context save:&error];
@@ -241,10 +243,11 @@
             i += 1.0;
             double progress = (i / [categoryList count])*100.0;
             
-            loadingView.activityLabel.text = [NSString stringWithFormat: @"Installing: %.02f%%",progress];
+            [DejalActivityView currentActivityView].activityLabel.text = [NSString stringWithFormat: @"Installing: %.02f%%",progress];
         }
     }
-    
+
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     [VPNTaxSavings updateTaxSavings];
     
     [DejalBezelActivityView removeViewAnimated:YES];
@@ -255,6 +258,7 @@
 
 -(void) getCategoryListFailedWithError:(NSError*)error
 {
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"There was a problem with our database, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     [alert show];
 }

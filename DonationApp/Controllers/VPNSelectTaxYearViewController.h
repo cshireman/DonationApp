@@ -10,6 +10,7 @@
 #import "VPNCDManager.h"
 #import "VPNCDManagerDelegate.h"
 #import "GradientButton.h"
+#import "DejalActivityView.h"
 
 @interface VPNSelectTaxYearViewController : UITableViewController <VPNCDManagerDelegate>
 
@@ -17,6 +18,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView* purchaseView;
 @property (strong, nonatomic) IBOutlet GradientButton *buyNowButton;
+@property (strong, nonatomic) DejalActivityView* loadingView;
 
 -(void) setCanPurchase:(NSNumber*)canPurchase;
 

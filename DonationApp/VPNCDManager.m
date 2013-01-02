@@ -1080,7 +1080,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
 #pragma mark -
 #pragma mark Communicator Delegate Methods
 
--(void) receivedResponse:(NSString*)response forAPICall:(APICallType*)apiCall
+-(void) receivedResponse:(NSData*)response forAPICall:(APICallType*)apiCall
 {
     if(response == nil)
     {
@@ -1091,8 +1091,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     }
     
     NSError* error = nil;
-    NSData* responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary* responseInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+    NSDictionary* responseInfo = [NSJSONSerialization JSONObjectWithData:response options:0 error:&error];
     
     if(error == nil)
     {
@@ -1104,7 +1103,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             d = [[NSDictionary alloc] initWithObjects:@[@"FAILURE",[NSNumber numberWithInt:12],@"Internal Server Error"] forKeys:@[@"status",@"errorCode",@"errorMessage"]];
         }
         
-        NSLog(@"Result: %@",d);
+      //  NSLog(@"Result: %@",d);
         
         if([@"SUCCESS" isEqualToString:[d objectForKey:@"status"]])
         {

@@ -48,6 +48,18 @@
     return newCat;
 }
 
++(Category*) newCategoryForCategoryID:(int)categoryID
+{
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext* context = [appDelegate managedObjectContext];
+    Category* newCat = [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:context];
+    
+    newCat.categoryID = [NSNumber numberWithInt:categoryID];
+    NSLog(@"New Category for %d",categoryID);
+    
+    return newCat;
+}
+
 +(NSArray*) getByTaxYear:(int)taxYear
 {
     VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -105,7 +117,7 @@
             
             int subcatID = [[subCat objectForKey:@"ID"] intValue];
             
-            Category* newCat = [Category getByCategoryID:subcatID];
+            Category* newCat = [Category newCategoryForCategoryID:subcatID];
             [newCat populateWithDictionary:mutableSubCat];
             
             [subcatSet addObject:newCat];

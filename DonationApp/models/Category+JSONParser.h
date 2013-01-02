@@ -12,6 +12,7 @@
 
 +(Category*) getByCategoryID:(int)categoryID;
 +(NSArray*) getByTaxYear:(int)taxYear;
++(Category*) newCategoryForCategoryID:(int)categoryID;
 
 -(void) populateWithDictionary:(NSDictionary*)info;
 
