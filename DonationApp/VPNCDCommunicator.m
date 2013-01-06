@@ -83,7 +83,8 @@
         self.handle = [NSFileHandle fileHandleForUpdatingAtPath:[self dataFilePath]];
     }
     
-    NSString* apiURL = [NSString stringWithFormat:@"http://review.prointegrations.com/charitydeductions/www/api/json/%@",apiCall];
+    //NSString* apiURL = [NSString stringWithFormat:@"http://review.prointegrations.com/charitydeductions/www/api/json/%@",apiCall];
+    NSString* apiURL = [NSString stringWithFormat:@"https://www2.charitydeductions.com/api/json/%@",apiCall];
     
     NSData* requestData = [NSData dataWithBytes:[content UTF8String] length:[content length]];
     

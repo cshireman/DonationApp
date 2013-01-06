@@ -108,6 +108,7 @@
 		837B2649169243E000454BD4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837B2648169243E000454BD4 /* MessageUI.framework */; };
 		837B26511692478100454BD4 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B26501692478100454BD4 /* GradientButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		837B26521692478100454BD4 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 837B26501692478100454BD4 /* GradientButton.m */; };
+		837BF55C169958E4003900B6 /* default_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 837BF55B169958E4003900B6 /* default_database.sqlite */; };
 		837E604816785B3300CA1FB7 /* KeyboardDoneToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */; };
 		8387D48C165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
 		8387D48D165615BA00FE7C0E /* VPNSelectTaxYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */; };
@@ -318,6 +319,7 @@
 		837B2648169243E000454BD4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		837B264F1692478100454BD4 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		837B26501692478100454BD4 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
+		837BF55B169958E4003900B6 /* default_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = default_database.sqlite; sourceTree = "<group>"; };
 		837E604716785B3300CA1FB7 /* KeyboardDoneToolbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardDoneToolbarView.xib; path = CustomViews/KeyboardDoneToolbarView.xib; sourceTree = "<group>"; };
 		8387D48A165615B800FE7C0E /* VPNSelectTaxYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNSelectTaxYearViewController.h; path = Controllers/VPNSelectTaxYearViewController.h; sourceTree = "<group>"; };
 		8387D48B165615B900FE7C0E /* VPNSelectTaxYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNSelectTaxYearViewController.m; path = Controllers/VPNSelectTaxYearViewController.m; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				837BF55B169958E4003900B6 /* default_database.sqlite */,
 				837B264E1692475900454BD4 /* External Libraries */,
 				8392FA0B1683A2AB00AE8E87 /* Protocols */,
 				837E604516785B0B00CA1FB7 /* CustomViews */,
@@ -893,6 +896,7 @@
 				83C8E2F51686D653001190E2 /* VPNDoneToolbar.xib in Resources */,
 				83B653AB1687CB740029C4A2 /* VPNItemNameCell.xib in Resources */,
 				837B2635168EBF2300454BD4 /* VPNItemConditionCell.xib in Resources */,
+				837BF55C169958E4003900B6 /* default_database.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
