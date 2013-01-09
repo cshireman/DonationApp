@@ -15,6 +15,7 @@
 #import "VPNMileageList.h"
 #import "VPNUser.h"
 #import "VPNTaxSavings.h"
+#import "VPNMainTabGroupViewController.h"
 
 @interface VPNDonationListsViewController ()
 {
@@ -56,7 +57,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [VPNTaxSavings updateTaxSavings];
     user = [VPNUser currentUser];
     

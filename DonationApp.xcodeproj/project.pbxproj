@@ -167,6 +167,7 @@
 		83BC7D5F169D393D008EB450 /* VPNPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D5E169D393D008EB450 /* VPNPasswordCell.xib */; };
 		83BC7D61169D39FE008EB450 /* VPNContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */; };
 		83BC7D64169D4691008EB450 /* UIColor+ColorFromHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC7D62169D4690008EB450 /* UIColor+ColorFromHex.m */; };
+		83BC7DA9169E2525008EB450 /* VPNInspectableNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC7DA8169E2525008EB450 /* VPNInspectableNavigationController.m */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
@@ -402,6 +403,8 @@
 		83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNContactInfoCell.xib; path = CustomCells/VPNContactInfoCell.xib; sourceTree = "<group>"; };
 		83BC7D62169D4690008EB450 /* UIColor+ColorFromHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorFromHex.m"; sourceTree = "<group>"; };
 		83BC7D63169D4690008EB450 /* UIColor+ColorFromHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorFromHex.h"; sourceTree = "<group>"; };
+		83BC7DA7169E2525008EB450 /* VPNInspectableNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNInspectableNavigationController.h; path = DonationApp/Controllers/VPNInspectableNavigationController.h; sourceTree = "<group>"; };
+		83BC7DA8169E2525008EB450 /* VPNInspectableNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNInspectableNavigationController.m; path = DonationApp/Controllers/VPNInspectableNavigationController.m; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -457,6 +460,8 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				83BC7DA7169E2525008EB450 /* VPNInspectableNavigationController.h */,
+				83BC7DA8169E2525008EB450 /* VPNInspectableNavigationController.m */,
 				837B2648169243E000454BD4 /* MessageUI.framework */,
 				837B264616911B0900454BD4 /* StoreKit.framework */,
 				83B653AD168B7E9A0029C4A2 /* VPNItemGroupDelegate.h */,
@@ -1016,6 +1021,7 @@
 				837B26441690DAF200454BD4 /* VPNPurchaseTaxYearViewController.m in Sources */,
 				837B26511692478100454BD4 /* GradientButton.m in Sources */,
 				83BC7D64169D4691008EB450 /* UIColor+ColorFromHex.m in Sources */,
+				83BC7DA9169E2525008EB450 /* VPNInspectableNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1180,7 +1186,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
@@ -1198,7 +1204,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DonationApp/DonationApp-Prefix.pch";
 				INFOPLIST_FILE = "DonationApp/DonationApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",

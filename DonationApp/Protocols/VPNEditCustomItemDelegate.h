@@ -14,4 +14,6 @@
 -(void) itemGroupAdded:(VPNItemGroup*) addedGroup;
 -(void) itemGroupUpdated:(VPNItemGroup*) updatedGroup;
 
+-(void) dismissEditCustomItem;
+
 @end

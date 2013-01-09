@@ -89,11 +89,17 @@
     
     [self dismissViewControllerAnimated:YES completion:^{}];    
     [self.delegate viewPhotoViewControllerUpdatedPhoto:imageView.image];
+    
+    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
+
 }
 
 -(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissViewControllerAnimated:YES completion:^{}];    
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
 }
 
 #pragma mark -

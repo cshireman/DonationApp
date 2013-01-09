@@ -37,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"View Did Load");
+    self.navigationController.delegate = self;
     
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
@@ -81,7 +83,15 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    NSLog(@"View Will Appear");
+    [super viewWillAppear:animated];
     [self refreshItemGroups];
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"View Did Appear");
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -349,6 +359,7 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
     if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
     {
         [segue.destinationViewController setValue:self forKey:@"delegate"];
@@ -368,6 +379,7 @@
     {
         [segue.destinationViewController setValue:groupToEdit forKey:@"group"];
     }
+    
 }
 
 
@@ -537,5 +549,11 @@
     [self setAddCustomItemButton:nil];
     [self setAddEbayItemButton:nil];
     [super viewDidUnload];
+}
+
+-(void) dismissEditCustomItem
+{
+    NSLog(@"List nav controller: %@",self.navigationController);
+    [self.navigationController popViewControllerAnimated:NO];
 }
 @end

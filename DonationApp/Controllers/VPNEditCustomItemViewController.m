@@ -30,6 +30,8 @@ static CGFloat itemListLimit = 15000.00;
     UITextField* currentTextField;
     
     UIImagePickerController* imageController;
+    
+    UINavigationController* origNavigationController;
 }
 @end
 
@@ -89,7 +91,7 @@ static CGFloat itemListLimit = 15000.00;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     imageController = [[UIImagePickerController alloc] init];
     imageController.delegate = self;
     imageController.allowsEditing = YES;
@@ -310,7 +312,7 @@ static CGFloat itemListLimit = 15000.00;
     
     imageController.sourceType = sourceType;
 
-    [self presentViewController:imageController animated:YES completion:^{}];
+    [self.tabBarController presentViewController:imageController animated:YES completion:^{}];
 }
 
 #pragma mark -
@@ -326,12 +328,18 @@ static CGFloat itemListLimit = 15000.00;
     }
     
     [self.tableView reloadData];
-    [picker dismissViewControllerAnimated:YES completion:^{}];
+    [self.tabBarController dismissViewControllerAnimated:YES completion:^{}];
+    
+    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
 }
 
 -(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker dismissViewControllerAnimated:YES completion:^{}];
+    [self.tabBarController dismissViewControllerAnimated:YES completion:^{}];
+    
+    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
 }
 
 #pragma mark -
@@ -516,7 +524,11 @@ static CGFloat itemListLimit = 15000.00;
 -(void) didGetItemLists:(NSArray *)itemLists
 {
     [DejalBezelActivityView removeViewAnimated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+
+    [delegate dismissEditCustomItem];
+    
+//    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 -(void) getItemListsFailedWithError:(NSError *)error
@@ -655,6 +667,5 @@ static CGFloat itemListLimit = 15000.00;
     tableFrame.size.height -= (keyboardHeight + toolbarHeight - tabBarHeight);
     self.tableView.frame = tableFrame;
 }
-
 
 @end

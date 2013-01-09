@@ -350,5 +350,17 @@
     }
 }
 
+#pragma mark -
+#pragma mark UINavigationControllerDelegate Methods
+
+-(void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if(navigationController == self.navigationController)
+    {
+        NSLog(@"Will Show %@",viewController);
+    }
+}
+
+
 
 @end

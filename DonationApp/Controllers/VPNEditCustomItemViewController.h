@@ -21,6 +21,7 @@
 #import "VPNEditCustomItemDelegate.h"
 #import "VPNViewPhotoDelegate.h"
 #import "GradientButton.h"
+#import "VPNEditCustomItemDelegate.h"
 
 @interface VPNEditCustomItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VPNCustomItemConditionCellDelegate,UITextFieldDelegate,VPNModalPickerDelegate,VPNDoneToolbarDelegate,VPNItemNameCellDelegate,VPNItemGroupDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPNViewPhotoDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
 

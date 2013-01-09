@@ -11,7 +11,7 @@
 #import "VPNCDManager.h"
 #import "VPNCDManagerDelegate.h"
 
-@interface VPNMainTabGroupViewController : UITabBarController <VPNLoginViewControllerDelegate,VPNCDManagerDelegate>
+@interface VPNMainTabGroupViewController : UITabBarController <VPNLoginViewControllerDelegate,VPNCDManagerDelegate,UINavigationControllerDelegate>
 
 -(void) displayLoginScene;
 -(void) displaySelectTaxYearScene;

@@ -28,12 +28,12 @@
                     <connections>
                         <outlet property="firstImage" destination="fAt-5a-ytM" id="frA-UH-x7W"/>
                         <outlet property="secondImage" destination="QLg-t3-ltw" id="1gb-JN-ORw"/>
-                        <segue destination="4" kind="push" identifier="IntroSegue" id="Ues-2U-CkE"/>
+                        <segue destination="4" kind="push" identifier="IntroSegue" id="Cfp-Gw-rbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="leq-4w-1uH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-335" y="180"/>
+            <point key="canvasLocation" x="-263" y="180"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Jlm-YO-GEc">
@@ -1854,10 +1854,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4826" y="979"/>
         </scene>
-        <!--Navigation Controller - Donations-->
+        <!--Inspectable Navigation Controller - Donations-->
         <scene sceneID="58d-iv-nGr">
             <objects>
-                <navigationController title="Donations" definesPresentationContext="YES" id="BUN-Ef-Ls5" sceneMemberID="viewController">
+                <navigationController title="Donations" definesPresentationContext="YES" id="BUN-Ef-Ls5" customClass="VPNInspectableNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Donations" image="172-pricetag.png" id="wY9-Xa-cf7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vtq-ac-5Sb">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1868,7 +1868,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYh-gU-c6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="634"/>
+            <point key="canvasLocation" x="998" y="634"/>
         </scene>
         <!--Cash List View Controller - Cash Lists-->
         <scene sceneID="Syj-aB-i4d">
@@ -2478,6 +2478,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="optOutView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="updateButton" candidateClass="UIBarButtonItem"/>
             </relationships>
+        </class>
+        <class className="VPNInspectableNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNInspectableNavigationController.h"/>
         </class>
         <class className="VPNItemSearchViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNItemSearchViewController.h"/>

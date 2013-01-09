@@ -270,11 +270,18 @@ static CGFloat itemListLimit = 15000.00;
     
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
+
 }
 
 -(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
 }
 
 #pragma mark -
