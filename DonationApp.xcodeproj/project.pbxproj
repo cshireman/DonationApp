@@ -164,6 +164,8 @@
 		83B653AC1687CB740029C4A2 /* VPNItemNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B653AA1687CB740029C4A2 /* VPNItemNameCell.xib */; };
 		83B653B0168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */; };
 		83B653B1168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */; };
+		83BC7D5F169D393D008EB450 /* VPNPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D5E169D393D008EB450 /* VPNPasswordCell.xib */; };
+		83BC7D61169D39FE008EB450 /* VPNContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
@@ -393,6 +395,10 @@
 		83B653AE168B89DF0029C4A2 /* VPNItemSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNItemSearchViewController.h; path = Controllers/VPNItemSearchViewController.h; sourceTree = "<group>"; };
 		83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNItemSearchViewController.m; path = Controllers/VPNItemSearchViewController.m; sourceTree = "<group>"; };
 		83B653B2168D68630029C4A2 /* VPNEditCustomItemDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNEditCustomItemDelegate.h; path = Protocols/VPNEditCustomItemDelegate.h; sourceTree = "<group>"; };
+		83BC7D5B169D20C2008EB450 /* VPNPasswordCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNPasswordCellDelegate.h; path = Protocols/VPNPasswordCellDelegate.h; sourceTree = "<group>"; };
+		83BC7D5D169D32A1008EB450 /* VPNContactInfoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VPNContactInfoCellDelegate.h; path = Protocols/VPNContactInfoCellDelegate.h; sourceTree = "<group>"; };
+		83BC7D5E169D393D008EB450 /* VPNPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNPasswordCell.xib; path = CustomCells/VPNPasswordCell.xib; sourceTree = "<group>"; };
+		83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNContactInfoCell.xib; path = CustomCells/VPNContactInfoCell.xib; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -712,6 +718,8 @@
 				837B2631168E800800454BD4 /* VPNItemConditionCell.h */,
 				837B2632168E800800454BD4 /* VPNItemConditionCell.m */,
 				837B2634168EBF2300454BD4 /* VPNItemConditionCell.xib */,
+				83BC7D5E169D393D008EB450 /* VPNPasswordCell.xib */,
+				83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -719,6 +727,7 @@
 		8392FA0B1683A2AB00AE8E87 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				83BC7D5D169D32A1008EB450 /* VPNContactInfoCellDelegate.h */,
 				837B2641168FADC600454BD4 /* VPNDonationReportsDelegate.h */,
 				837B2639168F89F500454BD4 /* VPNViewPhotoDelegate.h */,
 				83B653B2168D68630029C4A2 /* VPNEditCustomItemDelegate.h */,
@@ -726,6 +735,7 @@
 				8392FA2116842B4B00AE8E87 /* VPNModalPickerDelegate.h */,
 				83B653A41687CA780029C4A2 /* VPNItemNameCellDelegate.h */,
 				837B2630168E7FE300454BD4 /* VPNItemConditionCellDelegate.h */,
+				83BC7D5B169D20C2008EB450 /* VPNPasswordCellDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -897,6 +907,8 @@
 				83B653AB1687CB740029C4A2 /* VPNItemNameCell.xib in Resources */,
 				837B2635168EBF2300454BD4 /* VPNItemConditionCell.xib in Resources */,
 				837BF55C169958E4003900B6 /* default_database.sqlite in Resources */,
+				83BC7D5F169D393D008EB450 /* VPNPasswordCell.xib in Resources */,
+				83BC7D61169D39FE008EB450 /* VPNContactInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

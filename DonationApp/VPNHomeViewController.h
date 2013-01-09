@@ -14,23 +14,30 @@
 #import "VPNSession.h"
 #import "VPNUser.h"
 #import "VPNTaxSavings.h"
+#import "VPNDoneToolbar.h"
+#import "VPNDoneToolbarDelegate.h"
+#import "VPNPasswordCell.h"
+#import "VPNContactInfoCell.h"
 
 #define kTaxSavingsKey      @"tax_savings"
 #define kItemSubtotalKey    @"items_subtotal"
 #define kMoneySubtotalKey   @"money_subtotal"
 #define kMileageSubtotalKey @"mileage_subtotal"
 
-@interface VPNHomeViewController : UITableViewController <ADBannerViewDelegate, VPNSelectTaxRateViewControllerDelegate, VPNCDManagerDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
+@interface VPNHomeViewController : UITableViewController <ADBannerViewDelegate, VPNSelectTaxRateViewControllerDelegate, VPNCDManagerDelegate,VPNDoneToolbarDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,VPNPasswordCellDelegate,VPNContactInfoCellDelegate>
+
+@property (retain, nonatomic) UINib* passwordCellNib;
+@property (retain, nonatomic) UINib* contactInfoCellNib;
+@property (retain, nonatomic) UINib* doneToolbarNib;
+@property (strong, nonatomic) VPNDoneToolbar* doneToolbar;
+
+@property (strong, nonatomic) NSString* password;
+@property (strong, nonatomic) NSString* confirmPassword;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* updateButton;
 @property (strong, nonatomic) IBOutlet UIView* optOutView;
 @property (strong, nonatomic) IBOutlet UISwitch* optOutSwitch;
 @property (strong, nonatomic) IBOutlet ADBannerView* bannerView;
-
-@property (strong, nonatomic) UITextField* nameField;
-@property (strong, nonatomic) UITextField* emailField;
-@property (strong, nonatomic) UITextField* passwordField;
-@property (strong, nonatomic) UITextField* confirmPasswordField;
 
 @property (strong, nonatomic) UILabel* taxSavingsLabel;
 

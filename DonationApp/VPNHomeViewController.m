@@ -14,12 +14,16 @@
 #import "VPNTaxSavingsCell.h"
 #import "VPNPasswordCell.h"
 
-#define kTaxSettingsSection     0
-#define kPasswordSection        1
-#define kContactInfoSection     2
-#define kContactUsSection       3
+#define kContactUsSection       0
+#define kTaxSettingsSection     1
+#define kPasswordSection        2
+#define kContactInfoSection     3
 
 @interface VPNHomeViewController ()
+{
+    UITextField* currentTextField;
+    NSIndexPath* currentIndexPath;
+}
 
 @end
 
@@ -30,12 +34,17 @@
 @synthesize bannerView;
 @synthesize session;
 @synthesize user;
-@synthesize nameField;
-@synthesize emailField;
-@synthesize passwordField;
-@synthesize confirmPasswordField;
 @synthesize taxSavingsLabel;
 @synthesize manager;
+
+@synthesize password;
+@synthesize confirmPassword;
+
+@synthesize doneToolbarNib;
+@synthesize doneToolbar;
+
+@synthesize passwordCellNib;
+@synthesize contactInfoCellNib;
 
 -(id) init
 {
@@ -57,6 +66,38 @@
     return self;
 }
 
+-(UINib*) passwordCellNib
+{
+    if(passwordCellNib == nil)
+    {
+        self.passwordCellNib = [VPNPasswordCell nib];
+    }
+    
+    return passwordCellNib;
+}
+
+-(UINib*) contactInfoCellNib
+{
+    if(contactInfoCellNib == nil)
+    {
+        self.contactInfoCellNib = [VPNContactInfoCell nib];
+    }
+    
+    return contactInfoCellNib;
+}
+
+
+-(UINib*) doneToolbarNib
+{
+    if(doneToolbarNib == nil)
+    {
+        self.doneToolbarNib = [VPNDoneToolbar nib];
+    }
+    
+    return doneToolbarNib;
+}
+
+
 -(void) configure
 {
     session = [VPNSession currentSession];
@@ -68,7 +109,10 @@
 {
     [super viewDidLoad];
     [self configure];
-        
+
+    doneToolbar = [VPNDoneToolbar doneToolbarFromFromNib:[VPNDoneToolbar nib]];
+    doneToolbar.delegate = self;
+    
     NSLog(@"%@ %@",user.first_name, user.last_name);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished) name:@"LoginFinished" object:nil];
@@ -199,55 +243,27 @@
     // Configure the cell...
     if([CellIdentifier isEqualToString:@"ContactInfoCell"])
     {
-        VPNContactInfoCell *cell = (VPNContactInfoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        VPNContactInfoCell *contactInfoCell = [VPNContactInfoCell cellForTableView:tableView fromNib:self.contactInfoCellNib];
         
-        if(cell == nil)
-            cell = [[VPNContactInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        contactInfoCell.delegate = self;
+        contactInfoCell.indexPath = indexPath;
         
-        if(nameField == nil)
-        {
-            self.nameField = cell.nameField;
-            
-            [cell.nameField removeFromSuperview];
-            [cell addSubview:self.nameField];
-        }
+        [contactInfoCell assignNameText:[NSString stringWithFormat:@"%@ %@",user.first_name,user.last_name]];
+        [contactInfoCell assignEmailText:user.email];
         
-        if(emailField == nil)
-        {
-            self.emailField = cell.emailField;
-            
-            [cell.emailField removeFromSuperview];
-            [cell addSubview:self.emailField];
-        }
-        
-        nameField.text = [NSString stringWithFormat:@"%@ %@",user.first_name,user.last_name];
-        emailField.text = user.email;
-        
-        return cell;
+        return contactInfoCell;
     }
     else if([CellIdentifier isEqualToString:@"ChangePasswordCell"])
     {
-        VPNPasswordCell* cell = (VPNPasswordCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        if(cell == nil)
-            cell = [[VPNPasswordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        VPNPasswordCell *passwordCell = [VPNPasswordCell cellForTableView:tableView fromNib:self.passwordCellNib];
         
-        if(passwordField == nil)
-        {
-            self.passwordField = cell.passwordField;
-            
-            [cell.passwordField removeFromSuperview];
-            [cell addSubview:self.passwordField];
-        }
+        passwordCell.delegate = self;
+        passwordCell.indexPath = indexPath;
         
-        if(confirmPasswordField == nil)
-        {
-            self.confirmPasswordField = cell.confirmPasswordField;
-            
-            [cell.confirmPasswordField removeFromSuperview];
-            [cell addSubview:self.confirmPasswordField];
-        }
+        [passwordCell assignPasswordText:@""];
+        [passwordCell assignConfirmPasswordText:@""];
         
-        return cell;
+        return passwordCell;
     }
     else if([CellIdentifier isEqualToString:@"MyTaxSavingsCell"])
     {
@@ -397,9 +413,6 @@
 
 -(IBAction) updatePushed:(id)sender
 {
-    NSString* password = passwordField.text;
-    NSString* confirmPassword = confirmPasswordField.text;
-    
     if([password length] > 0 || [confirmPassword length] > 0)
     {
         if([password isEqualToString:confirmPassword])
@@ -445,8 +458,10 @@
 {
     //Update the user record with new password so we don't have to keep logging in
     VPNUser* currentUser = [VPNUser currentUser];
-    currentUser.password = passwordField.text;
+    currentUser.password = password;
     [currentUser saveAsDefaultUser];
+    
+    password = @"";
     
     [manager getUserInfo:YES];
 }
@@ -472,22 +487,9 @@
 
 -(void) didGetUser:(VPNUser*)theUser
 {
-    NSString* name = nameField.text;
-    NSString* email = emailField.text;
-    
-    NSArray* nameParts = [name componentsSeparatedByString:@" "];
-    if(nil != nameParts && [nameParts count] > 0)
-    {
-        NSInteger lastIndex = [nameParts count] - 1;
-        theUser.first_name = [nameParts objectAtIndex:0];
-        theUser.last_name = [nameParts objectAtIndex:lastIndex];
-    }
-    else
-    {
-        theUser.first_name = name;
-    }
-    
-    theUser.email = email;
+    theUser.first_name = user.first_name;
+    theUser.last_name = user.last_name;
+    theUser.email = user.email;
     
     [manager updateUserInfo:theUser];
 }
@@ -498,5 +500,128 @@
     [alert show];    
 }
 
+#pragma mark -
+#pragma mark VPNDoneToolbarDelegate Methods
+
+-(void) doneToolbarButtonPushed:(id)sender
+{
+    if(currentTextField != nil)
+    {
+        CGRect tableFrame = self.tableView.frame;
+        tableFrame.size.height += 211;
+        self.tableView.frame = tableFrame;
+        
+        [currentTextField resignFirstResponder];
+        [self.tableView scrollToRowAtIndexPath:currentIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+        currentTextField = nil;
+        currentIndexPath = nil;
+        
+    }
+}
+
+#pragma mark VPNContactInfoCellDelegate methods
+
+-(void) nameFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray* nameParts = [text componentsSeparatedByString:@" "];
+    if(nil != nameParts && [nameParts count] > 0)
+    {
+        NSInteger lastIndex = [nameParts count] - 1;
+        user.first_name = [nameParts objectAtIndex:0];
+        user.last_name = [nameParts objectAtIndex:lastIndex];
+    }
+    else
+    {
+        user.first_name = text;
+    }
+    
+}
+
+-(void) nameField:(UITextField *)textField focusedAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(currentTextField == nil)
+    {
+        CGRect tableFrame = self.tableView.frame;
+        tableFrame.size.height -= 211;
+        self.tableView.frame = tableFrame;
+    }
+    
+    currentIndexPath = indexPath;
+    currentTextField = textField;
+    
+    textField.inputAccessoryView = doneToolbar;    
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+-(void) emailFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
+{
+    user.email = text;
+}
+
+-(void) emailField:(UITextField *)textField focusedAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(currentTextField == nil)
+    {
+        CGRect tableFrame = self.tableView.frame;
+        tableFrame.size.height -= 211;
+        self.tableView.frame = tableFrame;
+    }    
+    
+    currentIndexPath = indexPath;
+    currentTextField = textField;
+    
+    textField.inputAccessoryView = doneToolbar;
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+#pragma mark -
+#pragma mark VPNPasswordCellDelegate Methods
+
+-(void) passwordFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
+{
+    password = text;
+}
+
+-(void) passwordField:(UITextField *)textField focusedAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(currentTextField == nil)
+    {
+        CGRect tableFrame = self.tableView.frame;
+        tableFrame.size.height -= 211;
+        self.tableView.frame = tableFrame;
+    }    
+    
+    currentTextField = textField;
+    currentIndexPath = indexPath;
+    
+    textField.inputAccessoryView = doneToolbar;
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+-(void) confirmPasswordFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
+{
+    confirmPassword = text;
+}
+
+-(void) confirmPasswordField:(UITextField *)textField focusedAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(currentTextField == nil)
+    {
+        CGRect tableFrame = self.tableView.frame;
+        tableFrame.size.height -= 211;
+        self.tableView.frame = tableFrame;
+    }
+    
+    currentTextField = textField;
+    currentIndexPath = indexPath;
+    
+    textField.inputAccessoryView = doneToolbar;    
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
 
 @end
