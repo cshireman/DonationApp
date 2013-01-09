@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "VPNDonationReportsViewController.h"
 #import "VPNUser.h"
 #import "VPNItemList.h"
+#import "UIColor+ColorFromHex.h"
 
 @interface VPNDonationReportsViewController ()
 
@@ -18,6 +20,8 @@
 @synthesize selectedDonationLists;
 @synthesize donationLists;
 @synthesize delegate;
+@synthesize doneButton;
+@synthesize gradientView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -43,6 +47,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -185,6 +190,11 @@
             [selectedDonationLists addObject:itemList];
         }
     }
+    
+    if([selectedDonationLists count] > 0)
+        doneButton.tintColor = [UIColor blueColor];
+    else
+        doneButton.tintColor = nil;
     
     [tableView reloadData];
 }

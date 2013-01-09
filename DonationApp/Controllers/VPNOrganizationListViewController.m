@@ -19,6 +19,7 @@
 @implementation VPNOrganizationListViewController
 @synthesize organizations;
 @synthesize manager;
+@synthesize bannerView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -100,12 +101,27 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
         deleteIndexPath = indexPath;
-        VPNOrganization* orgToDelete = [organizations objectAtIndex:indexPath.row];
-        [manager deleteOrganization:orgToDelete];        
+        
+        UIActionSheet* deleteConfirm = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to delete this Organization?  It cannot be undone." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
+        
+        [deleteConfirm showFromTabBar:self.tabBarController.tabBar];
+        
+        
     }
 }
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == actionSheet.destructiveButtonIndex)
+    {
+        VPNOrganization* orgToDelete = [organizations objectAtIndex:deleteIndexPath.row];
+        [manager deleteOrganization:orgToDelete];
+    }
+    
+    [actionSheet resignFirstResponder];
+}
+
 
 /*
 // Override to support rearranging the table view.
@@ -139,9 +155,21 @@
 #pragma mark -
 #pragma mark Custom Methods
 
--(IBAction) editPushed
+-(IBAction) editPushed:(UIBarButtonItem*)sender
 {
     BOOL editing = self.tableView.editing;
+    
+    if(!editing)
+    {
+        [sender setTitle:@"Cancel"];
+        sender.tintColor = [UIColor blueColor];
+    }
+    else
+    {
+        [sender setTitle:@"Edit"];
+        sender.tintColor = nil;
+    }
+    
     [self.tableView setEditing:!editing animated:YES];
 }
 
@@ -161,6 +189,16 @@
         }
     }
 }
+
+
+#pragma mark -
+#pragma mark AdBannerViewDelegate Methods
+
+-(void) bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [self.bannerView setHidden:YES];
+}
+
 
 #pragma mark -
 #pragma mark ManagerDelegate methods

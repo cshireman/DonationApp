@@ -13,7 +13,7 @@
 #import "VPNNotifier.h"
 #import "GradientButton.h"
 
-@interface VPNOrganizationDetailViewController : UIViewController <VPNCDManagerDelegate>
+@interface VPNOrganizationDetailViewController : UIViewController <VPNCDManagerDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet UITextField *addressField;
@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *zipField;
 
 @property (strong, nonatomic) IBOutlet GradientButton *deleteButton;
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem* doneButton;
 
 @property (strong, nonatomic) VPNOrganization* organization;
 

@@ -173,9 +173,15 @@
     self.listTable.scrollEnabled = NO;
     
     if(organization == nil)
+    {
+        doneButton.tintColor = nil;
         doneButton.enabled = NO;
+    }
     else
+    {
+        doneButton.tintColor = [UIColor blueColor];
         doneButton.enabled = YES;
+    }
     
     startAddingItemsButton.enabled = NO;
 }
@@ -344,6 +350,11 @@
 #pragma mark -
 #pragma mark UITableViewDelegate Methods
 
+-(void) tableView:(UITableView *)localTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self tableView:localTableView didSelectRowAtIndexPath:indexPath];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -362,6 +373,7 @@
                     [self.listTable reloadData];
                     
                     startAddingItemsButton.enabled = YES;
+                    doneButton.tintColor = [UIColor blueColor];
                     doneButton.enabled = YES;
                 }
                 
@@ -392,6 +404,7 @@
                 
                 startAddingItemsButton.enabled = YES;
                 doneButton.enabled = YES;
+                doneButton.tintColor = [UIColor blueColor];
                 
                 [self displayOrganizationPicker];
                 break;

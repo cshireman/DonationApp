@@ -344,6 +344,11 @@
 
 #pragma mark - Table view delegate
 
+-(void) tableView:(UITableView *)localTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self tableView:localTableView didSelectRowAtIndexPath:indexPath];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch(indexPath.section)
@@ -487,9 +492,21 @@
     return org.name;
 }
 
-- (IBAction)editButtonPushed:(id)sender
+- (IBAction)editButtonPushed:(UIBarButtonItem*)sender
 {
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
+    BOOL editing = self.tableView.editing;
+    if(!editing)
+    {
+        [sender setTitle:@"Cancel"];
+        sender.tintColor = [UIColor blueColor];
+    }
+    else
+    {
+        [sender setTitle:@"Edit"];
+        sender.tintColor = nil;
+    }
+    
+    [self.tableView setEditing:!editing animated:YES];
 }
 
 - (IBAction)addButtonPushed:(id)sender

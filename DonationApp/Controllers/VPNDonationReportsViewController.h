@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSMutableArray* donationLists;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet UIView* gradientView;
 - (IBAction)donePushed:(id)sender;
 
 @end

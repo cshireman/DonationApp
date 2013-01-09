@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 #import "VPNOrganization.h"
 #import "VPNCDManager.h"
 
-@interface VPNOrganizationListViewController : UITableViewController <VPNCDManagerDelegate>
+@interface VPNOrganizationListViewController : UITableViewController <VPNCDManagerDelegate,ADBannerViewDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray* organizations;
 @property (nonatomic, strong) VPNCDManager* manager;
 
--(IBAction) editPushed;
+@property (strong, nonatomic) IBOutlet ADBannerView* bannerView;
+
+-(IBAction) editPushed:(UIBarButtonItem*)sender;
 
 @end

@@ -26,6 +26,7 @@
 @synthesize zipField;
 
 @synthesize deleteButton;
+@synthesize doneButton;
 
 @synthesize organization;
 @synthesize manager;
@@ -88,9 +89,21 @@
 
 
 - (IBAction)deletePushed:(id)sender {
-    //Call delete organization API call
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Deleting Organization" width:155];
-    [manager deleteOrganization:organization];
+    UIActionSheet* deleteConfirm = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to delete this Organization?  It cannot be undone." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
+    
+    [deleteConfirm showFromTabBar:self.tabBarController.tabBar];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == actionSheet.destructiveButtonIndex)
+    {
+        //Call delete organization API call
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Deleting Organization" width:155];
+        [manager deleteOrganization:organization];
+    }
+    
+    [actionSheet resignFirstResponder];
 }
 
 - (IBAction)donePushed:(id)sender {
@@ -215,6 +228,14 @@
     [alert show];
 }
 
+#pragma mark -
+#pragma mark UITextFieldDelegate Methods
 
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    doneButton.tintColor = [UIColor blueColor];
+    
+    return YES;
+}
 
 @end

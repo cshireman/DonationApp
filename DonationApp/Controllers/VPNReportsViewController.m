@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Chris Shireman. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+#import "UIColor+ColorFromHex.h"
 #import "VPNReportsViewController.h"
 #import "VPNUser.h"
 
@@ -55,6 +57,15 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    UIView* gradientView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,44)];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = gradientView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithHexString:@"#d4d4d4"] CGColor], (id)[[UIColor colorWithHexString:@"#999999"] CGColor], (id)[[UIColor colorWithHexString:@"#b4b4b4"] CGColor], nil];
+    [gradientView.layer insertSublayer:gradient atIndex:0];
+    
+    [self.tableHeader addSubview:gradientView];
+    [self.tableHeader sendSubviewToBack:gradientView];
+    
     [self.navigationController setNavigationBarHidden:NO];
     
     VPNUser* user = [VPNUser currentUser];
@@ -122,8 +133,8 @@
         else
             imageView.image = [UIImage imageNamed:@"checkbox_unchecked"];
         
-        reportTitle.text = @"Itemized Detail";
-        reportSubtitle.text = @"- Save for your records";
+        reportTitle.text = @"Donation Reports";
+        reportSubtitle.text = @"- Use when you donate";
         
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
@@ -153,6 +164,17 @@
         sendTaxSummaryReport = !sendTaxSummaryReport;
     }
     else if(indexPath.row == 2)
+    {
+        [self performSegueWithIdentifier:@"ItemizedSegue" sender:self];
+    }
+    
+    [localTableView deselectRowAtIndexPath:indexPath animated:YES];
+    [localTableView reloadData];
+}
+
+-(void) tableView:(UITableView *)localTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 2)
     {
         [self performSegueWithIdentifier:@"ItemizedSegue" sender:self];
     }

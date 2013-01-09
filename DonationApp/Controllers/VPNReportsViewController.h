@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) NSMutableArray* donationLists;
 
+@property (strong, nonatomic) IBOutlet UIView* tableHeader;
+
 @property (strong, nonatomic) IBOutlet UILabel *taxYearLabel;
 @property (strong, nonatomic) IBOutlet GradientButton *emailReportsButton;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

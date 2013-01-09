@@ -28,6 +28,8 @@ static CGFloat itemListLimit = 15000.00;
     NSArray* categories;
     
     UITextField* currentTextField;
+    
+    UIImagePickerController* imageController;
 }
 @end
 
@@ -87,6 +89,11 @@ static CGFloat itemListLimit = 15000.00;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    imageController = [[UIImagePickerController alloc] init];
+    imageController.delegate = self;
+    imageController.allowsEditing = YES;
+    
     
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
@@ -277,7 +284,7 @@ static CGFloat itemListLimit = 15000.00;
         {
             UIActionSheet* imageSourceSheet = [[UIActionSheet alloc] initWithTitle:@"Image Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose Existing", nil];
             
-            [imageSourceSheet showInView:self.view];
+            [imageSourceSheet showFromTabBar:self.tabBarController.tabBar];
         }
         else
         {
@@ -301,11 +308,8 @@ static CGFloat itemListLimit = 15000.00;
     if(buttonIndex == 1)
         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    UIImagePickerController* imageController = [[UIImagePickerController alloc] init];
     imageController.sourceType = sourceType;
-    imageController.delegate = self;
-    imageController.allowsEditing = YES;
-    
+
     [self presentViewController:imageController animated:YES completion:^{}];
 }
 
@@ -322,12 +326,12 @@ static CGFloat itemListLimit = 15000.00;
     }
     
     [self.tableView reloadData];
-    [self dismissViewControllerAnimated:YES completion:^{}];
+    [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
 -(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissViewControllerAnimated:YES completion:^{}];
+    [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
 #pragma mark -

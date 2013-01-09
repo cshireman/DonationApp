@@ -566,9 +566,31 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="n9a-KM-cvS">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="logo_orgs.png" id="owi-Vv-wm4">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                                <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nBP-W3-y83">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <requiredContentSizeIdentifiers>
+                                        <string>ADBannerContentSizeLandscape</string>
+                                        <string>ADBannerContentSizePortrait</string>
+                                    </requiredContentSizeIdentifiers>
+                                    <connections>
+                                        <outlet property="delegate" destination="lmd-TY-pqQ" id="jQu-xG-Xde"/>
+                                    </connections>
+                                </adBannerView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OrganizationCell" rowHeight="56" id="TMs-fz-GAL" customClass="VPNOrganizationCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="55"/>
@@ -603,15 +625,16 @@
                                     <outlet property="localityLabel" destination="Cxj-0p-M63" id="VPJ-QO-XGj"/>
                                     <outlet property="nameLabel" destination="cYy-dr-vUq" id="oHE-dx-gNG"/>
                                     <segue destination="p3A-Qd-j6C" kind="push" id="pbZ-RP-p6e"/>
+                                    <segue destination="p3A-Qd-j6C" kind="push" trigger="accessoryAction" id="CYp-HV-Kh9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Organizations" id="BdC-3G-TGW">
                         <barButtonItem key="backBarButtonItem" title="Back" id="77T-B6-kcT"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="tya-pG-jOg">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="tya-pG-jOg">
                             <connections>
-                                <action selector="editPushed" destination="lmd-TY-pqQ" id="scf-9D-NbD"/>
+                                <action selector="editPushed:" destination="lmd-TY-pqQ" id="HyY-3s-PcS"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="iDS-uk-z5Y">
@@ -620,12 +643,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bannerView" destination="nBP-W3-y83" id="tzC-8C-Ipv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWZ-dR-Bn4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1532" y="-86"/>
         </scene>
-        <!--Organization Detail View Controller - Organization Detail-->
+        <!--Organization Detail View Controller - Organization Info-->
         <scene sceneID="thn-SI-abc">
             <objects>
                 <viewController id="p3A-Qd-j6C" customClass="VPNOrganizationDetailViewController" sceneMemberID="viewController">
@@ -638,33 +664,48 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p3A-Qd-j6C" id="s6I-yn-suA"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" minimumFontSize="17" id="F29-eu-BoV">
                                 <rect key="frame" x="20" y="58" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p3A-Qd-j6C" id="EOG-vu-Lcx"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" id="Gr7-hD-5Hg">
                                 <rect key="frame" x="20" y="96" width="98" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p3A-Qd-j6C" id="A2t-r8-ZOW"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" minimumFontSize="17" id="gls-I6-GAw">
                                 <rect key="frame" x="126" y="96" width="67" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p3A-Qd-j6C" id="ciH-tN-RGL"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" minimumFontSize="17" id="EFY-B1-vfA">
                                 <rect key="frame" x="201" y="96" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p3A-Qd-j6C" id="sZX-EE-HIb"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DKZ-U3-mZg" customClass="GradientButton">
-                                <rect key="frame" x="20" y="134" width="280" height="44"/>
+                                <rect key="frame" x="20" y="157" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Delete">
@@ -681,7 +722,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Organization Detail" id="0QB-sj-87V">
+                    <navigationItem key="navigationItem" title="Organization Info" id="0QB-sj-87V">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Ilu-Ra-DVV"/>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="wv2-LH-DIh">
                             <connections>
@@ -694,6 +735,7 @@
                         <outlet property="addressField" destination="F29-eu-BoV" id="Ls2-6H-3oQ"/>
                         <outlet property="cityField" destination="Gr7-hD-5Hg" id="Hdg-R7-H4G"/>
                         <outlet property="deleteButton" destination="DKZ-U3-mZg" id="hHs-Cd-XPQ"/>
+                        <outlet property="doneButton" destination="wv2-LH-DIh" id="asd-6Y-g27"/>
                         <outlet property="nameField" destination="OEY-uw-Z3q" id="KPL-b7-t9v"/>
                         <outlet property="stateField" destination="gls-I6-GAw" id="oSl-8d-OS6"/>
                         <outlet property="zipField" destination="EFY-B1-vfA" id="wy9-gK-9on"/>
@@ -879,7 +921,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Donations" id="fdE-Zf-fJI">
                         <barButtonItem key="backBarButtonItem" title="Back" id="uNJ-1s-3KO"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="2AK-ec-kHZ">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="2AK-ec-kHZ">
                             <connections>
                                 <action selector="editButtonPushed:" destination="8Cy-ph-Lh3" id="53m-uO-P0w"/>
                             </connections>
@@ -907,7 +949,7 @@
             <objects>
                 <viewController id="cr6-3o-1nK" customClass="VPNAddDonationListViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y5T-5i-oZq">
-                        <rect key="frame" x="0.0" y="20" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8uz-t2-dgo">
@@ -1218,10 +1260,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="eBQ-yK-HSt" customClass="VPNDonationItemListViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pl8-6K-mug">
-                        <rect key="frame" x="0.0" y="20" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="5pU-rl-CTE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="121" sectionHeaderHeight="22" sectionFooterHeight="22" id="5pU-rl-CTE">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="305"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1283,28 +1325,28 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="textColor" red="0.0" green="0.62708143250000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Qty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y2f-Bf-GXc">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="Qty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y2f-Bf-GXc">
                                                     <rect key="frame" x="10" y="50" width="23" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Condition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FJt-Gm-b2e">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" text="Condition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FJt-Gm-b2e">
                                                     <rect key="frame" x="40" y="50" width="56" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="FMV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9rm-E4-Z4a">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="FMV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9rm-E4-Z4a">
                                                     <rect key="frame" x="104" y="50" width="96" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Subtotal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BBY-9E-HfL">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="left" text="Subtotal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BBY-9E-HfL">
                                                     <rect key="frame" x="208" y="50" width="48" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -1396,7 +1438,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tableViewController id="8VY-Ol-Gbm" customClass="VPNItemSearchViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YCG-ep-eFu">
-                        <rect key="frame" x="0.0" y="20" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="cA4-FB-OUP">
@@ -1474,7 +1516,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="drF-lv-DNy" customClass="VPNEditItemViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L1w-lB-wKT">
-                        <rect key="frame" x="0.0" y="20" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AnJ-7J-7g5">
@@ -1629,11 +1671,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="1Gt-wV-Iuw" customClass="VPNEditCustomItemViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ghs-cv-5d0">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FDM-Sf-KhY">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1736,9 +1778,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <connections>
-                            <action selector="dismissKeyboard:" destination="1Gt-wV-Iuw" eventType="touchUpInside" id="nFt-dL-JWf"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Custom Item" id="uGq-KU-VKT">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="806-oT-ttc">
@@ -1764,11 +1803,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="XFe-XX-YqB" customClass="VPNViewPhotoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Woc-hX-fPV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="8Hc-J8-SuT">
-                                <rect key="frame" x="10" y="10" width="300" height="349"/>
+                                <rect key="frame" x="10" y="10" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bh3-TI-s3k" customClass="GradientButton">
@@ -2046,6 +2085,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Reports" id="9WE-Yc-a2H"/>
                     <connections>
                         <outlet property="emailReportsButton" destination="Hnb-ef-yNh" id="1s3-Dv-83C"/>
+                        <outlet property="tableHeader" destination="w8B-B7-oaX" id="XqC-iP-uP6"/>
                         <outlet property="tableView" destination="QKx-zc-p5D" id="yS0-ER-0Yf"/>
                         <outlet property="taxYearLabel" destination="j6X-yz-BzJ" id="0VF-HH-ntD"/>
                         <segue destination="SfT-fF-eJd" kind="push" identifier="SelectTaxYearSegue" id="lXZ-ve-Me6"/>
@@ -2141,7 +2181,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="i2n-qP-ntm" customClass="VPNPurchaseTaxYearViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WXQ-Ba-JhO">
-                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select a tax year to purchase:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QQf-MQ-FLN">
@@ -2180,7 +2220,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="UTM-N6-K7Z">
-                                <rect key="frame" x="0.0" y="124" width="320" height="208"/>
+                                <rect key="frame" x="0.0" y="124" width="320" height="159"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2277,18 +2317,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" id="IbE-fD-P10">
-                                            <rect key="frame" x="4" y="4" width="35" height="35"/>
+                                            <rect key="frame" x="20" y="3" width="35" height="35"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="List Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IQx-3u-z3r">
-                                            <rect key="frame" x="47" y="4" width="253" height="21"/>
+                                            <rect key="frame" x="63" y="3" width="253" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="List Info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u5s-DJ-YhE">
-                                            <rect key="frame" x="47" y="20" width="253" height="21"/>
+                                            <rect key="frame" x="63" y="19" width="253" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2400,7 +2440,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDonationListsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addButtonPushed:"/>
-                <relationship kind="action" name="editButtonPushed:"/>
+                <relationship kind="action" name="editButtonPushed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="taxSavingsLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -2409,6 +2449,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="donePushed:"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="gradientView" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="VPNEditCustomItemViewController" superclassName="UIViewController">
@@ -2489,6 +2530,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="addressField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="cityField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="stateField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="zipField" candidateClass="UITextField"/>
@@ -2497,7 +2539,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="VPNOrganizationListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationListViewController.h"/>
             <relationships>
-                <relationship kind="action" name="editPushed"/>
+                <relationship kind="action" name="editPushed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="bannerView" candidateClass="ADBannerView"/>
             </relationships>
         </class>
         <class className="VPNPurchaseTaxYearViewController" superclassName="UIViewController">
@@ -2517,6 +2560,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="emailReportsPushed:"/>
                 <relationship kind="action" name="taxYearButtonPushed:"/>
                 <relationship kind="outlet" name="emailReportsButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="tableHeader" candidateClass="UIView"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="taxYearLabel" candidateClass="UILabel"/>
             </relationships>
@@ -2582,12 +2626,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="aQI-nu-Yoy"/>
-        <segue reference="lXZ-ve-Me6"/>
-        <segue reference="afA-o9-LUL"/>
-        <segue reference="JgW-iW-Uj2"/>
+        <segue reference="fFg-b8-hXm"/>
         <segue reference="xZe-Ub-trX"/>
+        <segue reference="afA-o9-LUL"/>
         <segue reference="jEP-vW-rmk"/>
         <segue reference="nt4-d5-pPY"/>
+        <segue reference="lXZ-ve-Me6"/>
+        <segue reference="aQI-nu-Yoy"/>
     </inferredMetricsTieBreakers>
 </document>

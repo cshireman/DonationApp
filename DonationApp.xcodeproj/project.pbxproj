@@ -166,6 +166,7 @@
 		83B653B1168B89DF0029C4A2 /* VPNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B653AF168B89DF0029C4A2 /* VPNItemSearchViewController.m */; };
 		83BC7D5F169D393D008EB450 /* VPNPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D5E169D393D008EB450 /* VPNPasswordCell.xib */; };
 		83BC7D61169D39FE008EB450 /* VPNContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */; };
+		83BC7D64169D4691008EB450 /* UIColor+ColorFromHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC7D62169D4690008EB450 /* UIColor+ColorFromHex.m */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
@@ -399,6 +400,8 @@
 		83BC7D5D169D32A1008EB450 /* VPNContactInfoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VPNContactInfoCellDelegate.h; path = Protocols/VPNContactInfoCellDelegate.h; sourceTree = "<group>"; };
 		83BC7D5E169D393D008EB450 /* VPNPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNPasswordCell.xib; path = CustomCells/VPNPasswordCell.xib; sourceTree = "<group>"; };
 		83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VPNContactInfoCell.xib; path = CustomCells/VPNContactInfoCell.xib; sourceTree = "<group>"; };
+		83BC7D62169D4690008EB450 /* UIColor+ColorFromHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorFromHex.m"; sourceTree = "<group>"; };
+		83BC7D63169D4690008EB450 /* UIColor+ColorFromHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorFromHex.h"; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -495,6 +498,8 @@
 		83195D8A162D175600B63831 /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				83BC7D62169D4690008EB450 /* UIColor+ColorFromHex.m */,
+				83BC7D63169D4690008EB450 /* UIColor+ColorFromHex.h */,
 				837BF55B169958E4003900B6 /* default_database.sqlite */,
 				837B264E1692475900454BD4 /* External Libraries */,
 				8392FA0B1683A2AB00AE8E87 /* Protocols */,
@@ -1010,6 +1015,7 @@
 				837B263F168FAD9400454BD4 /* VPNDonationReportsViewController.m in Sources */,
 				837B26441690DAF200454BD4 /* VPNPurchaseTaxYearViewController.m in Sources */,
 				837B26511692478100454BD4 /* GradientButton.m in Sources */,
+				83BC7D64169D4691008EB450 /* UIColor+ColorFromHex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

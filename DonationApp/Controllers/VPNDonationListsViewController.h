@@ -29,7 +29,7 @@
 @property (assign) double cashTotal;
 @property (assign) int mileageTotal;
 
-- (IBAction)editButtonPushed:(id)sender;
+- (IBAction)editButtonPushed:(UIBarButtonItem*)sender;
 - (IBAction)addButtonPushed:(id)sender;
 
 //VPNCDManager Delegate methods

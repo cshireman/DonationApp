@@ -119,6 +119,11 @@
     
     UILabel* categoryLabel = (UILabel*)[cell viewWithTag:1];
     UILabel* itemNameLabel = (UILabel*)[cell viewWithTag:2];
+    UILabel* qtyHeader = (UILabel*)[cell viewWithTag:3];
+    UILabel* conditionHeader = (UILabel*)[cell viewWithTag:4];
+    UILabel* fmvHeader = (UILabel*)[cell viewWithTag:5];
+    UILabel* subtotalHeader = (UILabel*)[cell viewWithTag:6];
+    
     
     categoryLabel.text = itemGroup.categoryName;
     itemNameLabel.text = itemGroup.itemName;
@@ -127,7 +132,9 @@
     NSArray* subviews = [cell.contentView subviews];
     for(UIView* subview in subviews)
     {
-        if(subview != categoryLabel && subview != itemNameLabel)
+        if(subview != categoryLabel && subview != itemNameLabel &&
+           subview != qtyHeader && subview != conditionHeader &&
+           subview != fmvHeader && subview != subtotalHeader)
             [subview removeFromSuperview];
     }
     
@@ -234,6 +241,11 @@
 */
 
 #pragma mark - Table view delegate
+
+-(void) tableView:(UITableView *)localTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self tableView:localTableView didSelectRowAtIndexPath:indexPath];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
