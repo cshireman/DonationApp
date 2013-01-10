@@ -72,6 +72,11 @@ static CGFloat itemListLimit = 15000.00;
     [group loadImageFromDisc];    
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self updateDoneButton];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -223,7 +228,7 @@ static CGFloat itemListLimit = 15000.00;
         [mailController setSubject:@"Donation Limit Support Request"];
         
         mailController.mailComposeDelegate = self;
-        [self presentModalViewController:mailController animated:YES];
+        [self presentViewController:mailController animated:YES completion:^{}];
     }
 }
 
@@ -231,7 +236,7 @@ static CGFloat itemListLimit = 15000.00;
 #pragma mark MFMailComposeViewControllerDelegate Methods
 -(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 
@@ -332,6 +337,8 @@ static CGFloat itemListLimit = 15000.00;
         case 5: [group setQuantity:quantity forCondition:Fair]; break;
         default: break;
     }
+    
+    [self updateDoneButton];
 }
 
 -(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath
@@ -418,6 +425,19 @@ static CGFloat itemListLimit = 15000.00;
 
 #pragma mark -
 #pragma mark Custom Methods
+
+-(void) updateDoneButton
+{
+    NSMutableArray* errors;
+    if([self isGroupValid:&errors])
+    {
+        [doneButton setTintColor:[UIColor blueColor]];
+    }
+    else
+    {
+        [doneButton setTintColor:nil];
+    }
+}
 
 -(BOOL) isGroupValid:(NSMutableArray**) errors
 {

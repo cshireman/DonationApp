@@ -1116,6 +1116,21 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
                 
                 [session populateWithDictionary:d];
                 
+                NSNumber* isTrial = [d objectForKey:@"isTrial"];
+                
+                VPNUser* myUser = [VPNUser currentUser];
+                
+                if(isTrial != nil)
+                {
+                    myUser.is_trial = [isTrial boolValue];
+                }
+                else
+                {
+                    myUser.is_trial = NO;
+                }
+                
+                [VPNUser saveUserToDisc:myUser];
+                
                 [VPNSession setCurrentSessionWithSession:session];
                 
                 [delegate didStartSession];

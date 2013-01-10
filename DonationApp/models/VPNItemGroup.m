@@ -19,6 +19,7 @@
 @synthesize items;
 @synthesize summary;
 @synthesize itemID;
+@synthesize maxVPNItemID;
 @synthesize categoryID;
 @synthesize isCustom;
 @synthesize isNew;
@@ -40,9 +41,11 @@
             key = item.name;
         
         VPNItemGroup* itemGroup = [groups objectForKey:key];
-        
+
         if(itemGroup == nil)
         {
+            itemGroup.maxVPNItemID = 0;
+            
             itemGroup = [[VPNItemGroup alloc] init];
             itemGroup.items = [[NSMutableArray alloc] init];
             itemGroup.donationList = donationList;
@@ -67,6 +70,9 @@
             //TODO: Add code to get category info from core data
         }
         
+        if(item.ID > itemGroup.maxVPNItemID)
+            itemGroup.maxVPNItemID = item.ID;
+        
         [itemGroup.items addObject:item];
         [groups setObject:itemGroup forKey:key];
     }
@@ -82,7 +88,10 @@
     
     NSMutableArray* groupValues = [NSMutableArray arrayWithArray:[groups allValues]];
     [groupValues sortUsingComparator:^NSComparisonResult(VPNItemGroup* obj1, VPNItemGroup* obj2) {
-        return [obj1.itemName compare:obj2.itemName];
+        NSNumber* maxID1 = [NSNumber numberWithInt:obj1.maxVPNItemID];
+        NSNumber* maxID2 = [NSNumber numberWithInt:obj2.maxVPNItemID];
+        
+        return [maxID2 compare:maxID1];
     }];
     
     return groupValues;
@@ -289,6 +298,13 @@
     image = [UIImage imageWithContentsOfFile:filePath];
     
     return image;
+}
+
+-(BOOL) hasImage
+{
+    NSString* filePath = [self imageFilename];
+    
+    return [[NSFileManager defaultManager] fileExistsAtPath:filePath];
 }
 
 -(NSString*) imageFilename

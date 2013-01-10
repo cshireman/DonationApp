@@ -117,6 +117,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished) name:@"LoginFinished" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAds) name:@"RemoveAds" object:nil];
+    
+    if(!user.is_trial)
+        [self removeAds];
 
     //Load up cells to get field and label references
     NSIndexPath* contactInfoIndexPath = [NSIndexPath indexPathForRow:0 inSection:kContactInfoSection];
@@ -366,7 +369,7 @@
 
 -(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 #pragma mark -
@@ -435,12 +438,12 @@
 #pragma mark VPNSelectTaxRateViewControllerDelegate Methods
 -(void) selectTaxRateCanceled
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 -(void) selectTaxRateSaved
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     NSString* selectedTaxRate=  [userDefaults objectForKey:kSelectedTaxRateKey];

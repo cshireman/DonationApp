@@ -316,7 +316,7 @@
 
 -(void) loginControllerFinished
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
     [VPNNotifier postNotification:@"LoginFinished"];
     
     VPNUser* user = [VPNUser currentUser];

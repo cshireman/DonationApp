@@ -30,6 +30,7 @@
 @property (strong, nonatomic) NSMutableArray* items;
 @property (strong, nonatomic) NSMutableDictionary* summary;
 
+@property (assign) int maxVPNItemID;
 @property (assign) int itemID;
 @property (assign) int categoryID;
 @property (assign) BOOL isCustom;
@@ -58,6 +59,7 @@
 -(void)saveImageToDisc:(UIImage*)image;
 -(void)deleteImageFromDisc;
 -(UIImage*)loadImageFromDisc;
+-(BOOL) hasImage;
 
 -(void) save;
 -(void) deleteAllItems;

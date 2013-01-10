@@ -38,7 +38,6 @@
 {
     [super viewDidLoad];
     NSLog(@"View Did Load");
-    self.navigationController.delegate = self;
     
     manager = [[VPNCDManager alloc] init];
     manager.delegate = self;
@@ -134,9 +133,17 @@
     UILabel* fmvHeader = (UILabel*)[cell viewWithTag:5];
     UILabel* subtotalHeader = (UILabel*)[cell viewWithTag:6];
     
+    UIImageView* hasPhotoImage = (UIImageView*)[cell viewWithTag:7];
     
     categoryLabel.text = itemGroup.categoryName;
     itemNameLabel.text = itemGroup.itemName;
+    
+    [itemGroup loadImageFromDisc];
+    
+    if(itemGroup.image != nil)
+        [hasPhotoImage setHidden:NO];
+    else
+        [hasPhotoImage setHidden:YES];
     
     //Remove all other subviews from content view
     NSArray* subviews = [cell.contentView subviews];
@@ -144,7 +151,8 @@
     {
         if(subview != categoryLabel && subview != itemNameLabel &&
            subview != qtyHeader && subview != conditionHeader &&
-           subview != fmvHeader && subview != subtotalHeader)
+           subview != fmvHeader && subview != subtotalHeader &&
+           subview != hasPhotoImage)
             [subview removeFromSuperview];
     }
     
@@ -172,12 +180,12 @@
             UILabel* fmvLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 96, 15)];
             fmvLabel.font = [UIFont systemFontOfSize:12];
             fmvLabel.text = [NSString stringWithFormat:@"$%.02f",[[summary objectForKey:[NSString stringWithFormat:@"fmv_%d",i]] doubleValue]];
-            fmvLabel.textAlignment = UITextAlignmentCenter;
+            fmvLabel.textAlignment = NSTextAlignmentCenter;
 
             UILabel* subtotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(208, 0, 48, 15)];
             subtotalLabel.font = [UIFont systemFontOfSize:12];
             subtotalLabel.text = [NSString stringWithFormat:@"$%.02f",[[summary objectForKey:[NSString stringWithFormat:@"subtotal_%d",i]] doubleValue]];
-            subtotalLabel.textAlignment = UITextAlignmentRight;
+            subtotalLabel.textAlignment = NSTextAlignmentRight;
             
             [rowView addSubview:quantityLabel];
             [rowView addSubview:conditionLabel];
@@ -195,12 +203,12 @@
     UILabel* totalTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 96, 15)];
     totalTitleLabel.font = [UIFont boldSystemFontOfSize:12];
     totalTitleLabel.text = @"Total:";
-    totalTitleLabel.textAlignment = UITextAlignmentCenter;
+    totalTitleLabel.textAlignment = NSTextAlignmentCenter;
     
     UILabel* totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(208, 0, 48, 15)];
     totalLabel.font = [UIFont boldSystemFontOfSize:12];
     totalLabel.text = [NSString stringWithFormat:@"$%.02f",[[summary objectForKey:@"total"] doubleValue]];
-    totalLabel.textAlignment = UITextAlignmentRight;
+    totalLabel.textAlignment = NSTextAlignmentRight;
     
     [totalView addSubview:totalTitleLabel];
     [totalView addSubview:totalLabel];
@@ -553,7 +561,6 @@
 
 -(void) dismissEditCustomItem
 {
-    NSLog(@"List nav controller: %@",self.navigationController);
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

@@ -1353,6 +1353,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="has_picture.png" id="Hed-W9-Q0x">
+                                                    <rect key="frame" x="226" y="16" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -2387,6 +2391,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="VP@2x.png" width="640" height="960"/>
         <image name="arrow_icon.jpg" width="40" height="40"/>
         <image name="camera.png" width="33" height="33"/>
+        <image name="has_picture.png" width="30" height="30"/>
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
     <classes>

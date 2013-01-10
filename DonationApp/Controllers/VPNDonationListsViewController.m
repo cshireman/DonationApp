@@ -188,7 +188,7 @@
     headerLabel.shadowOffset = CGSizeMake(0.5f, 0.5f);
     headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     headerLabel.frame = CGRectMake(20,0, 149, 21);
-    headerLabel.textAlignment = UITextAlignmentLeft;
+    headerLabel.textAlignment = NSTextAlignmentLeft;
 
     amountLabel.backgroundColor = [UIColor clearColor];
     amountLabel.opaque = NO;
@@ -197,7 +197,7 @@
     amountLabel.shadowOffset = CGSizeMake(0.5f, 0.5f);
     amountLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     amountLabel.frame = CGRectMake(160,0, 150, 21);
-    amountLabel.textAlignment = UITextAlignmentRight;
+    amountLabel.textAlignment = NSTextAlignmentRight;
     
     if(section == 0)
     {

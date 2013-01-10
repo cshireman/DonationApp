@@ -168,6 +168,7 @@
 		83BC7D61169D39FE008EB450 /* VPNContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7D60169D39FD008EB450 /* VPNContactInfoCell.xib */; };
 		83BC7D64169D4691008EB450 /* UIColor+ColorFromHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC7D62169D4690008EB450 /* UIColor+ColorFromHex.m */; };
 		83BC7DA9169E2525008EB450 /* VPNInspectableNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC7DA8169E2525008EB450 /* VPNInspectableNavigationController.m */; };
+		83BC7DBC169E8786008EB450 /* has_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC7DBB169E8786008EB450 /* has_picture.png */; };
 		83BFD91B163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD91C163F853A00BC64B7 /* VPNCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD91A163F853A00BC64B7 /* VPNCDManager.m */; };
 		83BFD927163F892900BC64B7 /* VPNCDCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BFD926163F892900BC64B7 /* VPNCDCommunicator.m */; };
@@ -405,6 +406,7 @@
 		83BC7D63169D4690008EB450 /* UIColor+ColorFromHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorFromHex.h"; sourceTree = "<group>"; };
 		83BC7DA7169E2525008EB450 /* VPNInspectableNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNInspectableNavigationController.h; path = DonationApp/Controllers/VPNInspectableNavigationController.h; sourceTree = "<group>"; };
 		83BC7DA8169E2525008EB450 /* VPNInspectableNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNInspectableNavigationController.m; path = DonationApp/Controllers/VPNInspectableNavigationController.m; sourceTree = "<group>"; };
+		83BC7DBB169E8786008EB450 /* has_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = has_picture.png; sourceTree = "<group>"; };
 		83BFD919163F853A00BC64B7 /* VPNCDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManager.h; sourceTree = "<group>"; };
 		83BFD91A163F853A00BC64B7 /* VPNCDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNCDManager.m; sourceTree = "<group>"; };
 		83BFD91D163F85DD00BC64B7 /* VPNCDManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNCDManagerDelegate.h; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 		83195DB7162D25AC00B63831 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				83BC7DBB169E8786008EB450 /* has_picture.png */,
 				8392FA181683EB6E00AE8E87 /* camera.png */,
 				836426F5166748C900A70606 /* checkbox_checked.png */,
 				836426F6166748C900A70606 /* checkbox_unchecked.png */,
@@ -919,6 +922,7 @@
 				837BF55C169958E4003900B6 /* default_database.sqlite in Resources */,
 				83BC7D5F169D393D008EB450 /* VPNPasswordCell.xib in Resources */,
 				83BC7D61169D39FE008EB450 /* VPNContactInfoCell.xib in Resources */,
+				83BC7DBC169E8786008EB450 /* has_picture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

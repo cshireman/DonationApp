@@ -8,10 +8,12 @@
 
 #import "VPNOrganizationListViewController.h"
 #import "VPNOrganizationCell.h"
+#import "VPNUser.h"
 
 @interface VPNOrganizationListViewController ()
 {
     NSIndexPath* deleteIndexPath;
+    VPNUser* user;
 }
 
 @end
@@ -37,6 +39,12 @@
         manager = [[VPNCDManager alloc] init];
     
     manager.delegate = self;
+    user = [VPNUser currentUser];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAds) name:@"RemoveAds" object:nil];
+    
+    if(!user.is_trial)
+        [self removeAds];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -56,6 +64,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) removeAds
+{
+    [self.bannerView setHidden:YES];
+}
+
 
 #pragma mark - Table view data source
 
