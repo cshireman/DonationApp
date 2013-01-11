@@ -24,6 +24,7 @@
     NSArray* organizations;
     NSMutableArray* activeOrganizations;
     NSArray* itemSources;
+    NSArray* shortItemSources;
     
     UITextField* currentField;
     
@@ -90,7 +91,8 @@
     }
     
     itemSources = @[@"I purchased them.",@"They were a gift.",@"I inherited them.",@"I made an exchange"];
-
+    shortItemSources = @[@"purchased",@"gift",@"inherited",@"exchange"];
+    
     VPNUser* user = [VPNUser currentUser];
 
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -695,7 +697,19 @@
     donationList.name = organization.name;
     
     if(donationList.howAquired == nil)
-        donationList.howAquired = @"I purchased them.";
+        donationList.howAquired = @"purchased";
+    else
+    {
+        int index = [itemSources indexOfObject:donationList.howAquired];
+        
+        if(index < 0)
+            index = 0;
+        
+        if(index >= [itemSources count])
+            index = 0;
+        
+        donationList.howAquired = [shortItemSources objectAtIndex:index];
+    }
     
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

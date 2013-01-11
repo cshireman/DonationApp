@@ -78,9 +78,6 @@
     self.myTabBar = tabBar;
 
     self.highlightIndex = 1;
-    //CGRect tabFrame = [self frameForTabInTabBar:tabBar withIndex:highlightIndex];
-    
-    //self.highlightView = [[UIView alloc] initWithFrame:tabFrame];
     
     [self highlightTabInTabBar:tabBar withIndex:highlightIndex];
     

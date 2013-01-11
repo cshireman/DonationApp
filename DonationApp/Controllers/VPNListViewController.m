@@ -128,7 +128,9 @@
     [formatter setTimeStyle:NSDateFormatterNoStyle];
     
     organizationLabel.text = group.organization.name;
-    dateLabel.text = [formatter stringFromDate:group.lastDonationDate];
+    
+    VPNDonationList* currentList = [group.donationLists objectAtIndex:indexPath.row];
+    dateLabel.text = [formatter stringFromDate:currentList.donationDate];
     
     return cell;
 }
