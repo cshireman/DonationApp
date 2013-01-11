@@ -82,13 +82,15 @@
     VPNUser* user = [VPNUser loadUserFromDisc];
     VPNSession* session = [VPNSession currentSession];
     
+    VPNAppDelegate* appDelegate = (VPNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     if(user == nil)
         [self performSegueWithIdentifier:@"LoginSegue" sender:self];
     else
     {
-        if(!sessionLoaded)
+        if(!appDelegate.sessionStarted)
         {
-            sessionLoaded = YES;
+            appDelegate.sessionStarted = YES;
             [DejalBezelActivityView activityViewForView:self.view withLabel:@"Starting Session" width:155];
             if(session.session != nil && [session.session length] > 0)
             {
@@ -162,11 +164,11 @@
     NSParameterAssert(taxYears != nil);
     if([taxYears count] == 0)
     {
-        [VPNNotifier postNotification:@"GetTaxYearsEmptyError"];
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your tax year information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-        [alert show];
-        
-        return;
+//        [VPNNotifier postNotification:@"GetTaxYearsEmptyError"];
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download Error" message:@"We were not able to retrieve your tax year information at this time, please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+//        [alert show];
+//        
+//        return;
     }
     
     [DejalActivityView currentActivityView].activityLabel.text = @"Loading Purchase Options";

@@ -10,6 +10,7 @@
 
 @implementation VPNAppDelegate
 @synthesize userSession;
+@synthesize sessionStarted;
 @synthesize user;
 @synthesize currentTaxSavings;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -20,6 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    sessionStarted = NO;
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     NSString* currentTaxRate = [userDefaults objectForKey:kSelectedTaxRateKey];
     if(currentTaxRate == nil)

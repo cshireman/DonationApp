@@ -18,6 +18,7 @@
 @property (strong, nonatomic) VPNSession* userSession;
 @property (strong, nonatomic) VPNUser* user;
 @property (assign)            double currentTaxSavings;
+@property (assign)            BOOL sessionStarted;
 
 //Lists
 @property (strong, nonatomic) NSMutableArray* itemLists;

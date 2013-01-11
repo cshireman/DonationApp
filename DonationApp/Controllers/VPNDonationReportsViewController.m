@@ -37,9 +37,13 @@
     [super viewDidLoad];
 
     VPNUser* user = [VPNUser currentUser];
-    donationLists = [NSMutableArray arrayWithArray:[VPNItemList loadItemListsFromDisc:user.selected_tax_year]];
     
-    selectedDonationLists = [NSMutableArray array];
+    donationLists = [NSMutableArray arrayWithArray:[VPNItemList loadItemListsFromDisc:user.selected_tax_year]];
+
+    selectedDonationLists = [delegate selectedDonationLists];
+    
+    if(selectedDonationLists == nil)
+        selectedDonationLists = [NSMutableArray array];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,6 +52,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    selectedDonationLists = [delegate selectedDonationLists];
+    [self.tableView reloadData];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -99,7 +108,7 @@
         int index = indexPath.row - 1;
         VPNItemList* itemList = [donationLists objectAtIndex:index];
         
-        if([selectedDonationLists containsObject:itemList])
+        if([self isListSelected:itemList])
             checkboxImage.image = [UIImage imageNamed:@"checkbox_checked"];
         else
             checkboxImage.image = [UIImage imageNamed:@"checkbox_unchecked"];
@@ -119,6 +128,20 @@
     }
     
     return cell;
+}
+
+-(BOOL) isListSelected:(VPNItemList*)listToCheck
+{
+    if(selectedDonationLists == nil || [selectedDonationLists count] == 0)
+        return NO;
+    
+    for(VPNItemList* itemList in selectedDonationLists)
+    {
+        if(itemList.ID == listToCheck.ID)
+            return YES;
+    }
+    
+    return NO;
 }
 
 /*

@@ -106,6 +106,7 @@
     
     if(self)
     {
+        NSLog(@"%@",info);
         self.ID = [[info objectForKey:@"ID"] intValue];
         
         self.creationDate = [NSDate dateWithTimeIntervalSince1970:[[info objectForKey:@"CreationDate"] doubleValue]];

@@ -50,22 +50,44 @@
             itemGroup.items = [[NSMutableArray alloc] init];
             itemGroup.donationList = donationList;
             
-            itemGroup.itemName = item.name;
             itemGroup.itemID = item.itemID;
             itemGroup.isCustom = item.isCustomItem;
             
-            Category* category = [Category loadCategoryForID:item.categoryID];
-            
-            if(category != nil)
+            if(!itemGroup.isCustom)
             {
-                itemGroup.categoryName = category.name;
-                itemGroup.categoryID = [category.categoryID intValue];
+                Item* dbItem = [Item loadItemForID:item.itemID];
+                itemGroup.itemName = dbItem.name;
+                itemGroup.categoryName = dbItem.path;
+                
+                Category* category = [Category loadCategoryForID:item.categoryID];
+                
+                if(category != nil)
+                {
+                    itemGroup.categoryID = [category.categoryID intValue];
+                }
+                else
+                {
+                    itemGroup.categoryID = 0;
+                }
             }
             else
             {
-                itemGroup.categoryName = @"Unknown";
-                itemGroup.categoryID = 0;
+                itemGroup.itemName = item.name;
+                
+                Category* category = [Category loadCategoryForID:item.categoryID];
+                
+                if(category != nil)
+                {
+                    itemGroup.categoryName = category.name;
+                    itemGroup.categoryID = [category.categoryID intValue];
+                }
+                else
+                {
+                    itemGroup.categoryName = @"Unknown";
+                    itemGroup.categoryID = 0;
+                }
             }
+            
             
             //TODO: Add code to get category info from core data
         }

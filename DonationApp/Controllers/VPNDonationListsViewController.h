@@ -11,7 +11,7 @@
 #import "VPNDonationListGroup.h"
 #import "VPNUser.h"
 
-@interface VPNDonationListsViewController : UITableViewController <VPNCDManagerDelegate>
+@interface VPNDonationListsViewController : UITableViewController <VPNCDManagerDelegate,UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel* taxSavingsLabel;
 

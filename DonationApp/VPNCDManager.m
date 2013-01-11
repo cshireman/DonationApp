@@ -1055,7 +1055,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
     [request setObject:APIKey forKey:@"apiKey"];
     [request setObject:session.session forKey:@"session"];
     [request setObject:[NSNumber numberWithInt:donationList.ID] forKey:@"listID"];
-    [request setObject:[NSNumber numberWithInt:1] forKey:@"includeValues"];
+    [request setObject:[NSNumber numberWithBool:YES] forKey:@"includeValues"];
     
     NSError* error = nil;
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:request options:0 error:&error];
@@ -1216,6 +1216,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             }
             else if([GetYears isEqualToString:apiCall])
             {
+                NSLog(@"Tax Years:%@",d);
                 NSArray* resultYears = [d objectForKey:@"years"];
                 if(nil != resultYears && [resultYears count] > 0)
                 {

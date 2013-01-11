@@ -199,6 +199,12 @@
     {
         [destination performSelector:@selector(setCanPurchase:) withObject:[NSNumber numberWithBool:NO]];
     }
+    
+    if([destination respondsToSelector:@selector(setSelectedDonationLists::)])
+    {
+        [destination setValue:donationLists forKey:@"selectedDonationLists"];
+    }
+
 }
 
 #pragma mark -
@@ -253,6 +259,11 @@
 -(void) donationReportsControllerSelectedDonationLists:(NSArray*)selectedDonationLists
 {
     donationLists = [NSMutableArray arrayWithArray:selectedDonationLists];
+}
+
+-(NSMutableArray*) selectedDonationLists
+{
+    return donationLists;
 }
 
 

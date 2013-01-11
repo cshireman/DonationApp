@@ -23,6 +23,10 @@
     NSIndexPath* indexToDelete;
     VPNCDManager* manager;
     
+    VPNDonationList* listToDelete;
+    VPNDonationListGroup* groupToDelete;
+    
+    
     NSMutableArray* donationListsToDelete;
 }
 
@@ -80,6 +84,7 @@
 {
     organizations = [VPNOrganization loadOrganizationsFromDisc];
     [self setTitle:[NSString stringWithFormat:@"%d Donations",user.selected_tax_year]];
+    [self.navigationController setTitle:@"Donations"];
     
     [self updateTotals];
 }
@@ -301,8 +306,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         indexToDelete = indexPath;
-        VPNDonationList* listToDelete = nil;
-        VPNDonationListGroup* groupToDelete = nil;
+        listToDelete = nil;
+        groupToDelete = nil;
         
         if(indexPath.section == 0)
         {
@@ -320,23 +325,10 @@
             groupToDelete = [mileageListGroup objectAtIndex:indexPath.row];
         }
         
-        if(listToDelete != nil)
-        {
-            [manager deleteDonationList:listToDelete];
-        }
-        else if (groupToDelete != nil)
-        {
-            donationListsToDelete = [NSMutableArray arrayWithArray:groupToDelete.donationLists];
-            if([donationListsToDelete count] > 0)
-                [manager deleteDonationList:[donationListsToDelete objectAtIndex:0]];
-            
-        }
-        else
-        {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Selected list could not be found, please contact supper" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
-            
-            [alert show];
-        }
+        UIActionSheet* deleteConfirm = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to delete this List?  All items on it will be deleted." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
+        
+        [deleteConfirm showFromTabBar:self.tabBarController.tabBar];
+        
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -367,6 +359,33 @@
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate methods
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == actionSheet.destructiveButtonIndex)
+    {
+        if(listToDelete != nil)
+        {
+            [manager deleteDonationList:listToDelete];
+        }
+        else if (groupToDelete != nil)
+        {
+            donationListsToDelete = [NSMutableArray arrayWithArray:groupToDelete.donationLists];
+            if([donationListsToDelete count] > 0)
+                [manager deleteDonationList:[donationListsToDelete objectAtIndex:0]];
+            
+        }
+        else
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Selected list could not be found, please contact supper" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            
+            [alert show];
+        }        
+    }
 }
 
 #pragma mark -

@@ -11,5 +11,6 @@
 @protocol VPNDonationReportsDelegate <NSObject>
 
 -(void) donationReportsControllerSelectedDonationLists:(NSArray*)donationLists;
+-(NSMutableArray*) selectedDonationLists;
 
 @end

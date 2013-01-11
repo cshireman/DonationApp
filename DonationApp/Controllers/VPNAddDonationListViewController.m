@@ -22,6 +22,7 @@
     BOOL showTypeSelector;
     
     NSArray* organizations;
+    NSMutableArray* activeOrganizations;
     NSArray* itemSources;
     
     UITextField* currentField;
@@ -29,6 +30,8 @@
     id submittingButton;
     
     VPNCDManager* manager;
+    
+    VPNDonationList* listToEdit;
 }
 
 @end
@@ -79,6 +82,13 @@
     [[NSBundle mainBundle] loadNibNamed:@"KeyboardDoneToolbarView" owner:self options:nil];
     
     organizations = [VPNOrganization loadOrganizationsFromDisc];
+    activeOrganizations = [[NSMutableArray alloc] init];
+    for(VPNOrganization* currentOrg in organizations)
+    {
+        if(currentOrg.is_active)
+            [activeOrganizations addObject:currentOrg];
+    }
+    
     itemSources = @[@"I purchased them.",@"They were a gift.",@"I inherited them.",@"I made an exchange"];
 
     VPNUser* user = [VPNUser currentUser];
@@ -369,7 +379,7 @@
             case 1:
                 if(organization == nil)
                 {
-                    organization = [organizations objectAtIndex:0];
+                    organization = [activeOrganizations objectAtIndex:0];
                     [self.listTable reloadData];
                     
                     startAddingItemsButton.enabled = YES;
@@ -427,7 +437,7 @@
 {
     if(pickerView == organizationPicker)
     {
-        VPNOrganization* currentOrg = [organizations objectAtIndex:row];
+        VPNOrganization* currentOrg = [activeOrganizations objectAtIndex:row];
         return currentOrg.name;
     }
     else if(pickerView == itemSourcePicker)
@@ -442,7 +452,7 @@
 {
     if(pickerView == organizationPicker)
     {
-        organization = [organizations objectAtIndex:row];
+        organization = [activeOrganizations objectAtIndex:row];
         donationList.companyID = organization.ID;
     }
     else if(pickerView == itemSourcePicker)
@@ -465,7 +475,7 @@
 {
     if(pickerView == organizationPicker)
     {
-        return [organizations count];
+        return [activeOrganizations count];
     }
     else if(pickerView == itemSourcePicker)
     {
@@ -794,6 +804,7 @@
     }
     else if(submittingButton == startAddingItemsButton)
     {
+        listToEdit = list;
         [self performSegueWithIdentifier:@"ItemListSegue" sender:submittingButton];
     }
 }
@@ -810,6 +821,18 @@
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Update List Error" message:@"Unable to update your donation list at this time, please try again later" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
     
     [alert show];
+}
+
+#pragma mark -
+#pragma mark Segue Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(setDonationList:)])
+    {
+        [segue.destinationViewController setValue:listToEdit forKey:@"donationList"];
+        
+    }
 }
 
 @end

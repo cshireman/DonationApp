@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNCDManager.m"
-         timestampString = "379489987.990488"
+         timestampString = "379571135.958455"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1398"
-         endingLineNumber = "1398"
+         startingLineNumber = "1399"
+         endingLineNumber = "1399"
          landmarkName = "-receivedResponse:forAPICall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/models/VPNItem.m"
-         timestampString = "378365034.391411"
+         timestampString = "379559899.023584"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
          landmarkName = "-toDictionary"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/models/VPNItemGroup.m"
-         timestampString = "379466709.151297"
+         timestampString = "379572680.423196"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "253"
-         endingLineNumber = "253"
+         startingLineNumber = "275"
+         endingLineNumber = "275"
          landmarkName = "-buildItemSummary"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/models/VPNItemGroup.m"
-         timestampString = "379488306.131277"
+         timestampString = "379572680.423196"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "384"
-         endingLineNumber = "384"
+         startingLineNumber = "406"
+         endingLineNumber = "406"
          landmarkName = "-saveNextItem"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/models/VPNItemGroup.m"
-         timestampString = "379488306.131277"
+         timestampString = "379572680.423196"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "380"
-         endingLineNumber = "380"
+         startingLineNumber = "402"
+         endingLineNumber = "402"
          landmarkName = "-saveNextItem"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNCDManager.m"
-         timestampString = "379489987.990488"
+         timestampString = "379571135.958455"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1328"
-         endingLineNumber = "1328"
+         startingLineNumber = "1329"
+         endingLineNumber = "1329"
          landmarkName = "-receivedResponse:forAPICall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/VPNCDManager.m"
-         timestampString = "379489987.990488"
+         timestampString = "379571135.958455"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1325"
-         endingLineNumber = "1325"
+         startingLineNumber = "1326"
+         endingLineNumber = "1326"
          landmarkName = "-receivedResponse:forAPICall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -274,6 +274,45 @@
          startingLineNumber = "137"
          endingLineNumber = "137"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/models/VPNItemGroup.m"
+         timestampString = "379558641.291299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "+groupsFromItemsInDonationList:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/Controllers/VPNDonationReportsViewController.m"
+         timestampString = "379573991.785196"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/Controllers/VPNDonationReportsViewController.m"
+         timestampString = "379573991.785196"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
