@@ -14,6 +14,7 @@
 #import "Category+JSONParser.h"
 
 #import "DejalActivityView.h"
+#import "VPNTabBarHighlighter.h"
 
 @interface VPNMainTabGroupViewController ()
 {
@@ -21,6 +22,8 @@
     VPNUser* currentUser;
     
     BOOL sessionLoaded;
+    
+    VPNTabBarHighlighter* highlighter;
 }
 
 @end
@@ -69,6 +72,9 @@
 -(void) configure
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayLoginScene) name:@"Logout" object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWelcome) name:@"ShowWelcome" object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -363,6 +369,17 @@
     }
 }
 
+-(void) showWelcome
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    BOOL welcomeShown = [defaults boolForKey:@"welcome_shown"];
+    if(!welcomeShown)
+    {
+        highlighter = [[VPNTabBarHighlighter alloc] init];
+        [highlighter startHighlightingTabBar:self.tabBar];
+    }
+    
+}
 
 
 @end

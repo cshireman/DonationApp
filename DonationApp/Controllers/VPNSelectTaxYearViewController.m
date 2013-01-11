@@ -254,6 +254,8 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [VPNNotifier postNotification:@"ShowWelcome"];
 }
 
 -(void) getCategoryListFailedWithError:(NSError*)error

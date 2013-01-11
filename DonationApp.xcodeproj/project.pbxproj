@@ -185,6 +185,7 @@
 		83CE69F1167B69B100CC334A /* VPNListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CE69EF167B69B000CC334A /* VPNListViewController.m */; };
 		83E469991671B28200376FB0 /* VPNDonationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E469981671B28200376FB0 /* VPNDonationList.m */; };
 		83E4699A1671B28200376FB0 /* VPNDonationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E469981671B28200376FB0 /* VPNDonationList.m */; };
+		83F9C855169FD949000FE7F6 /* VPNTabBarHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F9C854169FD949000FE7F6 /* VPNTabBarHighlighter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -426,6 +427,8 @@
 		83CE69EF167B69B000CC334A /* VPNListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNListViewController.m; path = Controllers/VPNListViewController.m; sourceTree = "<group>"; };
 		83E469971671B28200376FB0 /* VPNDonationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNDonationList.h; path = models/VPNDonationList.h; sourceTree = "<group>"; };
 		83E469981671B28200376FB0 /* VPNDonationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNDonationList.m; path = models/VPNDonationList.m; sourceTree = "<group>"; };
+		83F9C853169FD948000FE7F6 /* VPNTabBarHighlighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPNTabBarHighlighter.h; path = DonationApp/VPNTabBarHighlighter.h; sourceTree = "<group>"; };
+		83F9C854169FD949000FE7F6 /* VPNTabBarHighlighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPNTabBarHighlighter.m; path = DonationApp/VPNTabBarHighlighter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +465,8 @@
 		83195D75162D175600B63831 = {
 			isa = PBXGroup;
 			children = (
+				83F9C853169FD948000FE7F6 /* VPNTabBarHighlighter.h */,
+				83F9C854169FD949000FE7F6 /* VPNTabBarHighlighter.m */,
 				83BC7DA7169E2525008EB450 /* VPNInspectableNavigationController.h */,
 				83BC7DA8169E2525008EB450 /* VPNInspectableNavigationController.m */,
 				837B2648169243E000454BD4 /* MessageUI.framework */,
@@ -1026,6 +1031,7 @@
 				837B26511692478100454BD4 /* GradientButton.m in Sources */,
 				83BC7D64169D4691008EB450 /* UIColor+ColorFromHex.m in Sources */,
 				83BC7DA9169E2525008EB450 /* VPNInspectableNavigationController.m in Sources */,
+				83F9C855169FD949000FE7F6 /* VPNTabBarHighlighter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
