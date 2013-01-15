@@ -65,6 +65,7 @@
     self = [super init];
     if(self)
     {
+        NSLog(@"%@",info);
         self.ID = [[info objectForKey:@"ID"] intValue];
         self.listType = [[info objectForKey:@"ListType"] intValue];
         self.companyID = [[info objectForKey:@"CompanyID"] intValue];
@@ -73,7 +74,7 @@
         self.donationDate = [NSDate dateWithCDValue:[info objectForKey:@"DonationDate"]];
         
         self.name = [info objectForKey:@"Name"];
-        self.mileage = [info objectForKey:@"Mileage"];
+        self.mileage = [info objectForKey:@"Miles"];
         self.notes = [info objectForKey:@"Notes"];
     }
     

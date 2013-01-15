@@ -415,6 +415,7 @@ static CGFloat itemListLimit = 15000.00;
 -(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath
 {
     [self shrinkTable];
+    [doneButton setEnabled:NO];
     
     quantityField.inputAccessoryView = doneToolbar;
     currentTextField = quantityField;
@@ -425,6 +426,7 @@ static CGFloat itemListLimit = 15000.00;
 -(void) fmvField:(UITextField*)fmvField focusedAtIndexPath:(NSIndexPath*)indexPath
 {
     [self shrinkTable];
+    [doneButton setEnabled:NO];
     
     fmvField.inputAccessoryView = doneToolbar;
     currentTextField = fmvField;
@@ -449,6 +451,7 @@ static CGFloat itemListLimit = 15000.00;
 -(void) pickerWasDismissed
 {
     NSLog(@"Picker dismissed");
+    [doneButton setEnabled:YES];
     if(group.categoryName == nil || [group.categoryName isEqualToString:@""])
     {
         Category* localCategory = [categories objectAtIndex:0];
@@ -461,6 +464,7 @@ static CGFloat itemListLimit = 15000.00;
 
 -(void) pickerWasDisplayed
 {
+    [doneButton setEnabled:NO];
     NSLog(@"Picker displayed");
 }
 
@@ -478,6 +482,7 @@ static CGFloat itemListLimit = 15000.00;
 -(void) doneToolbarButtonPushed:(id)sender
 {
     [self expandTable];
+    [doneButton setEnabled:YES];
     
     if(currentTextField != nil)
     {

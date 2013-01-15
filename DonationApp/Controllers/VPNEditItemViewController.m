@@ -344,6 +344,8 @@ static CGFloat itemListLimit = 15000.00;
 -(void) quantityField:(UITextField*)quantityField focusedAtIndexPath:(NSIndexPath*)indexPath
 {
     [self shrinkTable];
+    [doneButton setEnabled:NO];
+ 
     
     quantityField.inputAccessoryView = doneToolbar;
     currentTextField = quantityField;
@@ -357,6 +359,7 @@ static CGFloat itemListLimit = 15000.00;
 -(void) doneToolbarButtonPushed:(id)sender
 {
     [self expandTable];
+    [doneButton setEnabled:YES];
     
     if(currentTextField != nil)
     {

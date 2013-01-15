@@ -113,7 +113,7 @@
         donationList.name = @"";
         donationList.donationDate = [dateFormat dateFromString:taxYearFormat];
         donationList.creationDate = [NSDate date];
-        donationList.howAquired = [itemSources objectAtIndex:0];
+        donationList.howAquired = @"(select)";//[itemSources objectAtIndex:0];
         
         selectedListType = 0;
     }
@@ -328,6 +328,7 @@
         UILabel* itemSource = (UILabel*)[cell viewWithTag:1];
         
         VPNItemList* itemList = (VPNItemList*)self.donationList;
+        
         itemSource.text = itemList.howAquired;
     }
     else if([CellIdentifier isEqualToString:@"CashAmountCell"])
@@ -393,7 +394,13 @@
                 break;
             case 3:
                 if(selectedListType == 0)
+                {
+                    if([donationList.howAquired isEqualToString:@"(select)"])
+                        donationList.howAquired = [itemSources objectAtIndex:0];
+                    
                     [self displayItemSourcePicker];
+                    [self.listTable reloadData];
+                }
                 
                 break;
             default:
@@ -508,7 +515,8 @@
 
 -(void) displayDatePicker
 {
-    [self keyboardDone:nil];    
+    [self keyboardDone:nil];
+    [doneButton setEnabled:NO];
     
     if(organizationPickerDisplayed)
         [self hideOrganizationPicker];
@@ -533,6 +541,7 @@
 
 -(void) hideDatePicker
 {
+    [doneButton setEnabled:YES];
     if(datePickerDisplayed)
     {
         datePickerDisplayed = NO;
@@ -550,6 +559,7 @@
 -(void) displayOrganizationPicker
 {
     [self keyboardDone:nil];    
+    [doneButton setEnabled:NO];
     
     if(datePickerDisplayed)
         [self hideDatePicker];
@@ -574,6 +584,7 @@
 -(void) hideOrganizationPicker
 {
     //Show filter picker view
+    [doneButton setEnabled:YES];
     if(organizationPickerDisplayed)
     {
         organizationPickerDisplayed = NO;
@@ -590,6 +601,7 @@
 -(void) displayItemSourcePicker
 {
     [self keyboardDone:nil];
+    [doneButton setEnabled:NO];
     
     if(datePickerDisplayed)
         [self hideDatePicker];
@@ -613,6 +625,8 @@
 
 -(void) hideItemSourcePicker
 {
+    [doneButton setEnabled:YES];
+
     //Show filter picker view
     if(itemSourcePickerDisplayed)
     {
@@ -650,6 +664,8 @@
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField
 {
+    [doneButton setEnabled:NO];
+    
     //Scroll table view up
     NSIndexPath* fieldRow = [NSIndexPath indexPathForRow:3 inSection:0];
     if(!showTypeSelector)
@@ -665,6 +681,7 @@
 
 -(IBAction) keyboardDone:(id)sender
 {
+    [doneButton setEnabled:YES];
     //Scroll table view down
     NSIndexPath* fieldRow = [NSIndexPath indexPathForRow:0 inSection:0];
     

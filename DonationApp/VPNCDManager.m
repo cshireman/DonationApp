@@ -1302,6 +1302,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
             }
             else if([UpdateList isEqualToString:apiCall])
             {
+                NSLog(@"%@",d);
                 [delegate didUpdateList:currentDonationList];
             }
             else if([DeleteList isEqualToString:apiCall])

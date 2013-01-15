@@ -285,7 +285,7 @@
         
         organizationLabel.text = listGroup.organization.name;
         dateLabel.text = [NSString stringWithFormat:@"Last Donation: %@",[formatter stringFromDate:listGroup.lastDonationDate]];
-        amountLabel.text = [NSString stringWithFormat:@"$%.02f",[listGroup totalForAllLists]];
+        amountLabel.text = [NSString stringWithFormat:@"%.02f Miles",[listGroup totalForAllLists]];
     }
     
     

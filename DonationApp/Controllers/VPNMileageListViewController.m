@@ -60,7 +60,7 @@
     
     // Configure the cell...
     UILabel* amountLabel = (UILabel*)[cell viewWithTag:3];
-    amountLabel.text = [NSString stringWithFormat:@"%.02f",[donationList.cashDonation doubleValue]];
+    amountLabel.text = [NSString stringWithFormat:@"%.02f Miles",[donationList.mileage doubleValue]];
     
     return cell;
 }
@@ -79,7 +79,7 @@
     listToManage = [self.group.donationLists objectAtIndex:indexPath.row];
     listToManage.listType = MileageList;
     
-    [self performSegueWithIdentifier:@"AddEditCashListSegue" sender:self];
+    [self performSegueWithIdentifier:@"AddEditMileageListSegue" sender:self];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -12,6 +12,7 @@
 @interface VPNOrganizationDetailViewController ()
 {
     NSMutableArray* organizations;
+    UITextField* currentTextField;
 }
 
 @property (strong, nonatomic) VPNCDManager* manager;
@@ -107,6 +108,9 @@
 }
 
 - (IBAction)donePushed:(id)sender {
+    if(currentTextField != nil)
+        [currentTextField resignFirstResponder];
+    
     //IF name field is blank
     if([nameField.text isEqualToString:@""])
     {
@@ -236,6 +240,11 @@
     doneButton.tintColor = [UIColor blueColor];
     
     return YES;
+}
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    currentTextField = textField;
 }
 
 @end
