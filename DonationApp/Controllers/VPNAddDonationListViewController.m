@@ -386,8 +386,12 @@
                     [self.listTable reloadData];
                     
                     startAddingItemsButton.enabled = YES;
-                    doneButton.tintColor = [UIColor blueColor];
-                    doneButton.enabled = YES;
+                    
+                    if([self isDonationListValid])
+                    {
+                        doneButton.tintColor = [UIColor blueColor];
+                        doneButton.enabled = YES;
+                    }
                 }
                 
                 [self displayOrganizationPicker];
@@ -395,8 +399,13 @@
             case 3:
                 if(selectedListType == 0)
                 {
-                    if([donationList.howAquired isEqualToString:@"(select)"])
-                        donationList.howAquired = [itemSources objectAtIndex:0];
+                    donationList.howAquired = [itemSources objectAtIndex:0];
+                    
+                    if([self isDonationListValid])
+                    {
+                        doneButton.tintColor = [UIColor blueColor];
+                        doneButton.enabled = YES;                        
+                    }
                     
                     [self displayItemSourcePicker];
                     [self.listTable reloadData];
@@ -498,6 +507,45 @@
 #pragma mark -
 #pragma mark Custom Methods
 
+-(BOOL) isDonationListValid
+{
+    if(selectedListType == 0)
+    {
+        if(organization != nil && ![donationList.howAquired isEqualToString:@"(select)"])
+        {
+            [startAddingItemsButton setEnabled:YES];
+            [doneButton setEnabled:YES];
+            [doneButton setTintColor:[UIColor blueColor]];
+            return YES;
+        }
+    }
+    else if(selectedListType == 1)
+    {
+        if(organization != nil && donationList.cashDonation != nil)
+        {
+            [startAddingItemsButton setEnabled:YES];
+            [doneButton setEnabled:YES];
+            [doneButton setTintColor:[UIColor blueColor]];
+            return YES;
+        }
+    }
+    else if(selectedListType == 2)
+    {
+        if(organization != nil && donationList.mileage != nil)
+        {
+            [startAddingItemsButton setEnabled:YES];
+            [doneButton setEnabled:YES];
+            [doneButton setTintColor:[UIColor blueColor]];
+            return YES;
+        }
+    }
+    
+    [startAddingItemsButton setEnabled:NO];
+    [doneButton setEnabled:NO];
+    [doneButton setTintColor:nil];
+    return NO;
+}
+
 -(IBAction) datePickerDonePushed:(id)sender
 {
     [self hideDatePicker];
@@ -541,7 +589,12 @@
 
 -(void) hideDatePicker
 {
-    [doneButton setEnabled:YES];
+    if([self isDonationListValid])
+    {
+        [doneButton setEnabled:YES];
+        [doneButton setTintColor:[UIColor blueColor]];
+    }
+    
     if(datePickerDisplayed)
     {
         datePickerDisplayed = NO;
@@ -584,7 +637,9 @@
 -(void) hideOrganizationPicker
 {
     //Show filter picker view
-    [doneButton setEnabled:YES];
+    if([self isDonationListValid])
+        [doneButton setEnabled:YES];
+    
     if(organizationPickerDisplayed)
     {
         organizationPickerDisplayed = NO;
@@ -625,7 +680,8 @@
 
 -(void) hideItemSourcePicker
 {
-    [doneButton setEnabled:YES];
+    if([self isDonationListValid])
+        [doneButton setEnabled:YES];
 
     //Show filter picker view
     if(itemSourcePickerDisplayed)
@@ -649,6 +705,11 @@
         [self.startAddingItemsButton setHidden:NO];
     else
         [self.startAddingItemsButton setHidden:YES];
+    
+    if([self isDonationListValid])
+        [doneButton setEnabled:YES];
+    else
+        [doneButton setEnabled:NO];
     
     [self.listTable reloadData];
 }
@@ -681,7 +742,6 @@
 
 -(IBAction) keyboardDone:(id)sender
 {
-    [doneButton setEnabled:YES];
     //Scroll table view down
     NSIndexPath* fieldRow = [NSIndexPath indexPathForRow:0 inSection:0];
     
@@ -698,6 +758,9 @@
         
         [currentField resignFirstResponder];
     }
+    
+    if([self isDonationListValid])
+        [doneButton setEnabled:YES];
 }
 
 -(IBAction) donePushed:(id)sender

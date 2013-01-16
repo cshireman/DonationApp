@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/Controllers/VPNAddDonationListViewController.m"
-         timestampString = "379922378.492152"
+         timestampString = "380053921.154049"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "740"
-         endingLineNumber = "740"
+         startingLineNumber = "803"
+         endingLineNumber = "803"
          landmarkName = "-donePushed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DonationApp/Controllers/VPNAddDonationListViewController.m"
-         timestampString = "379922378.492152"
+         timestampString = "380053921.154049"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "753"
-         endingLineNumber = "753"
+         startingLineNumber = "816"
+         endingLineNumber = "816"
          landmarkName = "-didUpdateList:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -404,6 +404,19 @@
          startingLineNumber = "69"
          endingLineNumber = "69"
          landmarkName = "-initWithDictionary:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DonationApp/Controllers/VPNAddDonationListViewController.m"
+         timestampString = "380053921.154049"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "512"
+         endingLineNumber = "512"
+         landmarkName = "-isDonationListValid"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
