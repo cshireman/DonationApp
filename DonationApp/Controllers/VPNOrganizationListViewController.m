@@ -56,7 +56,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     //Load organizations from manager
-    [manager getOrganizations:NO];
+    [manager getOrganizations:YES];
 }
 
 - (void)didReceiveMemoryWarning

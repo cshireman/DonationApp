@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qgS-SM-Wcr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qgS-SM-Wcr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Splash View Controller-->
@@ -328,10 +328,6 @@
                                 <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YGw-Wh-chk">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <requiredContentSizeIdentifiers>
-                                        <string>ADBannerContentSizeLandscape</string>
-                                        <string>ADBannerContentSizePortrait</string>
-                                    </requiredContentSizeIdentifiers>
                                     <connections>
                                         <outlet property="delegate" destination="Uao-4D-flg" id="aXe-8u-HjG"/>
                                     </connections>
@@ -570,10 +566,6 @@
                                 <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nBP-W3-y83">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <requiredContentSizeIdentifiers>
-                                        <string>ADBannerContentSizeLandscape</string>
-                                        <string>ADBannerContentSizePortrait</string>
-                                    </requiredContentSizeIdentifiers>
                                     <connections>
                                         <outlet property="delegate" destination="lmd-TY-pqQ" id="jQu-xG-Xde"/>
                                     </connections>
@@ -1347,7 +1339,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="has_picture.png" id="Hed-W9-Q0x">
-                                                    <rect key="frame" x="226" y="16" width="30" height="30"/>
+                                                    <rect key="frame" x="226" y="24" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -2246,7 +2238,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2tb-WL-DQY" customClass="GradientButton">
-                                <rect key="frame" x="20" y="353" width="280" height="44"/>
+                                <rect key="frame" x="20" y="304" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <state key="normal" title="Buy Now">
@@ -2387,6 +2379,240 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="has_picture.png" width="30" height="30"/>
         <image name="logo_orgs.png" width="320" height="44"/>
     </resources>
+    <classes>
+        <class className="GradientButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
+        </class>
+        <class className="VPNAddDonationListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNAddDonationListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="datePickerDonePushed:"/>
+                <relationship kind="action" name="donePushed:"/>
+                <relationship kind="action" name="itemSourcePickerDonePushed:"/>
+                <relationship kind="action" name="keyboardDone:"/>
+                <relationship kind="action" name="organizationPickerDonePushed:"/>
+                <relationship kind="action" name="startAddingItemsPushed:"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="datePickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="itemSourcePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="itemSourcePickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIView"/>
+                <relationship kind="outlet" name="listTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="notesField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="organizationPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="organizationPickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="startAddingItemsButton" candidateClass="GradientButton"/>
+            </relationships>
+        </class>
+        <class className="VPNCashListViewController" superclassName="VPNListViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNCashListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addMoneyButton" candidateClass="GradientButton"/>
+            </relationships>
+        </class>
+        <class className="VPNDonationItemListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDonationItemListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addCustomItemPushed:"/>
+                <relationship kind="action" name="addItemPushed:"/>
+                <relationship kind="action" name="backPushed:"/>
+                <relationship kind="action" name="editListPushed:"/>
+                <relationship kind="action" name="editPushed:"/>
+                <relationship kind="outlet" name="addCustomItemButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="addEbayItemButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="donationListInfoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="organizationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNDonationListsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDonationListsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addButtonPushed:"/>
+                <relationship kind="action" name="editButtonPushed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="taxSavingsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNDonationReportsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNDonationReportsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="donePushed:"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="gradientView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="VPNEditCustomItemViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNEditCustomItemViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneButtonPushed:"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNEditItemViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNEditItemViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneButtonPushed:"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNHomeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNHomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logoutPushed:"/>
+                <relationship kind="action" name="updatePushed:"/>
+                <relationship kind="outlet" name="bannerView" candidateClass="ADBannerView"/>
+                <relationship kind="outlet" name="optOutSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="optOutView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="updateButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="VPNInspectableNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNInspectableNavigationController.h"/>
+        </class>
+        <class className="VPNItemSearchViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNItemSearchViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="itemSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="VPNListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addButtonPushed:"/>
+                <relationship kind="action" name="editButtonPushed:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissKeyboard"/>
+                <relationship kind="action" name="loginPushed:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="signUpButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNMainTabGroupViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNMainTabGroupViewController.h"/>
+        </class>
+        <class className="VPNMileageListViewController" superclassName="VPNListViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNMileageListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addMileageButton" candidateClass="GradientButton"/>
+            </relationships>
+        </class>
+        <class className="VPNOrganizationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="localityLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNOrganizationDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deletePushed:"/>
+                <relationship kind="action" name="donePushed:"/>
+                <relationship kind="outlet" name="addressField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="cityField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="zipField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="VPNOrganizationListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNOrganizationListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editPushed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="bannerView" candidateClass="ADBannerView"/>
+            </relationships>
+        </class>
+        <class className="VPNPurchaseTaxYearViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNPurchaseTaxYearViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="applyPromoCodePushed:"/>
+                <relationship kind="action" name="buyNowPushed:"/>
+                <relationship kind="outlet" name="applyPromoCodeButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="buyNowButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="promoCodeField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNReportsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNReportsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="emailReportsPushed:"/>
+                <relationship kind="action" name="taxYearButtonPushed:"/>
+                <relationship kind="outlet" name="emailReportsButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="tableHeader" candidateClass="UIView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="taxYearLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNSelectTaxRateViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxRateViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="savePushed:"/>
+                <relationship kind="outlet" name="taxRateTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNSelectTaxYearViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSelectTaxYearViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="buyNowPushed:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buyNowButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="purchaseView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="VPNSplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNSplashViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="secondImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="VPNTaxSavingsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNTaxSavingsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="taxSavings" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="VPNUserSignupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNUserSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPushed:"/>
+                <relationship kind="action" name="submitPushed:"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="confirmPasswordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="taxYearTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="VPNViewPhotoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VPNViewPhotoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="changePushed:"/>
+                <relationship kind="action" name="deletePushed:"/>
+                <relationship kind="outlet" name="changeButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -2394,11 +2620,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="aQI-nu-Yoy"/>
+        <segue reference="lXZ-ve-Me6"/>
         <segue reference="fFg-b8-hXm"/>
-        <segue reference="sIa-g4-8qs"/>
         <segue reference="afA-o9-LUL"/>
         <segue reference="jEP-vW-rmk"/>
+        <segue reference="xZe-Ub-trX"/>
         <segue reference="nt4-d5-pPY"/>
-        <segue reference="lXZ-ve-Me6"/>
     </inferredMetricsTieBreakers>
 </document>

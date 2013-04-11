@@ -1350,6 +1350,7 @@ NSString* const APIKey = @"12C7DCE347154B5A8FD49B72F169A975";
         else
         {
             NSLog(@"FAILURE");
+            NSLog(@"Result: %@",d);
             //create error and send to appropriate delegate method
             NSInteger apiErrorCode = [[d objectForKey:@"errorCode"] integerValue];
             NSDictionary* errorInfo = [NSDictionary dictionaryWithObject:[d objectForKey:@"errorMessage"] forKey:@"errorMessage"];

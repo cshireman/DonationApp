@@ -23,6 +23,8 @@
 {
     UITextField* currentTextField;
     NSIndexPath* currentIndexPath;
+    
+    BOOL canUpdate;
 }
 
 @end
@@ -109,6 +111,8 @@
 {
     [super viewDidLoad];
     [self configure];
+    
+    canUpdate = NO;
 
     doneToolbar = [VPNDoneToolbar doneToolbarFromFromNib:[VPNDoneToolbar nib]];
     doneToolbar.delegate = self;
@@ -120,6 +124,17 @@
     
     if(!user.is_trial)
         [self removeAds];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults boolForKey:@"UpdateMessageSeen"])
+    {
+        UIAlertView* updateAlert = [[UIAlertView alloc] initWithTitle:@"What's New" message:@"This version fixes the In-App upgrade problem, if you are unable to upgrade and use our eBay values, please contact us:  support@charitydeductions.com" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+        
+        [updateAlert show];
+        
+        [defaults setBool:YES forKey:@"UpdateMessageSeen"];
+        [defaults synchronize];
+    }
 
     //Load up cells to get field and label references
     NSIndexPath* contactInfoIndexPath = [NSIndexPath indexPathForRow:0 inSection:kContactInfoSection];
@@ -416,7 +431,9 @@
 
 -(IBAction) updatePushed:(id)sender
 {
-    if([password length] > 0 || [confirmPassword length] > 0)
+    manager.delegate = self;
+    
+    if(canUpdate && ([password length] > 0 || [confirmPassword length] > 0))
     {
         if([password isEqualToString:confirmPassword])
         {
@@ -431,6 +448,13 @@
             return;
         }
     }
+    else if(canUpdate)
+    {
+        //Start user update sequence on it's own
+        [manager getUserInfo:YES];
+    }
+    
+    canUpdate = NO;
 }
 
 
@@ -527,6 +551,7 @@
 
 -(void) nameFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
 {
+    canUpdate = YES;
     NSArray* nameParts = [text componentsSeparatedByString:@" "];
     if(nil != nameParts && [nameParts count] > 0)
     {
@@ -560,6 +585,7 @@
 
 -(void) emailFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
 {
+    canUpdate = YES;    
     user.email = text;
 }
 
@@ -585,6 +611,7 @@
 
 -(void) passwordFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
 {
+    canUpdate = YES; 
     password = text;
 }
 
@@ -607,6 +634,7 @@
 
 -(void) confirmPasswordFieldUpdatedWithText:(NSString *)text atIndexPath:(NSIndexPath *)indexPath
 {
+    canUpdate = YES;
     confirmPassword = text;
 }
 

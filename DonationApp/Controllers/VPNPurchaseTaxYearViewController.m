@@ -55,6 +55,9 @@
     usePromoPrice = NO;
     user = [VPNUser currentUser];
     purchaseOptions = user.available_tax_years;
+    
+    
+    
     selectedOptions = [NSMutableArray array];
     completedTransactions = [NSMutableArray array];
 	// Do any additional setup after loading the view.
@@ -67,9 +70,35 @@
     //Automatically select tax year for trial user
     if(user.is_trial)
     {
+        BOOL currentYearFound = NO;
+        
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:[NSDate date]];
+        
+        NSInteger currentYear = [components year];
+        if(user.selected_tax_year != 0)
+            currentYear = user.selected_tax_year;
+        
         for(NSNumber* year in purchaseOptions)
         {
-            if([year isEqualToNumber:[NSNumber numberWithInt:user.selected_tax_year]])
+            if([year isEqualToNumber:[NSNumber numberWithInt:currentYear]])
+            {
+                currentYearFound = YES;
+            }
+        }
+        
+        //Add the current tax year if it isn't already there
+        if(!currentYearFound)
+        {
+            [purchaseOptions addObject:@(currentYear)];
+            [purchaseOptions sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                return [obj1 compare:obj2];
+            }];
+        }
+        
+        
+        for(NSNumber* year in purchaseOptions)
+        {
+            if([year isEqualToNumber:[NSNumber numberWithInt:currentYear]])
             {
                 [selectedOptions addObject:year];
                 break;
@@ -118,11 +147,11 @@
     }
     
     [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
-    
+        
     if([selectedOptions count] >= 2)
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - ($%.02f)",year,user.discount_rate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - ($%.02f)",year,user.discount_rate+.04];
     else
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - ($%.02f)",year,user.single_rate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - ($%.02f)",year,user.single_rate+.04];
     
     if([selectedOptions containsObject:year])
         cell.imageView.image = [UIImage imageNamed:@"checkbox_checked"];

@@ -41,6 +41,9 @@
 
 -(void) keywordSearch:(NSString*)keyword
 {
+    categories = nil;
+    items = nil;
+    
     categories = [Category keywordSearch:keyword];
     items = [Item keywordSearch:keyword];
     
@@ -117,7 +120,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = @"Cell";
     if([itemSearchBar.text length] > 0)
     {
         CellIdentifier = @"SearchResultCell";
@@ -202,6 +205,9 @@
         group.itemName = item.name;
         
         group.categoryID = [currentCategory.categoryID intValue];
+        if(group.categoryID == 0)
+            group.categoryID = [item.category.categoryID intValue];
+        
         group.categoryName = item.path;
         
         group.donationList = donationList;
