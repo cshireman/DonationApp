@@ -175,7 +175,7 @@
             UILabel* conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 65, 15)];
             conditionLabel.font = [UIFont systemFontOfSize:12];
             conditionLabel.text = [conditionNames objectAtIndex:i];
-            conditionLabel.minimumFontSize = 10;
+            conditionLabel.minimumScaleFactor = 0.833;
 
             UILabel* fmvLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 96, 15)];
             fmvLabel.font = [UIFont systemFontOfSize:12];

@@ -188,7 +188,7 @@ static CGFloat itemListLimit = 15000.00;
         itemNameCell.delegate = self;
         
         itemNameCell.indexPath = indexPath;
-        [itemNameCell setText:group.itemName];
+        itemNameCell.textLabel.text = group.itemName;
         
         return itemNameCell;
         
